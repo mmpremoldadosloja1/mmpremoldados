@@ -1,86 +1,171 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MM PRÉ-MOLDADOS | Catálogo</title>
+  <meta charset="UTF-8">
+  <title>MM PRÉ-MOLDADOS – Catálogo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f4f4f4; color: #333; }
-    header { background: #2e2e2e; color: #fff; padding: 20px; text-align: center; }
-    header img { max-height: 90px; margin-bottom: 10px; }
-    nav { background: #444; display: flex; justify-content: center; gap: 20px; padding: 10px; flex-wrap: wrap; }
-    nav a { color: #fff; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    .container { max-width: 1200px; margin: auto; padding: 20px; }
-    h2 { border-left: 6px solid #c9a227; padding-left: 10px; margin-top: 40px; }
-    h3 { margin: 10px 0 5px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
-    .card { background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.12); padding: 15px; text-align: center; }
-    .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 6px; }
-    .btn { display: inline-block; margin-top: 10px; padding: 10px 15px; background: #25d366; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; }
-    .btn:hover { background: #1ebe5d; }
-    footer { background: #2e2e2e; color: #fff; text-align: center; padding: 15px; margin-top: 40px; }
-</style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f2f2f2;
+      color: #333;
+    }
+
+    header {
+      background: #1f1f1f;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header img {
+      max-width: 180px;
+      margin-bottom: 10px;
+    }
+
+    section {
+      padding: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      border-left: 6px solid #c9a24d;
+      padding-left: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    /* 🔑 CONTROLE DEFINITIVO DAS IMAGENS */
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      margin: 12px 0 5px;
+    }
+
+    footer {
+      background: #1f1f1f;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+  </style>
 </head>
+
 <body>
 
 <header>
-  <img src="logo.png" alt="Logo MM PRÉ-MOLDADOS" />
+  <!-- Se tiver logo, coloque aqui -->
+  <!-- <img src="img/logo.png" alt="MM Pré-Moldados"> -->
   <h1>MM PRÉ-MOLDADOS</h1>
-  <p>Qualidade e resistência para sua obra</p>
+  <p>Catálogo de Produtos</p>
 </header>
 
-<nav>
-  <a href="#home">Home</a>
-  <a href="#cobogos">Cobogós</a>
-  <a href="#contato">Contato</a>
-</nav>
-
-<section id="home" class="container">
-  <h2>Bem-vindo</h2>
-  <p>Confira nosso catálogo de cobogós em diversos modelos e medidas. Trabalhamos com produtos de qualidade, ideais para obras residenciais e comerciais.</p>
-</section>
-
-<section id="cobogos" class="container">
+<section>
 
   <h2>Cobogós 40x40</h2>
   <div class="grid">
-    <div class="card"><img src="img/cobogo-16-furos-40.jpg"><h3>Cobogó 16 Furos</h3><p>Medida: 40x40</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó 16 Furos 40x40">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-taco-chines-40.jpg"><h3>Cobogó Taco Chinês</h3><p>Medida: 40x40</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Taco Chinês 40x40">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-anti-chuva-40.jpg"><h3>Cobogó Anti-Chuva</h3><p>Medida: 40x40</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Anti-Chuva 40x40">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-flor-40.jpg"><h3>Cobogó Flor</h3><p>Medida: 40x40</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Flor 40x40">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-4-pontas-40.jpg"><h3>Cobogó 4 Pontas</h3><p>Medida: 40x40</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó 4 Pontas 40x40">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-arabe-40.jpg"><h3>Cobogó Árabe</h3><p>Medida: 40x40</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Árabe 40x40">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-cruz-40.jpg"><h3>Cobogó Cruz</h3><p>Medida: 40x40</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Cruz 40x40">Solicitar orçamento</a></div>
+
+    <div class="card">
+      <img src="img/cobogo-16-furos-40.jpg">
+      <h3>Cobogó 16 Furos 40x40</h3>
+    </div>
+
+    <div class="card">
+      <img src="img/cobogo-taco-chines-40.jpg">
+      <h3>Cobogó Taco Chinês 40x40</h3>
+    </div>
+
+    <div class="card">
+      <img src="img/cobogo-anti-chuva-40.jpg">
+      <h3>Cobogó Anti-Chuva 40x40</h3>
+    </div>
+
+    <div class="card">
+      <img src="img/cobogo-flor-40.jpg">
+      <h3>Cobogó Flor 40x40</h3>
+    </div>
+
+    <div class="card">
+      <img src="img/cobogo-4-pontas-40.jpg">
+      <h3>Cobogó 4 Pontas 40x40</h3>
+    </div>
+
+    <div class="card">
+      <img src="img/cobogo-arabe-40.jpg">
+      <h3>Cobogó Árabe 40x40</h3>
+    </div>
+
   </div>
 
   <h2>Cobogós 30x30</h2>
   <div class="grid">
-    <div class="card"><img src="img/cobogo-bandeira-30.jpg"><h3>Cobogó Bandeira</h3><p>Medida: 30x30</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Bandeira 30x30">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-estrela-30.jpg"><h3>Cobogó Estrela</h3><p>Medida: 30x30</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Estrela 30x30">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-petala-30.jpg"><h3>Cobogó Pétala</h3><p>Medida: 30x30</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Pétala 30x30">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-estrela-dos-ventos-30.jpg"><h3>Cobogó Estrela dos Ventos</h3><p>Medida: 30x30</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Estrela dos Ventos 30x30">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-fenestra-30.jpg"><h3>Cobogó Fenestra</h3><p>Medida: 30x30</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Fenestra 30x30">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-quadrado-cruz-30.jpg"><h3>Cobogó Quadrado Cruz</h3><p>Medida: 30x30</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Quadrado Cruz 30x30">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-margarida-30.jpg"><h3>Cobogó Margarida</h3><p>Medida: 30x30</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Margarida 30x30">Solicitar orçamento</a></div>
-    <div class="card"><img src="img/cobogo-xis-30.jpg"><h3>Cobogó Xis</h3><p>Medida: 30x30</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó Xis 30x30">Solicitar orçamento</a></div>
+
+    <div class="card">
+      <img src="img/cobogo-estrela-dos-ventos-30.jpg">
+      <h3>Cobogó Estrela dos Ventos 30x30</h3>
+    </div>
+
+    <div class="card">
+      <img src="img/cobogo-fenestra-30.jpg">
+      <h3>Cobogó Fenestra 30x30</h3>
+    </div>
+
+    <div class="card">
+      <img src="img/cobogo-petala-30.jpg">
+      <h3>Cobogó Pétala 30x30</h3>
+    </div>
+
+    <div class="card">
+      <img src="img/cobogo-quadrado-cruz-30.jpg">
+      <h3>Cobogó Quadrado Cruz 30x30</h3>
+    </div>
+
+    <div class="card">
+      <img src="img/cobogo-xis-30.jpg">
+      <h3>Cobogó Xis 30x30</h3>
+    </div>
+
   </div>
 
-  <h2>Cobogós 24x24</h2>
+  <h2>Cobogó 24x24</h2>
   <div class="grid">
-    <div class="card"><img src="img/cobogo-4-furos-24.jpg"><h3>Cobogó 4 Furos</h3><p>Medida: 24x24</p><a class="btn" href="https://wa.me/5561999385680?text=Olá! Tenho interesse no Cobogó 4 Furos 24x24">Solicitar orçamento</a></div>
+
+    <div class="card">
+      <img src="img/cobogo-4-furos-24.jpg">
+      <h3>Cobogó 4 Furos 24x24</h3>
+    </div>
+
   </div>
 
-</section>
-
-<section id="contato" class="container">
-  <h2>Contato</h2>
-  <p>📲 WhatsApp: (61) 99938-5680</p>
-  <a class="btn" href="https://wa.me/5561999385680">Falar no WhatsApp</a>
 </section>
 
 <footer>
-  <p>© 2026 MM PRÉ-MOLDADOS - Todos os direitos reservados</p>
+  © MM PRÉ-MOLDADOS – Catálogo de Produtos
 </footer>
 
 </body>
