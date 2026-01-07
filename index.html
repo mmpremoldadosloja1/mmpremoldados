@@ -22,7 +22,7 @@ header{
 
 header img{
   width:100%;
-  max-width:320px;
+  max-width:260px;
   margin:0 auto;
   display:block;
 }
@@ -38,9 +38,15 @@ header p{
 nav{
   background:#111;
   display:flex;
-  justify-content:center;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 20px;
+}
+
+nav .left,
+nav .right{
+  display:flex;
   gap:20px;
-  padding:10px;
 }
 
 nav a{
@@ -93,14 +99,18 @@ h2{
   border:2px solid #c9a24d;
 }
 
-/* ===== CATÁLOGO (OCULTO POR PADRÃO) ===== */
+/* ===== CATÁLOGO ===== */
 #catalogo{
   display:none;
 }
 
-/* MOSTRA CATÁLOGO QUANDO CLICA */
 #catalogo:target{
   display:block;
+}
+
+/* ESCONDE HOME QUANDO CATÁLOGO ABRIR */
+#catalogo:target ~ #home{
+  display:none;
 }
 
 /* ===== PRODUTOS ===== */
@@ -148,8 +158,13 @@ h2{
 /* ===== MOBILE ===== */
 @media (max-width:768px){
   header img{
-    max-width:260px;
+    max-width:240px;
   }
+
+  nav{
+    flex-direction:row;
+  }
+
   .card img{
     height:140px;
   }
@@ -175,27 +190,16 @@ footer{
 </header>
 
 <nav>
-  <a href="#home">Home</a>
-  <a href="#catalogo">Catálogo</a>
+  <div class="left">
+    <a href="#catalogo">Catálogo</a>
+  </div>
+
+  <div class="right">
+    <a href="#home">Home</a>
+  </div>
 </nav>
 
-<!-- ===== HOME ===== -->
-<section id="home">
-  <h2>Materiais</h2>
-
-  <div class="home-grid">
-    <div class="home-card">Manilhas</div>
-    <div class="home-card">Lajes Pré Moldadas</div>
-    <div class="home-card">Pingadeiras</div>
-    <div class="home-card">Blocos / Canaletas</div>
-    <div class="home-card">Pisadeiras de Jardim</div>
-    <div class="home-card">Revestimento de Piso</div>
-    <div class="home-card">Revestimento de Parede</div>
-    <div class="home-card"><a href="#catalogo">Cobogós</a></div>
-  </div>
-</section>
-
-<!-- ===== CATÁLOGO (SÓ ABRE AO CLICAR) ===== -->
+<!-- ===== CATÁLOGO ===== -->
 <section id="catalogo">
 
 <h2>Cobogós 40x40</h2>
@@ -216,6 +220,22 @@ footer{
   </div>
 </div>
 
+</section>
+
+<!-- ===== HOME ===== -->
+<section id="home">
+  <h2>Materiais</h2>
+
+  <div class="home-grid">
+    <div class="home-card">Manilhas</div>
+    <div class="home-card">Lajes Pré Moldadas</div>
+    <div class="home-card">Pingadeiras</div>
+    <div class="home-card">Blocos / Canaletas</div>
+    <div class="home-card">Pisadeiras de Jardim</div>
+    <div class="home-card">Revestimento de Piso</div>
+    <div class="home-card">Revestimento de Parede</div>
+    <div class="home-card"><a href="#catalogo">Cobogós</a></div>
+  </div>
 </section>
 
 <footer>
