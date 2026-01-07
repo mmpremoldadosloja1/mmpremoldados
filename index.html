@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MM Pré-Moldados</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:'Inter', Arial, sans-serif;
   background:#f5f5f5;
 }
 
@@ -49,7 +51,7 @@ header p{
   left:15px;
   background:#fff;
   border-radius:10px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  box-shadow:0 6px 16px rgba(0,0,0,0.2);
   overflow:hidden;
   z-index:10;
 }
@@ -85,13 +87,15 @@ h2{
   padding:20px;
   text-align:center;
   border-radius:12px;
-  font-weight:bold;
+  font-weight:600;
   cursor:pointer;
   box-shadow:0 4px 8px rgba(0,0,0,0.08);
+  transition:transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover{
-  background:#eee;
+  transform:translateY(-4px);
+  box-shadow:0 6px 14px rgba(0,0,0,0.15);
 }
 </style>
 </head>
@@ -112,7 +116,7 @@ h2{
     <a href="#">Pingadeiras</a>
     <a href="#">Blocos / Canaletas</a>
     <a href="#">Pisadeiras de Jardim</a>
-    <a href="#">Meio-fio de jardim</a>
+    <a href="#">Meio-fio de Jardim</a>
     <a href="#">Caixas</a>
     <a href="#">Revestimento de Piso</a>
     <a href="#">Revestimento de Parede</a>
@@ -123,22 +127,40 @@ h2{
   <h2>Departamentos</h2>
 
   <div class="grid">
-    <div class="card">Manilhas</div>
-    <div class="card">Lajes Pré-Moldadas</div>
-    <div class="card">Pingadeiras</div>
-    <div class="card">Blocos / Canaletas</div>
-    <div class="card">Pisadeiras de Jardim</div>
-    <div class="card">Revestimento de Piso</div>
-    <div class="card">Revestimento de Parede</div>
-    <div class="card" onclick="location.href='cobogos.html'">Cobogós</div>
+    <div class="card" data-link="manilhas.html">Manilhas</div>
+    <div class="card" data-link="#">Lajes Pré-Moldadas</div>
+    <div class="card" data-link="#">Pingadeiras</div>
+    <div class="card" data-link="#">Blocos / Canaletas</div>
+    <div class="card" data-link="#">Pisadeiras de Jardim</div>
+    <div class="card" data-link="#">Revestimento de Piso</div>
+    <div class="card" data-link="#">Revestimento de Parede</div>
+    <div class="card" data-link="cobogos.html">Cobogós</div>
   </div>
 </section>
 
 <script>
+const menu = document.getElementById("menu");
+
 function toggleMenu(){
-  const menu = document.getElementById("menu");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
+
+// Fecha menu ao clicar fora
+document.addEventListener("click", function(e){
+  if(!e.target.closest("header")){
+    menu.style.display = "none";
+  }
+});
+
+// Cards clicáveis
+document.querySelectorAll(".card").forEach(card=>{
+  card.addEventListener("click", ()=>{
+    const link = card.getAttribute("data-link");
+    if(link && link !== "#"){
+      window.location.href = link;
+    }
+  });
+});
 </script>
 
 </body>
