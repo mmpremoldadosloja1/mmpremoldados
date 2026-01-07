@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>MM Pré-Moldados – Catálogo</title>
+<title>MM Pré-Moldados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -16,37 +16,29 @@ body{
 /* ===== HEADER ===== */
 header{
   background:#1f1f1f;
-  padding:10px 15px;
+  padding:14px 10px 18px;
   text-align:center;
 }
 
 header img{
-  width:100%;
   max-width:260px;
-  margin:0 auto;
-  display:block;
+  width:100%;
 }
 
-header p{
-  margin:6px 0 0;
+header .frase{
+  margin-top:8px;
   font-size:15px;
-  color:#ddd;
+  color:#d4d4d4;
   font-weight:600;
+  letter-spacing:0.5px;
 }
 
 /* ===== MENU ===== */
 nav{
   background:#111;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
   padding:10px 20px;
-}
-
-nav .left,
-nav .right{
   display:flex;
-  gap:20px;
+  justify-content:flex-start;
 }
 
 nav a{
@@ -54,10 +46,14 @@ nav a{
   text-decoration:none;
   font-weight:bold;
   font-size:14px;
+  padding:8px 14px;
+  background:#222;
+  border-radius:6px;
 }
 
 nav a:hover{
-  color:#c9a24d;
+  background:#c9a24d;
+  color:#000;
 }
 
 /* ===== SEÇÕES ===== */
@@ -68,20 +64,27 @@ section{
 }
 
 h2{
-  margin-top:30px;
   margin-bottom:15px;
   border-left:6px solid #c9a24d;
   padding-left:10px;
 }
 
-/* ===== HOME ===== */
-.home-grid{
+/* ===== DEPARTAMENTOS ===== */
+#departamentos{
+  display:none;
+}
+
+#departamentos:target{
+  display:block;
+}
+
+.departamentos-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:20px;
 }
 
-.home-card{
+.departamento{
   background:#fff;
   padding:25px 15px;
   text-align:center;
@@ -90,12 +93,12 @@ h2{
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
-.home-card a{
+.departamento a{
   text-decoration:none;
   color:#333;
 }
 
-.home-card:hover{
+.departamento:hover{
   border:2px solid #c9a24d;
 }
 
@@ -106,11 +109,6 @@ h2{
 
 #catalogo:target{
   display:block;
-}
-
-/* ESCONDE HOME QUANDO CATÁLOGO ABRIR */
-#catalogo:target ~ #home{
-  display:none;
 }
 
 /* ===== PRODUTOS ===== */
@@ -130,18 +128,14 @@ h2{
 
 .card img{
   width:100%;
-  height:180px;
+  height:160px;
   object-fit:cover;
   border-radius:8px;
 }
 
-.card.img-24 img{
-  height:140px;
-}
-
 .card h3{
-  font-size:16px;
-  margin:12px 0;
+  font-size:15px;
+  margin:10px 0;
 }
 
 .whatsapp{
@@ -158,15 +152,12 @@ h2{
 /* ===== MOBILE ===== */
 @media (max-width:768px){
   header img{
-    max-width:240px;
+    max-width:220px;
   }
 
-  nav{
-    flex-direction:row;
-  }
-
-  .card img{
-    height:140px;
+  header .frase{
+    font-size:14px;
+    padding:0 10px;
   }
 }
 
@@ -186,60 +177,50 @@ footer{
 
 <header>
   <img src="img/logo.png" alt="MM Pré-Moldados">
-  <p>Catálogo de Produtos</p>
+  <div class="frase">
+    Qualidade, resistência e acabamento em pré-moldados
+  </div>
 </header>
 
 <nav>
-  <div class="left">
-    <a href="#catalogo">Catálogo</a>
-  </div>
-
-  <div class="right">
-    <a href="#home">Home</a>
-  </div>
+  <a href="#departamentos">Departamentos</a>
 </nav>
+
+<!-- ===== DEPARTAMENTOS ===== -->
+<section id="departamentos">
+  <h2>Departamentos</h2>
+
+  <div class="departamentos-grid">
+    <div class="departamento">Manilhas</div>
+    <div class="departamento">Lajes Pré Moldadas</div>
+    <div class="departamento">Pingadeiras</div>
+    <div class="departamento">Blocos / Canaletas</div>
+    <div class="departamento">Pisadeiras de Jardim</div>
+    <div class="departamento">Revestimento de Piso</div>
+    <div class="departamento">Revestimento de Parede</div>
+    <div class="departamento">
+      <a href="#catalogo">Cobogós</a>
+    </div>
+  </div>
+</section>
 
 <!-- ===== CATÁLOGO ===== -->
 <section id="catalogo">
+  <h2>Cobogós</h2>
 
-<h2>Cobogós 40x40</h2>
-<div class="grid">
-  <div class="card">
-    <img src="img/cobogo-16-furos-40.jpg">
-    <h3>Cobogó 16 Furos 40x40</h3>
-    <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
-  </div>
-</div>
-
-<h2>Cobogó 24x24</h2>
-<div class="grid">
-  <div class="card img-24">
-    <img src="img/cobogo-4-furos-24.jpg">
-    <h3>Cobogó 4 Furos 24x24</h3>
-    <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
-  </div>
-</div>
-
-</section>
-
-<!-- ===== HOME ===== -->
-<section id="home">
-  <h2>Materiais</h2>
-
-  <div class="home-grid">
-    <div class="home-card">Manilhas</div>
-    <div class="home-card">Lajes Pré Moldadas</div>
-    <div class="home-card">Pingadeiras</div>
-    <div class="home-card">Blocos / Canaletas</div>
-    <div class="home-card">Pisadeiras de Jardim</div>
-    <div class="home-card">Revestimento de Piso</div>
-    <div class="home-card">Revestimento de Parede</div>
-    <div class="home-card"><a href="#catalogo">Cobogós</a></div>
+  <div class="grid">
+    <div class="card">
+      <img src="img/cobogo-16-furos-40.jpg">
+      <h3>Cobogó 16 Furos 40x40</h3>
+      <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">
+        WhatsApp
+      </a>
+    </div>
   </div>
 </section>
 
 <footer>
-© MM Pré-Moldados – Catálogo de Produtos
+© MM Pré-Moldados
 </footer>
 
 </body>
