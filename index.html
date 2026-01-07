@@ -18,33 +18,37 @@ header{
   background:#1f1f1f;
   padding:10px 15px;
   text-align:center;
-  max-height:280px;
-  overflow:hidden;
 }
 
+/* LOGO */
 header img{
-  max-width:320px;
+  max-width:520px; /* AJUSTÁVEL */
   width:100%;
   margin:0 auto;
   display:block;
 }
 
+/* TEXTO */
 header p{
-  margin-top:10px;
+  margin-top:8px;
   font-size:16px;
   color:#ddd;
 }
 
-/* AJUSTE PARA CELULAR */
-@media (max-width:768px){
+/* CONTROLE SÓ NO DESKTOP */
+@media (min-width:769px){
   header{
-    max-height:220px;
+    max-height:260px;
+    overflow:hidden;
   }
+}
+
+/* MOBILE */
+@media (max-width:768px){
   header img{
-    max-width:85%;
+    max-width:320px; /* VOCÊ JÁ TESTOU ESSE */
   }
   header p{
-    display:block;
     font-size:14px;
     margin-top:6px;
   }
