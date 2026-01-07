@@ -37,21 +37,57 @@ nav{
   background:#111;
   padding:10px 15px;
   display:flex;
-  justify-content:flex-start;
+  justify-content:flex-end;
 }
 
-.menu-btn{
+.menu{
+  position:relative;
+}
+
+.menu button{
   font-size:26px;
-  color:#fff;
-  text-decoration:none;
-  padding:6px 10px;
   background:#222;
+  color:#fff;
+  border:none;
+  padding:6px 12px;
   border-radius:6px;
+  cursor:pointer;
 }
 
-.menu-btn:hover{
+.menu button:hover{
   background:#c9a24d;
   color:#000;
+}
+
+/* ===== BOLHA ===== */
+.menu-content{
+  display:none;
+  position:absolute;
+  right:0;
+  top:44px;
+  background:#fff;
+  min-width:220px;
+  border-radius:10px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+  overflow:hidden;
+  z-index:1000;
+}
+
+.menu:focus-within .menu-content{
+  display:block;
+}
+
+.menu-content a{
+  display:block;
+  padding:14px 16px;
+  text-decoration:none;
+  color:#333;
+  font-weight:bold;
+  border-bottom:1px solid #eee;
+}
+
+.menu-content a:hover{
+  background:#f4f4f4;
 }
 
 /* ===== SEÇÕES ===== */
@@ -67,49 +103,7 @@ h2{
   padding-left:10px;
 }
 
-/* ===== DEPARTAMENTOS ===== */
-#departamentos{
-  display:none;
-}
-
-#departamentos:target{
-  display:block;
-}
-
-.departamentos-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:20px;
-}
-
-.departamento{
-  background:#fff;
-  padding:25px 15px;
-  text-align:center;
-  border-radius:10px;
-  font-weight:bold;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
-}
-
-.departamento a{
-  text-decoration:none;
-  color:#333;
-}
-
-.departamento:hover{
-  border:2px solid #c9a24d;
-}
-
-/* ===== CATÁLOGO ===== */
-#catalogo{
-  display:none;
-}
-
-#catalogo:target{
-  display:block;
-}
-
-/* ===== PRODUTOS ===== */
+/* ===== HOME / DESTAQUES ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
@@ -136,6 +130,17 @@ h2{
   margin:10px 0;
 }
 
+.tag{
+  display:inline-block;
+  background:#c9a24d;
+  color:#000;
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
 .whatsapp{
   display:inline-block;
   background:#25D366;
@@ -147,12 +152,20 @@ h2{
   font-weight:bold;
 }
 
+/* ===== CATÁLOGO ===== */
+#catalogo{
+  display:none;
+}
+
+#catalogo:target{
+  display:block;
+}
+
 /* ===== MOBILE ===== */
 @media (max-width:768px){
   header img{
     max-width:220px;
   }
-
   header .frase{
     font-size:14px;
   }
@@ -180,38 +193,54 @@ footer{
 </header>
 
 <nav>
-  <a href="#departamentos" class="menu-btn">≡</a>
+  <div class="menu" tabindex="0">
+    <button>≡</button>
+    <div class="menu-content">
+      <a href="#catalogo">Cobogós</a>
+      <a href="#">Manilhas</a>
+      <a href="#">Lajes Pré Moldadas</a>
+      <a href="#">Pingadeiras</a>
+      <a href="#">Blocos / Canaletas</a>
+      <a href="#">Pisadeiras de Jardim</a>
+      <a href="#">Revestimento de Piso</a>
+      <a href="#">Revestimento de Parede</a>
+    </div>
+  </div>
 </nav>
 
-<!-- ===== DEPARTAMENTOS ===== -->
-<section id="departamentos">
-  <h2>Produtos</h2>
+<!-- ===== HOME ===== -->
+<section>
+  <h2>Destaques</h2>
 
-  <div class="departamentos-grid">
-    <div class="departamento">Manilhas</div>
-    <div class="departamento">Lajes Pré Moldadas</div>
-    <div class="departamento">Pingadeiras</div>
-    <div class="departamento">Blocos / Canaletas</div>
-    <div class="departamento">Pisadeiras de Jardim</div>
-    <div class="departamento">Revestimento de Piso</div>
-    <div class="departamento">Revestimento de Parede</div>
-    <div class="departamento">
-      <a href="#catalogo">Cobogós</a>
+  <div class="grid">
+    <div class="card">
+      <span class="tag">Mais vendido</span>
+      <img src="img/cobogo-16-furos-40.jpg">
+      <h3>Cobogó 16 Furos 40x40</h3>
+      <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">
+        WhatsApp
+      </a>
+    </div>
+
+    <div class="card">
+      <span class="tag">Destaque</span>
+      <img src="img/cobogo-4-furos-24.jpg">
+      <h3>Cobogó 4 Furos 24x24</h3>
+      <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">
+        WhatsApp
+      </a>
     </div>
   </div>
 </section>
 
 <!-- ===== CATÁLOGO ===== -->
 <section id="catalogo">
-  <h2>Cobogós</h2>
+  <h2>Catálogo de Cobogós</h2>
 
   <div class="grid">
     <div class="card">
       <img src="img/cobogo-16-furos-40.jpg">
       <h3>Cobogó 16 Furos 40x40</h3>
-      <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">
-        WhatsApp
-      </a>
     </div>
   </div>
 </section>
