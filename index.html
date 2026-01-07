@@ -30,28 +30,26 @@ header .frase{
   font-size:15px;
   color:#d4d4d4;
   font-weight:600;
-  letter-spacing:0.5px;
 }
 
 /* ===== MENU ===== */
 nav{
   background:#111;
-  padding:10px 20px;
+  padding:10px 15px;
   display:flex;
   justify-content:flex-start;
 }
 
-nav a{
+.menu-btn{
+  font-size:26px;
   color:#fff;
   text-decoration:none;
-  font-weight:bold;
-  font-size:14px;
-  padding:8px 14px;
+  padding:6px 10px;
   background:#222;
   border-radius:6px;
 }
 
-nav a:hover{
+.menu-btn:hover{
   background:#c9a24d;
   color:#000;
 }
@@ -157,7 +155,6 @@ h2{
 
   header .frase{
     font-size:14px;
-    padding:0 10px;
   }
 }
 
@@ -183,12 +180,12 @@ footer{
 </header>
 
 <nav>
-  <a href="#departamentos">Departamentos</a>
+  <a href="#departamentos" class="menu-btn">≡</a>
 </nav>
 
 <!-- ===== DEPARTAMENTOS ===== -->
 <section id="departamentos">
-  <h2>Departamentos</h2>
+  <h2>Produtos</h2>
 
   <div class="departamentos-grid">
     <div class="departamento">Manilhas</div>
