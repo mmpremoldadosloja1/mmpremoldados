@@ -1,104 +1,114 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Cobogós | MM Pré-Moldados</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Cobogós | MM Pré-Moldados</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
 
-    header {
-      background: #111;
-      padding: 12px;
-      text-align: center;
-    }
+/* ===== CABEÇALHO ===== */
+header {
+  background: #111;
+  padding: 14px;
+  text-align: center;
+}
 
-    header img {
-      max-width: 180px;
-    }
+header img {
+  max-width: 170px;
+}
 
-    h1 {
-      text-align: center;
-      margin: 20px 0 10px;
-    }
+/* ===== TÍTULOS ===== */
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
 
-    h2 {
-      margin: 30px 20px 10px;
-      border-left: 5px solid #c9a24d;
-      padding-left: 10px;
-      color: #333;
-    }
+h2 {
+  margin: 30px 20px 10px;
+  border-left: 5px solid #c9a24d;
+  padding-left: 10px;
+  color: #333;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-      padding: 18px;
-    }
+/* ===== GRID ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  padding: 18px;
+}
 
-    .card {
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-    }
+/* ===== CARD ===== */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
 
-    /* TAMANHO PADRÃO (DESKTOP) */
-    .card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
+/* 🔥 IMAGEM – DESKTOP */
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;       /* MOSTRA O PRODUTO INTEIRO */
+  background: #eee;          /* FUNDO SUAVE */
+  padding: 10px;
+}
 
-    .card h3 {
-      margin: 10px 0;
-      font-size: 15px;
-    }
+/* ===== TEXTO ===== */
+.card h3 {
+  margin: 10px 0;
+  font-size: 15px;
+}
 
-    .btn {
-      display: inline-block;
-      margin-bottom: 14px;
-      padding: 9px 16px;
-      background: #25d366;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      font-size: 14px;
-    }
+/* ===== BOTÃO ===== */
+.btn {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 9px 16px;
+  background: #25d366;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
 
-    /* ===== AJUSTES PARA MOBILE ===== */
-    @media (max-width: 600px) {
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
 
-      header img {
-        max-width: 150px;
-      }
+  header img {
+    max-width: 150px;
+  }
 
-      .grid {
-        grid-template-columns: 1fr;
-        padding: 14px;
-      }
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
 
-      .card img {
-        height: 160px; /* 🔥 AQUI DIMINUI NO MOBILE */
-      }
+  /* 🔥 IMAGEM – MOBILE (LEVE E SEM TOXICIDADE) */
+  .card img {
+    height: 150px;
+    padding: 8px;
+  }
 
-      .card h3 {
-        font-size: 14px;
-      }
+  .card h3 {
+    font-size: 14px;
+  }
 
-      .btn {
-        font-size: 13px;
-        padding: 8px 14px;
-      }
-    }
-  </style>
+  .btn {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -109,7 +119,7 @@
 
 <h1>Cobogós</h1>
 
-<!-- ================= 40x40 ================= -->
+<!-- ===== 40x40 ===== -->
 <h2>Cobogós 40x40</h2>
 <div class="grid">
 
@@ -151,7 +161,7 @@
 
 </div>
 
-<!-- ================= 30x30 ================= -->
+<!-- ===== 30x30 ===== -->
 <h2>Cobogós 30x30</h2>
 <div class="grid">
 
@@ -193,7 +203,7 @@
 
 </div>
 
-<!-- ================= 24x24 ================= -->
+<!-- ===== 24x24 ===== -->
 <h2>Cobogós 24x24</h2>
 <div class="grid">
 
