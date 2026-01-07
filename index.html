@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>MM PRÉ-MOLDADOS – Catálogo</title>
+<title>MM Pré-Moldados – Catálogo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -13,57 +13,39 @@ body{
   color:#333;
 }
 
-/* CABEÇALHO */
+/* ===== CABEÇALHO ===== */
 header{
   background:#1f1f1f;
-  padding:10px 15px;
+  padding:10px 15px 15px;
   text-align:center;
 }
 
 /* LOGO */
 header img{
-  max-width:520px; /* AJUSTÁVEL */
   width:100%;
+  max-width:320px;
   margin:0 auto;
   display:block;
 }
 
-/* TEXTO */
+/* TEXTO CATÁLOGO */
 header p{
-  margin-top:8px;
-  font-size:16px;
+  margin:6px 0 0;
+  font-size:15px;
   color:#ddd;
+  font-weight:600;
 }
 
-/* CONTROLE SÓ NO DESKTOP */
-@media (min-width:769px){
-  header{
-    max-height:260px;
-    overflow:hidden;
-  }
-}
-
-/* MOBILE */
-@media (max-width:768px){
-  header img{
-    max-width:150px; /* VOCÊ JÁ TESTOU ESSE */
-  }
-  header p{
-    font-size:14px;
-    margin-top:6px;
-  }
-}
-
-/* CONTEÚDO */
+/* ===== CONTEÚDO ===== */
 section{
   max-width:1200px;
   margin:auto;
-  padding:30px;
+  padding:20px;
 }
 
 h2{
-  margin-top:40px;
-  margin-bottom:20px;
+  margin-top:30px;
+  margin-bottom:15px;
   border-left:6px solid #c9a24d;
   padding-left:10px;
 }
@@ -84,32 +66,50 @@ h2{
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
+/* IMAGEM PADRÃO */
 .card img{
   width:100%;
-  height:220px;
+  height:200px;
   object-fit:cover;
   border-radius:8px;
 }
 
+/* 24x24 */
 .card.img-24 img{
-  height:160px;
+  height:150px;
 }
 
+/* TEXTO */
 .card h3{
   font-size:16px;
   margin:12px 0;
 }
 
-/* BOTÃO WHATSAPP */
+/* BOTÃO */
 .whatsapp{
   display:inline-block;
   background:#25D366;
   color:#fff;
-  padding:8px 12px;
+  padding:8px 14px;
   border-radius:6px;
   text-decoration:none;
   font-size:14px;
   font-weight:bold;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width:768px){
+  header img{
+    max-width:260px;
+  }
+
+  header p{
+    font-size:14px;
+  }
+
+  .card img{
+    height:150px;
+  }
 }
 
 /* RODAPÉ */
@@ -135,32 +135,53 @@ footer{
 
 <h2>Cobogós 40x40</h2>
 <div class="grid">
-  <div class="card"><img src="img/cobogo-16-furos-40.jpg"><h3>Cobogó 16 Furos 40x40</h3><a class="whatsapp" target="_blank" href="https://wa.me/5561999385680">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-taco-chines-40.jpg"><h3>Cobogó Taco Chinês 40x40</h3><a class="whatsapp" target="_blank" href="https://wa.me/5561999385680">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-anti-chuva-40.jpg"><h3>Cobogó Anti-Chuva 40x40</h3><a class="whatsapp" target="_blank" href="https://wa.me/5561999385680">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-flor-40.jpg"><h3>Cobogó Flor 40x40</h3><a class="whatsapp" target="_blank" href="https://wa.me/5561999385680">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-4-pontas-40.jpg"><h3>Cobogó 4 Pontas 40x40</h3><a class="whatsapp" target="_blank" href="https://wa.me/5561999385680">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-arabe-40.jpg"><h3>Cobogó Árabe 40x40</h3><a class="whatsapp" target="_blank" href="https://wa.me/5561999385680">WhatsApp</a></div>
+  <div class="card">
+    <img src="img/cobogo-16-furos-40.jpg">
+    <h3>Cobogó 16 Furos 40x40</h3>
+    <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
+  </div>
+
+  <div class="card">
+    <img src="img/cobogo-taco-chines-40.jpg">
+    <h3>Cobogó Taco Chinês 40x40</h3>
+    <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
+  </div>
+
+  <div class="card">
+    <img src="img/cobogo-anti-chuva-40.jpg">
+    <h3>Cobogó Anti-Chuva 40x40</h3>
+    <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
+  </div>
 </div>
 
 <h2>Cobogós 30x30</h2>
 <div class="grid">
-  <div class="card"><img src="img/cobogo-estrela-dos-ventos-30.jpg"><h3>Cobogó Estrela dos Ventos 30x30</h3><a class="whatsapp" target="_blank" href="https://wa.me/5561999385680">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-fenestra-30.jpg"><h3>Cobogó Fenestra 30x30</h3><a class="whatsapp" target="_blank" href="https://wa.me/5561999385680">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-petala-30.jpg"><h3>Cobogó Pétala 30x30</h3><a class="whatsapp" target="_blank" href="https://wa.me/5561999385680">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-quadrado-cruz-30.jpg"><h3>Cobogó Quadrado Cruz 30x30</h3><a class="whatsapp" target="_blank" href="https://wa.me/5561999385680">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-xis-30.jpg"><h3>Cobogó Xis 30x30</h3><a class="whatsapp" target="_blank" href="https://wa.me/5561999385680">WhatsApp</a></div>
+  <div class="card">
+    <img src="img/cobogo-estrela-dos-ventos-30.jpg">
+    <h3>Cobogó Estrela dos Ventos 30x30</h3>
+    <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
+  </div>
+
+  <div class="card">
+    <img src="img/cobogo-fenestra-30.jpg">
+    <h3>Cobogó Fenestra 30x30</h3>
+    <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
+  </div>
 </div>
 
 <h2>Cobogó 24x24</h2>
 <div class="grid">
-  <div class="card img-24"><img src="img/cobogo-4-furos-24.jpg"><h3>Cobogó 4 Furos 24x24</h3><a class="whatsapp" target="_blank" href="https://wa.me/5561999385680">WhatsApp</a></div>
+  <div class="card img-24">
+    <img src="img/cobogo-4-furos-24.jpg">
+    <h3>Cobogó 4 Furos 24x24</h3>
+    <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
+  </div>
 </div>
 
 </section>
 
 <footer>
-© MM PRÉ-MOLDADOS – Catálogo de Produtos
+© MM Pré-Moldados – Catálogo de Produtos
 </footer>
 
 </body>
