@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MM Premoldados</title>
 
 <style>
@@ -13,7 +12,7 @@ body {
   background: #f4f4f4;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header {
   background: #1e1e1e;
   text-align: center;
@@ -27,17 +26,16 @@ header img {
 
 header p {
   color: #ccc;
-  margin: 10px 0 0;
+  margin-top: 10px;
   font-size: 15px;
 }
 
-/* ===== BOTÃO MENU ≡ ===== */
+/* BOTÃO MENU */
 .menu-button {
   position: fixed;
   top: 16px;
   left: 16px;
   z-index: 9999;
-
   background: #222;
   color: #fff;
   border: none;
@@ -48,7 +46,7 @@ header p {
   cursor: pointer;
 }
 
-/* ===== MENU BOLHA ===== */
+/* MENU BOLHA */
 .menu {
   display: none;
   position: fixed;
@@ -78,14 +76,14 @@ header p {
   background: #f1f1f1;
 }
 
-/* ===== DESTAQUES ===== */
+/* CONTEÚDO */
 section {
   padding: 20px;
 }
 
 h2 {
-  margin-bottom: 15px;
   color: #333;
+  margin-top: 30px;
 }
 
 .card {
@@ -101,16 +99,6 @@ h2 {
   height: 220px;
   object-fit: cover;
   border-radius: 10px;
-}
-
-.tag {
-  display: inline-block;
-  background: #d4af37;
-  color: #000;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  margin-bottom: 8px;
 }
 
 .card h3 {
@@ -136,14 +124,10 @@ h2 {
 
 <!-- MENU -->
 <div class="menu" id="menu">
-  <a href="#">Manilhas</a>
-  <a href="#">Lajes Pré Moldadas</a>
-  <a href="#">Pingadeiras</a>
-  <a href="#">Blocos / Canaletas</a>
-  <a href="#">Pisadeiras de Jardim</a>
-  <a href="#">Revestimento de Piso</a>
-  <a href="#">Revestimento de Parede</a>
-  <a href="#">Cobogós</a>
+  <a href="#manilhas">Manilhas</a>
+  <a href="#cobogo40">Cobogós 40x40</a>
+  <a href="#cobogo30">Cobogós 30x30</a>
+  <a href="#cobogo24">Cobogós 24x24</a>
 </div>
 
 <!-- HEADER -->
@@ -152,24 +136,59 @@ h2 {
   <p>Qualidade, resistência e acabamento em pré-moldados</p>
 </header>
 
-<!-- DESTAQUES -->
-<section>
-  <h2>Destaques</h2>
+<!-- MANILHAS -->
+<section id="manilhas">
+  <h2>Manilhas</h2>
 
   <div class="card">
-    <span class="tag">Mais vendido</span>
-    <img src="img/cobogo-16-furos-40x40.jpg">
-    <h3>Cobogó 16 Furos 40x40</h3>
+    <img src="img/manilha-30.jpg">
+    <h3>Manilha 30cm</h3>
     <a class="whatsapp" href="https://wa.me/55SEUNUMERO" target="_blank">WhatsApp</a>
   </div>
 
   <div class="card">
-    <span class="tag">Destaque</span>
+    <img src="img/manilha-40.jpg">
+    <h3>Manilha 40cm</h3>
+    <a class="whatsapp" href="https://wa.me/55SEUNUMERO" target="_blank">WhatsApp</a>
+  </div>
+</section>
+
+<!-- COBOGÓS 40x40 -->
+<section id="cobogo40">
+  <h2>Cobogós 40x40</h2>
+
+  <div class="card"><img src="img/cobogo-16-furos-40x40.jpg"><h3>Cobogó 16 Furos</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-taco-chines-40x40.jpg"><h3>Taco Chinês</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-anti-chuva-40x40.jpg"><h3>Anti-chuva</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-flor-40x40.jpg"><h3>Flor</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-4-pontas-40x40.jpg"><h3>4 Pontas</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-arabe-40x40.jpg"><h3>Árabe</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-cruz-40x40.jpg"><h3>Cruz</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+</section>
+
+<!-- COBOGÓS 30x30 -->
+<section id="cobogo30">
+  <h2>Cobogós 30x30</h2>
+
+  <div class="card"><img src="img/cobogo-bandeira-30x30.jpg"><h3>Bandeira</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-estrela-30x30.jpg"><h3>Estrela</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-petala-30x30.jpg"><h3>Pétala</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-estrela-ventos-30x30.jpg"><h3>Estrela dos Ventos</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-fenestra-30x30.jpg"><h3>Fenestra</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-quadrado-cruz-30x30.jpg"><h3>Quadrado Cruz</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-margarida-30x30.jpg"><h3>Margarida</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+  <div class="card"><img src="img/cobogo-xis-30x30.jpg"><h3>Xis</h3><a class="whatsapp" href="#">WhatsApp</a></div>
+</section>
+
+<!-- COBOGÓ 24x24 -->
+<section id="cobogo24">
+  <h2>Cobogó 24x24</h2>
+
+  <div class="card">
     <img src="img/cobogo-4-furos-24x24.jpg">
-    <h3>Cobogó 4 Furos 24x24</h3>
-    <a class="whatsapp" href="https://wa.me/55SEUNUMERO" target="_blank">WhatsApp</a>
+    <h3>Cobogó 4 Furos</h3>
+    <a class="whatsapp" href="#">WhatsApp</a>
   </div>
-
 </section>
 
 <script>
