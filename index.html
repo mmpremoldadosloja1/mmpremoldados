@@ -3,196 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MM Premoldados</title>
+<title>MM Pré-Moldados</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f5f5f5;
 }
 
-/* HEADER */
-header {
-  background: #1e1e1e;
-  text-align: center;
-  padding: 12px 10px 20px;
+header{
+  background:#111;
+  padding:15px 10px 20px;
+  position:relative;
+  text-align:center;
 }
 
-header img {
-  max-width: 320px;
-  width: 100%;
+header img{
+  max-width:320px;
 }
 
-header p {
-  color: #ccc;
-  margin-top: 10px;
-  font-size: 15px;
+header p{
+  color:#ccc;
+  font-size:14px;
+  margin-top:8px;
 }
 
-/* BOTÃO MENU */
-.menu-button {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  z-index: 9999;
-  background: #222;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  width: 44px;
-  height: 44px;
-  font-size: 22px;
-  cursor: pointer;
+.menu-btn{
+  position:absolute;
+  top:15px;
+  left:15px;
+  background:#222;
+  color:#fff;
+  border:none;
+  font-size:22px;
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
 }
 
-/* MENU BOLHA */
-.menu {
-  display: none;
-  position: fixed;
-  top: 70px;
-  left: 16px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-  width: 240px;
-  z-index: 9998;
+.menu{
+  display:none;
+  position:absolute;
+  top:55px;
+  left:15px;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  overflow:hidden;
+  z-index:10;
 }
 
-.menu a {
-  display: block;
-  padding: 14px;
-  text-decoration: none;
-  color: #333;
-  border-bottom: 1px solid #eee;
-  font-weight: bold;
+.menu a{
+  display:block;
+  padding:12px 16px;
+  color:#333;
+  text-decoration:none;
+  border-bottom:1px solid #eee;
 }
 
-.menu a:last-child {
-  border-bottom: none;
+.menu a:hover{
+  background:#f0f0f0;
 }
 
-.menu a:hover {
-  background: #f1f1f1;
+section{
+  padding:20px;
 }
 
-/* CONTEÚDO */
-section {
-  padding: 20px;
+h2{
+  margin-bottom:15px;
 }
 
-h2 {
-  color: #333;
-  margin-top: 30px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
 }
 
-.card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 15px;
-  margin-bottom: 20px;
-  text-align: center;
+.card{
+  background:#fff;
+  padding:20px;
+  text-align:center;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 4px 8px rgba(0,0,0,0.08);
 }
 
-.card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.card h3 {
-  margin: 12px 0;
-}
-
-.whatsapp {
-  display: inline-block;
-  background: #25d366;
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
+.card:hover{
+  background:#eee;
 }
 </style>
 </head>
 
 <body>
 
-<!-- BOTÃO MENU -->
-<button class="menu-button" onclick="toggleMenu()">≡</button>
-
-<!-- MENU -->
-<div class="menu" id="menu">
-  <a href="#manilhas">Manilhas</a>
-  <a href="#cobogo40">Cobogós 40x40</a>
-  <a href="#cobogo30">Cobogós 30x30</a>
-  <a href="#cobogo24">Cobogós 24x24</a>
-</div>
-
-<!-- HEADER -->
 <header>
-  <img src="img/logo.png" alt="MM Premoldados">
+  <button class="menu-btn" onclick="toggleMenu()">≡</button>
+
+  <img src="img/logo.png" alt="MM Pré-Moldados">
   <p>Qualidade, resistência e acabamento em pré-moldados</p>
+
+  <div class="menu" id="menu">
+    <a href="index.html">Home</a>
+    <a href="cobogos.html">Cobogós</a>
+    <a href="#">Manilhas</a>
+    <a href="#">Lajes Pré-Moldadas</a>
+    <a href="#">Pingadeiras</a>
+    <a href="#">Blocos / Canaletas</a>
+    <a href="#">Pisadeiras de Jardim</a>
+    <a href="#">Revestimento de Piso</a>
+    <a href="#">Revestimento de Parede</a>
+  </div>
 </header>
 
-<!-- MANILHAS -->
-<section id="manilhas">
-  <h2>Manilhas</h2>
+<section>
+  <h2>Departamentos</h2>
 
-  <div class="card">
-    <img src="img/manilha-30.jpg">
-    <h3>Manilha 30cm</h3>
-    <a class="whatsapp" href="https://wa.me/55SEUNUMERO" target="_blank">WhatsApp</a>
-  </div>
-
-  <div class="card">
-    <img src="img/manilha-40.jpg">
-    <h3>Manilha 40cm</h3>
-    <a class="whatsapp" href="https://wa.me/55SEUNUMERO" target="_blank">WhatsApp</a>
-  </div>
-</section>
-
-<!-- COBOGÓS 40x40 -->
-<section id="cobogo40">
-  <h2>Cobogós 40x40</h2>
-
-  <div class="card"><img src="img/cobogo-16-furos-40x40.jpg"><h3>Cobogó 16 Furos</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-taco-chines-40x40.jpg"><h3>Taco Chinês</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-anti-chuva-40x40.jpg"><h3>Anti-chuva</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-flor-40x40.jpg"><h3>Flor</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-4-pontas-40x40.jpg"><h3>4 Pontas</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-arabe-40x40.jpg"><h3>Árabe</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-cruz-40x40.jpg"><h3>Cruz</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-</section>
-
-<!-- COBOGÓS 30x30 -->
-<section id="cobogo30">
-  <h2>Cobogós 30x30</h2>
-
-  <div class="card"><img src="img/cobogo-bandeira-30x30.jpg"><h3>Bandeira</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-estrela-30x30.jpg"><h3>Estrela</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-petala-30x30.jpg"><h3>Pétala</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-estrela-ventos-30x30.jpg"><h3>Estrela dos Ventos</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-fenestra-30x30.jpg"><h3>Fenestra</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-quadrado-cruz-30x30.jpg"><h3>Quadrado Cruz</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-margarida-30x30.jpg"><h3>Margarida</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-  <div class="card"><img src="img/cobogo-xis-30x30.jpg"><h3>Xis</h3><a class="whatsapp" href="#">WhatsApp</a></div>
-</section>
-
-<!-- COBOGÓ 24x24 -->
-<section id="cobogo24">
-  <h2>Cobogó 24x24</h2>
-
-  <div class="card">
-    <img src="img/cobogo-4-furos-24x24.jpg">
-    <h3>Cobogó 4 Furos</h3>
-    <a class="whatsapp" href="#">WhatsApp</a>
+  <div class="grid">
+    <div class="card">Manilhas</div>
+    <div class="card">Lajes Pré-Moldadas</div>
+    <div class="card">Pingadeiras</div>
+    <div class="card">Blocos / Canaletas</div>
+    <div class="card">Pisadeiras de Jardim</div>
+    <div class="card">Revestimento de Piso</div>
+    <div class="card">Revestimento de Parede</div>
+    <div class="card" onclick="location.href='cobogos.html'">Cobogós</div>
   </div>
 </section>
 
 <script>
-function toggleMenu() {
+function toggleMenu(){
   const menu = document.getElementById("menu");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
