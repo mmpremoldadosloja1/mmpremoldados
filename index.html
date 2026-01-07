@@ -12,36 +12,61 @@ body{
   background:#f2f2f2;
   color:#333;
 }
+
+/* CABEÇALHO */
 header{
   background:#1f1f1f;
   padding:10px 15px;
   text-align:center;
+  max-height:280px;
+  overflow:hidden;
 }
+
 header img{
-  max-width:600px; /* LOGO MAIOR */
+  max-width:900px;
   width:100%;
+  margin:0 auto;
+  display:block;
 }
+
 header p{
   margin-top:10px;
   font-size:16px;
   color:#ddd;
 }
+
+/* AJUSTE PARA CELULAR */
+@media (max-width:768px){
+  header{
+    max-height:200px;
+  }
+  header img{
+    max-width:95%;
+  }
+}
+
+/* CONTEÚDO */
 section{
   max-width:1200px;
   margin:auto;
   padding:30px;
 }
+
 h2{
   margin-top:40px;
   margin-bottom:20px;
   border-left:6px solid #c9a24d;
   padding-left:10px;
 }
+
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:20px;
 }
+
+/* CARD */
 .card{
   background:#fff;
   border-radius:10px;
@@ -49,19 +74,24 @@ h2{
   text-align:center;
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
+
 .card img{
   width:100%;
   height:220px;
   object-fit:cover;
   border-radius:8px;
 }
+
 .card.img-24 img{
   height:160px;
 }
+
 .card h3{
   font-size:16px;
   margin:12px 0;
 }
+
+/* BOTÃO WHATSAPP */
 .whatsapp{
   display:inline-block;
   background:#25D366;
@@ -72,6 +102,8 @@ h2{
   font-size:14px;
   font-weight:bold;
 }
+
+/* RODAPÉ */
 footer{
   background:#1f1f1f;
   color:#fff;
