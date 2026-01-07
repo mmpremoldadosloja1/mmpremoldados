@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -13,14 +13,13 @@ body{
   color:#333;
 }
 
-/* ===== CABEÇALHO ===== */
+/* ===== HEADER ===== */
 header{
   background:#1f1f1f;
-  padding:10px 15px 15px;
+  padding:10px 15px;
   text-align:center;
 }
 
-/* LOGO */
 header img{
   width:100%;
   max-width:320px;
@@ -28,7 +27,6 @@ header img{
   display:block;
 }
 
-/* TEXTO CATÁLOGO */
 header p{
   margin:6px 0 0;
   font-size:15px;
@@ -36,7 +34,27 @@ header p{
   font-weight:600;
 }
 
-/* ===== CONTEÚDO ===== */
+/* ===== MENU ===== */
+nav{
+  background:#111;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  padding:10px;
+}
+
+nav a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+}
+
+nav a:hover{
+  color:#c9a24d;
+}
+
+/* ===== SEÇÕES ===== */
 section{
   max-width:1200px;
   margin:auto;
@@ -50,14 +68,48 @@ h2{
   padding-left:10px;
 }
 
-/* GRID */
+/* ===== HOME ===== */
+.home-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:20px;
+}
+
+.home-card{
+  background:#fff;
+  padding:25px 15px;
+  text-align:center;
+  border-radius:10px;
+  font-weight:bold;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.home-card a{
+  text-decoration:none;
+  color:#333;
+}
+
+.home-card:hover{
+  border:2px solid #c9a24d;
+}
+
+/* ===== CATÁLOGO (OCULTO POR PADRÃO) ===== */
+#catalogo{
+  display:none;
+}
+
+/* MOSTRA CATÁLOGO QUANDO CLICA */
+#catalogo:target{
+  display:block;
+}
+
+/* ===== PRODUTOS ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:20px;
 }
 
-/* CARD */
 .card{
   background:#fff;
   border-radius:10px;
@@ -66,26 +118,22 @@ h2{
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* IMAGEM PADRÃO */
 .card img{
   width:100%;
-  height:200px;
+  height:180px;
   object-fit:cover;
   border-radius:8px;
 }
 
-/* 24x24 */
 .card.img-24 img{
-  height:150px;
+  height:140px;
 }
 
-/* TEXTO */
 .card h3{
   font-size:16px;
   margin:12px 0;
 }
 
-/* BOTÃO */
 .whatsapp{
   display:inline-block;
   background:#25D366;
@@ -102,17 +150,12 @@ h2{
   header img{
     max-width:260px;
   }
-
-  header p{
-    font-size:14px;
-  }
-
   .card img{
-    height:150px;
+    height:140px;
   }
 }
 
-/* RODAPÉ */
+/* ===== FOOTER ===== */
 footer{
   background:#1f1f1f;
   color:#fff;
@@ -131,40 +174,35 @@ footer{
   <p>Catálogo de Produtos</p>
 </header>
 
-<section>
+<nav>
+  <a href="#home">Home</a>
+  <a href="#catalogo">Catálogo</a>
+</nav>
+
+<!-- ===== HOME ===== -->
+<section id="home">
+  <h2>Materiais</h2>
+
+  <div class="home-grid">
+    <div class="home-card">Manilhas</div>
+    <div class="home-card">Lajes Pré Moldadas</div>
+    <div class="home-card">Pingadeiras</div>
+    <div class="home-card">Blocos / Canaletas</div>
+    <div class="home-card">Pisadeiras de Jardim</div>
+    <div class="home-card">Revestimento de Piso</div>
+    <div class="home-card">Revestimento de Parede</div>
+    <div class="home-card"><a href="#catalogo">Cobogós</a></div>
+  </div>
+</section>
+
+<!-- ===== CATÁLOGO (SÓ ABRE AO CLICAR) ===== -->
+<section id="catalogo">
 
 <h2>Cobogós 40x40</h2>
 <div class="grid">
   <div class="card">
     <img src="img/cobogo-16-furos-40.jpg">
     <h3>Cobogó 16 Furos 40x40</h3>
-    <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
-  </div>
-
-  <div class="card">
-    <img src="img/cobogo-taco-chines-40.jpg">
-    <h3>Cobogó Taco Chinês 40x40</h3>
-    <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
-  </div>
-
-  <div class="card">
-    <img src="img/cobogo-anti-chuva-40.jpg">
-    <h3>Cobogó Anti-Chuva 40x40</h3>
-    <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
-  </div>
-</div>
-
-<h2>Cobogós 30x30</h2>
-<div class="grid">
-  <div class="card">
-    <img src="img/cobogo-estrela-dos-ventos-30.jpg">
-    <h3>Cobogó Estrela dos Ventos 30x30</h3>
-    <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
-  </div>
-
-  <div class="card">
-    <img src="img/cobogo-fenestra-30.jpg">
-    <h3>Cobogó Fenestra 30x30</h3>
     <a class="whatsapp" href="https://wa.me/5561999385680" target="_blank">WhatsApp</a>
   </div>
 </div>
