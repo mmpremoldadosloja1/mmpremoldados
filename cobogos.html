@@ -14,7 +14,7 @@
 
     header {
       background: #111;
-      padding: 15px;
+      padding: 12px;
       text-align: center;
     }
 
@@ -24,7 +24,7 @@
 
     h1 {
       text-align: center;
-      margin: 25px 0 10px;
+      margin: 20px 0 10px;
     }
 
     h2 {
@@ -36,9 +36,9 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      padding: 18px;
     }
 
     .card {
@@ -49,6 +49,7 @@
       text-align: center;
     }
 
+    /* TAMANHO PADRÃO (DESKTOP) */
     .card img {
       width: 100%;
       height: 220px;
@@ -56,19 +57,46 @@
     }
 
     .card h3 {
-      margin: 12px 0;
-      font-size: 16px;
+      margin: 10px 0;
+      font-size: 15px;
     }
 
     .btn {
       display: inline-block;
-      margin-bottom: 15px;
-      padding: 10px 18px;
+      margin-bottom: 14px;
+      padding: 9px 16px;
       background: #25d366;
       color: #fff;
       text-decoration: none;
       border-radius: 5px;
       font-weight: bold;
+      font-size: 14px;
+    }
+
+    /* ===== AJUSTES PARA MOBILE ===== */
+    @media (max-width: 600px) {
+
+      header img {
+        max-width: 150px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      .card img {
+        height: 160px; /* 🔥 AQUI DIMINUI NO MOBILE */
+      }
+
+      .card h3 {
+        font-size: 14px;
+      }
+
+      .btn {
+        font-size: 13px;
+        padding: 8px 14px;
+      }
     }
   </style>
 </head>
