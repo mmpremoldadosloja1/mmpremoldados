@@ -14,11 +14,13 @@ body{
   background:#f5f5f5;
 }
 
+/* ===== HEADER ===== */
 header{
   background:#111;
-  padding:12px 20px;
+  padding:12px 15px;
   display:flex;
   align-items:center;
+  gap:12px;
   position:relative;
 }
 
@@ -33,13 +35,45 @@ header{
 }
 
 header img{
-  max-width:200px;
-  margin-left:12px;
+  max-width:170px;
 }
 
-.header-actions{
+/* SEARCH */
+.search-container{
+  flex:1;
+  position:relative;
+}
+
+.search-container input{
+  width:100%;
+  padding:12px 14px;
+  border-radius:6px;
+  border:none;
+  outline:none;
+  font-size:15px;
+}
+
+.suggestions{
   position:absolute;
-  right:20px;
+  top:48px;
+  width:100%;
+  background:#fff;
+  border-radius:0 0 6px 6px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.25);
+  z-index:999;
+}
+
+.suggestions div{
+  padding:12px;
+  cursor:pointer;
+}
+
+.suggestions div:hover{
+  background:#f0f0f0;
+}
+
+/* ACTIONS */
+.header-actions{
   display:flex;
   gap:10px;
 }
@@ -58,7 +92,7 @@ header img{
 .menu{
   display:none;
   position:absolute;
-  top:55px;
+  top:60px;
   left:15px;
   background:#fff;
   border-radius:10px;
@@ -73,51 +107,6 @@ header img{
   color:#333;
   text-decoration:none;
   border-bottom:1px solid #eee;
-}
-
-/* SEARCH */
-.search-bar{
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  background:#111;
-  padding:12px 20px;
-  z-index:999;
-}
-
-.search-box{
-  max-width:600px;
-  margin:0 auto;
-  position:relative;
-}
-
-.search-box input{
-  width:100%;
-  padding:12px 14px;
-  font-size:16px;
-  border-radius:6px;
-  border:none;
-  outline:none;
-}
-
-.suggestions{
-  position:absolute;
-  top:48px;
-  width:100%;
-  background:#fff;
-  border-radius:0 0 6px 6px;
-  box-shadow:0 6px 16px rgba(0,0,0,0.2);
-}
-
-.suggestions div{
-  padding:12px;
-  cursor:pointer;
-}
-
-.suggestions div:hover{
-  background:#f0f0f0;
 }
 
 section{
@@ -146,10 +135,16 @@ section{
 
 <header>
   <button class="menu-btn" onclick="toggleMenu()">≡</button>
+
   <img src="img/logo.png" alt="MM Pré-Moldados">
 
+  <!-- SEARCH SEMPRE VISÍVEL -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Buscar produtos">
+    <div class="suggestions" id="suggestions"></div>
+  </div>
+
   <div class="header-actions">
-    <button class="action-btn" onclick="openSearch()">🔍</button>
     <button class="action-btn">🛒</button>
   </div>
 
@@ -168,14 +163,6 @@ section{
   </div>
 </header>
 
-<!-- SEARCH -->
-<div class="search-bar" id="searchBar">
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Buscar produtos">
-    <div class="suggestions" id="suggestions"></div>
-  </div>
-</div>
-
 <section>
   <h2>Departamentos</h2>
   <div class="grid">
@@ -192,17 +179,14 @@ section{
 
 <script>
 const menu = document.getElementById("menu");
-const searchBar = document.getElementById("searchBar");
 const searchInput = document.getElementById("searchInput");
 const suggestionsBox = document.getElementById("suggestions");
 
-/* PRODUTOS REAIS DO SITE */
+/* PRODUTOS REAIS */
 const products = [
-  /* MANILHAS */
   { name:"Manilha 90cm x 50cm", link:"manilhas.html" },
   { name:"Manilha 1,10m x 50cm", link:"manilhas.html" },
 
-  /* COBOGÓS 40x40 */
   { name:"Cobogó 16 Furos 40x40", link:"cobogos.html" },
   { name:"Cobogó 4 Pontas 40x40", link:"cobogos.html" },
   { name:"Cobogó Anti-Chuva 40x40", link:"cobogos.html" },
@@ -210,7 +194,6 @@ const products = [
   { name:"Cobogó Flor 40x40", link:"cobogos.html" },
   { name:"Cobogó Taco Chinês 40x40", link:"cobogos.html" },
 
-  /* COBOGÓS 30x30 */
   { name:"Cobogó Estrela 30x30", link:"cobogos.html" },
   { name:"Cobogó Estrela dos Ventos 30x30", link:"cobogos.html" },
   { name:"Cobogó Fenestra 30x30", link:"cobogos.html" },
@@ -218,25 +201,12 @@ const products = [
   { name:"Cobogó Quadrado Cruz 30x30", link:"cobogos.html" },
   { name:"Cobogó Xis 30x30", link:"cobogos.html" },
 
-  /* COBOGÓS 24x24 */
   { name:"Cobogó 4 Furos 24x24", link:"cobogos.html" }
 ];
 
 function toggleMenu(){
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
-
-function openSearch(){
-  searchBar.style.display = "block";
-  searchInput.focus();
-  history.pushState({search:true}, "");
-}
-
-window.addEventListener("popstate", ()=>{
-  searchBar.style.display = "none";
-  searchInput.value = "";
-  suggestionsBox.innerHTML = "";
-});
 
 searchInput.addEventListener("input", ()=>{
   const value = searchInput.value.toLowerCase();
