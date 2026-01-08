@@ -14,7 +14,6 @@ body{
   background:#f5f5f5;
 }
 
-/* ===== HEADER ===== */
 header{
   background:#111;
   padding:12px 20px;
@@ -38,7 +37,6 @@ header img{
   margin-left:12px;
 }
 
-/* BOTÕES DIREITA */
 .header-actions{
   position:absolute;
   right:20px;
@@ -56,7 +54,7 @@ header img{
   cursor:pointer;
 }
 
-/* ===== MENU ===== */
+/* MENU */
 .menu{
   display:none;
   position:absolute;
@@ -77,11 +75,7 @@ header img{
   border-bottom:1px solid #eee;
 }
 
-.menu a:hover{
-  background:#f0f0f0;
-}
-
-/* ===== SEARCH TOPO ===== */
+/* SEARCH */
 .search-bar{
   display:none;
   position:fixed;
@@ -115,7 +109,6 @@ header img{
   background:#fff;
   border-radius:0 0 6px 6px;
   box-shadow:0 6px 16px rgba(0,0,0,0.2);
-  overflow:hidden;
 }
 
 .suggestions div{
@@ -127,13 +120,9 @@ header img{
   background:#f0f0f0;
 }
 
-/* ===== CONTEÚDO ===== */
+/* CONTEÚDO */
 section{
   padding:20px;
-}
-
-h2{
-  margin-bottom:15px;
 }
 
 .grid{
@@ -150,11 +139,6 @@ h2{
   font-weight:600;
   cursor:pointer;
   box-shadow:0 4px 8px rgba(0,0,0,0.08);
-  transition:transform 0.2s;
-}
-
-.card:hover{
-  transform:translateY(-4px);
 }
 </style>
 </head>
@@ -188,25 +172,22 @@ h2{
 <!-- SEARCH -->
 <div class="search-bar" id="searchBar">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Buscar produtos ou departamentos..." oninput="showSuggestions()">
+    <input type="text" id="searchInput" placeholder="Buscar produto (ex: manilha 90, anti-chuva)">
     <div class="suggestions" id="suggestions"></div>
   </div>
 </div>
 
 <section>
   <h2>Departamentos</h2>
-
   <div class="grid">
     <div class="card" onclick="go('manilhas.html')">Manilhas</div>
+    <div class="card" onclick="go('cobogos.html')">Cobogós</div>
     <div class="card">Lajes Pré-Moldadas</div>
     <div class="card">Pingadeiras</div>
     <div class="card">Blocos / Canaletas</div>
     <div class="card">Pisadeiras de Jardim</div>
-    <div class="card">Meio-fio de Jardim</div>
-    <div class="card">Caixas</div>
     <div class="card">Revestimento de Piso</div>
     <div class="card">Revestimento de Parede</div>
-    <div class="card" onclick="go('cobogos.html')">Cobogós</div>
   </div>
 </section>
 
@@ -216,18 +197,17 @@ const searchBar = document.getElementById("searchBar");
 const searchInput = document.getElementById("searchInput");
 const suggestionsBox = document.getElementById("suggestions");
 
+/* 🔹 PRODUTOS REAIS */
 const products = [
-  { name:"Cobogós", link:"cobogos.html" },
-  { name:"Manilhas", link:"manilhas.html" },
-  { name:"Tampas", link:"#"},
-  { name:"Lajes Pré-Moldadas", link:"#"},
-  { name:"Pingadeiras", link:"#"},
-  { name:"Blocos / Canaletas", link:"#"},
-  { name:"Pisadeiras de Jardim", link:"#"},
-  { name:"Meio-fio de Jardim", link:"#"},
-  { name:"Caixas", link:"#"},
-  { name:"Revestimento de Piso", link:"#"},
-  { name:"Revestimento de Parede", link:"#"}
+  { name:"Manilha 40", link:"manilhas.html" },
+  { name:"Manilha 60", link:"manilhas.html" },
+  { name:"Manilha 90", link:"manilhas.html" },
+  { name:"Manilha 1,10", link:"manilhas.html" },
+  { name:"Manilha 1,50", link:"manilhas.html" },
+
+  { name:"Cobogó Tradicional", link:"cobogos.html" },
+  { name:"Cobogó Anti-Chuva", link:"cobogos.html" },
+  { name:"Cobogó Ventilado", link:"cobogos.html" }
 ];
 
 function toggleMenu(){
@@ -240,19 +220,13 @@ function openSearch(){
   history.pushState({search:true}, "");
 }
 
-function closeSearch(){
+window.addEventListener("popstate", ()=>{
   searchBar.style.display = "none";
   searchInput.value = "";
   suggestionsBox.innerHTML = "";
-}
-
-window.addEventListener("popstate", ()=>{
-  if(searchBar.style.display === "block"){
-    closeSearch();
-  }
 });
 
-function showSuggestions(){
+searchInput.addEventListener("input", ()=>{
   const value = searchInput.value.toLowerCase();
   suggestionsBox.innerHTML = "";
   if(!value) return;
@@ -265,17 +239,11 @@ function showSuggestions(){
       div.onclick = ()=> window.location.href = p.link;
       suggestionsBox.appendChild(div);
     });
-}
+});
 
 function go(link){
   window.location.href = link;
 }
-
-document.addEventListener("keydown", e=>{
-  if(e.key === "Escape" && searchBar.style.display === "block"){
-    history.back();
-  }
-});
 </script>
 
 </body>
