@@ -118,9 +118,15 @@ h2{
 
 /* ✅ AJUSTE REAL DAS IMAGENS */
 .card img{
-  width:100%;
-  height:160px;      /* DESKTOP CONTROLADO */
-  object-fit:cover;
+  width: 100%;
+  height: 260px;
+  object-fit: contain;
+  background: #fff;
+}
+  @media (max-width: 600px) {
+  .card img {
+    height: 300px;
+  }
 }
 
 .card h3{
