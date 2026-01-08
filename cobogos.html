@@ -4,11 +4,109 @@
   <meta charset="UTF-8">
   <title>Cobogós | MM Pré-Moldados</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 25px 0 10px;
+    }
+
+    h2 {
+      margin: 30px 20px 10px;
+      border-left: 5px solid #c9a24d;
+      padding-left: 10px;
+      color: #333;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      margin: 12px 0;
+      font-size: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 10px 18px;
+      background: #25d366;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    /* ===== BOTÃO VOLTAR ===== */
+    .voltar {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      width: 46px;
+      height: 46px;
+      background: #111;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .voltar svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.3s ease;
+    }
+
+    .voltar:hover {
+      background: #000;
+      transform: scale(1.1);
+    }
+
+    .voltar:hover svg {
+      transform: translateX(-3px);
+    }
+
+    .voltar:active {
+      transform: scale(0.95);
+    }
+  </style>
 </head>
 
 <body>
 
+<!-- BOTÃO VOLTAR -->
 <a href="index.html" class="voltar" aria-label="Voltar">
   <svg viewBox="0 0 24 24">
     <path d="M15 18l-6-6 6-6"/>
@@ -22,37 +120,37 @@
 <div class="grid">
 
   <div class="card">
-    <img src="img/cobogo-16-furos-40.jpg" alt="Cobogó 16 Furos 40x40">
+    <img src="img/cobogo-16-furos-40.jpg">
     <h3>16 Furos 40x40</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
 
   <div class="card">
-    <img src="img/cobogo-4-pontas-40.jpg" alt="Cobogó 4 Pontas 40x40">
+    <img src="img/cobogo-4-pontas-40.jpg">
     <h3>4 Pontas 40x40</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
 
   <div class="card">
-    <img src="img/cobogo-anti-chuva-40.jpg" alt="Cobogó Anti-Chuva 40x40">
+    <img src="img/cobogo-anti-chuva-40.jpg">
     <h3>Anti-Chuva 40x40</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
 
   <div class="card">
-    <img src="img/cobogo-arabe-40.jpg" alt="Cobogó Árabe 40x40">
+    <img src="img/cobogo-arabe-40.jpg">
     <h3>Árabe 40x40</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
 
   <div class="card">
-    <img src="img/cobogo-flor-40.jpg" alt="Cobogó Flor 40x40">
+    <img src="img/cobogo-flor-40.jpg">
     <h3>Flor 40x40</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
 
   <div class="card">
-    <img src="img/cobogo-taco-chines-40.jpg" alt="Cobogó Taco Chinês 40x40">
+    <img src="img/cobogo-taco-chines-40.jpg">
     <h3>Taco Chinês 40x40</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
@@ -64,37 +162,37 @@
 <div class="grid">
 
   <div class="card">
-    <img src="img/cobogo-estrela-30.jpg" alt="Cobogó Estrela 30x30">
+    <img src="img/cobogo-estrela-30.jpg">
     <h3>Estrela 30x30</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
 
   <div class="card">
-    <img src="img/cobogo-estrela-dos-ventos-30.jpg" alt="Cobogó Estrela dos Ventos 30x30">
+    <img src="img/cobogo-estrela-dos-ventos-30.jpg">
     <h3>Estrela dos Ventos 30x30</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
 
   <div class="card">
-    <img src="img/cobogo-fenestra-30.jpg" alt="Cobogó Fenestra 30x30">
+    <img src="img/cobogo-fenestra-30.jpg">
     <h3>Fenestra 30x30</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
 
   <div class="card">
-    <img src="img/cobogo-petala-30.jpg" alt="Cobogó Pétala 30x30">
+    <img src="img/cobogo-petala-30.jpg">
     <h3>Pétala 30x30</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
 
   <div class="card">
-    <img src="img/cobogo-quadrado-cruz-30.jpg" alt="Cobogó Quadrado Cruz 30x30">
+    <img src="img/cobogo-quadrado-cruz-30.jpg">
     <h3>Quadrado Cruz 30x30</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
 
   <div class="card">
-    <img src="img/cobogo-xis-30.jpg" alt="Cobogó Xis 30x30">
+    <img src="img/cobogo-xis-30.jpg">
     <h3>Xis 30x30</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
@@ -106,7 +204,7 @@
 <div class="grid">
 
   <div class="card">
-    <img src="img/cobogo-4-furos-24.jpg" alt="Cobogó 4 Furos 24x24">
+    <img src="img/cobogo-4-furos-24.jpg">
     <h3>4 Furos 24x24</h3>
     <a class="btn" href="#">WhatsApp</a>
   </div>
