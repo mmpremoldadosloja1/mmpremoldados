@@ -120,7 +120,6 @@ header img{
   background:#f0f0f0;
 }
 
-/* CONTEÚDO */
 section{
   padding:20px;
 }
@@ -172,7 +171,7 @@ section{
 <!-- SEARCH -->
 <div class="search-bar" id="searchBar">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Buscar produto (ex: manilha 90, anti-chuva)">
+    <input type="text" id="searchInput" placeholder="Buscar produtos">
     <div class="suggestions" id="suggestions"></div>
   </div>
 </div>
@@ -197,17 +196,30 @@ const searchBar = document.getElementById("searchBar");
 const searchInput = document.getElementById("searchInput");
 const suggestionsBox = document.getElementById("suggestions");
 
-/* 🔹 PRODUTOS REAIS */
+/* PRODUTOS REAIS DO SITE */
 const products = [
-  { name:"Manilha 40", link:"manilhas.html" },
-  { name:"Manilha 60", link:"manilhas.html" },
-  { name:"Manilha 90", link:"manilhas.html" },
-  { name:"Manilha 1,10", link:"manilhas.html" },
-  { name:"Manilha 1,50", link:"manilhas.html" },
+  /* MANILHAS */
+  { name:"Manilha 90cm x 50cm", link:"manilhas.html" },
+  { name:"Manilha 1,10m x 50cm", link:"manilhas.html" },
 
-  { name:"Cobogó Tradicional", link:"cobogos.html" },
-  { name:"Cobogó Anti-Chuva", link:"cobogos.html" },
-  { name:"Cobogó Ventilado", link:"cobogos.html" }
+  /* COBOGÓS 40x40 */
+  { name:"Cobogó 16 Furos 40x40", link:"cobogos.html" },
+  { name:"Cobogó 4 Pontas 40x40", link:"cobogos.html" },
+  { name:"Cobogó Anti-Chuva 40x40", link:"cobogos.html" },
+  { name:"Cobogó Árabe 40x40", link:"cobogos.html" },
+  { name:"Cobogó Flor 40x40", link:"cobogos.html" },
+  { name:"Cobogó Taco Chinês 40x40", link:"cobogos.html" },
+
+  /* COBOGÓS 30x30 */
+  { name:"Cobogó Estrela 30x30", link:"cobogos.html" },
+  { name:"Cobogó Estrela dos Ventos 30x30", link:"cobogos.html" },
+  { name:"Cobogó Fenestra 30x30", link:"cobogos.html" },
+  { name:"Cobogó Pétala 30x30", link:"cobogos.html" },
+  { name:"Cobogó Quadrado Cruz 30x30", link:"cobogos.html" },
+  { name:"Cobogó Xis 30x30", link:"cobogos.html" },
+
+  /* COBOGÓS 24x24 */
+  { name:"Cobogó 4 Furos 24x24", link:"cobogos.html" }
 ];
 
 function toggleMenu(){
