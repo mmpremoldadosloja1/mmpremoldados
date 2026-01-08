@@ -24,11 +24,26 @@
       color: #333;
     }
 
+    /* ===== GRID ===== */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(4, 1fr); /* DESKTOP */
       gap: 20px;
       padding: 20px;
+    }
+
+    /* TABLET */
+    @media (max-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .card {
@@ -39,10 +54,18 @@
       text-align: center;
     }
 
+    /* ===== IMAGEM DO PRODUTO ===== */
     .card img {
       width: 100%;
-      height: 330px;
+      height: 220px;           /* DESKTOP PROPORCIONAL */
       object-fit: cover;
+    }
+
+    /* MOBILE: imagem um pouco maior */
+    @media (max-width: 600px) {
+      .card img {
+        height: 300px;
+      }
     }
 
     .card h3 {
@@ -106,7 +129,6 @@
 
 <body>
 
-<!-- BOTÃO VOLTAR -->
 <a href="index.html" class="voltar" aria-label="Voltar">
   <svg viewBox="0 0 24 24">
     <path d="M15 18l-6-6 6-6"/>
@@ -115,7 +137,6 @@
 
 <h1>Cobogós</h1>
 
-<!-- ================= 40x40 ================= -->
 <h2>Cobogós 40x40</h2>
 <div class="grid">
 
@@ -157,7 +178,6 @@
 
 </div>
 
-<!-- ================= 30x30 ================= -->
 <h2>Cobogós 30x30</h2>
 <div class="grid">
 
@@ -199,7 +219,6 @@
 
 </div>
 
-<!-- ================= 24x24 ================= -->
 <h2>Cobogós 24x24</h2>
 <div class="grid">
 
