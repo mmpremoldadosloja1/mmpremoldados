@@ -2,72 +2,89 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>MM Pré-Moldados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MM Pré-Moldados</title>
 
 <style>
-/* ===== RESET ===== */
 *{
-  margin:0;
-  padding:0;
   box-sizing:border-box;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  margin:0;
+  background:#f5f5f5;
 }
 
 /* ===== HEADER ===== */
 header{
-  background:#000;
+  background:#111;
+  padding:10px;
   display:flex;
   align-items:center;
-  padding:10px;
+  gap:10px;
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
 
 .menu-btn{
-  background:none;
-  border:none;
+  background:#222;
   color:#fff;
-  font-size:26px;
+  border:none;
+  font-size:18px;
+  padding:6px 8px;
+  border-radius:6px;
   cursor:pointer;
 }
 
-.logo{
-  margin-left:10px;
+header img{
+  height:50px; /* MOBILE */
 }
 
-.logo img{
-  height:60px;
-}
-
-.search-bar{
+.search-box{
   flex:1;
-  margin:0 10px;
 }
 
-.search-bar input{
+.search-box input{
   width:100%;
   padding:8px 12px;
-  border-radius:20px;
+  border-radius:8px;
   border:none;
-  outline:none;
+  font-size:14px;
 }
 
-.header-icons{
-  display:flex;
-  gap:10px;
-}
-
-.header-icons button{
+.cart-btn{
   background:none;
   border:none;
-  font-size:22px;
+  font-size:20px;
+  color:#fff;
   cursor:pointer;
 }
 
-/* ===== MOBILE ===== */
-@media(max-width:768px){
-  .logo img{
-    height:50px;
-  }
+/* ===== MENU ===== */
+.menu{
+  display:none;
+  position:absolute;
+  top:70px;
+  left:10px;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  overflow:hidden;
+  z-index:2000;
+}
+
+.menu a{
+  display:block;
+  padding:12px 16px;
+  text-decoration:none;
+  color:#333;
+  border-bottom:1px solid #eee;
+}
+
+.menu a:hover{
+  background:#f0f0f0;
 }
 
 /* ===== SEÇÕES ===== */
@@ -79,40 +96,50 @@ header{
   margin-bottom:10px;
 }
 
-/* ===== CARROSSEL ===== */
-.carousel{
-  overflow:hidden;
-  width:100%;
+.section a.ver-mais{
+  display:inline-block;
+  margin-bottom:15px;
+  text-decoration:none;
+  color:#111;
+  font-weight:bold;
 }
 
-.carousel-track{
-  display:flex;
+/* ===== GRID PRODUTOS ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:15px;
-  transition:transform 0.5s ease;
 }
 
 .card{
-  min-width:200px;
-  background:#f5f5f5;
+  background:#fff;
   border-radius:10px;
-  padding:10px;
-  text-align:center;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
   cursor:pointer;
 }
 
 .card img{
   width:100%;
-  border-radius:8px;
+  height:150px;
+  object-fit:cover;
 }
 
 .card h3{
+  padding:10px;
   font-size:14px;
-  margin-top:8px;
+  text-align:center;
 }
 
-@media(min-width:768px){
-  .card{
-    min-width:250px;
+/* ===== DESKTOP ===== */
+@media (min-width:768px){
+  header img{
+    height:60px;
+  }
+
+  .search-box input{
+    font-size:16px;
+    padding:10px 14px;
   }
 }
 </style>
@@ -120,81 +147,78 @@ header{
 
 <body>
 
-<!-- ===== HEADER ===== -->
 <header>
-  <button class="menu-btn">☰</button>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
-  <div class="logo">
-    <img src="img/logo.png" alt="MM Pré-Moldados">
-  </div>
+  <img src="img/logo.png" alt="MM Pré-Moldados">
 
-  <div class="search-bar">
+  <div class="search-box">
     <input type="text" placeholder="Buscar produtos">
   </div>
 
-  <div class="header-icons">
-    <button>🛒</button>
+  <button class="cart-btn">🛒</button>
+
+  <div class="menu" id="menu">
+    <a href="cobogos.html">Cobogós</a>
+    <a href="manilhas.html">Manilhas</a>
+    <a href="#">Tampas</a>
+    <a href="#">Lajes Pré-Moldadas</a>
+    <a href="#">Pingadeiras</a>
+    <a href="#">Blocos / Canaletas</a>
+    <a href="#">Pisadeiras de Jardim</a>
+    <a href="#">Meio-fio de Jardim</a>
+    <a href="#">Caixas</a>
+    <a href="#">Revestimento de Piso</a>
+    <a href="#">Revestimento de Parede</a>
   </div>
 </header>
 
-<!-- ===== PRODUTOS EM DESTAQUE ===== -->
+<!-- 🔥 DESTAQUES -->
 <section class="section">
   <h2>🔥 Produtos em Destaque</h2>
+  <a class="ver-mais" href="destaque.html">Ver todos</a>
 
-  <div class="carousel">
-    <div class="carousel-track" id="carouselTrack">
+  <div class="grid">
+    <div class="card" onclick="location.href='destaque.html'">
+      <img src="img/cobogo-anti-chuva-40.jpg">
+      <h3>Cobogó Anti-Chuva 40x40</h3>
+    </div>
 
-      <!-- COBOGÓS -->
-      <div class="card">
-        <img src="img/cobogos/cobogo1.jpg">
-        <h3>Cobogó Modelo 01</h3>
-      </div>
+    <div class="card" onclick="location.href='destaque.html'">
+      <img src="img/cobogo-16-furos-40.jpg">
+      <h3>Cobogó 16 Furos 40x40</h3>
+    </div>
 
-      <div class="card">
-        <img src="img/cobogos/cobogo2.jpg">
-        <h3>Cobogó Modelo 02</h3>
-      </div>
-
-      <div class="card">
-        <img src="img/cobogos/cobogo3.jpg">
-        <h3>Cobogó Modelo 03</h3>
-      </div>
-
-      <!-- MANILHAS -->
-      <div class="card">
-        <img src="img/manilhas/manilha1.jpg">
-        <h3>Manilha 90cm</h3>
-      </div>
-
-      <div class="card">
-        <img src="img/manilhas/manilha2.jpg">
-        <h3>Manilha 1,10m</h3>
-      </div>
-
+    <div class="card" onclick="location.href='destaque.html'">
+      <img src="img/manilhas/manilha-90x50.jpg">
+      <h3>Manilha 90cm x 50cm</h3>
     </div>
   </div>
 </section>
 
-<!-- ===== JAVASCRIPT ===== -->
+<!-- ✨ NOVIDADES -->
+<section class="section">
+  <h2>✨ Novidades</h2>
+  <a class="ver-mais" href="novidades.html">Ver todas</a>
+
+  <div class="grid">
+    <div class="card" onclick="location.href='novidades.html'">
+      <img src="img/cobogo-flor-40.jpg">
+      <h3>Cobogó Flor 40x40</h3>
+    </div>
+
+    <div class="card" onclick="location.href='novidades.html'">
+      <img src="img/cobogo-estrela-30.jpg">
+      <h3>Cobogó Estrela 30x30</h3>
+    </div>
+  </div>
+</section>
+
 <script>
-const track = document.getElementById("carouselTrack");
-let index = 0;
-
-function moveCarousel(){
-  const card = track.children[0];
-  const gap = 15;
-  const cardWidth = card.offsetWidth + gap;
-
-  index++;
-
-  if(index >= track.children.length){
-    index = 0;
-  }
-
-  track.style.transform = `translateX(-${index * cardWidth}px)`;
+function toggleMenu(){
+  const menu = document.getElementById("menu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
-
-setInterval(moveCarousel, 3000);
 </script>
 
 </body>
