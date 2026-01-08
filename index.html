@@ -1,204 +1,183 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MM Pré-Moldados</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MM Pré-Moldados</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
 
-    body {
-      margin: 0;
-      background: #f2f2f2;
-    }
+body{
+  margin:0;
+  background:#f5f5f5;
+}
 
-    /* ===== HEADER (ESTILO CENTAURO) ===== */
-    .header {
-      background: #000;
-      display: flex;
-      align-items: center;
-      padding: 8px 10px;
-      gap: 8px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+/* ===== HEADER ===== */
+header{
+  background:#111;
+  padding:8px 10px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
 
-    .menu-btn {
-      background: #222;
-      border: none;
-      color: #fff;
-      font-size: 18px;
-      padding: 6px 8px;
-      border-radius: 6px;
-    }
+.menu-btn{
+  background:#222;
+  color:#fff;
+  border:none;
+  font-size:18px;
+  padding:6px 8px;
+  border-radius:6px;
+  cursor:pointer;
+}
 
-    .logo {
-      height: 26px;
-    }
+header img{
+  height:26px;
+}
 
-    .search-container {
-      flex: 1;
-      position: relative;
-    }
+.search-box{
+  flex:1;
+}
 
-    .search-container input {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: none;
-      font-size: 14px;
-    }
+.search-box input{
+  width:100%;
+  padding:8px 10px;
+  border-radius:8px;
+  border:none;
+  font-size:14px;
+}
 
-    .cart-btn {
-      background: none;
-      border: none;
-      font-size: 20px;
-      color: #fff;
-    }
+.cart-btn{
+  background:none;
+  border:none;
+  font-size:20px;
+  color:#fff;
+  cursor:pointer;
+}
 
-    /* ===== RESULTADOS DA BUSCA ===== */
-    .search-results {
-      position: absolute;
-      top: 42px;
-      left: 0;
-      right: 0;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      display: none;
-      max-height: 250px;
-      overflow-y: auto;
-      z-index: 999;
-    }
+/* ===== MENU ===== */
+.menu{
+  display:none;
+  position:absolute;
+  top:50px;
+  left:10px;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  overflow:hidden;
+  z-index:2000;
+}
 
-    .search-results div {
-      padding: 10px;
-      border-bottom: 1px solid #eee;
-      cursor: pointer;
-    }
+.menu a{
+  display:block;
+  padding:12px 16px;
+  text-decoration:none;
+  color:#333;
+  border-bottom:1px solid #eee;
+}
 
-    .search-results div:hover {
-      background: #f5f5f5;
-    }
+.menu a:hover{
+  background:#f0f0f0;
+}
 
-    /* ===== CONTEÚDO ===== */
-    .container {
-      padding: 16px;
-    }
+/* ===== CONTEÚDO ===== */
+section{
+  padding:20px;
+}
 
-    h2 {
-      margin-top: 0;
-    }
+h2{
+  margin-bottom:15px;
+}
 
-    /* ===== PRODUTOS ===== */
-    .produtos {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 12px;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+}
 
-    .produto {
-      background: #fff;
-      padding: 12px;
-      border-radius: 10px;
-      text-align: center;
-    }
+.card{
+  background:#fff;
+  padding:20px;
+  text-align:center;
+  border-radius:12px;
+  font-weight:bold;
+  box-shadow:0 4px 8px rgba(0,0,0,0.08);
+}
 
-    /* ===== DESKTOP ===== */
-    @media (min-width: 768px) {
-      .logo {
-        height: 36px;
-      }
+/* ===== DESKTOP ===== */
+@media (min-width:768px){
+  header img{
+    height:36px;
+  }
 
-      .search-container input {
-        font-size: 16px;
-        padding: 10px 14px;
-      }
-    }
-  </style>
+  .search-box input{
+    font-size:16px;
+    padding:10px 14px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header class="header">
-    <button class="menu-btn">☰</button>
+<header>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
-    <img src="logo.png" alt="MM Pré-Moldados" class="logo">
+  <!-- LOGO (SEM ALTERAR CAMINHO) -->
+  <img src="img/logo.png" alt="MM Pré-Moldados">
 
-    <div class="search-container">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Buscar produtos"
-        oninput="buscarProdutos()"
-      >
-      <div id="searchResults" class="search-results"></div>
-    </div>
-
-    <button class="cart-btn">🛒</button>
-  </header>
-
-  <!-- ===== CONTEÚDO ===== -->
-  <div class="container">
-    <h2>Produtos</h2>
-
-    <div class="produtos">
-      <!-- MANILHAS -->
-      <div class="produto" data-nome="Manilha de 90">Manilha de 90</div>
-      <div class="produto" data-nome="Manilha de 1,10">Manilha de 1,10</div>
-      <div class="produto" data-nome="Manilha de 1,50">Manilha de 1,50</div>
-
-      <!-- COBOGÓS -->
-      <div class="produto" data-nome="Cobogó Tradicional">Cobogó Tradicional</div>
-      <div class="produto" data-nome="Cobogó Vazado">Cobogó Vazado</div>
-      <div class="produto" data-nome="Cobogó Decorativo">Cobogó Decorativo</div>
-
-      <!-- OUTROS EXEMPLOS -->
-      <div class="produto" data-nome="Pingadeira de Concreto">Pingadeira de Concreto</div>
-      <div class="produto" data-nome="Laje Pré-Moldada H8">Laje Pré-Moldada H8</div>
-    </div>
+  <!-- BUSCA FIXA -->
+  <div class="search-box">
+    <input type="text" placeholder="Buscar produtos">
   </div>
 
-  <!-- ===== SCRIPT ===== -->
-  <script>
-    function buscarProdutos() {
-      const input = document.getElementById("searchInput").value.toLowerCase();
-      const results = document.getElementById("searchResults");
-      const produtos = document.querySelectorAll(".produto");
+  <!-- CARRINHO -->
+  <button class="cart-btn">🛒</button>
 
-      results.innerHTML = "";
+  <!-- MENU -->
+  <div class="menu" id="menu">
+    <a href="cobogos.html">Cobogós</a>
+    <a href="manilhas.html">Manilhas</a>
+    <a href="#">Tampas</a>
+    <a href="#">Lajes Pré-Moldadas</a>
+    <a href="#">Pingadeiras</a>
+    <a href="#">Blocos / Canaletas</a>
+    <a href="#">Pisadeiras de Jardim</a>
+    <a href="#">Meio-fio de Jardim</a>
+    <a href="#">Caixas</a>
+    <a href="#">Revestimento de Piso</a>
+    <a href="#">Revestimento de Parede</a>
+  </div>
+</header>
 
-      if (input.length === 0) {
-        results.style.display = "none";
-        return;
-      }
+<section>
+  <h2>Departamentos</h2>
 
-      let encontrou = false;
+  <div class="grid">
+    <div class="card">Manilhas</div>
+    <div class="card">Cobogós</div>
+    <div class="card">Lajes Pré-Moldadas</div>
+    <div class="card">Pingadeiras</div>
+    <div class="card">Blocos / Canaletas</div>
+    <div class="card">Pisadeiras de Jardim</div>
+    <div class="card">Revestimento de Piso</div>
+    <div class="card">Revestimento de Parede</div>
+  </div>
+</section>
 
-      produtos.forEach(produto => {
-        const nome = produto.dataset.nome.toLowerCase();
-
-        if (nome.includes(input)) {
-          encontrou = true;
-          const item = document.createElement("div");
-          item.textContent = produto.dataset.nome;
-          item.onclick = () => {
-            produto.scrollIntoView({ behavior: "smooth" });
-            results.style.display = "none";
-          };
-          results.appendChild(item);
-        }
-      });
-
-      results.style.display = encontrou ? "block" : "none";
-    }
-  </script>
+<script>
+function toggleMenu(){
+  const menu = document.getElementById("menu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+</script>
 
 </body>
 </html>
