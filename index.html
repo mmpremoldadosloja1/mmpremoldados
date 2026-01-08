@@ -147,11 +147,6 @@ section{
   font-weight:600;
   cursor:pointer;
   box-shadow:0 4px 8px rgba(0,0,0,0.08);
-  transition:transform 0.2s;
-}
-
-.card:hover{
-  transform:translateY(-4px);
 }
 </style>
 </head>
@@ -170,22 +165,18 @@ section{
   <div class="menu" id="menu">
     <a href="cobogos.html">Cobogós</a>
     <a href="manilhas.html">Manilhas</a>
-    <a href="#">Tampas</a>
-    <a href="#">Lajes Pré-Moldadas</a>
-    <a href="#">Pingadeiras</a>
-    <a href="#">Blocos / Canaletas</a>
-    <a href="#">Pisadeiras de Jardim</a>
-    <a href="#">Meio-fio de Jardim</a>
-    <a href="#">Caixas</a>
-    <a href="#">Revestimento de Piso</a>
-    <a href="#">Revestimento de Parede</a>
   </div>
 </header>
 
 <!-- SEARCH -->
 <div class="search-bar" id="searchBar">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Buscar produtos ou departamentos..." oninput="showSuggestions()">
+    <input 
+      type="text" 
+      id="searchInput" 
+      placeholder="Buscar produtos ou departamentos..." 
+      oninput="showSuggestions()"
+    >
     <div class="suggestions" id="suggestions"></div>
   </div>
 </div>
@@ -195,12 +186,6 @@ section{
 
   <div class="grid">
     <div class="card" onclick="go('manilhas.html')">Manilhas</div>
-    <div class="card">Lajes Pré-Moldadas</div>
-    <div class="card">Pingadeiras</div>
-    <div class="card">Blocos / Canaletas</div>
-    <div class="card">Pisadeiras de Jardim</div>
-    <div class="card">Revestimento de Piso</div>
-    <div class="card">Revestimento de Parede</div>
     <div class="card" onclick="go('cobogos.html')">Cobogós</div>
   </div>
 </section>
@@ -209,26 +194,39 @@ section{
 const menu = document.getElementById("menu");
 const searchBar = document.getElementById("searchBar");
 const suggestionsBox = document.getElementById("suggestions");
+const searchInput = document.getElementById("searchInput");
 
 const products = [
   { name: "Cobogós", link: "cobogos.html" },
-  { name: "Manilhas", link: "manilhas.html" },
-  { name: "Lajes Pré-Moldadas", link: "#" },
-  { name: "Pingadeiras", link: "#" },
-  { name: "Blocos / Canaletas", link: "#" },
-  { name: "Pisadeiras de Jardim", link: "#" },
-  { name: "Revestimento de Piso", link: "#" },
-  { name: "Revestimento de Parede", link: "#" }
+  { name: "Manilhas", link: "manilhas.html" }
 ];
 
 function toggleMenu(){
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
+/* === ABRIR BUSCA === */
 function openSearch(){
   searchBar.style.display = "block";
-  document.getElementById("searchInput").focus();
+  searchInput.focus();
+
+  // adiciona um estado fake no histórico
+  history.pushState({ search: true }, "");
 }
+
+/* === FECHAR BUSCA === */
+function closeSearch(){
+  searchBar.style.display = "none";
+  searchInput.value = "";
+  suggestionsBox.innerHTML = "";
+}
+
+/* === INTERCEPTA BOTÃO VOLTAR === */
+window.addEventListener("popstate", function(event){
+  if(searchBar.style.display === "block"){
+    closeSearch();
+  }
+});
 
 function showSuggestions(){
   const value = searchInput.value.toLowerCase();
@@ -249,6 +247,13 @@ function showSuggestions(){
 function go(link){
   window.location.href = link;
 }
+
+/* FECHA BUSCA COM ESC */
+document.addEventListener("keydown", e=>{
+  if(e.key === "Escape" && searchBar.style.display === "block"){
+    history.back();
+  }
+});
 </script>
 
 </body>
