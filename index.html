@@ -1,229 +1,145 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MM Pré-Moldados</title>
+  <meta charset="UTF-8">
+  <title>MM Pré-Moldados</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
 
-<style>
-body{
-  margin:0;
-  font-family:'Inter', Arial, sans-serif;
-  background:#f5f5f5;
-}
+    /* ================= TÍTULOS ================= */
+    h1 {
+      text-align: center;
+      margin: 25px 0 10px;
+    }
 
-/* ===== HEADER ===== */
-header{
-  background:#000;
-  padding:10px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  position:relative;
-}
+    h2 {
+      margin: 30px 20px 10px;
+      border-left: 5px solid #c9a24d;
+      padding-left: 10px;
+      color: #333;
+    }
 
-/* HAMBURGUER */
-.menu-btn{
-  background:#222;
-  color:#fff;
-  border:none;
-  font-size:22px;
-  padding:8px 12px;
-  border-radius:6px;
-  cursor:pointer;
-}
+    /* ================= GRID PRODUTOS ================= */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
 
-/* LOGO */
-.logo img{
-  height:60px; /* DESKTOP */
-}
+    @media (max-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-/* BUSCA */
-.search-box{
-  flex:1;
-}
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
-.search-box input{
-  width:100%;
-  padding:12px;
-  border-radius:6px;
-  border:none;
-  font-size:15px;
-}
+    /* ================= CARD ================= */
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
 
-/* CARRINHO */
-.cart{
-  font-size:22px;
-  color:#fff;
-}
+    /* 🔥 IMAGEM CORRETA (NÃO CORTA) */
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      background: #fff;
+    }
 
-/* MENU */
-.menu{
-  display:none;
-  position:absolute;
-  top:65px;
-  left:10px;
-  background:#fff;
-  border-radius:10px;
-  box-shadow:0 6px 16px rgba(0,0,0,0.2);
-  overflow:hidden;
-  z-index:999;
-}
+    @media (max-width: 600px) {
+      .card img {
+        height: 260px;
+      }
+    }
 
-.menu a{
-  display:block;
-  padding:12px 16px;
-  color:#333;
-  text-decoration:none;
-  border-bottom:1px solid #eee;
-}
+    .card h3 {
+      margin: 12px 0;
+      font-size: 15px;
+      padding: 0 10px;
+    }
 
-.menu a:hover{
-  background:#f0f0f0;
-}
-
-/* ===== SEÇÕES ===== */
-section{
-  padding:20px;
-}
-
-h2{
-  margin-bottom:5px;
-}
-
-.ver-todos{
-  font-size:14px;
-  color:#555;
-  margin-bottom:15px;
-  display:inline-block;
-}
-
-/* ===== GRID ===== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-}
-
-/* ===== CARD ===== */
-.card{
-  background:#fff;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 4px 8px rgba(0,0,0,0.08);
-  text-align:center;
-}
-
-/* ✅ AJUSTE REAL DAS IMAGENS */
-.card img{
-  width:100%;
-  height:160px;      /* DESKTOP CONTROLADO */
-  object-fit:cover;
-}
-
-.card h3{
-  font-size:15px;
-  padding:12px;
-  margin:0;
-}
-
-/* ===== MOBILE ===== */
-@media(max-width:768px){
-  .logo img{
-    height:50px; /* MOBILE */
-  }
-
-  .card img{
-    height:150px;
-  }
-}
-</style>
+    .btn {
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 10px 18px;
+      background: #25d366;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+<h1>MM Pré-Moldados</h1>
 
-  <div class="logo">
-    <img src="img/logo.png" alt="MM Pré-Moldados">
+<!-- ================= PRODUTOS EM DESTAQUE ================= -->
+<h2>Produtos em Destaque</h2>
+
+<div class="grid">
+
+  <div class="card">
+    <img src="img/cobogo-16-furos-40.jpg">
+    <h3>Cobogó 16 Furos 40x40</h3>
+    <a class="btn" href="#">WhatsApp</a>
   </div>
 
-  <div class="search-box">
-    <input type="text" placeholder="Buscar produtos">
+  <div class="card">
+    <img src="img/cobogo-anti-chuva-40.jpg">
+    <h3>Cobogó Anti-Chuva 40x40</h3>
+    <a class="btn" href="#">WhatsApp</a>
   </div>
 
-  <div class="cart">🛒</div>
-
-  <!-- MENU HAMBURGUER COMPLETO -->
-  <div class="menu" id="menu">
-    <a href="manilhas.html">Manilhas</a>
-    <a href="cobogos.html">Cobogós</a>
-    <a href="#">Tampas</a>
-    <a href="#">Lajes Pré-Moldadas</a>
-    <a href="#">Pingadeiras</a>
-    <a href="#">Blocos / Canaletas</a>
-    <a href="#">Pisadeiras de Jardim</a>
-    <a href="#">Meio-fio de Jardim</a>
-    <a href="#">Caixas</a>
-    <a href="#">Revestimento de Piso</a>
-    <a href="#">Revestimento de Parede</a>
+  <div class="card">
+    <img src="img/cobogo-arabe-40.jpg">
+    <h3>Cobogó Árabe 40x40</h3>
+    <a class="btn" href="#">WhatsApp</a>
   </div>
-</header>
 
-<section>
-  <h2>🔥 Produtos em Destaque</h2>
-  <span class="ver-todos">Ver todos</span>
-
-  <div class="grid">
-    <div class="card">
-      <img src="img/cobogo-anti-chuva-40.jpg">
-      <h3>Cobogó Anti-Chuva 40x40</h3>
-    </div>
-
-    <div class="card">
-      <img src="img/cobogo-16-furos-40.jpg">
-      <h3>Cobogó 16 Furos 40x40</h3>
-    </div>
-
-    <div class="card">
-      <img src="img/manilhas/manilha-90x50.jpg">
-      <h3>Manilha 90cm x 50cm</h3>
-    </div>
+  <div class="card">
+    <img src="img/cobogo-flor-40.jpg">
+    <h3>Cobogó Flor 40x40</h3>
+    <a class="btn" href="#">WhatsApp</a>
   </div>
-</section>
 
-<section>
-  <h2>✨ Novidades</h2>
-  <span class="ver-todos">Ver todas</span>
+</div>
 
-  <div class="grid">
-    <div class="card">
-      <img src="img/cobogo-flor-40.jpg">
-      <h3>Cobogó Flor 40x40</h3>
-    </div>
+<!-- ================= MANILHAS ================= -->
+<h2>Manilhas</h2>
 
-    <div class="card">
-      <img src="img/cobogo-estrela-30.jpg">
-      <h3>Cobogó Estrela 30x30</h3>
-    </div>
+<div class="grid">
+
+  <div class="card">
+    <img src="img/manilha-90.jpg">
+    <h3>Manilha 90</h3>
+    <a class="btn" href="#">WhatsApp</a>
   </div>
-</section>
 
-<script>
-function toggleMenu(){
-  const menu = document.getElementById("menu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
+  <div class="card">
+    <img src="img/manilha-110.jpg">
+    <h3>Manilha 1,10</h3>
+    <a class="btn" href="#">WhatsApp</a>
+  </div>
 
-document.addEventListener("click", function(e){
-  if(!e.target.closest("header")){
-    document.getElementById("menu").style.display = "none";
-  }
-});
-</script>
+</div>
 
 </body>
 </html>
