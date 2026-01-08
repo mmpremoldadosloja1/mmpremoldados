@@ -28,6 +28,7 @@ header{
   z-index:1000;
 }
 
+/* BOTÃO MENU */
 .menu-btn{
   background:#222;
   color:#fff;
@@ -38,10 +39,13 @@ header{
   cursor:pointer;
 }
 
+/* LOGO */
 header img{
-  height:50px; /* LOGO MAIOR NO MOBILE */
+  height:50px; /* MOBILE */
+  width:auto;
 }
 
+/* BUSCA */
 .search-box{
   flex:1;
 }
@@ -54,6 +58,7 @@ header img{
   font-size:14px;
 }
 
+/* CARRINHO */
 .cart-btn{
   background:none;
   border:none;
@@ -62,11 +67,11 @@ header img{
   cursor:pointer;
 }
 
-/* ===== MENU ===== */
+/* ===== MENU HAMBURGUER ===== */
 .menu{
   display:none;
   position:absolute;
-  top:56px;
+  top:70px;
   left:10px;
   background:#fff;
   border-radius:10px;
@@ -87,34 +92,19 @@ header img{
   background:#f0f0f0;
 }
 
-/* ===== CONTEÚDO ===== */
-section{
+/* ===== HOME ===== */
+.home{
   padding:20px;
 }
 
-h2{
-  margin-bottom:15px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
-}
-
-.card{
-  background:#fff;
-  padding:20px;
-  text-align:center;
-  border-radius:12px;
-  font-weight:bold;
-  box-shadow:0 4px 8px rgba(0,0,0,0.08);
+.home h2{
+  margin-bottom:10px;
 }
 
 /* ===== DESKTOP ===== */
 @media (min-width:768px){
   header img{
-    height:60px; /* LOGO MAIOR NO DESKTOP */
+    height:60px; /* DESKTOP */
   }
 
   .search-box input{
@@ -157,19 +147,10 @@ h2{
   </div>
 </header>
 
-<section>
-  <h2>Departamentos</h2>
-
-  <div class="grid">
-    <div class="card">Manilhas</div>
-    <div class="card">Cobogós</div>
-    <div class="card">Lajes Pré-Moldadas</div>
-    <div class="card">Pingadeiras</div>
-    <div class="card">Blocos / Canaletas</div>
-    <div class="card">Pisadeiras de Jardim</div>
-    <div class="card">Revestimento de Piso</div>
-    <div class="card">Revestimento de Parede</div>
-  </div>
+<!-- HOME (SEM DEPARTAMENTOS) -->
+<section class="home">
+  <h2>Bem-vindo à MM Pré-Moldados</h2>
+  <p>Confira nossos produtos em destaque e encontre a solução ideal para sua obra.</p>
 </section>
 
 <script>
