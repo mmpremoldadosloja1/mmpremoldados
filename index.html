@@ -1,232 +1,204 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MM Pré-Moldados</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MM Pré-Moldados</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-<style>
-body{
-  margin:0;
-  font-family:'Inter', Arial, sans-serif;
-  background:#f5f5f5;
-}
+    body {
+      margin: 0;
+      background: #f2f2f2;
+    }
 
-/* ===== HEADER ===== */
-header{
-  background:#111;
-  padding:12px 15px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  position:relative;
-}
+    /* ===== HEADER (ESTILO CENTAURO) ===== */
+    .header {
+      background: #000;
+      display: flex;
+      align-items: center;
+      padding: 8px 10px;
+      gap: 8px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-.menu-btn{
-  background:#222;
-  color:#fff;
-  border:none;
-  font-size:22px;
-  padding:8px 12px;
-  border-radius:6px;
-  cursor:pointer;
-}
+    .menu-btn {
+      background: #222;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      padding: 6px 8px;
+      border-radius: 6px;
+    }
 
-header img{
-  max-width:170px;
-}
+    .logo {
+      height: 26px;
+    }
 
-/* SEARCH */
-.search-container{
-  flex:1;
-  position:relative;
-}
+    .search-container {
+      flex: 1;
+      position: relative;
+    }
 
-.search-container input{
-  width:100%;
-  padding:12px 14px;
-  border-radius:6px;
-  border:none;
-  outline:none;
-  font-size:15px;
-}
+    .search-container input {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+    }
 
-.suggestions{
-  position:absolute;
-  top:48px;
-  width:100%;
-  background:#fff;
-  border-radius:0 0 6px 6px;
-  box-shadow:0 6px 16px rgba(0,0,0,0.25);
-  z-index:999;
-}
+    .cart-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #fff;
+    }
 
-.suggestions div{
-  padding:12px;
-  cursor:pointer;
-}
+    /* ===== RESULTADOS DA BUSCA ===== */
+    .search-results {
+      position: absolute;
+      top: 42px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      display: none;
+      max-height: 250px;
+      overflow-y: auto;
+      z-index: 999;
+    }
 
-.suggestions div:hover{
-  background:#f0f0f0;
-}
+    .search-results div {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+    }
 
-/* ACTIONS */
-.header-actions{
-  display:flex;
-  gap:10px;
-}
+    .search-results div:hover {
+      background: #f5f5f5;
+    }
 
-.action-btn{
-  background:#222;
-  color:#fff;
-  border:none;
-  font-size:20px;
-  padding:8px 12px;
-  border-radius:6px;
-  cursor:pointer;
-}
+    /* ===== CONTEÚDO ===== */
+    .container {
+      padding: 16px;
+    }
 
-/* MENU */
-.menu{
-  display:none;
-  position:absolute;
-  top:60px;
-  left:15px;
-  background:#fff;
-  border-radius:10px;
-  box-shadow:0 6px 16px rgba(0,0,0,0.2);
-  overflow:hidden;
-  z-index:10;
-}
+    h2 {
+      margin-top: 0;
+    }
 
-.menu a{
-  display:block;
-  padding:12px 16px;
-  color:#333;
-  text-decoration:none;
-  border-bottom:1px solid #eee;
-}
+    /* ===== PRODUTOS ===== */
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+    }
 
-section{
-  padding:20px;
-}
+    .produto {
+      background: #fff;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+    }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
-}
+    /* ===== DESKTOP ===== */
+    @media (min-width: 768px) {
+      .logo {
+        height: 36px;
+      }
 
-.card{
-  background:#fff;
-  padding:20px;
-  text-align:center;
-  border-radius:12px;
-  font-weight:600;
-  cursor:pointer;
-  box-shadow:0 4px 8px rgba(0,0,0,0.08);
-}
-</style>
+      .search-container input {
+        font-size: 16px;
+        padding: 10px 14px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <button class="menu-btn" onclick="toggleMenu()">≡</button>
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <button class="menu-btn">☰</button>
 
-  <img src="img/logo.png" alt="MM Pré-Moldados">
+    <img src="logo.png" alt="MM Pré-Moldados" class="logo">
 
-  <!-- SEARCH SEMPRE VISÍVEL -->
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Buscar produtos">
-    <div class="suggestions" id="suggestions"></div>
+    <div class="search-container">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Buscar produtos"
+        oninput="buscarProdutos()"
+      >
+      <div id="searchResults" class="search-results"></div>
+    </div>
+
+    <button class="cart-btn">🛒</button>
+  </header>
+
+  <!-- ===== CONTEÚDO ===== -->
+  <div class="container">
+    <h2>Produtos</h2>
+
+    <div class="produtos">
+      <!-- MANILHAS -->
+      <div class="produto" data-nome="Manilha de 90">Manilha de 90</div>
+      <div class="produto" data-nome="Manilha de 1,10">Manilha de 1,10</div>
+      <div class="produto" data-nome="Manilha de 1,50">Manilha de 1,50</div>
+
+      <!-- COBOGÓS -->
+      <div class="produto" data-nome="Cobogó Tradicional">Cobogó Tradicional</div>
+      <div class="produto" data-nome="Cobogó Vazado">Cobogó Vazado</div>
+      <div class="produto" data-nome="Cobogó Decorativo">Cobogó Decorativo</div>
+
+      <!-- OUTROS EXEMPLOS -->
+      <div class="produto" data-nome="Pingadeira de Concreto">Pingadeira de Concreto</div>
+      <div class="produto" data-nome="Laje Pré-Moldada H8">Laje Pré-Moldada H8</div>
+    </div>
   </div>
 
-  <div class="header-actions">
-    <button class="action-btn">🛒</button>
-  </div>
+  <!-- ===== SCRIPT ===== -->
+  <script>
+    function buscarProdutos() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const results = document.getElementById("searchResults");
+      const produtos = document.querySelectorAll(".produto");
 
-  <div class="menu" id="menu">
-    <a href="cobogos.html">Cobogós</a>
-    <a href="manilhas.html">Manilhas</a>
-    <a href="#">Tampas</a>
-    <a href="#">Lajes Pré-Moldadas</a>
-    <a href="#">Pingadeiras</a>
-    <a href="#">Blocos / Canaletas</a>
-    <a href="#">Pisadeiras de Jardim</a>
-    <a href="#">Meio-fio de Jardim</a>
-    <a href="#">Caixas</a>
-    <a href="#">Revestimento de Piso</a>
-    <a href="#">Revestimento de Parede</a>
-  </div>
-</header>
+      results.innerHTML = "";
 
-<section>
-  <h2>Departamentos</h2>
-  <div class="grid">
-    <div class="card" onclick="go('manilhas.html')">Manilhas</div>
-    <div class="card" onclick="go('cobogos.html')">Cobogós</div>
-    <div class="card">Lajes Pré-Moldadas</div>
-    <div class="card">Pingadeiras</div>
-    <div class="card">Blocos / Canaletas</div>
-    <div class="card">Pisadeiras de Jardim</div>
-    <div class="card">Revestimento de Piso</div>
-    <div class="card">Revestimento de Parede</div>
-  </div>
-</section>
+      if (input.length === 0) {
+        results.style.display = "none";
+        return;
+      }
 
-<script>
-const menu = document.getElementById("menu");
-const searchInput = document.getElementById("searchInput");
-const suggestionsBox = document.getElementById("suggestions");
+      let encontrou = false;
 
-/* PRODUTOS REAIS */
-const products = [
-  { name:"Manilha 90cm x 50cm", link:"manilhas.html" },
-  { name:"Manilha 1,10m x 50cm", link:"manilhas.html" },
+      produtos.forEach(produto => {
+        const nome = produto.dataset.nome.toLowerCase();
 
-  { name:"Cobogó 16 Furos 40x40", link:"cobogos.html" },
-  { name:"Cobogó 4 Pontas 40x40", link:"cobogos.html" },
-  { name:"Cobogó Anti-Chuva 40x40", link:"cobogos.html" },
-  { name:"Cobogó Árabe 40x40", link:"cobogos.html" },
-  { name:"Cobogó Flor 40x40", link:"cobogos.html" },
-  { name:"Cobogó Taco Chinês 40x40", link:"cobogos.html" },
+        if (nome.includes(input)) {
+          encontrou = true;
+          const item = document.createElement("div");
+          item.textContent = produto.dataset.nome;
+          item.onclick = () => {
+            produto.scrollIntoView({ behavior: "smooth" });
+            results.style.display = "none";
+          };
+          results.appendChild(item);
+        }
+      });
 
-  { name:"Cobogó Estrela 30x30", link:"cobogos.html" },
-  { name:"Cobogó Estrela dos Ventos 30x30", link:"cobogos.html" },
-  { name:"Cobogó Fenestra 30x30", link:"cobogos.html" },
-  { name:"Cobogó Pétala 30x30", link:"cobogos.html" },
-  { name:"Cobogó Quadrado Cruz 30x30", link:"cobogos.html" },
-  { name:"Cobogó Xis 30x30", link:"cobogos.html" },
-
-  { name:"Cobogó 4 Furos 24x24", link:"cobogos.html" }
-];
-
-function toggleMenu(){
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
-
-searchInput.addEventListener("input", ()=>{
-  const value = searchInput.value.toLowerCase();
-  suggestionsBox.innerHTML = "";
-  if(!value) return;
-
-  products
-    .filter(p => p.name.toLowerCase().includes(value))
-    .forEach(p=>{
-      const div = document.createElement("div");
-      div.textContent = p.name;
-      div.onclick = ()=> window.location.href = p.link;
-      suggestionsBox.appendChild(div);
-    });
-});
-
-function go(link){
-  window.location.href = link;
-}
-</script>
+      results.style.display = encontrou ? "block" : "none";
+    }
+  </script>
 
 </body>
 </html>
