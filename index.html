@@ -14,27 +14,17 @@ body{
   background:#f5f5f5;
 }
 
+/* ===== HEADER ===== */
 header{
   background:#111;
-  padding:15px 10px 20px;
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
   position:relative;
-  text-align:center;
 }
 
-header img{
-  max-width:320px;
-}
-
-header p{
-  color:#ccc;
-  font-size:14px;
-  margin-top:8px;
-}
-
+/* MENU HAMBÚRGUER */
 .menu-btn{
-  position:absolute;
-  top:15px;
-  left:15px;
   background:#222;
   color:#fff;
   border:none;
@@ -44,6 +34,18 @@ header p{
   cursor:pointer;
 }
 
+/* LOGO */
+header img{
+  max-width:200px;
+  margin-left:12px;
+}
+
+/* TEXTO ABAIXO DA LOGO (opcional manter) */
+header p{
+  display:none;
+}
+
+/* MENU DROPDOWN */
 .menu{
   display:none;
   position:absolute;
@@ -68,6 +70,25 @@ header p{
   background:#f0f0f0;
 }
 
+/* BOTÕES DIREITA */
+.header-actions{
+  position:absolute;
+  right:20px;
+  display:flex;
+  gap:10px;
+}
+
+.action-btn{
+  background:#222;
+  color:#fff;
+  border:none;
+  font-size:20px;
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* ===== CONTEÚDO ===== */
 section{
   padding:20px;
 }
@@ -106,7 +127,11 @@ h2{
   <button class="menu-btn" onclick="toggleMenu()">≡</button>
 
   <img src="img/logo.png" alt="MM Pré-Moldados">
-  <p>Qualidade, resistência e acabamento em pré-moldados</p>
+
+  <div class="header-actions">
+    <button class="action-btn">🔍</button>
+    <button class="action-btn">🛒</button>
+  </div>
 
   <div class="menu" id="menu">
     <a href="cobogos.html">Cobogós</a>
@@ -145,14 +170,12 @@ function toggleMenu(){
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
-// Fecha menu ao clicar fora
 document.addEventListener("click", function(e){
   if(!e.target.closest("header")){
     menu.style.display = "none";
   }
 });
 
-// Cards clicáveis
 document.querySelectorAll(".card").forEach(card=>{
   card.addEventListener("click", ()=>{
     const link = card.getAttribute("data-link");
