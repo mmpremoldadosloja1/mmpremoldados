@@ -23,7 +23,6 @@ header{
   position:relative;
 }
 
-/* MENU HAMBÚRGUER */
 .menu-btn{
   background:#222;
   color:#fff;
@@ -34,18 +33,30 @@ header{
   cursor:pointer;
 }
 
-/* LOGO */
 header img{
   max-width:200px;
   margin-left:12px;
 }
 
-/* TEXTO ABAIXO DA LOGO (opcional manter) */
-header p{
-  display:none;
+/* BOTÕES DIREITA */
+.header-actions{
+  position:absolute;
+  right:20px;
+  display:flex;
+  gap:10px;
 }
 
-/* MENU DROPDOWN */
+.action-btn{
+  background:#222;
+  color:#fff;
+  border:none;
+  font-size:20px;
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* MENU */
 .menu{
   display:none;
   position:absolute;
@@ -70,31 +81,39 @@ header p{
   background:#f0f0f0;
 }
 
-/* BOTÕES DIREITA */
-.header-actions{
-  position:absolute;
-  right:20px;
-  display:flex;
-  gap:10px;
+/* ===== PESQUISA ===== */
+.search-box{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+  z-index:999;
+  align-items:center;
+  justify-content:center;
 }
 
-.action-btn{
-  background:#222;
-  color:#fff;
-  border:none;
-  font-size:20px;
-  padding:8px 12px;
+.search-content{
+  background:#fff;
+  width:90%;
+  max-width:400px;
+  border-radius:10px;
+  padding:20px;
+}
+
+.search-content input{
+  width:100%;
+  padding:12px;
+  font-size:16px;
   border-radius:6px;
-  cursor:pointer;
+  border:1px solid #ccc;
 }
 
 /* ===== CONTEÚDO ===== */
 section{
   padding:20px;
-}
-
-h2{
-  margin-bottom:15px;
 }
 
 .grid{
@@ -111,12 +130,6 @@ h2{
   font-weight:600;
   cursor:pointer;
   box-shadow:0 4px 8px rgba(0,0,0,0.08);
-  transition:transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 6px 14px rgba(0,0,0,0.15);
 }
 </style>
 </head>
@@ -125,11 +138,10 @@ h2{
 
 <header>
   <button class="menu-btn" onclick="toggleMenu()">≡</button>
-
   <img src="img/logo.png" alt="MM Pré-Moldados">
 
   <div class="header-actions">
-    <button class="action-btn">🔍</button>
+    <button class="action-btn" onclick="openSearch()">🔍</button>
     <button class="action-btn">🛒</button>
   </div>
 
@@ -148,42 +160,62 @@ h2{
   </div>
 </header>
 
+<!-- PESQUISA -->
+<div class="search-box" id="searchBox">
+  <div class="search-content">
+    <input type="text" id="searchInput" placeholder="O que você procura?" onkeyup="searchProduct(event)">
+  </div>
+</div>
+
 <section>
   <h2>Departamentos</h2>
 
   <div class="grid">
-    <div class="card" data-link="manilhas.html">Manilhas</div>
-    <div class="card" data-link="#">Lajes Pré-Moldadas</div>
-    <div class="card" data-link="#">Pingadeiras</div>
-    <div class="card" data-link="#">Blocos / Canaletas</div>
-    <div class="card" data-link="#">Pisadeiras de Jardim</div>
-    <div class="card" data-link="#">Revestimento de Piso</div>
-    <div class="card" data-link="#">Revestimento de Parede</div>
-    <div class="card" data-link="cobogos.html">Cobogós</div>
+    <div class="card" data-name="manilhas" data-link="manilhas.html">Manilhas</div>
+    <div class="card" data-name="lajes" data-link="#">Lajes Pré-Moldadas</div>
+    <div class="card" data-name="pingadeiras" data-link="#">Pingadeiras</div>
+    <div class="card" data-name="blocos" data-link="#">Blocos / Canaletas</div>
+    <div class="card" data-name="pisadeiras" data-link="#">Pisadeiras de Jardim</div>
+    <div class="card" data-name="piso" data-link="#">Revestimento de Piso</div>
+    <div class="card" data-name="parede" data-link="#">Revestimento de Parede</div>
+    <div class="card" data-name="cobogos" data-link="cobogos.html">Cobogós</div>
   </div>
 </section>
 
 <script>
 const menu = document.getElementById("menu");
+const searchBox = document.getElementById("searchBox");
 
 function toggleMenu(){
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
-document.addEventListener("click", function(e){
-  if(!e.target.closest("header")){
-    menu.style.display = "none";
+function openSearch(){
+  searchBox.style.display = "flex";
+  document.getElementById("searchInput").focus();
+}
+
+searchBox.addEventListener("click", e=>{
+  if(e.target === searchBox){
+    searchBox.style.display = "none";
   }
 });
 
-document.querySelectorAll(".card").forEach(card=>{
-  card.addEventListener("click", ()=>{
-    const link = card.getAttribute("data-link");
-    if(link && link !== "#"){
-      window.location.href = link;
+function searchProduct(e){
+  if(e.key === "Enter"){
+    const value = e.target.value.toLowerCase();
+    const cards = document.querySelectorAll(".card");
+
+    for(let card of cards){
+      if(card.dataset.name.includes(value)){
+        window.location.href = card.dataset.link;
+        return;
+      }
     }
-  });
-});
+
+    alert("Produto não encontrado");
+  }
+}
 </script>
 
 </body>
