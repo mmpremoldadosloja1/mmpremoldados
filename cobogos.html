@@ -153,7 +153,11 @@
   <span class="qtd">1</span>
   <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div>
-  <a class="btn" href="#">WhatsApp</a>
+ <a class="btn"
+   href="#"
+   onclick="enviarWhats(this)">
+   WhatsApp
+</a>
 </div>
 
 <div class="card">
@@ -164,7 +168,11 @@
   <span class="qtd">1</span>
   <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div>
-  <a class="btn" href="#">WhatsApp</a>
+<a class="btn"
+   href="#"
+   onclick="enviarWhats(this)">
+   WhatsApp
+</a>
 </div>
 
 <div class="card">
@@ -175,7 +183,11 @@
   <span class="qtd">1</span>
   <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div>
-  <a class="btn" href="#">WhatsApp</a>
+<a class="btn"
+   href="#"
+   onclick="enviarWhats(this)">
+   WhatsApp
+</a>
 </div>
 
 <div class="card">
@@ -186,7 +198,11 @@
   <span class="qtd">1</span>
   <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div>
-  <a class="btn" href="#">WhatsApp</a>
+<a class="btn"
+   href="#"
+   onclick="enviarWhats(this)">
+   WhatsApp
+</a>
 </div>
 
 <div class="card">
@@ -197,7 +213,11 @@
   <span class="qtd">1</span>
   <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div>
-  <a class="btn" href="#">WhatsApp</a>
+ <a class="btn"
+   href="#"
+   onclick="enviarWhats(this)">
+   WhatsApp
+</a>
 </div>
 
 </div>
@@ -213,7 +233,11 @@
   <span class="qtd">1</span>
   <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div> 
-  <a class="btn" href="#">WhatsApp</a>
+<a class="btn"
+   href="#"
+   onclick="enviarWhats(this)">
+   WhatsApp
+</a>
 </div>
 
 <div class="card">
@@ -224,7 +248,11 @@
   <span class="qtd">1</span>
   <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div>
-  <a class="btn" href="#">WhatsApp</a>
+<a class="btn"
+   href="#"
+   onclick="enviarWhats(this)">
+   WhatsApp
+</a>
 </div>
 
 <div class="card">
@@ -235,7 +263,11 @@
   <span class="qtd">1</span>
   <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div>
-  <a class="btn" href="#">WhatsApp</a>
+ <a class="btn"
+   href="#"
+   onclick="enviarWhats(this)">
+   WhatsApp
+</a>
 </div>
 
 <div class="card">
@@ -246,7 +278,11 @@
   <span class="qtd">1</span>
   <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div>
-  <a class="btn" href="#">WhatsApp</a>
+<a class="btn"
+   href="#"
+   onclick="enviarWhats(this)">
+   WhatsApp
+</a>
 </div>
 
 <div class="card">
@@ -257,7 +293,11 @@
   <span class="qtd">1</span>
   <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div>
-  <a class="btn" href="#">WhatsApp</a>
+<a class="btn"
+   href="#"
+   onclick="enviarWhats(this)">
+   WhatsApp
+</a>
 </div>
 
 <div class="card">
@@ -268,7 +308,11 @@
   <span class="qtd">1</span>
   <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div>
-  <a class="btn" href="#">WhatsApp</a>
+<a class="btn"
+   href="#"
+   onclick="enviarWhats(this)">
+   WhatsApp
+</a>
 </div>
 
 </div>
@@ -279,15 +323,31 @@
   <div class="card">
   <img src="img/cobogo-4-furos-24.jpg" alt="Cobogó 4 Furos 24x24">
   <h3>4 Furos 24x24</h3>
-      <div class="contador">
+  <div class="contador">
   <button onclick="this.parentElement.querySelector('.qtd').innerText = Math.max(1, parseInt(this.parentElement.querySelector('.qtd').innerText) - 1)">−</button>
   <span class="qtd">1</span>
   <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div>
-  <a class="btn" href="#">WhatsApp</a>
+<a class="btn"
+   href="#"
+   onclick="enviarWhats(this)">
+   WhatsApp
+</a>
 </div>
 
 </div>
+<script>
+function enviarWhats(botao) {
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const qtd = card.querySelector('.qtd').innerText;
 
+  const telefone = '556199385680'; // WhatsApp MM Pré-Moldados
+  const mensagem = `Olá, gostaria de comprar:\n• ${nome}\nQuantidade: ${qtd}`;
+
+  const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+  window.open(url, '_blank');
+}
+</script>
 </body>
 </html>
