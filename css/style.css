@@ -85,7 +85,7 @@ h1 {
     height: 160px;
   }
 }
-/* ===== CONTADOR DE PRODUTOS ===== */
+/* CONTADOR */
 .contador {
   display: flex;
   justify-content: center;
@@ -98,23 +98,19 @@ h1 {
   width: 32px;
   height: 32px;
   border-radius: 6px;
-  border: none;
-  background: #111;
-  color: #fff;
-  font-size: 20px;
+  border: 1px solid #ccc;
+  background: #f0f0f0;
+  font-size: 18px;
   cursor: pointer;
 }
 
 .contador button:hover {
-  background: #000;
+  background: #ddd;
 }
 
 .contador .qtd {
-  min-width: 26px;
+  min-width: 28px;
   text-align: center;
   font-size: 16px;
-  font-weight: 600;
-  background: #eee;
-  padding: 4px 8px;
-  border-radius: 4px;
+  font-weight: bold;
 }
