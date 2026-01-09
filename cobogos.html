@@ -349,5 +349,25 @@ function enviarWhats(botao) {
   window.open(url, '_blank');
 }
 </script>
+  <script>
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function adicionarCarrinho(botao) {
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const qtd = parseInt(card.querySelector('.qtd').innerText);
+
+  const existente = carrinho.find(item => item.nome === nome);
+
+  if (existente) {
+    existente.qtd += qtd;
+  } else {
+    carrinho.push({ nome, qtd });
+  }
+
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert('Produto adicionado ao carrinho!');
+}
+</script>
 </body>
 </html>
