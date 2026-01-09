@@ -103,12 +103,22 @@
   <div class="card">
   <img src="img/manilhas/manilha-90x50.jpg" alt="Manilha 90cm x 50cm em concreto">
   <h3>Manilha 90cm x 50cm</h3>
+  <div class="contador">
+  <button onclick="this.parentElement.querySelector('.qtd').innerText = Math.max(1, parseInt(this.parentElement.querySelector('.qtd').innerText) - 1)">−</button>
+  <span class="qtd">1</span>
+  <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
+</div>
   <a class="btn" href="#">WhatsApp</a>
 </div>
 
 <div class="card">
   <img src="img/manilhas/manilha-110x50.jpg" alt="Manilha 1,10m x 50cm em concreto">
   <h3>Manilha 1,10m x 50cm</h3>
+  <div class="contador">
+  <button onclick="this.parentElement.querySelector('.qtd').innerText = Math.max(1, parseInt(this.parentElement.querySelector('.qtd').innerText) - 1)">−</button>
+  <span class="qtd">1</span>
+  <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
+</div>
   <a class="btn" href="#">WhatsApp</a>
 </div>
 
