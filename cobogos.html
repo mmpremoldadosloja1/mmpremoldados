@@ -333,6 +333,7 @@
 
 </div>
 <script>
+<script>
 function enviarWhats(botao) {
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -344,8 +345,7 @@ function enviarWhats(botao) {
   const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
   window.open(url, '_blank');
 }
-</script>
-  <script>
+<script>
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function adicionarCarrinho(botao) {
@@ -362,8 +362,39 @@ function adicionarCarrinho(botao) {
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  atualizarCarrinho();
   alert('Produto adicionado ao carrinho!');
 }
+
+function atualizarCarrinho() {
+  const lista = document.getElementById('lista-carrinho');
+  lista.innerHTML = '';
+
+  carrinho.forEach(item => {
+    const div = document.createElement('div');
+    div.innerText = `${item.nome} — Quantidade: ${item.qtd}`;
+    lista.appendChild(div);
+  });
+}
+
+function enviarCarrinhoWhats() {
+  if (carrinho.length === 0) {
+    alert('Carrinho vazio');
+    return;
+  }
+
+  let mensagem = 'Olá, gostaria de fazer o pedido:\n\n';
+
+  carrinho.forEach(item => {
+    mensagem += `• ${item.nome} — ${item.qtd}\n`;
+  });
+
+  const telefone = '556199385680';
+  const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+  window.open(url, '_blank');
+}
+
+atualizarCarrinho();
 </script>
 </body>
 </html>
