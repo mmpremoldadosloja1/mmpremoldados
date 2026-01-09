@@ -133,9 +133,9 @@
   <img src="img/cobogo-16-furos-40.jpg" alt="Cobogó 16 Furos 40x40">
   <h3>16 Furos 40x40</h3>
   <div class="contador">
-  <button onclick="this.nextElementSibling.innerText = Math.max(1, parseInt(this.nextElementSibling.innerText) - 1)">−</button>
+  <button onclick="this.parentElement.querySelector('.qtd').innerText = Math.max(1, parseInt(this.parentElement.querySelector('.qtd').innerText) - 1)">−</button>
   <span class="qtd">1</span>
-  <button onclick="this.previousElementSibling.innerText = parseInt(this.previousElementSibling.innerText) + 1">+</button>
+  <button onclick="this.parentElement.querySelector('.qtd').innerText = parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
 </div>
   <a class="btn" href="#">WhatsApp</a>
 </div>
