@@ -1,10 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Blocos e Canaletas | MM Pré-Moldados</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>Blocos e Canaletas | MM Pré-Moldados</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+/* ===== AJUSTES VISUAIS ===== */
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* CENTRALIZA TUDO */
+  justify-content: center;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+
+  display: block;
+  margin: 0 auto;          /* FORÇA CENTRALIZAÇÃO */
+}
+
+h2{
+  margin-top: 30px;
+}
+</style>
+
 </head>
 
 <body>
@@ -17,156 +49,82 @@
 
 <h1>Blocos e Canaletas</h1>
 
-<div class="grid">
+<div class="grid" id="gridProdutos"></div>
 
-<!-- ===== BLOCO DE VEDAÇÃO ===== -->
+<script>
+const grid = document.getElementById("gridProdutos");
 
-<div style="grid-column:1/-1">
-  <h2>BLOCO DE VEDAÇÃO</h2>
-</div>
+function titulo(texto) {
+  grid.innerHTML += `
+    <div style="grid-column:1/-1;margin-top:20px">
+      <h2>${texto}</h2>
+    </div>
+  `;
+}
 
-<div class="card">
-  <img src="img/blocos/bloco-fundo-09.jpg" alt="Bloco c/fundo 09x19x39cm">
-  <h3>Bloco c/fundo 09x19x39cm</h3>
+function mais(btn){
+  const qtd = btn.parentElement.querySelector('.qtd');
+  qtd.innerText = parseInt(qtd.innerText) + 1;
+}
 
-  <div class="contador">
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      Math.max(1, parseInt(this.parentElement.querySelector('.qtd').innerText) - 1)">−</button>
+function menos(btn){
+  const qtd = btn.parentElement.querySelector('.qtd');
+  qtd.innerText = Math.max(1, parseInt(qtd.innerText) - 1);
+}
 
-    <span class="qtd">1</span>
+function criar(nome){
+  grid.innerHTML += `
+  <div class="card">
+    <img src="img/blocos/padrao.jpg" alt="${nome}">
+    <h3>${nome}</h3>
 
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
-  </div>
-</div>
+    <div class="contador">
+      <button onclick="menos(this)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="mais(this)">+</button>
+    </div>
 
-<div class="card">
-  <img src="img/blocos/bloco-vazado-14.jpg" alt="Bloco vazado 14x19x39cm">
-  <h3>Bloco vazado 14x19x39cm</h3>
+  </div>`;
+}
+</script>
 
-  <div class="contador">
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      Math.max(1, parseInt(this.parentElement.querySelector('.qtd').innerText) - 1)">−</button>
+<script>
+// ====================== BLOCO DE VEDAÇÃO ======================
+titulo("BLOCO DE VEDAÇÃO");
 
-    <span class="qtd">1</span>
-
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
-  </div>
-</div>
-
-
-<!-- ===== CANALETA DE VEDAÇÃO ===== -->
-
-<div style="grid-column:1/-1">
-  <h2>CANALETA DE VEDAÇÃO</h2>
-</div>
-
-<div class="card">
-  <img src="img/blocos/canaleta-09.jpg" alt="Canaleta de 09x19x39cm">
-  <h3>Canaleta de 09x19x39cm</h3>
-
-  <div class="contador">
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      Math.max(1, parseInt(this.parentElement.querySelector('.qtd').innerText) - 1)">−</button>
-
-    <span class="qtd">1</span>
-
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
-  </div>
-</div>
-
-<div class="card">
-  <img src="img/blocos/canaleta-14.jpg" alt="Canaleta de 14x19x39cm">
-  <h3>Canaleta de 14x19x39cm</h3>
-
-  <div class="contador">
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      Math.max(1, parseInt(this.parentElement.querySelector('.qtd').innerText) - 1)">−</button>
-
-    <span class="qtd">1</span>
-
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
-  </div>
-</div>
+[
+"Bloco c/fundo 09x19x39cm",
+"Bloco vazado 14x19x39cm"
+].forEach(criar);
 
 
-<!-- ===== PILAR COM SEGMENTO ===== -->
+// ====================== CANALETA DE VEDAÇÃO ======================
+titulo("CANALETA DE VEDAÇÃO");
 
-<div style="grid-column:1/-1">
-  <h2>BLOCO PARA FECHAMENTO DE COLUNA C/ SEGMENTO</h2>
-</div>
-
-<div class="card">
-  <img src="img/blocos/pilar-09.jpg" alt="Bloco de pilar 09x19x39cm">
-  <h3>Bloco de pilar 09x19x39cm</h3>
-
-  <div class="contador">
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      Math.max(1, parseInt(this.parentElement.querySelector('.qtd').innerText) - 1)">−</button>
-
-    <span class="qtd">1</span>
-
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
-  </div>
-</div>
-
-<div class="card">
-  <img src="img/blocos/pilar-14.jpg" alt="Bloco de pilar 14x19x39cm">
-  <h3>Bloco de pilar 14x19x39cm</h3>
-
-  <div class="contador">
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      Math.max(1, parseInt(this.parentElement.querySelector('.qtd').innerText) - 1)">−</button>
-
-    <span class="qtd">1</span>
-
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
-  </div>
-</div>
+[
+"Canaleta de 09x19x39cm",
+"Canaleta de 14x19x39cm"
+].forEach(criar);
 
 
-<!-- ===== PILAR SEM SEGMENTO ===== -->
+// ===== BLOCO PARA FECHAMENTO DE COLUNA C/ SEGMENTO =====
+titulo("BLOCO PARA FECHAMENTO DE COLUNA C/ SEGMENTO");
 
-<div style="grid-column:1/-1">
-  <h2>BLOCO PARA FECHAMENTO DE COLUNA S/ SEGMENTO</h2>
-</div>
+[
+"Bloco de pilar 09x19x39cm",
+"Bloco de pilar 14x19x39cm"
+].forEach(criar);
 
-<div class="card">
-  <img src="img/blocos/quadrado-19.jpg" alt="Quadrado de pilar de 19x19x19cm">
-  <h3>Quadrado de pilar de 19x19x19cm</h3>
 
-  <div class="contador">
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      Math.max(1, parseInt(this.parentElement.querySelector('.qtd').innerText) - 1)">−</button>
+// ===== BLOCO PARA FECHAMENTO DE COLUNA S/ SEGMENTO =====
+titulo("BLOCO PARA FECHAMENTO DE COLUNA S/ SEGMENTO");
 
-    <span class="qtd">1</span>
+[
+"Quadrado de pilar de 19x19x19cm",
+"Quadrado de pilar de 25x25x19cm"
+].forEach(criar);
 
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
-  </div>
-</div>
-
-<div class="card">
-  <img src="img/blocos/quadrado-25.jpg" alt="Quadrado de pilar de 25x25x19cm">
-  <h3>Quadrado de pilar de 25x25x19cm</h3>
-
-  <div class="contador">
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      Math.max(1, parseInt(this.parentElement.querySelector('.qtd').innerText) - 1)">−</button>
-
-    <span class="qtd">1</span>
-
-    <button onclick="this.parentElement.querySelector('.qtd').innerText =
-      parseInt(this.parentElement.querySelector('.qtd').innerText) + 1">+</button>
-  </div>
-</div>
-
-</div>
+</script>
 
 </body>
 </html>
