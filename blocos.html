@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Blocos e Canaletas | MM Pré-Moldados</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<a href="index.html" class="voltar">
+  <svg viewBox="0 0 24 24">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
+</a>
+
+<h1>Blocos e Canaletas</h1>
+
+<div class="grid" id="gridProdutos"></div>
+
+<script>
+const grid = document.getElementById("gridProdutos");
+
+function titulo(texto) {
+  grid.innerHTML += `
+    <div style="grid-column:1/-1;margin-top:20px">
+      <h2>${texto}</h2>
+    </div>
+  `;
+}
+
+function mais(btn){
+  const qtd = btn.parentElement.querySelector('.qtd');
+  qtd.innerText = parseInt(qtd.innerText) + 1;
+}
+
+function menos(btn){
+  const qtd = btn.parentElement.querySelector('.qtd');
+  qtd.innerText = Math.max(1, parseInt(qtd.innerText) - 1);
+}
+
+function criar(nome){
+  grid.innerHTML += `
+  <div class="card">
+    <img src="img/blocos/padrao.jpg" alt="${nome}">
+    <h3>${nome}</h3>
+
+    <div class="contador">
+      <button onclick="menos(this)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="mais(this)">+</button>
+    </div>
+
+  </div>`;
+}
+
+</script>
+
+<script>
+// ====================== BLOCO DE VEDAÇÃO ======================
+titulo("BLOCO DE VEDAÇÃO");
+
+[
+"Bloco c/fundo 09x19x39cm",
+"Bloco vazado 14x19x39cm"
+].forEach(criar);
+
+
+// ====================== CANALETA DE VEDAÇÃO ======================
+titulo("CANALETA DE VEDAÇÃO");
+
+[
+"Canaleta de 09x19x39cm",
+"Canaleta de 14x19x39cm"
+].forEach(criar);
+
+
+// ===== BLOCO PARA FECHAMENTO DE COLUNA C/ SEGMENTO =====
+titulo("BLOCO PARA FECHAMENTO DE COLUNA C/ SEGMENTO");
+
+[
+"Bloco de pilar 09x19x39cm",
+"Bloco de pilar 14x19x39cm"
+].forEach(criar);
+
+
+// ===== BLOCO PARA FECHAMENTO DE COLUNA S/ SEGMENTO =====
+titulo("BLOCO PARA FECHAMENTO DE COLUNA S/ SEGMENTO");
+
+[
+"Quadrado de pilar de 19x19x19cm",
+"Quadrado de pilar de 25x25x19cm"
+].forEach(criar);
+
+</script>
+
+</body>
+</html>
