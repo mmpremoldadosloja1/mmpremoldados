@@ -19,6 +19,12 @@
       margin: 25px 0 10px;
     }
 
+    h2 {
+      margin: 30px 20px 10px;
+      border-left: 5px solid #c9a24d;
+      padding-left: 10px;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -40,11 +46,6 @@
       object-fit: cover;
     }
 
-    .card h3 {
-      margin: 12px 0;
-      font-size: 16px;
-    }
-
     .btn {
       display: inline-block;
       margin-bottom: 15px;
@@ -57,38 +58,6 @@
       cursor: pointer;
     }
 
-    /* BOTÃO VOLTAR */
-    .voltar {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      width: 46px;
-      height: 46px;
-      background: #111;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      transition: transform 0.3s ease;
-    }
-
-    .voltar svg {
-      width: 22px;
-      height: 22px;
-      fill: none;
-      stroke: #fff;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .voltar:hover {
-      transform: scale(1.1);
-    }
-
-    /* CONTADOR */
     .contador {
       display: flex;
       justify-content: center;
@@ -107,15 +76,32 @@
       cursor: pointer;
     }
 
-    .contador button:hover {
-      background: #ddd;
-    }
-
     .contador .qtd {
       min-width: 28px;
       text-align: center;
       font-size: 16px;
       font-weight: bold;
+    }
+
+    .voltar {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      width: 46px;
+      height: 46px;
+      background: #111;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .voltar svg {
+      width: 22px;
+      height: 22px;
+      stroke: #fff;
+      stroke-width: 2.5;
+      fill: none;
     }
   </style>
 </head>
@@ -128,13 +114,15 @@
   </svg>
 </a>
 
-<h1>Manilhas</h1>
+<h1>Manilhas e Tampas</h1>
+
+<!-- ===== MANILHAS ===== -->
+<h2>Manilhas</h2>
 
 <div class="grid">
 
-  <!-- MANILHA 90x50 -->
   <div class="card">
-    <img src="img/manilhas/manilha-90x50.jpg" alt="Manilha 90cm x 50cm em concreto">
+    <img src="img/manilhas/manilha-90x50.jpg" alt="Manilha 90cm x 50cm">
     <h3>Manilha 90cm x 50cm</h3>
 
     <div class="contador">
@@ -148,9 +136,8 @@
     </button>
   </div>
 
-  <!-- MANILHA 110x50 -->
   <div class="card">
-    <img src="img/manilhas/manilha-110x50.jpg" alt="Manilha 1,10m x 50cm em concreto">
+    <img src="img/manilhas/manilha-110x50.jpg" alt="Manilha 1,10m x 50cm">
     <h3>Manilha 1,10m x 50cm</h3>
 
     <div class="contador">
@@ -163,6 +150,45 @@
       Adicionar ao carrinho
     </button>
   </div>
+
+</div>
+
+<!-- ===== TAMPAS DE MANILHA ===== -->
+<h2>Tampas de Manilha</h2>
+
+<div class="grid">
+
+<script>
+const tampas = [
+"Tampa 90cm (F)",
+"Tampa 90cm (A)",
+"Tampa de 1m (F)",
+"Tampa 1,10cm (F)",
+"Tampa 1,10cm (A)",
+"Tampa 1,20cm (F)",
+"Tampa 1,20cm (A)",
+"Tampa de manilha 40x40cm"
+];
+
+document.write(
+tampas.map(nome => `
+<div class="card">
+  <img src="img/manilhas/tampa-padrao.jpg" alt="${nome}">
+  <h3>${nome}</h3>
+
+  <div class="contador">
+    <button onclick="alterarQtd(this,-1)">−</button>
+    <span class="qtd">1</span>
+    <button onclick="alterarQtd(this,1)">+</button>
+  </div>
+
+  <button class="btn" onclick="adicionarCarrinho(this)">
+    Adicionar ao carrinho
+  </button>
+</div>
+`).join('')
+);
+</script>
 
 </div>
 
@@ -183,11 +209,8 @@ function adicionarCarrinho(botao) {
 
   const existente = carrinho.find(item => item.nome === nome);
 
-  if (existente) {
-    existente.qtd += qtd;
-  } else {
-    carrinho.push({ nome, qtd });
-  }
+  if (existente) existente.qtd += qtd;
+  else carrinho.push({ nome, qtd });
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
 
