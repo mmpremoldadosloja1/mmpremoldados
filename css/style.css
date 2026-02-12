@@ -30,9 +30,12 @@ h1 {
 
 /* GRID DE PRODUTOS */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 /* CARD */
@@ -42,15 +45,19 @@ h1 {
   padding: 15px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+  width: 220px;
+  margin: 0 auto;
 }
 
-/* IMAGENS */
+/* IMAGENS CENTRALIZADAS */
 .card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
   border-radius: 8px;
-  margin-bottom: 10px;
+  margin: 0 auto 10px auto;
+  display: block;
 }
 
 /* TÍTULO DO CARD */
@@ -85,6 +92,7 @@ h1 {
     height: 160px;
   }
 }
+
 /* CONTADOR */
 .contador {
   display: flex;
