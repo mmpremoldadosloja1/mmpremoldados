@@ -93,7 +93,20 @@ h2{
 
 <h1>Blocos e Canaletas</h1>
 
-<div class="grid" id="gridProdutos"></div>
+  <!-- ================== BLOCO DE VEDAÇÃO ================== -->
+<h2>Bloco de vedação</h2>
+<div class="grid">
+
+  <div class="card">
+    <img src="img/bloco-de-09.jpg" alt="Bloco c/fundo 09x19x39cm">
+    <h3>Bloco c/fundo 09x19x39cm</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
 
 <script>
 const grid = document.getElementById("gridProdutos");
