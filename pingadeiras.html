@@ -1,123 +1,165 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pingadeiras</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Pingadeiras</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+}
+
+/* BOTÃO VOLTAR */
+.botao-voltar {
+    display: inline-block;
+    margin-bottom: 30px;
+    padding: 8px 15px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.botao-voltar:hover {
+    background-color: #555;
+    transform: translateX(-5px);
+}
+
+/* TÍTULO */
+h1 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/* MODELOS */
+.modelo {
+    margin-bottom: 60px;
+}
+
+.modelo h2 {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* ESPAÇO DA IMAGEM */
+.imagem-centro {
+    width: 300px;
+    height: 200px;
+    margin: 0 auto 20px auto;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 14px;
+    border: 1px solid #ddd;
+}
+
+/* PRODUTO */
+.produto {
+    text-align: center;
+}
+
+select, button {
+    padding: 6px;
+    margin-top: 8px;
+}
+
+.quantidade {
+    margin: 10px 0;
+}
+</style>
 </head>
+
 <body>
 
-<a href="index.html" class="voltar">← Voltar</a>
+<a href="index.html" class="botao-voltar">← Voltar</a>
 
-<h1>Pingadeiras</h1>
+<h1>PINGADEIRAS</h1>
 
-<div class="grid">
+<!-- MODELO CASINHA -->
+<div class="modelo">
+    <h2>Modelo Casinha</h2>
 
-  <!-- MODELO CASINHA -->
-  <h2>Modelo Casinha</h2>
-
-  <div class="card">
-    <img src="img/pingadeiras/casinha.jpg" alt="Pingadeira Casinha">
-    <h3>Pingadeira Casinha</h3>
-
-    <select class="tamanho">
-      <option value="1mx20cm">1m x 20cm</option>
-      <option value="1mx23cm">1m x 23cm</option>
-      <option value="1mx25cm">1m x 25cm</option>
-      <option value="1mx30cm">1m x 30cm</option>
-    </select>
-
-    <div class="contador">
-      <button onclick="menos(this)">−</button>
-      <span class="qtd">1</span>
-      <button onclick="mais(this)">+</button>
+    <div class="imagem-centro">
+        Imagem será adicionada aqui
     </div>
 
-    <button class="btn" onclick="adicionarCarrinho(this, 'Pingadeira Casinha')">
-      Adicionar ao carrinho
-    </button>
-  </div>
+    <div class="produto">
+        <h3>Pingadeira Casinha</h3>
 
+        <select>
+            <option>1m x 20cm</option>
+            <option>1m x 23cm</option>
+            <option>1m x 25cm</option>
+            <option>1m x 30cm</option>
+        </select>
 
-  <!-- MODELO RETA -->
-  <h2>Modelo Reta</h2>
+        <div class="quantidade">
+            <button>-</button>
+            1
+            <button>+</button>
+        </div>
 
-  <div class="card">
-    <img src="img/pingadeiras/reta.jpg" alt="Pingadeira Reta">
-    <h3>Pingadeira Reta</h3>
-
-    <select class="tamanho">
-      <option value="1mx20cm">1m x 20cm</option>
-      <option value="1mx23cm">1m x 23cm</option>
-      <option value="1mx25cm">1m x 25cm</option>
-      <option value="1mx30cm">1m x 30cm</option>
-      <option value="1mx40cm">1m x 40cm</option>
-    </select>
-
-    <div class="contador">
-      <button onclick="menos(this)">−</button>
-      <span class="qtd">1</span>
-      <button onclick="mais(this)">+</button>
+        <button>Adicionar ao carrinho</button>
     </div>
-
-    <button class="btn" onclick="adicionarCarrinho(this, 'Pingadeira Reta')">
-      Adicionar ao carrinho
-    </button>
-  </div>
-
-
-  <!-- MODELO DEGRAU -->
-  <h2>Modelo Degrau</h2>
-
-  <div class="card">
-    <img src="img/pingadeiras/degrau.jpg" alt="Pingadeira Degrau">
-    <h3>Pingadeira Degrau</h3>
-
-    <select class="tamanho">
-      <option value="1mx20cm">1m x 20cm</option>
-    </select>
-
-    <div class="contador">
-      <button onclick="menos(this)">−</button>
-      <span class="qtd">1</span>
-      <button onclick="mais(this)">+</button>
-    </div>
-
-    <button class="btn" onclick="adicionarCarrinho(this, 'Pingadeira Degrau')">
-      Adicionar ao carrinho
-    </button>
-  </div>
-
 </div>
 
-<script>
-function mais(botao){
-  const qtd = botao.parentElement.querySelector(".qtd");
-  qtd.innerText = parseInt(qtd.innerText) + 1;
-}
+<!-- MODELO RETA -->
+<div class="modelo">
+    <h2>Modelo Reta</h2>
 
-function menos(botao){
-  const qtd = botao.parentElement.querySelector(".qtd");
-  if(parseInt(qtd.innerText) > 1){
-    qtd.innerText = parseInt(qtd.innerText) - 1;
-  }
-}
+    <div class="imagem-centro">
+        Imagem será adicionada aqui
+    </div>
 
-function adicionarCarrinho(botao, nomeModelo){
-  const card = botao.closest(".card");
-  const tamanho = card.querySelector(".tamanho").value;
-  const qtd = card.querySelector(".qtd").innerText;
+    <div class="produto">
+        <h3>Pingadeira Reta</h3>
 
-  const nomeCompleto = nomeModelo + " " + tamanho;
+        <select>
+            <option>1m x 20cm</option>
+            <option>1m x 23cm</option>
+            <option>1m x 25cm</option>
+            <option>1m x 30cm</option>
+            <option>1m x 40cm</option>
+        </select>
 
-  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-  carrinho.push({ nome: nomeCompleto, qtd });
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+        <div class="quantidade">
+            <button>-</button>
+            1
+            <button>+</button>
+        </div>
 
-  alert("Produto adicionado ao carrinho!");
-}
-</script>
+        <button>Adicionar ao carrinho</button>
+    </div>
+</div>
+
+<!-- MODELO DEGRAU -->
+<div class="modelo">
+    <h2>Modelo Degrau</h2>
+
+    <div class="imagem-centro">
+        Imagem será adicionada aqui
+    </div>
+
+    <div class="produto">
+        <h3>Pingadeira Degrau</h3>
+
+        <select>
+            <option>1m x 20cm</option>
+        </select>
+
+        <div class="quantidade">
+            <button>-</button>
+            1
+            <button>+</button>
+        </div>
+
+        <button>Adicionar ao carrinho</button>
+    </div>
+</div>
 
 </body>
 </html>
