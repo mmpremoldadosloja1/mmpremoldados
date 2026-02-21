@@ -1,102 +1,56 @@
-/* BODY */
 body {
-  background: #f5f5f5;
-  color: #222;
-  padding: 20px;
+  margin: 0;
   font-family: Arial, sans-serif;
+  background: #f5f5f5;
 }
 
-/* BOTÃO VOLTAR – PADRÃO ELEGANTE */
-.voltar {
-  display: inline-block;
-  padding: 6px 12px;
-  background: transparent;
-  color: #000;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  margin-bottom: 20px;
-}
-
-/* HOVER */
-.voltar:hover {
-  background: #eaeaea;
-}
-
-/* EFEITO AO CLICAR */
-.voltar:active {
-  transform: scale(0.95);
-}
-
-/* TÍTULOS PRINCIPAIS */
 h1 {
   text-align: center;
-  margin-bottom: 30px;
+  margin: 30px 0 10px;
+  font-size: 32px;
 }
 
-/* GRID DE PRODUTOS */
+h2 {
+  margin: 40px 40px 20px;
+  font-size: 22px;
+  border-left: 5px solid #c9a24d;
+  padding-left: 12px;
+  color: #333;
+}
+
+/* GRID */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 220px));
-  justify-content: center;
-  gap: 30px;
-}
-
-/* TÍTULO DAS CATEGORIAS */
-.grid h2 {
-  grid-column: 1 / -1;
-  text-align: left;
-  margin: 30px 0 10px 0;
-  font-size: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  padding: 30px 40px 60px;
 }
 
 /* CARD */
 .card {
   background: #fff;
-  border-radius: 10px;
-  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  padding: 20px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  width: 220px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* IMAGENS */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
 .card img {
-  width: 160px;
-  height: 160px;
+  width: 100%;
+  height: 220px;
   object-fit: contain;
-  border-radius: 8px;
-  margin: 0 auto 10px auto;
-  display: block;
+  margin-bottom: 15px;
 }
 
-/* TÍTULO DO CARD */
 .card h3 {
   font-size: 16px;
   margin-bottom: 12px;
-}
-
-/* BOTÃO PADRÃO */
-.btn {
-  display: inline-block;
-  padding: 10px 15px;
-  background: #000;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.btn:hover {
-  background: #333;
-}
-
-.btn:active {
-  transform: scale(0.96);
 }
 
 /* CONTADOR */
@@ -105,50 +59,84 @@ h1 {
   justify-content: center;
   align-items: center;
   gap: 12px;
-  margin: 10px 0;
+  margin-bottom: 15px;
 }
 
 .contador button {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #f0f0f0;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: #e0e0e0;
   font-size: 18px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
 .contador button:hover {
-  background: #ddd;
+  background: #d5d5d5;
 }
 
 .contador button:active {
-  transform: scale(0.92);
+  transform: scale(0.9);
 }
 
-.contador .qtd {
-  min-width: 28px;
-  text-align: center;
+.qtd {
   font-size: 16px;
   font-weight: bold;
 }
 
-/* RESPONSIVO */
-@media (max-width: 480px) {
-  body {
-    padding: 10px;
-  }
+/* BOTÃO ADICIONAR */
+.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #111;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
 
-  .card {
-    width: 100%;
-  }
+.btn:hover {
+  background: #333;
+}
 
-  .grid {
-    grid-template-columns: 1fr;
-  }
+.btn:active {
+  transform: scale(0.95);
+}
 
-  .card img {
-    height: 150px;
-  }
+/* BOTÃO VOLTAR AJUSTADO */
+.voltar {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background: #111;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.voltar:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+.voltar:active {
+  transform: scale(0.92);
+}
+
+.voltar svg {
+  width: 18px;
+  height: 18px;
+  stroke: #fff;
+  stroke-width: 2.5;
+  fill: none;
 }
