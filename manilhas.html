@@ -17,35 +17,95 @@
 
 <h1>Manilhas e Tampas</h1>
 
-<div class="grid">
+<div class="grid" id="gridProdutos"></div>
 
+<script>
+const grid = document.getElementById("gridProdutos");
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function titulo(texto) {
+  grid.innerHTML += `
+    <div style="grid-column:1/-1;margin-top:30px">
+      <h2>${texto}</h2>
+    </div>
+  `;
+}
+
+function mais(btn){
+  const qtd = btn.parentElement.querySelector('.qtd');
+  qtd.innerText = parseInt(qtd.innerText) + 1;
+}
+
+function menos(btn){
+  const qtd = btn.parentElement.querySelector('.qtd');
+  qtd.innerText = Math.max(1, parseInt(qtd.innerText) - 1);
+}
+
+function adicionarCarrinho(botao){
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const qtd = parseInt(card.querySelector('.qtd').innerText);
+
+  const existente = carrinho.find(item => item.nome === nome);
+
+  if(existente){
+    existente.qtd += qtd;
+  } else {
+    carrinho.push({ nome, qtd });
+  }
+
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+  alert("Produto adicionado ao carrinho!");
+}
+
+function criar(nome){
+  grid.innerHTML += `
   <div class="card">
     <div class="imagem-placeholder">
       Imagem será adicionada aqui
     </div>
-    <h3>Manilha 90cm x 50cm</h3>
-    <div class="contador">
-      <button>−</button>
-      <span class="qtd">1</span>
-      <button>+</button>
-    </div>
-    <button class="btn">Adicionar ao carrinho</button>
-  </div>
 
-  <div class="card">
-    <div class="imagem-placeholder">
-      Imagem será adicionada aqui
-    </div>
-    <h3>Manilha 1,10m x 50cm</h3>
-    <div class="contador">
-      <button>−</button>
-      <span class="qtd">1</span>
-      <button>+</button>
-    </div>
-    <button class="btn">Adicionar ao carrinho</button>
-  </div>
+    <h3>${nome}</h3>
 
-</div>
+    <div class="contador">
+      <button onclick="menos(this)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="mais(this)">+</button>
+    </div>
+
+    <button class="btn" onclick="adicionarCarrinho(this)">
+      Adicionar ao carrinho
+    </button>
+
+  </div>`;
+}
+
+/* ========================= */
+/* MANILHAS */
+/* ========================= */
+
+titulo("Manilhas");
+
+[
+"Manilha 90cm x 50cm",
+"Manilha 1,10m x 50cm"
+].forEach(criar);
+
+/* ========================= */
+/* TAMPAS DE MANILHA */
+/* ========================= */
+
+titulo("Tampas de Manilha");
+
+[
+"Tampa 90cm (F)",
+"Tampa 90cm (A)",
+"Tampa 1m (F)",
+"Tampa 1,10cm (F)"
+].forEach(criar);
+
+</script>
 
 </body>
 </html>
