@@ -16,21 +16,21 @@
 
     h1 {
       text-align: center;
-      margin: 30px 0;
+      margin: 30px 0 40px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
-      padding: 30px 40px 60px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 20px 60px 60px;
     }
 
     .card {
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-      padding: 20px;
+      padding: 25px;
       text-align: center;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -40,23 +40,41 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
 
-    select {
-      padding: 8px;
-      margin-bottom: 12px;
+    /* ESPAÇO PARA IMAGEM */
+    .imagem-centro {
       width: 100%;
+      height: 180px;
+      margin-bottom: 20px;
+      background: #f2f2f2;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 14px;
+    }
+
+    select {
+      padding: 8px 10px;
+      margin-bottom: 15px;
+      width: 70%;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
     }
 
     .contador {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 15px;
+      gap: 14px;
+      margin-bottom: 18px;
     }
 
     .contador button {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border: none;
       border-radius: 50%;
       background: #e0e0e0;
@@ -74,15 +92,15 @@
     }
 
     .qtd {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: bold;
-      min-width: 20px;
+      min-width: 25px;
       text-align: center;
     }
 
     .btn {
       display: inline-block;
-      padding: 10px 18px;
+      padding: 10px 22px;
       background: #111;
       color: #fff;
       border-radius: 6px;
@@ -100,7 +118,7 @@
       transform: scale(0.95);
     }
 
-    /* BOTÃO VOLTAR PADRÃO */
+    /* BOTÃO VOLTAR */
     .voltar {
       position: fixed;
       top: 20px;
@@ -150,7 +168,9 @@
 
   <!-- MODELO CASINHA -->
   <div class="card">
-    <h3>Estilo Casinha</h3>
+    <div class="imagem-centro">Imagem será adicionada aqui</div>
+    <h3>Modelo Casinha</h3>
+
     <select>
       <option>1m x 20cm</option>
       <option>1m x 23cm</option>
@@ -169,7 +189,9 @@
 
   <!-- MODELO RETA -->
   <div class="card">
-    <h3>Estilo Reta</h3>
+    <div class="imagem-centro">Imagem será adicionada aqui</div>
+    <h3>Modelo Reta</h3>
+
     <select>
       <option>1m x 20cm</option>
       <option>1m x 23cm</option>
@@ -189,7 +211,9 @@
 
   <!-- MODELO DEGRAU -->
   <div class="card">
-    <h3>Estilo Degraus</h3>
+    <div class="imagem-centro">Imagem será adicionada aqui</div>
+    <h3>Modelo Degrau</h3>
+
     <select>
       <option>1m x 20cm</option>
     </select>
@@ -210,7 +234,6 @@ function alterarQtd(botao, valor) {
   const contador = botao.parentElement;
   const qtdSpan = contador.querySelector('.qtd');
   let qtd = parseInt(qtdSpan.innerText);
-
   qtd = Math.max(1, qtd + valor);
   qtdSpan.innerText = qtd;
 }
@@ -224,7 +247,6 @@ function adicionarCarrinho(botao) {
   const medida = card.querySelector('select').value;
 
   const nomeCompleto = nome + " - " + medida;
-
   const existente = carrinho.find(item => item.nome === nomeCompleto);
 
   if (existente) {
