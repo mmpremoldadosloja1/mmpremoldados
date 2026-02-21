@@ -16,27 +16,34 @@
 
     h1 {
       text-align: center;
-      margin: 25px 0 30px;
+      margin: 30px 0;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      padding: 30px 40px 60px;
     }
 
     .card {
       background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
       padding: 20px;
       text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
 
     select {
       padding: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      width: 100%;
     }
 
     .contador {
@@ -44,49 +51,84 @@
       justify-content: center;
       align-items: center;
       gap: 12px;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     .contador button {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border: none;
       border-radius: 50%;
-      background: #ddd;
+      background: #e0e0e0;
       font-size: 18px;
       cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    .contador button:hover {
+      background: #d5d5d5;
+    }
+
+    .contador button:active {
+      transform: scale(0.9);
+    }
+
+    .qtd {
+      font-size: 16px;
+      font-weight: bold;
+      min-width: 20px;
+      text-align: center;
     }
 
     .btn {
       display: inline-block;
-      margin-top: 10px;
       padding: 10px 18px;
       background: #111;
       color: #fff;
-      border-radius: 5px;
+      border-radius: 6px;
       font-weight: bold;
       border: none;
       cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
     }
 
-    /* BOTÃO VOLTAR IGUAL AO COBOGOS */
+    .btn:hover {
+      background: #333;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    /* BOTÃO VOLTAR PADRÃO */
     .voltar {
       position: fixed;
-      top: 15px;
-      left: 15px;
-      width: 46px;
-      height: 46px;
+      top: 20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
       background: #111;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 999;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .voltar:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+
+    .voltar:active {
+      transform: scale(0.92);
     }
 
     .voltar svg {
-      width: 22px;
-      height: 22px;
+      width: 18px;
+      height: 18px;
       stroke: #fff;
       stroke-width: 2.5;
       fill: none;
@@ -106,6 +148,7 @@
 
 <div class="grid">
 
+  <!-- MODELO CASINHA -->
   <div class="card">
     <h3>Modelo Casinha</h3>
     <select>
@@ -116,14 +159,15 @@
     </select>
 
     <div class="contador">
-      <button>-</button>
+      <button onclick="alterarQtd(this,-1)">−</button>
       <span class="qtd">1</span>
-      <button>+</button>
+      <button onclick="alterarQtd(this,1)">+</button>
     </div>
 
-    <button class="btn">Adicionar ao carrinho</button>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
   </div>
 
+  <!-- MODELO RETA -->
   <div class="card">
     <h3>Modelo Reta</h3>
     <select>
@@ -135,14 +179,15 @@
     </select>
 
     <div class="contador">
-      <button>-</button>
+      <button onclick="alterarQtd(this,-1)">−</button>
       <span class="qtd">1</span>
-      <button>+</button>
+      <button onclick="alterarQtd(this,1)">+</button>
     </div>
 
-    <button class="btn">Adicionar ao carrinho</button>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
   </div>
 
+  <!-- MODELO DEGRAU -->
   <div class="card">
     <h3>Modelo Degrau</h3>
     <select>
@@ -150,15 +195,48 @@
     </select>
 
     <div class="contador">
-      <button>-</button>
+      <button onclick="alterarQtd(this,-1)">−</button>
       <span class="qtd">1</span>
-      <button>+</button>
+      <button onclick="alterarQtd(this,1)">+</button>
     </div>
 
-    <button class="btn">Adicionar ao carrinho</button>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
   </div>
 
 </div>
+
+<script>
+function alterarQtd(botao, valor) {
+  const contador = botao.parentElement;
+  const qtdSpan = contador.querySelector('.qtd');
+  let qtd = parseInt(qtdSpan.innerText);
+
+  qtd = Math.max(1, qtd + valor);
+  qtdSpan.innerText = qtd;
+}
+
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function adicionarCarrinho(botao) {
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const qtd = parseInt(card.querySelector('.qtd').innerText);
+  const medida = card.querySelector('select').value;
+
+  const nomeCompleto = nome + " - " + medida;
+
+  const existente = carrinho.find(item => item.nome === nomeCompleto);
+
+  if (existente) {
+    existente.qtd += qtd;
+  } else {
+    carrinho.push({ nome: nomeCompleto, qtd });
+  }
+
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert('Produto adicionado ao carrinho');
+}
+</script>
 
 </body>
 </html>
