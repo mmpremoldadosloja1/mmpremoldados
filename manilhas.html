@@ -44,14 +44,18 @@ function menos(btn){
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
+  const select = card.querySelector('select');
+  const variacao = select ? select.value : "";
   const qtd = parseInt(card.querySelector('.qtd').innerText);
 
-  const existente = carrinho.find(item => item.nome === nome);
+  const nomeFinal = variacao ? nome + " - " + variacao : nome;
+
+  const existente = carrinho.find(item => item.nome === nomeFinal);
 
   if(existente){
     existente.qtd += qtd;
   } else {
-    carrinho.push({ nome, qtd });
+    carrinho.push({ nome: nomeFinal, qtd });
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
@@ -59,14 +63,21 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado ao carrinho!");
 }
 
-function criar(nome){
+function criarProduto(nome, opcoes = null){
   grid.innerHTML += `
   <div class="card">
+
     <div class="imagem-placeholder">
       Imagem será adicionada aqui
     </div>
 
     <h3>${nome}</h3>
+
+    ${opcoes ? `
+      <select style="margin:10px 0;padding:6px;border-radius:6px;border:1px solid #ccc;width:100%;">
+        ${opcoes.map(op => `<option>${op}</option>`).join('')}
+      </select>
+    ` : ''}
 
     <div class="contador">
       <button onclick="menos(this)">−</button>
@@ -90,20 +101,18 @@ titulo("Manilhas");
 [
 "Manilha 90cm x 50cm",
 "Manilha 1,10m x 50cm"
-].forEach(criar);
+].forEach(nome => criarProduto(nome));
 
 /* ========================= */
-/* TAMPAS DE MANILHA */
+/* TAMPAS ORGANIZADAS */
 /* ========================= */
 
 titulo("Tampas de Manilha");
 
-[
-"Tampa 90cm (F)",
-"Tampa 90cm (A)",
-"Tampa 1m (F)",
-"Tampa 1,10cm (F)"
-].forEach(criar);
+criarProduto("Tampa 90cm", ["Aberta", "Fechada"]);
+criarProduto("Tampa 1m", ["Aberta", "Fechada"]);
+criarProduto("Tampa 1,10cm", ["Fechada"]);
+criarProduto("Tampa 1,20cm", ["Aberta", "Fechada"]);
 
 </script>
 
