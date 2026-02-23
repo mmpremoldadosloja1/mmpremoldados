@@ -10,123 +10,176 @@
 <style>
 body{
   margin:0;
-  font-family:'Inter', Arial, sans-serif;
-  background:#f5f5f5;
+  font-family:'Inter', sans-serif;
+  background:#0f0f12;
+  color:#fff;
 }
 
+/* HEADER */
 header{
   background:#000;
-  padding:10px;
+  padding:15px 30px;
   display:flex;
   align-items:center;
-  gap:10px;
-  position:relative;
-}
-
-.menu-btn{
-  background:#222;
-  color:#fff;
-  border:none;
-  font-size:22px;
-  padding:8px 12px;
-  border-radius:6px;
-  cursor:pointer;
+  justify-content:space-between;
+  border-bottom:2px solid #0a84ff;
 }
 
 .logo img{
-  height:70px;
+  height:55px;
 }
 
 .search-box{
   flex:1;
+  margin:0 30px;
 }
 
 .search-box input{
-  width:80%;
+  width:100%;
   padding:12px;
-  border-radius:6px;
+  border-radius:8px;
   border:none;
-  font-size:15px;
+  background:#1a1a1f;
+  color:#fff;
+  font-size:14px;
+}
+
+.search-box input:focus{
+  outline:2px solid #0a84ff;
 }
 
 .cart{
   font-size:22px;
+  cursor:pointer;
+}
+
+/* BANNER */
+.banner{
+  padding:60px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  background:linear-gradient(135deg,#0f0f12,#121827);
+}
+
+.banner-text{
+  max-width:500px;
+}
+
+.banner-text h1{
+  font-size:36px;
+  margin-bottom:15px;
+  color:#0a84ff;
+}
+
+.banner-text p{
+  font-size:16px;
+  margin-bottom:25px;
+  color:#ccc;
+}
+
+.banner button{
+  background:#0a84ff;
   color:#fff;
+  border:none;
+  padding:14px 25px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
 }
 
-.menu{
-  display:none;
-  position:absolute;
-  top:65px;
-  left:10px;
-  background:#fff;
-  border-radius:10px;
-  box-shadow:0 6px 16px rgba(0,0,0,0.2);
-  overflow:hidden;
-  z-index:999;
+.banner button:hover{
+  background:#0066cc;
 }
 
-.menu a{
-  display:block;
-  padding:12px 16px;
-  color:#333;
-  text-decoration:none;
-  border-bottom:1px solid #eee;
+.banner img{
+  max-width:420px;
+  width:100%;
 }
 
-.menu a:hover{
-  background:#f0f0f0;
-}
-
+/* SECTION */
 section{
-  padding:20px;
+  padding:40px 30px;
 }
 
 h2{
-  margin-bottom:15px;
+  margin-bottom:25px;
+  border-left:4px solid #0a84ff;
+  padding-left:10px;
+  font-size:22px;
 }
 
+/* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
 }
 
+/* CARD */
 .card{
-  background:#fff;
+  background:#1a1a1f;
   border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 4px 8px rgba(0,0,0,0.08);
+  padding:20px;
   text-align:center;
   transition:0.3s;
-  text-decoration:none;
-  color:inherit;
+  cursor:pointer;
+  border:1px solid #1f1f25;
 }
 
 .card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 8px 18px rgba(0,0,0,0.15);
+  transform:translateY(-6px);
+  border:1px solid #0a84ff;
+  box-shadow:0 0 20px rgba(10,132,255,0.4);
 }
 
 .card img{
   width:100%;
-  height:260px;
+  height:160px;
   object-fit:contain;
-  background:#fff;
 }
 
 .card h3{
+  margin-top:15px;
   font-size:15px;
-  padding:12px;
-  margin:0;
 }
 
+/* PRODUTOS */
+.produto-card{
+  background:#1a1a1f;
+  border-radius:12px;
+  padding:20px;
+  text-align:center;
+  border:1px solid #1f1f25;
+  transition:0.3s;
+}
+
+.produto-card:hover{
+  border:1px solid #0a84ff;
+  box-shadow:0 0 20px rgba(10,132,255,0.4);
+}
+
+.produto-card img{
+  width:100%;
+  height:180px;
+  object-fit:contain;
+}
+
+/* RESPONSIVO */
 @media(max-width:768px){
-  .logo img{
-    height:50px;
+  .banner{
+    flex-direction:column;
+    text-align:center;
   }
-  .card img{
-    height:150px;
+
+  .banner-text{
+    margin-bottom:30px;
+  }
+
+  .search-box{
+    display:none;
   }
 }
 </style>
@@ -135,67 +188,84 @@ h2{
 <body>
 
 <header>
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
-
   <div class="logo">
-    <img src="img/logo.png" alt="MM Pré-Moldados">
+    <img src="img/logo.png">
   </div>
 
   <div class="search-box">
-    <input type="text" placeholder="Buscar produtos">
+    <input type="text" placeholder="Buscar produtos...">
   </div>
 
   <div class="cart">🛒</div>
-
-  <!-- MENU COMPLETO RESTAURADO -->
-  <div class="menu" id="menu">
-    <a href="blocos.html">Blocos/Canaletas</a>
-    <a href="manilhas.html">Manilhas</a>
-    <a href="lajes.html">Lajes Pré-Moldadas</a>
-    <a href="cobogos.html">Cobogós</a>
-    <a href="pingadeiras.html">Pingadeiras</a>
-    <a href="caixas.html">Caixas</a>
-    <a href="pisos.html">Pisos e Pisadeiras</a>
-    <a href="meio-fio.html">Meio-Fio de Jardim</a>
-    <a href="revestimento-parede.html">Revestimento de Parede</a>
-  </div>
 </header>
 
+<!-- BANNER -->
+<div class="banner">
+  <div class="banner-text">
+    <h1>Força e Resistência para sua Obra</h1>
+    <p>Blocos, Lajes, Manilhas, Pingadeiras e muito mais com qualidade garantida.</p>
+    <button onclick="window.location.href='produtos.html?categoria=blocos'">
+      Ver Produtos
+    </button>
+  </div>
+  <img src="img/banner.png">
+</div>
+
+<!-- CATEGORIAS -->
 <section>
-  <h2>🔥 Produtos</h2>
+  <h2>Categorias</h2>
+  <div class="grid">
+
+    <div class="card" onclick="location.href='produtos.html?categoria=blocos'">
+      <img src="img/categorias/blocos.jpg">
+      <h3>Blocos</h3>
+    </div>
+
+    <div class="card" onclick="location.href='produtos.html?categoria=manilhas'">
+      <img src="img/categorias/manilhas.jpg">
+      <h3>Manilhas</h3>
+    </div>
+
+    <div class="card" onclick="location.href='produtos.html?categoria=lajes'">
+      <img src="img/categorias/lajes.jpg">
+      <h3>Lajes</h3>
+    </div>
+
+    <div class="card" onclick="location.href='produtos.html?categoria=pingadeiras'">
+      <img src="img/categorias/pingadeiras.jpg">
+      <h3>Pingadeiras</h3>
+    </div>
+
+    <div class="card" onclick="location.href='produtos.html?categoria=pisos'">
+      <img src="img/categorias/pisos.jpg">
+      <h3>Pisos</h3>
+    </div>
+
+    <div class="card" onclick="location.href='produtos.html?categoria=cobogos'">
+      <img src="img/categorias/cobogos.jpg">
+      <h3>Cobogós</h3>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRODUTOS AUTOMÁTICOS -->
+<section>
+  <h2>Produtos</h2>
   <div class="grid" id="produtosHome"></div>
 </section>
 
 <script src="js/produtos.js"></script>
 
 <script>
-// MENU
-function toggleMenu(){
-  const menu = document.getElementById("menu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
-
-document.addEventListener("click", function(e){
-  if(!e.target.closest("header")){
-    document.getElementById("menu").style.display = "none";
-  }
-});
-
-// ===============================
-// HOME AUTOMÁTICA
-// ===============================
-
 const homeContainer = document.getElementById("produtosHome");
 
 Object.keys(PRODUTOS).forEach(categoria => {
-
   PRODUTOS[categoria].forEach(produto => {
 
     if(produto.imagem){
-
-      const card = document.createElement("a");
-      card.className = "card";
-      card.href = `produtos.html?categoria=${categoria}`;
+      const card = document.createElement("div");
+      card.className = "produto-card";
 
       card.innerHTML = `
         <img src="${produto.imagem}">
@@ -206,7 +276,6 @@ Object.keys(PRODUTOS).forEach(categoria => {
     }
 
   });
-
 });
 </script>
 
