@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Revestimento de Parede | MM Pré-Moldados</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- BOTÃO VOLTAR PADRÃO -->
+<a href="index.html" class="voltar">
+  <svg viewBox="0 0 24 24">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
+</a>
+
+<h1 style="text-align:center; margin-top:60px;">Revestimento de Parede</h1>
+
+<div class="grid" id="gridProdutos" style="padding:20px;"></div>
+
+<script>
+const grid = document.getElementById("gridProdutos");
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function mais(btn){
+  const qtd = btn.parentElement.querySelector('.qtd');
+  qtd.innerText = parseInt(qtd.innerText) + 1;
+}
+
+function menos(btn){
+  const qtd = btn.parentElement.querySelector('.qtd');
+  qtd.innerText = Math.max(1, parseInt(qtd.innerText) - 1);
+}
+
+function adicionarCarrinho(botao){
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const qtd = parseInt(card.querySelector('.qtd').innerText);
+
+  const existente = carrinho.find(item => item.nome === nome);
+
+  if(existente){
+    existente.qtd += qtd;
+  } else {
+    carrinho.push({ nome: nome, qtd });
+  }
+
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert("Produto adicionado ao carrinho!");
+}
+
+function criarProduto(nome){
+  grid.innerHTML += `
+  <div class="card">
+
+    <div class="imagem-placeholder">
+      Imagem será adicionada aqui
+    </div>
+
+    <h3>${nome}</h3>
+
+    <div class="contador">
+      <button onclick="menos(this)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="mais(this)">+</button>
+    </div>
+
+    <button class="btn" onclick="adicionarCarrinho(this)">
+      Adicionar ao carrinho
+    </button>
+
+  </div>`;
+}
+
+/* ========================= */
+/* PRODUTOS */
+/* ========================= */
+
+criarProduto("Revestimento 3D 30x30cm");
+criarProduto("Revestimento Pedra Lascada 50x20cm");
+
+</script>
+
+</body>
+</html>
