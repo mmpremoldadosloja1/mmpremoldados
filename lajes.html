@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Lajes Pré-Moldadas | MM Pré-Moldados</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.input-metro, .input-tamanho {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<a href="index.html" class="voltar">
+  <svg viewBox="0 0 24 24">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
+</a>
+
+<h1 style="text-align:center; margin-top:60px;">Lajes Pré-Moldadas</h1>
+
+<div class="grid" id="gridProdutos" style="padding:20px;"></div>
+
+<script>
+const grid = document.getElementById("gridProdutos");
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+/* ========================= */
+/* FUNÇÕES GERAIS */
+/* ========================= */
+
+function adicionarCarrinho(nome, qtd){
+  const existente = carrinho.find(item => item.nome === nome);
+
+  if(existente){
+    existente.qtd += qtd;
+  } else {
+    carrinho.push({ nome, qtd });
+  }
+
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert("Produto adicionado ao carrinho!");
+}
+
+function titulo(texto){
+  grid.innerHTML += `
+    <div style="grid-column:1/-1;margin-top:40px">
+      <h2>${texto}</h2>
+    </div>
+  `;
+}
+
+/* ========================= */
+/* LAJES (M²) */
+/* ========================= */
+
+function criarLaje(nome, medidas){
+  grid.innerHTML += `
+  <div class="card">
+
+    <h3>${nome}</h3>
+
+    <select class="input-metro">
+      ${medidas.map(m => `<option>${m}</option>`).join('')}
+    </select>
+
+    <input type="number" class="input-metro metro" placeholder="Digite a metragem (m²)" min="1">
+
+    <button class="btn" onclick="adicionarLaje(this, '${nome}')">
+      Adicionar ao carrinho
+    </button>
+
+  </div>`;
+}
+
+function adicionarLaje(botao, nome){
+  const card = botao.closest('.card');
+  const medida = card.querySelector('select').value;
+  const metro = parseFloat(card.querySelector('.metro').value);
+
+  if(!metro || metro <= 0){
+    alert("Digite a metragem válida.");
+    return;
+  }
+
+  const nomeFinal = nome + " - " + medida;
+  adicionarCarrinho(nomeFinal + " (m²)", metro);
+}
+
+/* ========================= */
+/* VIGAS */
+/* ========================= */
+
+function criarViga(tipo){
+  const tamanhos = [];
+
+  for(let i = 150; i <= 600; i += 10){
+    tamanhos.push((i/100).toFixed(2) + "m");
+  }
+
+  grid.innerHTML += `
+  <div class="card">
+
+    <h3>Viga ${tipo}</h3>
+
+    <select class="input-tamanho" onchange="mostrarQuantidade(this)">
+      <option value="">Selecione o tamanho</option>
+      ${tamanhos.map(t => `<option>${t}</option>`).join('')}
+    </select>
+
+    <div class="hidden area-qtd">
+      <input type="number" class="input-metro qtd" placeholder="Quantidade" min="1">
+      <button class="btn" onclick="adicionarViga(this, 'Viga ${tipo}')">
+        Adicionar ao carrinho
+      </button>
+    </div>
+
+  </div>`;
+}
+
+function mostrarQuantidade(select){
+  const area = select.closest('.card').querySelector('.area-qtd');
+  if(select.value !== ""){
+    area.classList.remove("hidden");
+  } else {
+    area.classList.add("hidden");
+  }
+}
+
+function adicionarViga(botao, nome){
+  const card = botao.closest('.card');
+  const tamanho = card.querySelector('select').value;
+  const qtd = parseInt(card.querySelector('.qtd').value);
+
+  if(!qtd || qtd <= 0){
+    alert("Digite a quantidade válida.");
+    return;
+  }
+
+  const nomeFinal = nome + " - " + tamanho;
+  adicionarCarrinho(nomeFinal, qtd);
+}
+
+/* ========================= */
+/* CONTEÚDO */
+/* ========================= */
+
+titulo("Lajes");
+
+criarLaje("Laje Teto H8", ["7,5cm x 33cm", "7,5cm x 40cm"]);
+criarLaje("Laje Piso H10", ["9cm x 33cm", "9cm x 40cm"]);
+criarLaje("Laje Piso H12", ["11cm x 33cm"]);
+
+titulo("Vigas por Unidade");
+
+criarViga("H8");
+criarViga("H10");
+
+</script>
+
+</body>
+</html>
