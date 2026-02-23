@@ -5,8 +5,7 @@
   <title>MM Premoldados</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Fonte moderna -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -17,166 +16,98 @@
     }
 
     body {
-      background: #000;
-      color: white;
-      overflow-x: hidden;
+      background: #111;
+      color: #fff;
     }
 
-    /* Fundo partículas */
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: radial-gradient(circle at top, #0a0f2c, #000000);
-    }
-
+    /* HEADER */
     header {
+      padding: 15px 20px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 8%;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0, 140, 255, 0.3);
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: 700;
-      color: #00aaff;
-      letter-spacing: 1px;
-    }
-
-    nav a {
-      margin-left: 20px;
-      text-decoration: none;
-      color: white;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #00aaff;
-      text-shadow: 0 0 10px #00aaff;
-    }
-
-    .hero {
-      height: 90vh;
-      display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      background: #111;
+      border-bottom: 1px solid #222;
+    }
+
+    .logo img {
+      width: 140px;
+      max-width: 100%;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 50px 20px;
       text-align: center;
-      padding: 0 20px;
     }
 
     .hero h1 {
-      font-size: 48px;
+      font-size: 22px;
       font-weight: 700;
-      background: linear-gradient(90deg, #00aaff, #0077ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 20px rgba(0,170,255,0.5);
+      line-height: 1.4;
+      margin-bottom: 15px;
     }
 
     .hero p {
-      margin-top: 20px;
-      font-size: 18px;
+      font-size: 14px;
       color: #ccc;
-      max-width: 600px;
+      margin-bottom: 25px;
     }
 
     .btn {
-      margin-top: 30px;
-      padding: 15px 35px;
-      border: none;
-      border-radius: 30px;
-      background: linear-gradient(90deg, #0077ff, #00aaff);
+      display: inline-block;
+      padding: 12px 25px;
+      background: #1e88e5;
+      border-radius: 6px;
+      text-decoration: none;
       color: white;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
-      cursor: pointer;
       transition: 0.3s;
-      box-shadow: 0 0 20px rgba(0,170,255,0.4);
     }
 
     .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(0,170,255,0.8);
+      background: #1565c0;
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #000;
-      border-top: 1px solid rgba(0, 140, 255, 0.2);
-      font-size: 14px;
-      color: #888;
+    /* RESPONSIVO TABLET E DESKTOP */
+    @media(min-width: 768px){
+
+      .hero {
+        padding: 80px 20px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .logo img {
+        width: 180px;
+      }
     }
+
   </style>
 </head>
 <body>
 
-  <!-- Partículas -->
-  <div id="particles-js"></div>
-
   <header>
-    <div class="logo">MM PREMOLDADOS</div>
-    <nav>
-      <a href="#">Início</a>
-      <a href="#">Produtos</a>
-      <a href="#">Contato</a>
-    </nav>
+    <div class="logo">
+      <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO -->
+      <img src="logo.png" alt="MM Premoldados">
+    </div>
   </header>
 
   <section class="hero">
-    <h1>Qualidade que constrói o futuro</h1>
+    <h1>Estrutura, resistência e qualidade em cada peça</h1>
     <p>
-      Trabalhamos com lajes, pisos, meio-fio, revestimentos e artefatos de concreto com alto padrão de acabamento.
+      Produzimos artefatos de concreto com alto padrão de acabamento e durabilidade para sua obra.
     </p>
-    <button class="btn">Ver Produtos</button>
+    <a href="#" class="btn">Conhecer a Empresa</a>
   </section>
-
-  <footer>
-    © 2026 MM Premoldados - Todos os direitos reservados
-  </footer>
-
-  <!-- Biblioteca partículas -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
-  <script>
-    particlesJS("particles-js", {
-      "particles": {
-        "number": {
-          "value": 80
-        },
-        "color": {
-          "value": "#00aaff"
-        },
-        "shape": {
-          "type": "circle"
-        },
-        "opacity": {
-          "value": 0.5
-        },
-        "size": {
-          "value": 3
-        },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#0077ff",
-          "opacity": 0.4,
-          "width": 1
-        },
-        "move": {
-          "enable": true,
-          "speed": 3
-        }
-      }
-    });
-  </script>
 
 </body>
 </html>
