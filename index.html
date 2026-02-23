@@ -1,113 +1,258 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>MM Premoldados</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MM Pré-Moldados</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+<style>
+body{
+  margin:0;
+  font-family:'Inter', Arial, sans-serif;
+  background:#0f0f0f;
+  color:#fff;
+}
 
-    body {
-      background: #111;
-      color: #fff;
-    }
+/* ===== HEADER ===== */
+header{
+  background:#000;
+  padding:10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  position:relative;
+}
 
-    /* HEADER */
-    header {
-      padding: 15px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #111;
-      border-bottom: 1px solid #222;
-    }
+.menu-btn{
+  background:#111;
+  color:#00aaff;
+  border:none;
+  font-size:22px;
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
 
-    .logo img {
-      width: 140px;
-      max-width: 100%;
-    }
+.logo img{
+  height:60px;
+}
 
-    /* HERO */
-    .hero {
-      padding: 50px 20px;
-      text-align: center;
-    }
+.search-box{
+  flex:1;
+}
 
-    .hero h1 {
-      font-size: 22px;
-      font-weight: 700;
-      line-height: 1.4;
-      margin-bottom: 15px;
-    }
+.search-box input{
+  width:100%;
+  padding:10px;
+  border-radius:6px;
+  border:none;
+  font-size:14px;
+}
 
-    .hero p {
-      font-size: 14px;
-      color: #ccc;
-      margin-bottom: 25px;
-    }
+.cart{
+  font-size:20px;
+  color:#00aaff;
+}
 
-    .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      background: #1e88e5;
-      border-radius: 6px;
-      text-decoration: none;
-      color: white;
-      font-size: 14px;
-      font-weight: 600;
-      transition: 0.3s;
-    }
+/* MENU */
+.menu{
+  display:none;
+  position:absolute;
+  top:65px;
+  left:10px;
+  background:#111;
+  border-radius:10px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.4);
+  overflow:hidden;
+  z-index:999;
+}
 
-    .btn:hover {
-      background: #1565c0;
-    }
+.menu a{
+  display:block;
+  padding:12px 16px;
+  color:#fff;
+  text-decoration:none;
+  border-bottom:1px solid #222;
+}
 
-    /* RESPONSIVO TABLET E DESKTOP */
-    @media(min-width: 768px){
+.menu a:hover{
+  background:#00aaff;
+  color:#000;
+}
 
-      .hero {
-        padding: 80px 20px;
-      }
+/* ===== SEÇÕES ===== */
+section{
+  padding:20px;
+}
 
-      .hero h1 {
-        font-size: 32px;
-      }
+h2{
+  margin-bottom:10px;
+  color:#00aaff;
+}
 
-      .hero p {
-        font-size: 16px;
-      }
+/* ===== BOTÃO PRODUTOS ===== */
+.btn-produtos{
+  background:#00aaff;
+  color:#000;
+  padding:12px 20px;
+  border-radius:8px;
+  display:inline-block;
+  font-weight:600;
+  cursor:pointer;
+  margin-bottom:20px;
+}
 
-      .logo img {
-        width: 180px;
-      }
-    }
+.btn-produtos:hover{
+  background:#0088cc;
+}
 
-  </style>
+/* ===== GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+}
+
+.card{
+  background:#1a1a1a;
+  border-radius:12px;
+  overflow:hidden;
+  text-align:center;
+  transition:0.3s;
+  text-decoration:none;
+  color:#fff;
+  border:1px solid #222;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  border:1px solid #00aaff;
+}
+
+.card img{
+  width:100%;
+  height:150px;
+  object-fit:contain;
+  background:#fff;
+}
+
+.card h3{
+  font-size:14px;
+  padding:10px;
+  margin:0;
+}
+
+/* SEÇÃO CATEGORIAS OCULTA */
+#categorias{
+  display:none;
+  margin-top:20px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .logo img{
+    height:45px;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <header>
-    <div class="logo">
-      <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO -->
-      <img src="logo.png" alt="MM Premoldados">
-    </div>
-  </header>
+<header>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
-  <section class="hero">
-    <h1>Estrutura, resistência e qualidade em cada peça</h1>
-    <p>
-      Produzimos artefatos de concreto com alto padrão de acabamento e durabilidade para sua obra.
-    </p>
-    <a href="#" class="btn">Conhecer a Empresa</a>
-  </section>
+  <div class="logo">
+    <img src="img/logo.png" alt="MM Pré-Moldados">
+  </div>
 
+  <div class="search-box">
+    <input type="text" placeholder="Buscar produtos">
+  </div>
+
+  <div class="cart">🛒</div>
+
+  <div class="menu" id="menu">
+    <a href="blocos.html">Blocos/Canaletas</a>
+    <a href="manilhas.html">Manilhas</a>
+    <a href="lajes.html">Lajes Pré-Moldadas</a>
+    <a href="cobogos.html">Cobogós</a>
+    <a href="pingadeiras.html">Pingadeiras</a>
+    <a href="caixas.html">Caixas</a>
+    <a href="pisos.html">Pisos e Pisadeiras</a>
+    <a href="meio-fio.html">Meio-fio de Jardim</a>
+    <a href="revestimento-parede.html">Revestimento de Parede</a>
+  </div>
+</header>
+
+<section>
+  <h2>🔥 Produtos</h2>
+
+  <div class="btn-produtos" onclick="toggleCategorias()">
+    Ver Todas as Categorias
+  </div>
+
+  <div id="categorias" class="grid">
+
+    <a href="blocos.html" class="card">
+      <h3>Blocos / Canaletas</h3>
+    </a>
+
+    <a href="manilhas.html" class="card">
+      <h3>Manilhas</h3>
+    </a>
+
+    <a href="lajes.html" class="card">
+      <h3>Lajes Pré-Moldadas</h3>
+    </a>
+
+    <a href="cobogos.html" class="card">
+      <h3>Cobogós</h3>
+    </a>
+
+    <a href="pingadeiras.html" class="card">
+      <h3>Pingadeiras</h3>
+    </a>
+
+    <a href="caixas.html" class="card">
+      <h3>Caixas</h3>
+    </a>
+
+    <a href="pisos.html" class="card">
+      <h3>Pisos e Pisadeiras</h3>
+    </a>
+
+    <a href="meio-fio.html" class="card">
+      <h3>Meio-fio de Jardim</h3>
+    </a>
+
+    <a href="revestimento-parede.html" class="card">
+      <h3>Revestimento de Parede</h3>
+    </a>
+
+  </div>
+</section>
+
+<script>
+function toggleMenu(){
+  const menu = document.getElementById("menu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+function toggleCategorias(){
+  const cat = document.getElementById("categorias");
+  cat.style.display = cat.style.display === "grid" ? "none" : "grid";
+}
+
+document.addEventListener("click", function(e){
+  if(!e.target.closest("header")){
+    document.getElementById("menu").style.display = "none";
+  }
+});
+</script>
+
+<script src="produtos.js"></script>
 </body>
 </html>
