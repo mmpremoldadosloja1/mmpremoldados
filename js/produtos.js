@@ -1,58 +1,86 @@
-const produtos = [
+// ===============================
+// BANCO CENTRAL DE PRODUTOS
+// MM PRÉ-MOLDADOS
+// ===============================
 
-  /* ================= COBÓGOS ================= */
-  {
-    nome: "Cobogó Anti-Chuva 40x40",
-    imagem: "img/cobogo-anti-chuva-40.jpg",
-    categoria: "cobogos",
-    destaque: true,
-    novidade: false
-  },
-  {
-    nome: "Cobogó 16 Furos 40x40",
-    imagem: "img/cobogo-16-furos-40.jpg",
-    categoria: "cobogos",
-    destaque: true,
-    novidade: false
-  },
-  {
-    nome: "Cobogó Flor 40x40",
-    imagem: "img/cobogo-flor-40.jpg",
-    categoria: "cobogos",
-    destaque: false,
-    novidade: true
-  },
-  {
-    nome: "Cobogó Estrela 30x30",
-    imagem: "img/cobogo-estrela-30.jpg",
-    categoria: "cobogos",
-    destaque: false,
-    novidade: true
-  },
-
-  /* ================= MANILHAS ================= */
-  {
-    nome: "Manilha 90cm x 50cm",
-    imagem: "img/manilhas/manilha-90x50.jpg",
-    categoria: "manilhas",
-    destaque: true,
-    novidade: false
-  },
-  {
-    nome: "Manilha 110cm x 50cm",
-    imagem: "img/manilhas/manilha-110x50.jpg",
-    categoria: "manilhas",
-    destaque: false,
-    novidade: false
-  },
+const PRODUTOS = {
 
   /* ================= PINGADEIRAS ================= */
-  {
-    nome: "Pingadeira 1 Metro",
-    imagem: "img/pingadeiras/pingadeira-1m.jpg",
-    categoria: "pingadeiras",
-    destaque: true,
-    novidade: false
-  }
 
-];
+  pingadeiras: [
+    {
+      nome: "Estilo Casinha",
+      medidas: [
+        "1m x 20cm",
+        "1m x 23cm",
+        "1m x 25cm",
+        "1m x 30cm"
+      ],
+      imagem: "img/pingadeiras/casinha.jpg"
+    },
+    {
+      nome: "Estilo Reta",
+      medidas: [
+        "1m x 20cm",
+        "1m x 23cm",
+        "1m x 25cm",
+        "1m x 30cm",
+        "1m x 40cm"
+      ],
+      imagem: "img/pingadeiras/reta.jpg"
+    },
+    {
+      nome: "Estilo Degraus",
+      medidas: [
+        "1m x 20cm"
+      ],
+      imagem: "img/pingadeiras/degraus.jpg"
+    }
+  ],
+
+  /* ================= MEIO-FIO DE JARDIM ================= */
+
+  meio_fio_jardim: [
+    {
+      nome: "Meio-Fio Arredondado 80x25x8cm",
+      imagem: "img/meio-fio-jardim/arredondado.jpg"
+    },
+    {
+      nome: "Meio-Fio Cordão 80x25x4cm",
+      imagem: "img/meio-fio-jardim/cordao.jpg"
+    },
+    {
+      nome: "Guia de Jardim Ondulado 80x20x4cm",
+      imagem: "img/meio-fio-jardim/ondulado.jpg"
+    }
+  ],
+
+  /* ================= REVESTIMENTO DE PAREDE ================= */
+
+  revestimento_parede: [
+    {
+      nome: "Revestimento 3D 30x30cm",
+      imagem: "img/revestimento/3d-30x30.jpg"
+    },
+    {
+      nome: "Revestimento Pedra Lascada 50x20cm",
+      imagem: "img/revestimento/pedra-lascada.jpg"
+    }
+  ],
+
+  /* ================= LAJES PRÉ-MOLDADAS ================= */
+
+  lajes: [
+    {
+      nome: "Laje Teto H8",
+      tipo: "metragem",
+      medidas: ["7,5cm x 33cm", "7,5cm x 40cm"]
+    },
+    {
+      nome: "Laje Piso H10",
+      tipo: "metragem",
+      medidas: ["9cm x 33cm", "9cm x 40cm"]
+    }
+  ]
+
+};
