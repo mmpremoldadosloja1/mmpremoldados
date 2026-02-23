@@ -9,13 +9,16 @@
 
 <body>
 
+<!-- BOTÃO VOLTAR PADRÃO -->
 <a href="index.html" class="voltar">
-  ← Voltar
+  <svg viewBox="0 0 24 24">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
 </a>
 
-<h1>Pisos e Pisadeiras</h1>
+<h1 style="text-align:center; margin-top:60px;">Pisos e Pisadeiras</h1>
 
-<div class="grid" id="gridProdutos"></div>
+<div class="grid" id="gridProdutos" style="padding:20px;"></div>
 
 <script>
 const grid = document.getElementById("gridProdutos");
@@ -54,7 +57,7 @@ function adicionarCarrinho(botao){
 
 function titulo(texto){
   grid.innerHTML += `
-    <div style="grid-column:1/-1;margin-top:30px">
+    <div style="grid-column:1/-1;margin-top:40px">
       <h2>${texto}</h2>
     </div>
   `;
