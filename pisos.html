@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Pisos e Pisadeiras | MM Pré-Moldados</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<a href="index.html" class="voltar">
+  ← Voltar
+</a>
+
+<h1>Pisos e Pisadeiras</h1>
+
+<div class="grid" id="gridProdutos"></div>
+
+<script>
+const grid = document.getElementById("gridProdutos");
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function mais(btn){
+  const qtd = btn.parentElement.querySelector('.qtd');
+  qtd.innerText = parseInt(qtd.innerText) + 1;
+}
+
+function menos(btn){
+  const qtd = btn.parentElement.querySelector('.qtd');
+  qtd.innerText = Math.max(1, parseInt(qtd.innerText) - 1);
+}
+
+function adicionarCarrinho(botao){
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const select = card.querySelector('select');
+  const variacao = select ? select.value : "";
+  const qtd = parseInt(card.querySelector('.qtd').innerText);
+
+  const nomeFinal = variacao ? nome + " - " + variacao : nome;
+
+  const existente = carrinho.find(item => item.nome === nomeFinal);
+
+  if(existente){
+    existente.qtd += qtd;
+  } else {
+    carrinho.push({ nome: nomeFinal, qtd });
+  }
+
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert("Produto adicionado ao carrinho!");
+}
+
+function titulo(texto){
+  grid.innerHTML += `
+    <div style="grid-column:1/-1;margin-top:30px">
+      <h2>${texto}</h2>
+    </div>
+  `;
+}
+
+function criarProduto(nome, opcoes = null){
+  grid.innerHTML += `
+  <div class="card">
+
+    <div class="imagem-placeholder">
+      Imagem será adicionada aqui
+    </div>
+
+    <h3>${nome}</h3>
+
+    ${opcoes ? `
+      <select style="margin:10px 0;padding:6px;border-radius:6px;border:1px solid #ccc;width:100%;">
+        ${opcoes.map(op => `<option>${op}</option>`).join('')}
+      </select>
+    ` : ''}
+
+    <div class="contador">
+      <button onclick="menos(this)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="mais(this)">+</button>
+    </div>
+
+    <button class="btn" onclick="adicionarCarrinho(this)">
+      Adicionar ao carrinho
+    </button>
+
+  </div>`;
+}
+
+/* ========================= */
+/* 🔥 PISOS */
+/* ========================= */
+
+titulo("Pisos");
+
+criarProduto("Piso Quadrado Liso", [
+  "40x40cm",
+  "50x50cm",
+  "60x60cm"
+]);
+
+criarProduto("Piso Copacabana 50x50cm");
+criarProduto("Piso Trabalhado em Flor 45x45cm");
+criarProduto("Piso em X");
+
+/* ========================= */
+/* 🌿 PISADEIRAS */
+/* ========================= */
+
+titulo("Pisadeiras");
+
+criarProduto("Pezão de Jardim 50cm");
+criarProduto("Círculo Estelar 50cm");
+criarProduto("Pisadeira Xis 50cm");
+
+/* ========================= */
+/* ⭐ CONJUNTOS */
+/* ========================= */
+
+titulo("Conjuntos");
+
+criarProduto("Conjunto Trevo Oriente 60x60cm");
+criarProduto("Conjunto Passarela Estrelado 70x70cm");
+criarProduto("Conjunto Passarela Estelar 140x140cm");
+
+</script>
+
+</body>
+</html>
