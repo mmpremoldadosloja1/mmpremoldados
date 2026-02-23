@@ -46,12 +46,16 @@ header{
   height:55px;
 }
 
+/* ===== BUSCA AJUSTADA ===== */
 .search-box{
   flex:1;
+  display:flex;
+  justify-content:center;
 }
 
 .search-box input{
   width:100%;
+  max-width:500px;
   padding:10px;
   border-radius:6px;
   border:none;
@@ -64,9 +68,12 @@ header{
   color:#aaa;
 }
 
+/* ===== CARRINHO AJUSTADO ===== */
 .cart{
   font-size:20px;
   color:#00aaff;
+  min-width:35px;
+  text-align:center;
 }
 
 /* ===== MENU ===== */
@@ -153,7 +160,7 @@ h2{
   margin:0;
 }
 
-/* ===== MOBILE AJUSTES ===== */
+/* ===== MOBILE ===== */
 @media(max-width:768px){
 
   header{
