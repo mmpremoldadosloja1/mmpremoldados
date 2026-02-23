@@ -11,18 +11,19 @@
 body{
   margin:0;
   font-family:'Inter', Arial, sans-serif;
-  background:#0f0f0f;
+  background:#0e0e0e;
   color:#fff;
 }
 
 /* ===== HEADER ===== */
 header{
   background:#000;
-  padding:10px;
+  padding:8px 12px;
   display:flex;
   align-items:center;
   gap:10px;
   position:relative;
+  box-shadow:0 2px 10px rgba(0,0,0,0.5);
 }
 
 .menu-btn{
@@ -33,10 +34,16 @@ header{
   padding:8px 12px;
   border-radius:6px;
   cursor:pointer;
+  transition:0.2s;
+}
+
+.menu-btn:hover{
+  background:#00aaff;
+  color:#000;
 }
 
 .logo img{
-  height:60px;
+  height:55px;
 }
 
 .search-box{
@@ -49,6 +56,12 @@ header{
   border-radius:6px;
   border:none;
   font-size:14px;
+  background:#1a1a1a;
+  color:#fff;
+}
+
+.search-box input::placeholder{
+  color:#aaa;
 }
 
 .cart{
@@ -56,7 +69,7 @@ header{
   color:#00aaff;
 }
 
-/* MENU */
+/* ===== MENU ===== */
 .menu{
   display:none;
   position:absolute;
@@ -64,9 +77,10 @@ header{
   left:10px;
   background:#111;
   border-radius:10px;
-  box-shadow:0 6px 16px rgba(0,0,0,0.4);
+  box-shadow:0 6px 16px rgba(0,0,0,0.6);
   overflow:hidden;
   z-index:999;
+  min-width:220px;
 }
 
 .menu a{
@@ -75,6 +89,7 @@ header{
   color:#fff;
   text-decoration:none;
   border-bottom:1px solid #222;
+  font-size:14px;
 }
 
 .menu a:hover{
@@ -90,22 +105,14 @@ section{
 h2{
   margin-bottom:10px;
   color:#00aaff;
+  font-weight:700;
 }
 
-/* ===== BOTÃO PRODUTOS ===== */
-.btn-produtos{
-  background:#00aaff;
-  color:#000;
-  padding:12px 20px;
-  border-radius:8px;
+.ver-todos{
+  font-size:13px;
+  color:#aaa;
+  margin-bottom:15px;
   display:inline-block;
-  font-weight:600;
-  cursor:pointer;
-  margin-bottom:20px;
-}
-
-.btn-produtos:hover{
-  background:#0088cc;
 }
 
 /* ===== GRID ===== */
@@ -115,6 +122,7 @@ h2{
   gap:15px;
 }
 
+/* ===== CARD ===== */
 .card{
   background:#1a1a1a;
   border-radius:12px;
@@ -129,11 +137,12 @@ h2{
 .card:hover{
   transform:translateY(-4px);
   border:1px solid #00aaff;
+  box-shadow:0 6px 16px rgba(0,170,255,0.2);
 }
 
 .card img{
   width:100%;
-  height:150px;
+  height:160px;
   object-fit:contain;
   background:#fff;
 }
@@ -144,17 +153,26 @@ h2{
   margin:0;
 }
 
-/* SEÇÃO CATEGORIAS OCULTA */
-#categorias{
-  display:none;
-  margin-top:20px;
-}
-
-/* MOBILE */
+/* ===== MOBILE AJUSTES ===== */
 @media(max-width:768px){
+
+  header{
+    padding:6px 8px;
+  }
+
   .logo img{
     height:45px;
   }
+
+  .search-box input{
+    padding:8px;
+    font-size:13px;
+  }
+
+  .card img{
+    height:130px;
+  }
+
 }
 </style>
 </head>
@@ -181,55 +199,55 @@ h2{
     <a href="cobogos.html">Cobogós</a>
     <a href="pingadeiras.html">Pingadeiras</a>
     <a href="caixas.html">Caixas</a>
-    <a href="pisos.html">Pisos e Pisadeiras</a>
+    <a href="pisos.html">Pisos e pisadeiras</a>
     <a href="meio-fio.html">Meio-fio de Jardim</a>
     <a href="revestimento-parede.html">Revestimento de Parede</a>
   </div>
 </header>
 
 <section>
-  <h2>🔥 Produtos</h2>
+  <h2>🔥 Produtos em Destaque</h2>
+  <span class="ver-todos">Ver todos</span>
 
-  <div class="btn-produtos" onclick="toggleCategorias()">
-    Ver Todas as Categorias
-  </div>
+  <div class="grid">
 
-  <div id="categorias" class="grid">
-
-    <a href="blocos.html" class="card">
-      <h3>Blocos / Canaletas</h3>
-    </a>
-
-    <a href="manilhas.html" class="card">
-      <h3>Manilhas</h3>
-    </a>
-
-    <a href="lajes.html" class="card">
-      <h3>Lajes Pré-Moldadas</h3>
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-anti-chuva-40.jpg">
+      <h3>Cobogó Anti-Chuva 40x40</h3>
     </a>
 
     <a href="cobogos.html" class="card">
-      <h3>Cobogós</h3>
+      <img src="img/cobogo-16-furos-40.jpg">
+      <h3>Cobogó 16 Furos 40x40</h3>
+    </a>
+
+    <a href="manilhas.html" class="card">
+      <img src="img/manilhas/manilha-90x50.jpg">
+      <h3>Manilha 90cm x 50cm</h3>
     </a>
 
     <a href="pingadeiras.html" class="card">
-      <h3>Pingadeiras</h3>
+      <img src="img/pingadeiras/pingadeira-1m.jpg">
+      <h3>Pingadeira 1 Metro</h3>
     </a>
 
-    <a href="caixas.html" class="card">
-      <h3>Caixas</h3>
+  </div>
+</section>
+
+<section>
+  <h2>✨ Novidades</h2>
+  <span class="ver-todos">Ver todas</span>
+
+  <div class="grid">
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-flor-40.jpg">
+      <h3>Cobogó Flor 40x40</h3>
     </a>
 
-    <a href="pisos.html" class="card">
-      <h3>Pisos e Pisadeiras</h3>
-    </a>
-
-    <a href="meio-fio.html" class="card">
-      <h3>Meio-fio de Jardim</h3>
-    </a>
-
-    <a href="revestimento-parede.html" class="card">
-      <h3>Revestimento de Parede</h3>
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-estrela-30.jpg">
+      <h3>Cobogó Estrela 30x30</h3>
     </a>
 
   </div>
@@ -239,11 +257,6 @@ h2{
 function toggleMenu(){
   const menu = document.getElementById("menu");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
-
-function toggleCategorias(){
-  const cat = document.getElementById("categorias");
-  cat.style.display = cat.style.display === "grid" ? "none" : "grid";
 }
 
 document.addEventListener("click", function(e){
