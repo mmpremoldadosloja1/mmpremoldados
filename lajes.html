@@ -5,21 +5,42 @@
 <title>Lajes Pré-Moldadas | MM Pré-Moldados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
+
 <style>
-.input-metro, .input-tamanho {
-  width: 100%;
-  padding: 8px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+.laje-box{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:30px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
 }
 
-.hidden {
-  display: none;
+.laje-box h2{
+  margin-bottom:15px;
+}
+
+select, input{
+  padding:8px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  margin-top:10px;
+  width:100%;
+}
+
+.hidden{
+  display:none;
+}
+
+.viga-opcoes{
+  margin-top:15px;
+}
+
+.btn{
+  margin-top:15px;
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <a href="index.html" class="voltar">
@@ -30,142 +51,124 @@
 
 <h1 style="text-align:center; margin-top:60px;">Lajes Pré-Moldadas</h1>
 
-<div class="grid" id="gridProdutos" style="padding:20px;"></div>
+<div style="padding:20px; max-width:800px; margin:auto;">
+
+<!-- LAJE TETO H8 -->
+<div class="laje-box">
+  <h2>Laje Teto H8</h2>
+
+  <label>Selecionar medida:</label>
+  <select id="medidaH8">
+    <option value="">Escolher...</option>
+    <option>7,5cm x 33cm</option>
+    <option>7,5cm x 40cm</option>
+  </select>
+
+  <div id="metragemH8" class="hidden">
+    <label>Adicionar metragem (m²):</label>
+    <input type="number" min="1" id="qtdH8">
+    <button class="btn" onclick="addLaje('Laje Teto H8', 'medidaH8', 'qtdH8')">Adicionar ao carrinho</button>
+  </div>
+</div>
+
+<!-- LAJE PISO H10 -->
+<div class="laje-box">
+  <h2>Laje Piso H10</h2>
+
+  <label>Selecionar medida:</label>
+  <select id="medidaH10">
+    <option value="">Escolher...</option>
+    <option>9cm x 33cm</option>
+    <option>9cm x 40cm</option>
+  </select>
+
+  <div id="metragemH10" class="hidden">
+    <label>Adicionar metragem (m²):</label>
+    <input type="number" min="1" id="qtdH10">
+    <button class="btn" onclick="addLaje('Laje Piso H10', 'medidaH10', 'qtdH10')">Adicionar ao carrinho</button>
+  </div>
+</div>
+
+<!-- VIGA POR UNIDADE -->
+<div class="laje-box">
+  <h2>Viga por Unidade</h2>
+
+  <label>Selecionar modelo:</label>
+  <select id="tipoViga">
+    <option value="">Escolher...</option>
+    <option>H8</option>
+    <option>H10</option>
+  </select>
+
+  <div id="vigaTamanhoBox" class="hidden">
+    <label>Digite o tamanho (ex: 1.50):</label>
+    <input type="number" step="0.10" min="1.5" max="6" id="tamanhoViga">
+
+    <div id="vigaQtdBox" class="hidden viga-opcoes">
+      <label>Quantidade:</label>
+      <input type="number" min="1" id="qtdViga">
+      <button class="btn" onclick="addViga()">Adicionar ao carrinho</button>
+    </div>
+  </div>
+</div>
+
+</div>
 
 <script>
-const grid = document.getElementById("gridProdutos");
+
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* ========================= */
-/* FUNÇÕES GERAIS */
-/* ========================= */
+/* MOSTRAR METRAGEM QUANDO ESCOLHER */
+document.getElementById("medidaH8").addEventListener("change", function(){
+  document.getElementById("metragemH8").classList.toggle("hidden", this.value === "");
+});
 
-function adicionarCarrinho(nome, qtd){
-  const existente = carrinho.find(item => item.nome === nome);
+document.getElementById("medidaH10").addEventListener("change", function(){
+  document.getElementById("metragemH10").classList.toggle("hidden", this.value === "");
+});
 
-  if(existente){
-    existente.qtd += qtd;
+/* MOSTRAR TAMANHO VIGA */
+document.getElementById("tipoViga").addEventListener("change", function(){
+  document.getElementById("vigaTamanhoBox").classList.toggle("hidden", this.value === "");
+});
+
+/* MOSTRAR QUANTIDADE APÓS DIGITAR TAMANHO */
+document.getElementById("tamanhoViga").addEventListener("input", function(){
+  const tamanho = parseFloat(this.value);
+  if(tamanho >= 1.5 && tamanho <= 6){
+    document.getElementById("vigaQtdBox").classList.remove("hidden");
   } else {
-    carrinho.push({ nome, qtd });
+    document.getElementById("vigaQtdBox").classList.add("hidden");
   }
+});
 
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert("Produto adicionado ao carrinho!");
+/* ADICIONAR LAJE */
+function addLaje(nome, selectId, qtdId){
+  const medida = document.getElementById(selectId).value;
+  const qtd = document.getElementById(qtdId).value;
+
+  if(!medida || !qtd) return alert("Preencha todos os campos!");
+
+  const produto = `${nome} - ${medida} - ${qtd}m²`;
+
+  carrinho.push({nome: produto, qtd:1});
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  alert("Adicionado ao carrinho!");
 }
 
-function titulo(texto){
-  grid.innerHTML += `
-    <div style="grid-column:1/-1;margin-top:40px">
-      <h2>${texto}</h2>
-    </div>
-  `;
+/* ADICIONAR VIGA */
+function addViga(){
+  const tipo = document.getElementById("tipoViga").value;
+  const tamanho = document.getElementById("tamanhoViga").value;
+  const qtd = document.getElementById("qtdViga").value;
+
+  if(!tipo || !tamanho || !qtd) return alert("Preencha todos os campos!");
+
+  const produto = `Viga ${tipo} - ${tamanho}m`;
+  carrinho.push({nome: produto, qtd: parseInt(qtd)});
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  alert("Adicionado ao carrinho!");
 }
-
-/* ========================= */
-/* LAJES (M²) */
-/* ========================= */
-
-function criarLaje(nome, medidas){
-  grid.innerHTML += `
-  <div class="card">
-
-    <h3>${nome}</h3>
-
-    <select class="input-metro">
-      ${medidas.map(m => `<option>${m}</option>`).join('')}
-    </select>
-
-    <input type="number" class="input-metro metro" placeholder="Digite a metragem (m²)" min="1">
-
-    <button class="btn" onclick="adicionarLaje(this, '${nome}')">
-      Adicionar ao carrinho
-    </button>
-
-  </div>`;
-}
-
-function adicionarLaje(botao, nome){
-  const card = botao.closest('.card');
-  const medida = card.querySelector('select').value;
-  const metro = parseFloat(card.querySelector('.metro').value);
-
-  if(!metro || metro <= 0){
-    alert("Digite a metragem válida.");
-    return;
-  }
-
-  const nomeFinal = nome + " - " + medida;
-  adicionarCarrinho(nomeFinal + " (m²)", metro);
-}
-
-/* ========================= */
-/* VIGAS */
-/* ========================= */
-
-function criarViga(tipo){
-  const tamanhos = [];
-
-  for(let i = 150; i <= 600; i += 10){
-    tamanhos.push((i/100).toFixed(2) + "m");
-  }
-
-  grid.innerHTML += `
-  <div class="card">
-
-    <h3>Viga ${tipo}</h3>
-
-    <select class="input-tamanho" onchange="mostrarQuantidade(this)">
-      <option value="">Selecione o tamanho</option>
-      ${tamanhos.map(t => `<option>${t}</option>`).join('')}
-    </select>
-
-    <div class="hidden area-qtd">
-      <input type="number" class="input-metro qtd" placeholder="Quantidade" min="1">
-      <button class="btn" onclick="adicionarViga(this, 'Viga ${tipo}')">
-        Adicionar ao carrinho
-      </button>
-    </div>
-
-  </div>`;
-}
-
-function mostrarQuantidade(select){
-  const area = select.closest('.card').querySelector('.area-qtd');
-  if(select.value !== ""){
-    area.classList.remove("hidden");
-  } else {
-    area.classList.add("hidden");
-  }
-}
-
-function adicionarViga(botao, nome){
-  const card = botao.closest('.card');
-  const tamanho = card.querySelector('select').value;
-  const qtd = parseInt(card.querySelector('.qtd').value);
-
-  if(!qtd || qtd <= 0){
-    alert("Digite a quantidade válida.");
-    return;
-  }
-
-  const nomeFinal = nome + " - " + tamanho;
-  adicionarCarrinho(nomeFinal, qtd);
-}
-
-/* ========================= */
-/* CONTEÚDO */
-/* ========================= */
-
-titulo("Lajes");
-
-criarLaje("Laje Teto H8", ["7,5cm x 33cm", "7,5cm x 40cm"]);
-criarLaje("Laje Piso H10", ["9cm x 33cm", "9cm x 40cm"]);
-criarLaje("Laje Piso H12", ["11cm x 33cm"]);
-
-titulo("Vigas por Unidade");
-
-criarViga("H8");
-criarViga("H10");
 
 </script>
 
