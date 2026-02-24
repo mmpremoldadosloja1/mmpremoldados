@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MM Pré-Moldados</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
 body{
   margin:0;
@@ -6,9 +16,9 @@ body{
   color:#fff;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header{
-  background:#e0e0e0; /* CINZA CLARO */
+  background:#e0e0e0;
   padding:8px 12px;
   display:flex;
   align-items:center;
@@ -25,7 +35,6 @@ header{
   padding:8px 12px;
   border-radius:6px;
   cursor:pointer;
-  transition:0.2s;
 }
 
 .menu-btn:hover{
@@ -37,7 +46,7 @@ header{
   height:55px;
 }
 
-/* ===== BUSCA ===== */
+/* BUSCA */
 .search-box{
   flex:1;
   display:flex;
@@ -55,11 +64,7 @@ header{
   color:#000;
 }
 
-.search-box input::placeholder{
-  color:#777;
-}
-
-/* ===== CARRINHO ===== */
+/* CARRINHO */
 .cart{
   font-size:20px;
   color:#005f88;
@@ -67,7 +72,7 @@ header{
   text-align:center;
 }
 
-/* ===== MENU ===== */
+/* MENU */
 .menu{
   display:none;
   position:absolute;
@@ -87,55 +92,48 @@ header{
   color:#000;
   text-decoration:none;
   border-bottom:1px solid #ccc;
-  font-size:14px;
 }
 
 .menu a:hover{
   background:#00aaff;
-  color:#000;
 }
 
-/* ===== SEÇÕES ===== */
+/* SEÇÕES */
 section{
   padding:20px;
 }
 
 h2{
-  margin-bottom:10px;
   color:#00aaff;
-  font-weight:700;
 }
 
 .ver-todos{
   font-size:13px;
   color:#aaa;
-  margin-bottom:15px;
-  display:inline-block;
 }
 
-/* ===== GRID ===== */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
   gap:15px;
 }
 
-/* ===== CARD ===== */
+/* CARD */
 .card{
   background:#1a1a1a;
   border-radius:12px;
   overflow:hidden;
   text-align:center;
-  transition:0.3s;
   text-decoration:none;
   color:#fff;
   border:1px solid #222;
+  transition:0.3s;
 }
 
 .card:hover{
   transform:translateY(-4px);
-  border:1px solid #00aaff;
-  box-shadow:0 6px 16px rgba(0,170,255,0.2);
+  border-color:#00aaff;
 }
 
 .card img{
@@ -151,30 +149,120 @@ h2{
   margin:0;
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media(max-width:768px){
-
-  header{
-    padding:6px 8px;
-  }
 
   .logo img{
     height:45px;
-  }
-
-  .search-box input{
-    padding:8px;
-    font-size:13px;
   }
 
   .card img{
     height:130px;
   }
 
-  /* 🔥 2 PRODUTOS POR LINHA NO CELULAR */
   .grid{
     grid-template-columns: repeat(2, 1fr);
   }
 
 }
 </style>
+</head>
+
+<body>
+
+<header>
+
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+  <div class="logo">
+    <img src="img/logo.png" alt="MM Pré-Moldados">
+  </div>
+
+  <div class="search-box">
+    <input type="text" placeholder="Buscar produtos">
+  </div>
+
+  <div class="cart">🛒</div>
+
+  <div class="menu" id="menu">
+    <a href="blocos.html">Blocos/Canaletas</a>
+    <a href="manilhas.html">Manilhas</a>
+    <a href="lajes.html">Lajes</a>
+    <a href="cobogos.html">Cobogós</a>
+    <a href="pingadeiras.html">Pingadeiras</a>
+    <a href="caixas.html">Caixas</a>
+    <a href="pisos.html">Pisos</a>
+    <a href="meio-fio.html">Meio-fio</a>
+    <a href="revestimento-parede.html">Revestimento</a>
+  </div>
+
+</header>
+
+<section>
+
+  <h2>🔥 Produtos em Destaque</h2>
+  <span class="ver-todos">Ver todos</span>
+
+  <div class="grid">
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-anti-chuva-40.jpg">
+      <h3>Cobogó Anti-Chuva 40x40</h3>
+    </a>
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-16-furos-40.jpg">
+      <h3>Cobogó 16 Furos 40x40</h3>
+    </a>
+
+    <a href="manilhas.html" class="card">
+      <img src="img/manilhas/manilha-90x50.jpg">
+      <h3>Manilha 90x50</h3>
+    </a>
+
+    <a href="pingadeiras.html" class="card">
+      <img src="img/pingadeiras/pingadeira-1m.jpg">
+      <h3>Pingadeira 1m</h3>
+    </a>
+
+  </div>
+
+</section>
+
+<section>
+
+  <h2>✨ Novidades</h2>
+
+  <div class="grid">
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-flor-40.jpg">
+      <h3>Cobogó Flor</h3>
+    </a>
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-estrela-30.jpg">
+      <h3>Cobogó Estrela</h3>
+    </a>
+
+  </div>
+
+</section>
+
+<script>
+function toggleMenu(){
+  const menu = document.getElementById("menu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+document.addEventListener("click", function(e){
+  if(!e.target.closest("header")){
+    document.getElementById("menu").style.display = "none";
+  }
+});
+</script>
+
+<script src="produtos.js"></script>
+
+</body>
+</html>
