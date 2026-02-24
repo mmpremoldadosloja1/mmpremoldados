@@ -6,6 +6,7 @@
 <title>MM Pré-Moldados</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
 <style>
 body{
@@ -43,10 +44,9 @@ header{
 }
 
 .logo img{
-  height:55px;
+  height:75px;
 }
 
-/* ===== BUSCA AJUSTADA ===== */
 .search-box{
   flex:1;
   display:flex;
@@ -64,11 +64,6 @@ header{
   color:#fff;
 }
 
-.search-box input::placeholder{
-  color:#aaa;
-}
-
-/* ===== CARRINHO AJUSTADO ===== */
 .cart{
   font-size:20px;
   color:#00aaff;
@@ -76,11 +71,10 @@ header{
   text-align:center;
 }
 
-/* ===== MENU ===== */
 .menu{
   display:none;
   position:absolute;
-  top:65px;
+  top:80px;
   left:10px;
   background:#111;
   border-radius:10px;
@@ -122,7 +116,7 @@ h2{
   display:inline-block;
 }
 
-/* ===== GRID ===== */
+/* ===== GRID (mantido para outras seções) ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
@@ -160,6 +154,28 @@ h2{
   margin:0;
 }
 
+/* ===== SWIPER ===== */
+.swiper{
+  padding-bottom:40px;
+}
+
+/* ===== SETAS PERSONALIZADAS ===== */
+.swiper-button-next,
+.swiper-button-prev{
+  color:#00aaff;
+  background:#111;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  box-shadow:0 4px 10px rgba(0,0,0,0.6);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover{
+  background:#00aaff;
+  color:#000;
+}
+
 /* ===== MOBILE ===== */
 @media(max-width:768px){
 
@@ -168,12 +184,7 @@ h2{
   }
 
   .logo img{
-    height:45px;
-  }
-
-  .search-box input{
-    padding:8px;
-    font-size:13px;
+    height:65px;
   }
 
   .card img{
@@ -216,27 +227,42 @@ h2{
   <h2>🔥 Produtos em Destaque</h2>
   <span class="ver-todos">Ver todos</span>
 
-  <div class="grid">
+  <div class="swiper destaqueSwiper">
+    <div class="swiper-wrapper">
 
-    <a href="cobogos.html" class="card">
-      <img src="img/cobogo-anti-chuva-40.jpg">
-      <h3>Cobogó Anti-Chuva 40x40</h3>
-    </a>
+      <div class="swiper-slide">
+        <a href="cobogos.html" class="card">
+          <img src="img/cobogo-anti-chuva-40.jpg">
+          <h3>Cobogó Anti-Chuva 40x40</h3>
+        </a>
+      </div>
 
-    <a href="cobogos.html" class="card">
-      <img src="img/cobogo-16-furos-40.jpg">
-      <h3>Cobogó 16 Furos 40x40</h3>
-    </a>
+      <div class="swiper-slide">
+        <a href="cobogos.html" class="card">
+          <img src="img/cobogo-16-furos-40.jpg">
+          <h3>Cobogó 16 Furos 40x40</h3>
+        </a>
+      </div>
 
-    <a href="manilhas.html" class="card">
-      <img src="img/manilhas/manilha-90x50.jpg">
-      <h3>Manilha 90cm x 50cm</h3>
-    </a>
+      <div class="swiper-slide">
+        <a href="manilhas.html" class="card">
+          <img src="img/manilhas/manilha-90x50.jpg">
+          <h3>Manilha 90cm x 50cm</h3>
+        </a>
+      </div>
 
-    <a href="pingadeiras.html" class="card">
-      <img src="img/pingadeiras/pingadeira-1m.jpg">
-      <h3>Pingadeira 1 Metro</h3>
-    </a>
+      <div class="swiper-slide">
+        <a href="pingadeiras.html" class="card">
+          <img src="img/pingadeiras/pingadeira-1m.jpg">
+          <h3>Pingadeira 1 Metro</h3>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- SETAS -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
 
   </div>
 </section>
@@ -260,6 +286,8 @@ h2{
   </div>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <script>
 function toggleMenu(){
   const menu = document.getElementById("menu");
@@ -269,6 +297,28 @@ function toggleMenu(){
 document.addEventListener("click", function(e){
   if(!e.target.closest("header")){
     document.getElementById("menu").style.display = "none";
+  }
+});
+
+const swiper = new Swiper(".destaqueSwiper", {
+  slidesPerView: 1,
+  spaceBetween: 20,
+  loop: true,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  breakpoints: {
+    768: {
+      slidesPerView: 2
+    },
+    1024: {
+      slidesPerView: 3
+    }
   }
 });
 </script>
