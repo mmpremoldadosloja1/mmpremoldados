@@ -26,16 +26,6 @@ header{
   box-shadow:0 4px 20px rgba(0,0,0,0.6);
 }
 
-.menu-btn{
-  background:#00d4ff;
-  color:#000;
-  border:none;
-  font-size:22px;
-  padding:10px 14px;
-  border-radius:10px;
-  cursor:pointer;
-}
-
 .logo img{
   height:85px;
 }
@@ -51,7 +41,7 @@ header{
   max-width:500px;
   padding:12px 15px;
   border-radius:30px;
-  border:2px solid #00d4ff;
+  border:2px solid #1f1f1f;
   font-size:14px;
   background:#111;
   color:#fff;
@@ -60,7 +50,32 @@ header{
 
 .cart{
   font-size:22px;
-  color:#00d4ff;
+  color:#fff;
+}
+
+/* ===== BOLINHA LATERAL ===== */
+.menu-handle{
+  position:fixed;
+  top:50%;
+  left:0;
+  transform:translateY(-50%);
+  width:22px;
+  height:70px;
+  background:#1f1f1f;
+  border-top-right-radius:20px;
+  border-bottom-right-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:2100;
+  box-shadow:4px 0 10px rgba(0,0,0,0.6);
+}
+
+.menu-handle::after{
+  content:'›';
+  font-size:18px;
+  color:#888;
 }
 
 /* ===== MENU LATERAL ===== */
@@ -86,8 +101,7 @@ header{
 }
 
 .side-menu a:hover{
-  background:#00d4ff;
-  color:#000;
+  background:#222;
 }
 
 .side-menu.active{
@@ -117,7 +131,6 @@ section{
 
 h2{
   margin-bottom:10px;
-  color:#00d4ff;
   font-weight:700;
 }
 
@@ -142,8 +155,7 @@ h2{
 
 .card:hover{
   transform:translateY(-6px);
-  border:1px solid #00d4ff;
-  box-shadow:0 8px 25px rgba(0,212,255,0.25);
+  box-shadow:0 8px 25px rgba(0,0,0,0.5);
 }
 
 .card img{
@@ -162,17 +174,13 @@ h2{
 
 /* ===== SWIPER ===== */
 .swiper{
-  padding-bottom:50px;
+  padding-bottom:30px;
 }
 
+/* Remove setas */
 .swiper-button-next,
 .swiper-button-prev{
-  color:#000;
-  background:#00d4ff;
-  width:45px;
-  height:45px;
-  border-radius:50%;
-  box-shadow:0 6px 15px rgba(0,212,255,0.4);
+  display:none;
 }
 
 /* ===== GRID ===== */
@@ -200,8 +208,6 @@ h2{
 <body>
 
 <header>
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
-
   <div class="logo">
     <img src="img/logo.png" alt="MM Pré-Moldados">
   </div>
@@ -212,6 +218,8 @@ h2{
 
   <div class="cart">🛒</div>
 </header>
+
+<div class="menu-handle" onclick="toggleMenu()"></div>
 
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
@@ -263,9 +271,6 @@ h2{
       </div>
 
     </div>
-
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
   </div>
 </section>
 
@@ -292,7 +297,6 @@ h2{
 function toggleMenu(){
   const menu = document.getElementById("sideMenu");
   const overlay = document.getElementById("overlay");
-
   menu.classList.toggle("active");
   overlay.classList.toggle("active");
 }
@@ -304,10 +308,6 @@ const swiper = new Swiper(".destaqueSwiper", {
   autoplay: {
     delay: 2500,
     disableOnInteraction: false,
-  },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
   },
   breakpoints: {
     768: { slidesPerView: 2 },
