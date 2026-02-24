@@ -13,6 +13,7 @@ body{
   font-family:'Inter', Arial, sans-serif;
   background:#0e0e0e;
   color:#fff;
+  overflow-x:hidden;
 }
 
 /* ===== HEADER ===== */
@@ -45,76 +46,13 @@ header{
   background:#111;
   color:#fff;
   outline:none;
-  transition:0.3s;
-}
-
-.search-box input:focus{
-  border-color:#2d6cdf;
-  box-shadow:0 0 12px rgba(45,108,223,0.4);
 }
 
 .cart{
   font-size:22px;
-  color:#fff;
 }
 
-/* ===== MENU HANDLE ===== */
-.menu-handle{
-  position:fixed;
-  top:50%;
-  left:0;
-  transform:translateY(-50%);
-  width:24px;
-  height:70px;
-  background:#1c1c1c;
-  border-top-right-radius:30px;
-  border-bottom-right-radius:30px;
-  z-index:2100;
-  box-shadow:4px 0 15px rgba(0,0,0,0.8);
-}
-
-/* ===== MENU ===== */
-.side-menu{
-  position:fixed;
-  top:0;
-  left:-280px;
-  width:260px;
-  height:100%;
-  background:#111;
-  box-shadow:5px 0 25px rgba(0,0,0,0.8);
-  padding-top:100px;
-  transition:0.4s ease;
-  z-index:2000;
-}
-
-.side-menu a{
-  display:block;
-  padding:15px 20px;
-  color:#fff;
-  text-decoration:none;
-  border-bottom:1px solid #1a1a1a;
-}
-
-.side-menu.active{
-  left:0;
-}
-
-.overlay{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.7);
-  display:none;
-  z-index:1500;
-}
-
-.overlay.active{
-  display:block;
-}
-
-/* ===== HOME VAZIA / INSTITUCIONAL ===== */
+/* ===== HOME ===== */
 .home{
   display:flex;
   align-items:center;
@@ -125,7 +63,7 @@ header{
 }
 
 .home-content h1{
-  font-size:32px;
+  font-size:36px;
   margin-bottom:15px;
 }
 
@@ -139,16 +77,67 @@ header{
 .btn-orcamento{
   background:#fff;
   color:#000;
-  padding:12px 25px;
+  padding:14px 28px;
   border-radius:30px;
   text-decoration:none;
   font-weight:600;
   transition:0.3s;
   display:inline-block;
+  cursor:pointer;
 }
 
 .btn-orcamento:hover{
   background:#ddd;
+}
+
+/* ===== OVERLAY ===== */
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+  opacity:0;
+  visibility:hidden;
+  transition:0.4s;
+  z-index:1500;
+}
+
+.overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+/* ===== PAINEL CATEGORIAS ===== */
+.categoria-panel{
+  position:fixed;
+  top:0;
+  right:-320px;
+  width:300px;
+  height:100%;
+  background:#111;
+  box-shadow:-5px 0 30px rgba(0,0,0,0.8);
+  padding-top:120px;
+  transition:0.4s ease;
+  z-index:2000;
+}
+
+.categoria-panel.active{
+  right:0;
+}
+
+.categoria-panel a{
+  display:block;
+  padding:18px 25px;
+  color:#fff;
+  text-decoration:none;
+  border-bottom:1px solid #1a1a1a;
+  transition:0.3s;
+}
+
+.categoria-panel a:hover{
+  background:#1c1c1c;
 }
 </style>
 </head>
@@ -167,39 +156,39 @@ header{
   <div class="cart">🛒</div>
 </header>
 
-<div class="menu-handle" onclick="toggleMenu()"></div>
-<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+<section class="home">
+  <div class="home-content">
+    <h1>MM Pré-Moldados</h1>
+    <p>Soluções em pré-moldados com qualidade, resistência e acabamento profissional.</p>
+    <div class="btn-orcamento" onclick="abrirCategorias()">Solicitar Orçamento</div>
+  </div>
+</section>
 
-<div class="side-menu" id="sideMenu">
-  <a href="blocos.html">Blocos/Canaletas</a>
+<div class="overlay" id="overlay" onclick="fecharCategorias()"></div>
+
+<div class="categoria-panel" id="categoriaPanel">
+  <a href="blocos.html">Blocos / Canaletas</a>
   <a href="manilhas.html">Manilhas</a>
   <a href="lajes.html">Lajes Pré-Moldadas</a>
   <a href="cobogos.html">Cobogós</a>
   <a href="pingadeiras.html">Pingadeiras</a>
   <a href="caixas.html">Caixas</a>
-  <a href="pisos.html">Pisos e pisadeiras</a>
-  <a href="meio-fio.html">Meio-fio de Jardim</a>
+  <a href="pisos.html">Pisos e Pisadeiras</a>
+  <a href="meio-fio.html">Meio-Fio de Jardim</a>
   <a href="revestimento-parede.html">Revestimento de Parede</a>
 </div>
 
-<section class="home">
-  <div class="home-content">
-    <h1>MM Pré-Moldados</h1>
-    <p>Soluções em pré-moldados com qualidade, resistência e acabamento profissional.</p>
-    <a href="#" class="btn-orcamento">Solicitar Orçamento</a>
-  </div>
-</section>
-
 <script>
-function toggleMenu(){
-  const menu = document.getElementById("sideMenu");
-  const overlay = document.getElementById("overlay");
-  menu.classList.toggle("active");
-  overlay.classList.toggle("active");
+function abrirCategorias(){
+  document.getElementById("categoriaPanel").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+}
+
+function fecharCategorias(){
+  document.getElementById("categoriaPanel").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
 }
 </script>
-
-<script src="produtos.js"></script>
 
 </body>
 </html>
