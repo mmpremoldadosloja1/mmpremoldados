@@ -75,38 +75,46 @@ h3 {
 }
 
 /* ============================= */
-/* CARD PADRÃO (ATUALIZADO) */
+/* CARD MODERNO */
 /* ============================= */
 
 .card {
-  background: transparent; /* removido branco */
-  border-radius: 12px;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
   text-align: center;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
 
-  transition: transform 0.2s ease;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.12);
 }
 
-/* ============================= */
-/* IMAGEM DO PRODUTO (NOVO) */
-/* ============================= */
+/* IMAGEM DO PRODUTO */
 
 .card img {
   width: 100%;
-  max-height: 220px;
+  height: 220px;
   object-fit: contain;
-  background: transparent; /* sem fundo branco */
-  border-radius: 12px;
-  display: block;
-  margin-bottom: 10px;
+  background: #f8f8f8;
+  padding: 20px;
+}
+
+/* TÍTULO DO PRODUTO */
+
+.card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 15px;
+  color: #222;
 }
 
 /* ============================= */
