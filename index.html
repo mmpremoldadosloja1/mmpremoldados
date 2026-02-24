@@ -23,28 +23,21 @@ header{
   display:flex;
   align-items:center;
   gap:15px;
-  position:relative;
   box-shadow:0 4px 20px rgba(0,0,0,0.6);
 }
 
 .menu-btn{
-  background:#111;
-  color:#00d4ff;
-  border:none;
-  font-size:22px;
-  padding:8px 12px;
-  border-radius:8px;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.menu-btn:hover{
   background:#00d4ff;
   color:#000;
+  border:none;
+  font-size:22px;
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
 }
 
 .logo img{
-  height:95px; /* AUMENTEI A LOGO */
+  height:85px;
 }
 
 .search-box{
@@ -68,36 +61,53 @@ header{
 .cart{
   font-size:22px;
   color:#00d4ff;
-  min-width:35px;
-  text-align:center;
 }
 
-/* ===== MENU ===== */
-.menu{
-  display:none;
-  position:absolute;
-  top:100px;
-  left:10px;
+/* ===== MENU LATERAL ===== */
+.side-menu{
+  position:fixed;
+  top:0;
+  left:-280px;
+  width:260px;
+  height:100%;
   background:#111;
-  border-radius:12px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.7);
-  overflow:hidden;
-  z-index:999;
-  min-width:220px;
+  box-shadow:5px 0 20px rgba(0,0,0,0.7);
+  padding-top:100px;
+  transition:0.4s ease;
+  z-index:2000;
 }
 
-.menu a{
+.side-menu a{
   display:block;
-  padding:14px 16px;
+  padding:15px 20px;
   color:#fff;
   text-decoration:none;
   border-bottom:1px solid #222;
-  font-size:14px;
 }
 
-.menu a:hover{
+.side-menu a:hover{
   background:#00d4ff;
   color:#000;
+}
+
+.side-menu.active{
+  left:0;
+}
+
+/* ===== OVERLAY ===== */
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  z-index:1500;
+}
+
+.overlay.active{
+  display:block;
 }
 
 /* ===== SEÇÕES ===== */
@@ -109,7 +119,6 @@ h2{
   margin-bottom:10px;
   color:#00d4ff;
   font-weight:700;
-  font-size:20px;
 }
 
 .ver-todos{
@@ -119,7 +128,7 @@ h2{
   display:inline-block;
 }
 
-/* ===== CARD PREMIUM ===== */
+/* ===== CARD ===== */
 .card{
   background:#141414;
   border-radius:18px;
@@ -149,7 +158,6 @@ h2{
   font-size:15px;
   padding:15px;
   margin:0;
-  font-weight:600;
 }
 
 /* ===== SWIPER ===== */
@@ -157,7 +165,6 @@ h2{
   padding-bottom:50px;
 }
 
-/* ===== SETAS PREMIUM ===== */
 .swiper-button-next,
 .swiper-button-prev{
   color:#000;
@@ -166,12 +173,6 @@ h2{
   height:45px;
   border-radius:50%;
   box-shadow:0 6px 15px rgba(0,212,255,0.4);
-  transition:0.3s;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover{
-  transform:scale(1.1);
 }
 
 /* ===== GRID ===== */
@@ -185,7 +186,7 @@ h2{
 @media(max-width:768px){
 
   .logo img{
-    height:75px;
+    height:70px;
   }
 
   .card img{
@@ -210,19 +211,21 @@ h2{
   </div>
 
   <div class="cart">🛒</div>
-
-  <div class="menu" id="menu">
-    <a href="blocos.html">Blocos/Canaletas</a>
-    <a href="manilhas.html">Manilhas</a>
-    <a href="lajes.html">Lajes Pré-Moldadas</a>
-    <a href="cobogos.html">Cobogós</a>
-    <a href="pingadeiras.html">Pingadeiras</a>
-    <a href="caixas.html">Caixas</a>
-    <a href="pisos.html">Pisos e pisadeiras</a>
-    <a href="meio-fio.html">Meio-fio de Jardim</a>
-    <a href="revestimento-parede.html">Revestimento de Parede</a>
-  </div>
 </header>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<div class="side-menu" id="sideMenu">
+  <a href="blocos.html">Blocos/Canaletas</a>
+  <a href="manilhas.html">Manilhas</a>
+  <a href="lajes.html">Lajes Pré-Moldadas</a>
+  <a href="cobogos.html">Cobogós</a>
+  <a href="pingadeiras.html">Pingadeiras</a>
+  <a href="caixas.html">Caixas</a>
+  <a href="pisos.html">Pisos e pisadeiras</a>
+  <a href="meio-fio.html">Meio-fio de Jardim</a>
+  <a href="revestimento-parede.html">Revestimento de Parede</a>
+</div>
 
 <section>
   <h2>🔥 Produtos em Destaque</h2>
@@ -263,7 +266,6 @@ h2{
 
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
-
   </div>
 </section>
 
@@ -272,7 +274,6 @@ h2{
   <span class="ver-todos">Ver todas</span>
 
   <div class="grid">
-
     <a href="cobogos.html" class="card">
       <img src="img/cobogo-flor-40.jpg">
       <h3>Cobogó Flor 40x40</h3>
@@ -282,7 +283,6 @@ h2{
       <img src="img/cobogo-estrela-30.jpg">
       <h3>Cobogó Estrela 30x30</h3>
     </a>
-
   </div>
 </section>
 
@@ -290,15 +290,12 @@ h2{
 
 <script>
 function toggleMenu(){
-  const menu = document.getElementById("menu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
+  const menu = document.getElementById("sideMenu");
+  const overlay = document.getElementById("overlay");
 
-document.addEventListener("click", function(e){
-  if(!e.target.closest("header")){
-    document.getElementById("menu").style.display = "none";
-  }
-});
+  menu.classList.toggle("active");
+  overlay.classList.toggle("active");
+}
 
 const swiper = new Swiper(".destaqueSwiper", {
   slidesPerView: 1,
@@ -313,12 +310,8 @@ const swiper = new Swiper(".destaqueSwiper", {
     prevEl: ".swiper-button-prev",
   },
   breakpoints: {
-    768: {
-      slidesPerView: 2
-    },
-    1024: {
-      slidesPerView: 3
-    }
+    768: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 }
   }
 });
 </script>
