@@ -51,7 +51,7 @@ header{
 
 .search-box input:focus{
   border-color:#2d6cdf;
-  box-shadow:0 0 10px rgba(45,108,223,0.4);
+  box-shadow:0 0 12px rgba(45,108,223,0.4);
 }
 
 .cart{
@@ -59,37 +59,22 @@ header{
   color:#fff;
 }
 
-/* ===== BOLINHA LATERAL ===== */
+/* ===== MENU HANDLE ===== */
 .menu-handle{
   position:fixed;
   top:50%;
   left:0;
   transform:translateY(-50%);
-  width:26px;
-  height:80px;
+  width:24px;
+  height:70px;
   background:#1c1c1c;
   border-top-right-radius:30px;
   border-bottom-right-radius:30px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
   z-index:2100;
   box-shadow:4px 0 15px rgba(0,0,0,0.8);
-  transition:0.3s;
 }
 
-.menu-handle::after{
-  content:'●';
-  font-size:10px;
-  color:#555;
-}
-
-.menu-handle:hover{
-  background:#2a2a2a;
-}
-
-/* ===== MENU LATERAL ===== */
+/* ===== MENU ===== */
 .side-menu{
   position:fixed;
   top:0;
@@ -108,20 +93,13 @@ header{
   padding:15px 20px;
   color:#fff;
   text-decoration:none;
-  border-bottom:1px solid #1f1f1f;
-  transition:0.3s;
-}
-
-.side-menu a:hover{
-  background:#1f1f1f;
-  padding-left:25px;
+  border-bottom:1px solid #1a1a1a;
 }
 
 .side-menu.active{
   left:0;
 }
 
-/* ===== OVERLAY ===== */
 .overlay{
   position:fixed;
   top:0;
@@ -137,7 +115,7 @@ header{
   display:block;
 }
 
-/* ===== SEÇÕES ===== */
+/* ===== SECTIONS ===== */
 section{
   padding:40px 20px;
 }
@@ -150,12 +128,12 @@ h2{
 
 .ver-todos{
   font-size:13px;
-  color:#888;
+  color:#777;
   margin-bottom:20px;
   display:inline-block;
 }
 
-/* ===== CARD MODERNO ===== */
+/* ===== CARD MINIMALISTA ===== */
 .card{
   background:#141414;
   border-radius:22px;
@@ -164,12 +142,12 @@ h2{
   transition:0.4s;
   text-decoration:none;
   color:#fff;
-  border:1px solid #1f1f1f;
+  box-shadow:0 8px 25px rgba(0,0,0,0.4);
 }
 
 .card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 12px 35px rgba(0,0,0,0.7);
+  transform:translateY(-6px);
+  box-shadow:0 12px 35px rgba(0,0,0,0.6);
 }
 
 .card img{
@@ -177,44 +155,42 @@ h2{
   height:200px;
   object-fit:contain;
   background:transparent;
-  padding:20px;
+  padding:25px;
+  display:block;
 }
 
 .card h3{
   font-size:15px;
-  padding:15px;
+  padding:20px;
   margin:0;
 }
 
 /* ===== SWIPER ===== */
 .swiper{
-  padding-bottom:30px;
+  padding:10px 5px 40px 5px;
 }
 
-/* Remove setas */
-.swiper-button-next,
-.swiper-button-prev{
-  display:none !important;
+.swiper-slide{
+  display:flex;
+  justify-content:center;
 }
 
 /* ===== GRID ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:18px;
+  gap:20px;
 }
 
 /* ===== MOBILE ===== */
 @media(max-width:768px){
-
   .logo img{
     height:70px;
   }
 
   .card img{
-    height:150px;
+    height:160px;
   }
-
 }
 </style>
 </head>
@@ -234,7 +210,6 @@ h2{
 </header>
 
 <div class="menu-handle" onclick="toggleMenu()"></div>
-
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
 <div class="side-menu" id="sideMenu">
@@ -315,8 +290,9 @@ function toggleMenu(){
   overlay.classList.toggle("active");
 }
 
-const swiper = new Swiper(".destaqueSwiper", {
+new Swiper(".destaqueSwiper", {
   slidesPerView: 1,
+  centeredSlides:true,
   spaceBetween: 20,
   loop: true,
   autoplay: {
