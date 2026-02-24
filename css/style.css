@@ -6,26 +6,40 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 
 body {
-  background: #f4f4f4;
+  background: #000; /* PRETO ABSOLUTO */
   padding: 60px 20px 40px;
+  color: #fff;
 }
+
+/* ============================= */
+/* TÍTULOS */
+/* ============================= */
 
 h1 {
   text-align: center;
   margin-bottom: 30px;
+  font-size: 28px;
+  letter-spacing: 3px;
+  font-weight: 700;
 }
 
 h2 {
-  margin-top: 30px;
+  margin-top: 40px;
   margin-bottom: 15px;
+  font-size: 22px;
+  letter-spacing: 2px;
+  font-weight: 600;
 }
 
 h3 {
-  margin: 10px 0;
+  margin: 15px 0;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 
 /* ============================= */
@@ -36,51 +50,42 @@ h3 {
   position: fixed;
   top: 15px;
   left: 15px;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   background: #111;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: transform 0.2s ease;
-}
-
-.voltar svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: #fff;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.8);
+  transition: 0.3s ease;
 }
 
 .voltar:hover {
-  transform: scale(1.08);
+  transform: scale(1.1);
+  background: #1c1c1c;
 }
 
 /* ============================= */
-/* GRID PADRÃO */
+/* GRID */
 /* ============================= */
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 /* ============================= */
-/* CARD MODERNO */
+/* CARD INDUSTRIAL PREMIUM */
 /* ============================= */
 
 .card {
-  background: #ffffff;
-  border-radius: 18px;
+  background: #0f0f0f;
+  border-radius: 20px;
   overflow: hidden;
   text-align: center;
 
@@ -88,55 +93,52 @@ h3 {
   flex-direction: column;
   align-items: center;
 
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+  transition: all 0.4s ease;
   cursor: pointer;
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(0,0,0,1);
 }
 
-/* IMAGEM DO PRODUTO */
+/* IMAGEM */
 
 .card img {
   width: 100%;
-  height: 220px;
+  height: 230px;
   object-fit: contain;
-  background: #f8f8f8;
+  background: transparent; /* REMOVE FUNDO BRANCO */
+  padding: 30px;
+}
+
+/* TÍTULO */
+
+.card h3 {
+  color: #e5e5e5;
   padding: 20px;
 }
 
-/* TÍTULO DO PRODUTO */
-
-.card h3 {
-  font-size: 16px;
-  font-weight: 600;
-  padding: 15px;
-  color: #222;
-}
-
 /* ============================= */
-/* PADRÃO DE IMAGEM (PLACEHOLDER) */
+/* PLACEHOLDER */
 /* ============================= */
 
 .imagem-placeholder {
   width: 100%;
   height: 180px;
-  background: #e9e9e9;
+  background: #1a1a1a;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #777;
+  color: #666;
   font-size: 14px;
   margin-bottom: 15px;
-  border: 1px solid #ddd;
 }
 
 /* ============================= */
-/* CONTADOR PADRÃO */
+/* CONTADOR */
 /* ============================= */
 
 .contador {
@@ -147,23 +149,25 @@ h3 {
 }
 
 .contador button {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border: none;
-  border-radius: 6px;
-  background: #ddd;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: #fff;
   font-size: 18px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: 0.3s ease;
 }
 
 .contador button:hover {
-  background: #ccc;
+  background: #2a2a2a;
 }
 
 .qtd {
   font-weight: bold;
   font-size: 16px;
+  color: #fff;
 }
 
 /* ============================= */
@@ -171,16 +175,39 @@ h3 {
 /* ============================= */
 
 .btn {
-  margin-top: 10px;
-  padding: 8px 14px;
+  margin-top: 12px;
+  padding: 10px 18px;
   border: none;
-  background: #111;
+  background: #1c1c1c;
   color: #fff;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: 0.3s ease;
 }
 
 .btn:hover {
-  background: #333;
+  background: #2a2a2a;
+}
+
+/* ============================= */
+/* BOTÃO WHATSAPP FLUTUANTE */
+/* ============================= */
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #25D366;
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.8);
+  transition: 0.3s ease;
+  z-index: 1000;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.05);
 }
