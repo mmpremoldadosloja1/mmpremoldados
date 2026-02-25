@@ -1,281 +1,144 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>MM Pré-Moldados</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MM Pré-Moldados</title>
+  <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #3f3f3f;
+      color: white;
+    }
 
-<style>
-body{
-  margin:0;
-  font-family:'Inter', Arial, sans-serif;
-  background:#4a4a4a;
-  color:#fff;
-}
+    header {
+      background: #e5e5e5;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-/* HEADER */
-header{
-  background:#e0e0e0;
-  padding:10px 15px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  box-shadow:0 2px 10px rgba(0,0,0,0.3);
-}
+    header img {
+      height: 40px;
+    }
 
-.logo img{
-  height:60px;
-}
+    /* BOTÃO CATEGORIAS */
+    .area-categorias {
+      padding: 15px;
+      display: flex;
+      justify-content: flex-start;
+    }
 
-/* ÍCONES HEADER */
-.header-icons{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
+    .btn-categorias {
+      background: linear-gradient(135deg, #00bfff, #009acd);
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
 
-.icon-btn{
-  font-size:20px;
-  cursor:pointer;
-  color:#005f88;
-  transition:0.2s;
-}
+    .btn-categorias:hover {
+      transform: scale(1.05);
+    }
 
-.icon-btn:hover{
-  color:#00aaff;
-  transform:scale(1.1);
-}
+    .menu-categorias {
+      display: none;
+      background: #2c2c2c;
+      padding: 15px;
+    }
 
-/* BARRA CATEGORIAS */
-.barra-categorias{
-  background:linear-gradient(to right,#3f3f3f,#4a4a4a);
-  padding:14px 20px;
-  position:relative;
-  border-bottom:1px solid #2a2a2a;
-}
+    .menu-categorias button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 8px;
+      border: none;
+      border-radius: 8px;
+      background: #444;
+      color: white;
+      cursor: pointer;
+    }
 
-.categorias-btn{
-  background:linear-gradient(135deg,#0077aa,#00aaff);
-  color:#fff;
-  border:none;
-  font-size:14px;
-  padding:10px 22px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:600;
-  letter-spacing:0.5px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.3);
-  transition:all 0.3s ease;
-}
+    .menu-categorias button:hover {
+      background: #00bfff;
+    }
 
-.categorias-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 6px 18px rgba(0,0,0,0.4);
-  background:linear-gradient(135deg,#0099dd,#00ccff);
-}
+    h2 {
+      padding: 15px;
+      color: #00bfff;
+    }
 
-.categorias-btn:active{
-  transform:scale(0.97);
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      padding: 15px;
+    }
 
-/* MENU */
-.menu{
-  display:none;
-  position:absolute;
-  top:55px;
-  left:20px;
-  background:#f0f0f0;
-  border-radius:10px;
-  box-shadow:0 6px 16px rgba(0,0,0,0.4);
-  overflow:hidden;
-  z-index:999;
-  min-width:220px;
-}
+    .card {
+      background: #1e1e1e;
+      border-radius: 15px;
+      overflow: hidden;
+      text-align: center;
+    }
 
-.menu a{
-  display:block;
-  padding:12px 16px;
-  color:#000;
-  text-decoration:none;
-  border-bottom:1px solid #ccc;
-}
+    .card img {
+      width: 100%;
+      background: white;
+    }
 
-.menu a:hover{
-  background:#00aaff;
-}
-
-/* SEÇÕES */
-section{
-  padding:20px;
-}
-
-h2{
-  color:#00aaff;
-}
-
-.ver-todos{
-  font-size:13px;
-  color:#aaa;
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
-}
-
-/* CARD */
-.card{
-  background:#1a1a1a;
-  border-radius:12px;
-  overflow:hidden;
-  text-align:center;
-  text-decoration:none;
-  color:#fff;
-  border:1px solid #222;
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:translateY(-4px);
-  border-color:#00aaff;
-}
-
-.card img{
-  width:100%;
-  height:160px;
-  object-fit:contain;
-  background:#fff;
-}
-
-.card h3{
-  font-size:14px;
-  padding:10px;
-  margin:0;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-
-  .logo img{
-    height:45px;
-  }
-
-  .card img{
-    height:130px;
-  }
-
-  .grid{
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-}
-</style>
+    .card h3 {
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <header>
+    <img src="img/logo.png" alt="MM Pré Moldados">
+  </header>
 
-  <div class="logo">
-    <img src="img/logo.png" alt="MM Pré-Moldados">
+  <!-- BOTÃO ABAIXO DO CABEÇALHO -->
+  <div class="area-categorias">
+    <button class="btn-categorias" onclick="toggleCategorias()">
+      Categorias ▼
+    </button>
   </div>
 
-  <div class="header-icons">
-    <span class="icon-btn">🔍</span>
-    <span class="icon-btn">🛒</span>
+  <div id="menuCategorias" class="menu-categorias">
+    <button onclick="filtrarCategoria('pingadeiras')">Pingadeiras</button>
+    <button onclick="filtrarCategoria('meio_fio_jardim')">Meio-Fio de Jardim</button>
+    <button onclick="filtrarCategoria('revestimento_parede')">Revestimento</button>
+    <button onclick="filtrarCategoria('lajes')">Lajes</button>
   </div>
-
-</header>
-
-<!-- BOTÃO ABAIXO DO HEADER -->
-<div class="barra-categorias">
-  <button class="categorias-btn" onclick="toggleMenu()">
-    Categorias ▼
-  </button>
-
-  <div class="menu" id="menu">
-    <a href="blocos.html">Blocos/Canaletas</a>
-    <a href="manilhas.html">Manilhas</a>
-    <a href="lajes.html">Lajes</a>
-    <a href="cobogos.html">Cobogós</a>
-    <a href="pingadeiras.html">Pingadeiras</a>
-    <a href="caixas.html">Caixas</a>
-    <a href="pisos.html">Pisos</a>
-    <a href="meio-fio.html">Meio-fio</a>
-    <a href="revestimento-parede.html">Revestimento</a>
-  </div>
-</div>
-
-<section>
 
   <h2>🔥 Produtos em Destaque</h2>
-  <span class="ver-todos">Ver todos</span>
-
-  <div class="grid">
-
-    <a href="cobogos.html" class="card">
-      <img src="img/cobogo-anti-chuva-40.jpg">
-      <h3>Cobogó Anti-Chuva 40x40</h3>
-    </a>
-
-    <a href="cobogos.html" class="card">
-      <img src="img/cobogo-16-furos-40.jpg">
-      <h3>Cobogó 16 Furos 40x40</h3>
-    </a>
-
-    <a href="manilhas.html" class="card">
-      <img src="img/manilhas/manilha-90x50.jpg">
-      <h3>Manilha 90x50</h3>
-    </a>
-
-    <a href="pingadeiras.html" class="card">
-      <img src="img/pingadeiras/pingadeira-1m.jpg">
-      <h3>Pingadeira 1m</h3>
-    </a>
-
-  </div>
-
-</section>
-
-<section>
+  <div id="produtosDestaque" class="grid"></div>
 
   <h2>✨ Novidades</h2>
+  <div id="produtosNovidades" class="grid"></div>
 
-  <div class="grid">
+  <script src="produtos.js"></script>
+  <script src="apps.js"></script>
 
-    <a href="cobogos.html" class="card">
-      <img src="img/cobogo-flor-40.jpg">
-      <h3>Cobogó Flor</h3>
-    </a>
-
-    <a href="cobogos.html" class="card">
-      <img src="img/cobogo-estrela-30.jpg">
-      <h3>Cobogó Estrela</h3>
-    </a>
-
-  </div>
-
-</section>
-
-<script>
-function toggleMenu(){
-  const menu = document.getElementById("menu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
-
-document.addEventListener("click", function(e){
-  if(!e.target.closest(".barra-categorias")){
-    document.getElementById("menu").style.display = "none";
-  }
-});
-</script>
-
-<script src="produtos.js"></script>
+  <script>
+    function toggleCategorias() {
+      const menu = document.getElementById("menuCategorias");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+  </script>
 
 </body>
 </html>
