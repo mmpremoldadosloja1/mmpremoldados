@@ -23,7 +23,7 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 30px;
+  padding:15px 25px;
   position:fixed;
   top:0;
   z-index:999;
@@ -34,15 +34,17 @@ header{
   height:45px;
 }
 
+/* NAV */
 nav{
   display:flex;
-  gap:25px;
+  gap:20px;
 }
 
 nav a{
   text-decoration:none;
   color:#fff;
   font-weight:600;
+  font-size:15px;
   transition:0.3s;
 }
 
@@ -91,7 +93,7 @@ nav a:hover{
   transform:scale(1.05);
 }
 
-/* MENU LATERAL LUXO */
+/* MENU LATERAL */
 .menu-categorias{
   position:fixed;
   top:0;
@@ -99,7 +101,7 @@ nav a:hover{
   width:240px;
   height:100%;
   backdrop-filter:blur(12px);
-  background:rgba(0,0,0,0.85);
+  background:rgba(0,0,0,0.88);
   padding:90px 20px;
   transition:0.4s ease;
   z-index:998;
@@ -143,10 +145,19 @@ nav a:hover{
   pointer-events:auto;
 }
 
-/* MOBILE */
+/* MOBILE AJUSTE */
 @media(max-width:768px){
+
+  header{
+    padding:12px 15px;
+  }
+
   nav{
-    display:none;
+    gap:12px;
+  }
+
+  nav a{
+    font-size:13px;
   }
 
   .hero h1{
@@ -156,8 +167,8 @@ nav a:hover{
   .hero p{
     font-size:14px;
   }
-}
 
+}
 </style>
 </head>
 
@@ -183,7 +194,6 @@ nav a:hover{
   </div>
 </section>
 
-<!-- MENU CATEGORIAS -->
 <div class="menu-categorias" id="menuCategorias">
   <a href="#">Blocos e Canaletas</a>
   <a href="#">Manilhas</a>
