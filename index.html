@@ -22,7 +22,6 @@ header{
   display:flex;
   align-items:center;
   gap:10px;
-  position:relative;
   box-shadow:0 2px 10px rgba(0,0,0,0.3);
 }
 
@@ -30,7 +29,6 @@ header{
   height:100px;
 }
 
-/* BUSCA */
 .search-box{
   flex:1;
   display:flex;
@@ -48,27 +46,11 @@ header{
   color:#000;
 }
 
-/* CARRINHO */
 .cart{
   font-size:20px;
   color:#005f88;
   min-width:35px;
   text-align:center;
-}
-
-/* INDICADOR LATERAL */
-.swipe-indicator{
-  position:fixed;
-  top:50%;
-  left:0;
-  transform:translateY(-50%);
-  width:8px;
-  height:80px;
-  background:#0090c5;
-  border-radius:0 6px 6px 0;
-  z-index:2100;
-  cursor:pointer;
-  opacity:0.8;
 }
 
 /* MENU LATERAL */
@@ -116,6 +98,16 @@ header{
   display:block;
 }
 
+/* ÁREA INVISÍVEL PARA SWIPE */
+.swipe-zone{
+  position:fixed;
+  top:0;
+  left:0;
+  width:30px;
+  height:100%;
+  z-index:1000;
+}
+
 /* SEÇÕES */
 section{
   padding:20px;
@@ -123,6 +115,11 @@ section{
 
 h2{
   color:#00aaff;
+}
+
+.ver-todos{
+  font-size:13px;
+  color:#aaa;
 }
 
 .grid{
@@ -176,7 +173,7 @@ h2{
 
 <body>
 
-<div class="swipe-indicator" onclick="abrirMenu()"></div>
+<div class="swipe-zone" id="swipeZone"></div>
 
 <header>
   <div class="logo">
@@ -205,18 +202,55 @@ h2{
 </div>
 
 <section>
-  <h2>Produtos</h2>
+  <h2>🔥 Produtos em Destaque</h2>
+  <span class="ver-todos">Ver todos</span>
 
   <div class="grid">
-    <!-- seus cards aqui -->
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-anti-chuva-40.jpg">
+      <h3>Cobogó Anti-Chuva 40x40</h3>
+    </a>
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-16-furos-40.jpg">
+      <h3>Cobogó 16 Furos 40x40</h3>
+    </a>
+
+    <a href="manilhas.html" class="card">
+      <img src="img/manilhas/manilha-90x50.jpg">
+      <h3>Manilha 90x50</h3>
+    </a>
+
+    <a href="pingadeiras.html" class="card">
+      <img src="img/pingadeiras/pingadeira-1m.jpg">
+      <h3>Pingadeira 1m</h3>
+    </a>
+  </div>
+</section>
+
+<section>
+  <h2>✨ Novidades</h2>
+
+  <div class="grid">
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-flor-40.jpg">
+      <h3>Cobogó Flor</h3>
+    </a>
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-estrela-30.jpg">
+      <h3>Cobogó Estrela</h3>
+    </a>
   </div>
 </section>
 
 <script>
 let startX = 0;
 let endX = 0;
+
 const menu = document.getElementById("sideMenu");
 const overlay = document.getElementById("overlay");
+const swipeZone = document.getElementById("swipeZone");
 
 function abrirMenu(){
   menu.classList.add("active");
@@ -228,19 +262,14 @@ function fecharMenu(){
   overlay.classList.remove("active");
 }
 
-document.addEventListener("touchstart", e => {
+swipeZone.addEventListener("touchstart", e => {
   startX = e.touches[0].clientX;
 });
 
-document.addEventListener("touchend", e => {
+swipeZone.addEventListener("touchend", e => {
   endX = e.changedTouches[0].clientX;
-
-  if(startX < 40 && endX > 120){
+  if(endX - startX > 80){
     abrirMenu();
-  }
-
-  if(startX > 200 && endX < 100){
-    fecharMenu();
   }
 });
 
