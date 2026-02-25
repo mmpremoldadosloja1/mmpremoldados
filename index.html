@@ -49,25 +49,6 @@ nav a{
   text-decoration:none;
   color:#fff;
   font-weight:600;
-  transition:0.3s;
-}
-
-nav a:hover{
-  color:#e63946;
-}
-
-/* BOTÃO HAMBÚRGUER */
-.menu-toggle{
-  display:none;
-  flex-direction:column;
-  cursor:pointer;
-}
-
-.menu-toggle span{
-  width:25px;
-  height:3px;
-  background:#fff;
-  margin:4px 0;
 }
 
 /* HERO */
@@ -105,47 +86,52 @@ nav a:hover{
   border-radius:6px;
 }
 
-.btn-produtos:hover{
-  background:#c92f3b;
+/* PAINEL DE CATEGORIAS */
+.categorias{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  background:#111;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
+
+.categorias.active{
+  display:flex;
+}
+
+.categorias-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  width:90%;
+  max-width:900px;
+}
+
+.categorias-grid a{
+  background:#1f1f1f;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  color:#fff;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.categorias-grid a:hover{
+  background:#e63946;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-
-  nav{
-    position:absolute;
-    top:70px;
-    right:-100%;
-    flex-direction:column;
-    background:#111;
-    width:200px;
-    padding:20px;
-    gap:15px;
-    box-shadow:0 10px 20px rgba(0,0,0,0.25);
-    transition:0.3s;
-  }
-
-  nav.active{
-    right:0;
-  }
-
-  .menu-toggle{
-    display:flex;
-  }
-
-  .hero h1{
-    font-size:24px;
-  }
-
-  .hero p{
-    font-size:14px;
-  }
-
-  .logo img{
-    height:40px;
-  }
+  .hero h1{font-size:24px;}
+  .hero p{font-size:14px;}
+  .logo img{height:40px;}
 }
-
 </style>
 </head>
 
@@ -156,43 +142,57 @@ nav a:hover{
     <img src="img/logo.png" alt="MM Pré-Moldados">
   </div>
 
-  <nav id="menu">
+  <nav>
     <a href="#">Início</a>
     <a href="#">Produtos</a>
     <a href="#">Sobre</a>
     <a href="#">Contato</a>
   </nav>
-
-  <div class="menu-toggle" id="hamburguer">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
 </header>
 
 <section class="hero">
   <div>
     <h1>Qualidade, Economia e Confiança</h1>
-    <p>Os melhores pré-moldados da região</p>
-    <button class="btn-produtos">Ver produtos</button>
+    <p>Lajes, blocos, manilhas, cobogós, pisos, revestimentos e muito mais</p>
+    <button class="btn-produtos" onclick="abrirCategorias()">Ver produtos</button>
   </div>
 </section>
 
+<!-- CATEGORIAS -->
+<div class="categorias" id="categorias">
+  <div class="categorias-grid">
+
+    <a href="blocos.html">Blocos e Canaletas</a>
+    <a href="manilhas.html">Manilhas</a>
+    <a href="lajes.html">Lajes</a>
+    <a href="cobogos.html">Cobogós</a>
+    <a href="pingadeiras.html">Pingadeiras</a>
+    <a href="caixas.html">Caixas</a>
+    <a href="pisos.html">Pisos</a>
+    <a href="meio-fio.html">Meio-fio</a>
+    <a href="revestimento-parede.html">Revestimentos</a>
+
+  </div>
+</div>
+
 <script>
-const hamburguer = document.getElementById('hamburguer');
-const menu = document.getElementById('menu');
 const header = document.getElementById('header');
 
-hamburguer.addEventListener('click', () => {
-  menu.classList.toggle('active');
-});
-
-/* EFEITO AO ROLAR */
 window.addEventListener("scroll", () => {
   if(window.scrollY > 50){
     header.classList.add("scrolled");
   } else {
     header.classList.remove("scrolled");
+  }
+});
+
+function abrirCategorias(){
+  document.getElementById("categorias").classList.add("active");
+}
+
+document.getElementById("categorias").addEventListener("click", function(e){
+  if(e.target === this){
+    this.classList.remove("active");
   }
 });
 </script>
