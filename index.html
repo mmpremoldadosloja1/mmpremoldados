@@ -11,6 +11,7 @@
 <style>
 body{
   margin:0;
+  padding-top:80px;
   font-family:'Inter', Arial, sans-serif;
   background:#4a4a4a;
   color:#fff;
@@ -18,172 +19,120 @@ body{
 
 /* HEADER */
 header{
-  background:#e0e0e0;
-  padding:8px 12px;
+  background:#111;
+  padding:12px 40px;
   display:flex;
   align-items:center;
-  gap:10px;
-  position:relative;
-  box-shadow:0 2px 10px rgba(0,0,0,0.3);
+  justify-content:space-between;
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:1000;
 }
 
 .logo img{
-  height:100px;
+  height:55px;
 }
 
-/* BUSCA */
-.search-box{
-  flex:1;
+nav{
   display:flex;
-  justify-content:center;
+  gap:30px;
 }
 
-.search-box input{
-  width:100%;
-  max-width:500px;
-  padding:10px;
-  border-radius:6px;
-  border:none;
+nav a{
+  color:#fff;
+  text-decoration:none;
   font-size:14px;
-  background:#f2f2f2;
-  color:#000;
+  transition:0.3s;
 }
 
-/* CARRINHO */
-.cart{
-  font-size:20px;
-  color:#005f88;
-  min-width:35px;
-  text-align:center;
+nav a:hover{
+  color:#00aaff;
 }
 
 /* HERO */
 .hero{
+  height:90vh;
   background:url('img/banner.jpg') center/cover no-repeat;
-  padding:80px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
+  position:relative;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+}
+
+.hero-content{
+  position:relative;
+  max-width:900px;
+  padding:20px;
 }
 
 .hero h1{
-  font-size:32px;
-  margin-bottom:10px;
+  font-size:42px;
+  margin-bottom:20px;
 }
 
 .hero p{
-  font-size:16px;
+  font-size:15px;
+  line-height:1.6;
   color:#ddd;
 }
 
-.btn-orcamento{
-  background:#00aaff;
-  padding:12px 22px;
-  border-radius:8px;
-  color:#fff;
-  text-decoration:none;
+.btn-produtos{
+  margin-top:25px;
+  padding:14px 30px;
+  font-size:15px;
   font-weight:600;
-  display:inline-block;
-  margin-top:15px;
-}
-
-/* BENEFICIOS */
-.beneficios{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  padding:30px;
-  background:#3a3a3a;
-  text-align:center;
-}
-
-.beneficio{
-  background:#1a1a1a;
-  padding:20px;
-  border-radius:12px;
-}
-
-/* BARRA CATEGORIAS */
-.barra-categorias{
-  background:linear-gradient(to right,#3f3f3f,#4a4a4a);
-  padding:14px 20px;
-  position:relative;
-  border-bottom:1px solid #2a2a2a;
-}
-
-/* BOTÃO */
-.categorias-btn{
-  background:linear-gradient(135deg,#0077aa,#00aaff);
+  background:#e10600;
   color:#fff;
   border:none;
-  font-size:14px;
-  padding:10px 22px;
-  border-radius:8px;
+  border-radius:6px;
   cursor:pointer;
-  font-weight:600;
 }
 
-/* MENU */
-.menu{
+.btn-produtos:hover{
+  background:#ff1a1a;
+}
+
+/* CATEGORIAS */
+#categorias-section{
   display:none;
-  position:absolute;
-  top:55px;
-  left:20px;
-  background:#f0f0f0;
-  border-radius:10px;
-  overflow:hidden;
-  z-index:999;
-}
-
-.menu a{
-  display:block;
-  padding:12px;
-  color:#000;
-  text-decoration:none;
-}
-
-/* GRID */
-section{
-  padding:20px;
+  padding:60px 40px;
+  background:#2a2a2a;
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
+  gap:20px;
 }
 
 .card{
   background:#1a1a1a;
-  border-radius:12px;
-  overflow:hidden;
+  padding:25px;
   text-align:center;
-  text-decoration:none;
-  color:#fff;
-}
-
-.card img{
-  width:100%;
-  height:160px;
-  object-fit:contain;
-  background:#fff;
-}
-
-/* WHATSAPP */
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  padding:14px;
-  border-radius:50%;
-  font-size:22px;
+  border-radius:12px;
   color:#fff;
   text-decoration:none;
+  border:1px solid #222;
+  transition:0.3s;
+}
+
+.card:hover{
+  border-color:#00aaff;
+  transform:translateY(-4px);
 }
 
 /* MOBILE */
 @media(max-width:768px){
-  .logo img{height:45px;}
-  .hero h1{font-size:22px;}
+  .hero h1{font-size:26px;}
 }
 </style>
 </head>
@@ -192,37 +141,61 @@ section{
 
 <header>
   <div class="logo">
-    <img src="img/logo.png">
+    <img src="img/logo.png" alt="MM Pré-Moldados">
   </div>
 
-  <div class="search-box">
-    <input type="text" placeholder="Buscar produtos">
-  </div>
-
-  <div class="cart">🛒</div>
+  <nav>
+    <a href="#">Menu</a>
+    <a href="#">Dicas de Assentamento</a>
+    <a href="#">Quem Nós Somos</a>
+    <a href="#">Ajuda</a>
+  </nav>
 </header>
 
 <!-- HERO -->
-<div class="hero">
-  <h1>Qualidade, Economia e Confiança</h1>
-  <p>Pré-moldados com entrega rápida e garantia</p>
-  <a href="https://wa.me/61999385680" class="btn-orcamento">Solicitar orçamento</a>
-</div>
+<section class="hero">
+  <div class="hero-content">
+    <h1>Qualidade que sustenta sua obra</h1>
 
-<!-- BENEFICIOS -->
-<div class="beneficios">
-  <div class="beneficio">
-    <h3>Alta Qualidade</h3>
-    <p>Materiais resistentes e duráveis</p>
-  </div>
-  <div class="beneficio">
-    <h3>Melhor Preço</h3>
-    <p>Economia na sua obra</p>
-  </div>
-  <div class="beneficio">
-    <h3>Entrega Rápida</h3>
-    <p>Atendemos toda região</p>
-  </div>
-</div>
+    <p>
+      Lajes, isopor, treliças, manilhas, pingadeiras, blocos, canaletas,
+      cobogós, revestimentos de paredes, portas e janelas,
+      pisos quadrado e piso tátil, chapéu de pilar,
+      meios fios e cimento.
+    </p>
 
-<!-- RESTANTE DO SITE CONTINUA IGUAL -->
+    <button class="btn-produtos" onclick="mostrarProdutos()">
+      Ver Produtos
+    </button>
+  </div>
+</section>
+
+<!-- CATEGORIAS -->
+<section id="categorias-section">
+  <h2 style="text-align:center; margin-bottom:40px;">Nossas Categorias</h2>
+
+  <div class="grid">
+    <a href="blocos.html" class="card">Blocos / Canaletas</a>
+    <a href="manilhas.html" class="card">Manilhas</a>
+    <a href="lajes.html" class="card">Lajes</a>
+    <a href="cobogos.html" class="card">Cobogós</a>
+    <a href="pingadeiras.html" class="card">Pingadeiras</a>
+    <a href="caixas.html" class="card">Caixas</a>
+    <a href="pisos.html" class="card">Pisos</a>
+    <a href="meio-fio.html" class="card">Meio-fio</a>
+    <a href="revestimento-parede.html" class="card">Revestimento</a>
+  </div>
+</section>
+
+<script>
+function mostrarProdutos(){
+  const section = document.getElementById("categorias-section");
+  section.style.display = "block";
+  section.scrollIntoView({behavior:"smooth"});
+}
+</script>
+
+<script src="produtos.js"></script>
+
+</body>
+</html>
