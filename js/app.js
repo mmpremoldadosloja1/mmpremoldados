@@ -5,38 +5,21 @@
 const produtos = {
 
   "pingadeiras": [
-
     {
       nome: "Estilo Casinha",
       tipo: "variacao",
-      medidas: [
-        "1m x 20cm",
-        "1m x 23cm",
-        "1m x 25cm",
-        "1m x 30cm"
-      ]
+      medidas: ["1m x 20cm","1m x 23cm","1m x 25cm","1m x 30cm"]
     },
-
     {
       nome: "Estilo Reta",
       tipo: "variacao",
-      medidas: [
-        "1m x 20cm",
-        "1m x 23cm",
-        "1m x 25cm",
-        "1m x 30cm",
-        "1m x 40cm"
-      ]
+      medidas: ["1m x 20cm","1m x 23cm","1m x 25cm","1m x 30cm","1m x 40cm"]
     },
-
     {
       nome: "Estilo Degraus",
       tipo: "variacao",
-      medidas: [
-        "1m x 20cm"
-      ]
+      medidas: ["1m x 20cm"]
     }
-
   ],
 
   "revestimento-parede": [
@@ -54,15 +37,14 @@ const produtos = {
     {
       nome: "Laje Teto H8",
       tipo: "metragem",
-      medidas: ["7,5cm x 33cm", "7,5cm x 40cm"]
+      medidas: ["7,5cm x 33cm","7,5cm x 40cm"]
     },
     {
       nome: "Laje Piso H10",
       tipo: "metragem",
-      medidas: ["9cm x 33cm", "9cm x 40cm"]
+      medidas: ["9cm x 33cm","9cm x 40cm"]
     }
   ]
-
 };
 
 
@@ -83,17 +65,35 @@ function salvarCarrinho() {
 
 function carregarProdutos() {
 
-  const params = new URLSearchParams(window.location.search);
-  const categoria = params.get("categoria");
-
   const container = document.getElementById("produtosContainer");
-  if (!container || !produtos[categoria]) return;
+  if (!container) return;
 
   container.innerHTML = "";
 
+  const params = new URLSearchParams(window.location.search);
+  let categoria = params.get("categoria");
+
+  // 🔥 SE ESTIVER NA HOME (SEM CATEGORIA) MOSTRA TODOS OS PRODUTOS
+  if (!categoria) {
+
+    Object.keys(produtos).forEach(cat => {
+      produtos[cat].forEach(produto => {
+        container.innerHTML += `
+          <div class="card">
+            <h3>${produto.nome}</h3>
+          </div>
+        `;
+      });
+    });
+
+    return;
+  }
+
+  // 🔥 SE ESTIVER EM PÁGINA DE CATEGORIA
+  if (!produtos[categoria]) return;
+
   produtos[categoria].forEach(produto => {
 
-    // PRODUTO COM VARIAÇÃO (PINGADEIRAS)
     if (produto.tipo === "variacao") {
 
       let opcoes = produto.medidas.map(m =>
@@ -127,7 +127,6 @@ function carregarProdutos() {
       `;
     }
 
-    // PRODUTO UNIDADE
     if (produto.tipo === "unidade") {
 
       container.innerHTML += `
@@ -147,7 +146,6 @@ function carregarProdutos() {
       `;
     }
 
-    // PRODUTO METRAGEM
     if (produto.tipo === "metragem") {
 
       let opcoes = produto.medidas.map(m =>
@@ -174,7 +172,9 @@ function carregarProdutos() {
 
   });
 
-  ativarEventos();
+  if (typeof ativarEventos === "function") {
+    ativarEventos();
+  }
 }
 
 
