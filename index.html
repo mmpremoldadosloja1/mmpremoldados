@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +32,7 @@ header{
 
 .logo img{
   height:50px;
+  max-width:100%;
 }
 
 nav{
@@ -74,10 +74,10 @@ nav a:hover{
   justify-content:center;
   text-align:center;
   padding:0 20px;
-  background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-  url('https://i.pinimg.com/1200x/2d/8f/a5/2d8fa5373f9b4c7d07a8687d2717d032.jpg');
-  background-size:cover;
-  background-position:center;
+  background:
+  linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+  url('https://i.pinimg.com/1200x/2d/8f/a5/2d8fa5373f9b4c7d07a8687d2717d032.jpg')
+  no-repeat center/cover;
   color:#fff;
 }
 
@@ -137,6 +137,10 @@ nav a:hover{
   .hero p{
     font-size:14px;
   }
+
+  .logo img{
+    height:40px;
+  }
 }
 
 </style>
@@ -146,7 +150,7 @@ nav a:hover{
 
 <header>
   <div class="logo">
-    <img src="logo.png" alt="MM Pré-Moldados">
+    <img src="img/logo.png" alt="MM Pré-Moldados">
   </div>
 
   <nav id="menu">
