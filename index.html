@@ -1,8 +1,11 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MM Pré-Moldados</title><style>
+<title>MM Pré-Moldados</title>
+
+<style>
 *{
   margin:0;
   padding:0;
@@ -71,8 +74,10 @@ nav a:hover{
   justify-content:center;
   text-align:center;
   padding:0 20px;
-  background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e');
+  background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+  url('https://i.pinimg.com/1200x/2d/8f/a5/2d8fa5373f9b4c7d07a8687d2717d032.jpg');
   background-size:cover;
+  background-position:center;
   color:#fff;
 }
 
@@ -134,29 +139,46 @@ nav a:hover{
   }
 }
 
-</style></head><body><header>  <div class="logo">
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
     <img src="logo.png" alt="MM Pré-Moldados">
-  </div>  <nav id="menu">
+  </div>
+
+  <nav id="menu">
     <a href="#">Início</a>
     <a href="#">Produtos</a>
     <a href="#">Sobre</a>
     <a href="#">Contato</a>
-  </nav>  <div class="menu-toggle" id="hamburguer">
+  </nav>
+
+  <div class="menu-toggle" id="hamburguer">
     <span></span>
     <span></span>
     <span></span>
-  </div></header><section class="hero">
+  </div>
+</header>
+
+<section class="hero">
   <div>
     <h1>Qualidade, Economia e Confiança</h1>
     <p>Os melhores pré-moldados da região</p>
     <button class="btn-produtos">Ver produtos</button>
   </div>
-</section><script>
+</section>
+
+<script>
 const hamburguer = document.getElementById('hamburguer');
 const menu = document.getElementById('menu');
 
 hamburguer.addEventListener('click', () => {
   menu.classList.toggle('active');
 });
-</script></body>
+</script>
+
+</body>
 </html>
