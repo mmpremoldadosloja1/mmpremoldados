@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MM Pré-Moldados</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -22,13 +23,30 @@ header{
   display:flex;
   align-items:center;
   gap:10px;
+  position:relative;
   box-shadow:0 2px 10px rgba(0,0,0,0.3);
+}
+
+.menu-btn{
+  background:#d0d0d0;
+  color:#005f88;
+  border:none;
+  font-size:22px;
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.menu-btn:hover{
+  background:#00aaff;
+  color:#000;
 }
 
 .logo img{
   height:100px;
 }
 
+/* BUSCA */
 .search-box{
   flex:1;
   display:flex;
@@ -46,6 +64,7 @@ header{
   color:#000;
 }
 
+/* CARRINHO */
 .cart{
   font-size:20px;
   color:#005f88;
@@ -53,73 +72,30 @@ header{
   text-align:center;
 }
 
-/* INDICADOR DISCRETO */
-.menu-indicator{
-  position:fixed;
-  top:50%;
-  left:0;
-  transform:translateY(-50%);
-  width:18px;
-  height:90px;
-  background:#1c1c1c;
-  border-radius:0 12px 12px 0;
-  box-shadow:4px 0 12px rgba(0,0,0,0.4);
-  z-index:2100;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-
-.menu-indicator::after{
-  content:"›";
-  color:#0090c5;
-  font-size:22px;
-}
-
 /* MENU */
-.side-menu{
-  position:fixed;
-  top:0;
-  left:-260px;
-  width:250px;
-  height:100%;
-  background:#1c1c1c;
-  box-shadow:4px 0 20px rgba(0,0,0,0.6);
-  padding-top:120px;
-  transition:0.3s ease;
-  z-index:2000;
-}
-
-.side-menu.active{
-  left:0;
-}
-
-.side-menu a{
-  display:block;
-  padding:15px 20px;
-  color:#fff;
-  text-decoration:none;
-  border-bottom:1px solid #2a2a2a;
-}
-
-.side-menu a:hover{
-  background:#0090c5;
-}
-
-.overlay{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.5);
+.menu{
   display:none;
-  z-index:1500;
+  position:absolute;
+  top:65px;
+  left:10px;
+  background:#f0f0f0;
+  border-radius:10px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.4);
+  overflow:hidden;
+  z-index:999;
+  min-width:220px;
 }
 
-.overlay.active{
+.menu a{
   display:block;
+  padding:12px 16px;
+  color:#000;
+  text-decoration:none;
+  border-bottom:1px solid #ccc;
+}
+
+.menu a:hover{
+  background:#00aaff;
 }
 
 /* SEÇÕES */
@@ -136,12 +112,14 @@ h2{
   color:#aaa;
 }
 
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
   gap:15px;
 }
 
+/* CARD */
 .card{
   background:#1a1a1a;
   border-radius:12px;
@@ -171,25 +149,31 @@ h2{
   margin:0;
 }
 
+/* MOBILE */
 @media(max-width:768px){
+
   .logo img{
     height:45px;
   }
+
   .card img{
     height:130px;
   }
+
   .grid{
     grid-template-columns: repeat(2, 1fr);
   }
+
 }
 </style>
 </head>
 
 <body>
 
-<div class="menu-indicator" onclick="abrirMenu()"></div>
-
 <header>
+
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
   <div class="logo">
     <img src="img/logo.png" alt="MM Pré-Moldados">
   </div>
@@ -199,51 +183,86 @@ h2{
   </div>
 
   <div class="cart">🛒</div>
+
+  <div class="menu" id="menu">
+    <a href="blocos.html">Blocos/Canaletas</a>
+    <a href="manilhas.html">Manilhas</a>
+    <a href="lajes.html">Lajes</a>
+    <a href="cobogos.html">Cobogós</a>
+    <a href="pingadeiras.html">Pingadeiras</a>
+    <a href="caixas.html">Caixas</a>
+    <a href="pisos.html">Pisos</a>
+    <a href="meio-fio.html">Meio-fio</a>
+    <a href="revestimento-parede.html">Revestimento</a>
+  </div>
+
 </header>
 
-<div class="overlay" id="overlay"></div>
-
-<div class="side-menu" id="sideMenu">
-  <a href="blocos.html">Blocos/Canaletas</a>
-  <a href="manilhas.html">Manilhas</a>
-  <a href="lajes.html">Lajes</a>
-  <a href="cobogos.html">Cobogós</a>
-  <a href="pingadeiras.html">Pingadeiras</a>
-  <a href="caixas.html">Caixas</a>
-  <a href="pisos.html">Pisos</a>
-  <a href="meio-fio.html">Meio-fio</a>
-  <a href="revestimento-parede.html">Revestimento</a>
-</div>
-
 <section>
+
   <h2>🔥 Produtos em Destaque</h2>
   <span class="ver-todos">Ver todos</span>
-  <div class="grid" id="produtosContainer"></div>
+
+  <div class="grid">
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-anti-chuva-40.jpg">
+      <h3>Cobogó Anti-Chuva 40x40</h3>
+    </a>
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-16-furos-40.jpg">
+      <h3>Cobogó 16 Furos 40x40</h3>
+    </a>
+
+    <a href="manilhas.html" class="card">
+      <img src="img/manilhas/manilha-90x50.jpg">
+      <h3>Manilha 90x50</h3>
+    </a>
+
+    <a href="pingadeiras.html" class="card">
+      <img src="img/pingadeiras/pingadeira-1m.jpg">
+      <h3>Pingadeira 1m</h3>
+    </a>
+
+  </div>
+
 </section>
 
 <section>
+
   <h2>✨ Novidades</h2>
-  <div class="grid"></div>
+
+  <div class="grid">
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-flor-40.jpg">
+      <h3>Cobogó Flor</h3>
+    </a>
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-estrela-30.jpg">
+      <h3>Cobogó Estrela</h3>
+    </a>
+
+  </div>
+
 </section>
 
 <script>
-const menu = document.getElementById("sideMenu");
-const overlay = document.getElementById("overlay");
-
-function abrirMenu(){
-  menu.classList.add("active");
-  overlay.classList.add("active");
+function toggleMenu(){
+  const menu = document.getElementById("menu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
-function fecharMenu(){
-  menu.classList.remove("active");
-  overlay.classList.remove("active");
-}
-
-overlay.addEventListener("click", fecharMenu);
+document.addEventListener("click", function(e){
+  if(!e.target.closest("header")){
+    document.getElementById("menu").style.display = "none";
+  }
+});
 </script>
 
-<script src="Js/apps.js"></script>
+<script src="produtos.js"></script>
 
 </body>
 </html>
