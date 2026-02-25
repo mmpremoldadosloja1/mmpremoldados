@@ -37,14 +37,15 @@ const produtos = {
     {
       nome: "Laje Teto H8",
       tipo: "metragem",
-      medidas: ["7,5cm x 33cm","7,5cm x 40cm"]
+      medidas: ["7,5cm x 33cm", "7,5cm x 40cm"]
     },
     {
       nome: "Laje Piso H10",
       tipo: "metragem",
-      medidas: ["9cm x 33cm","9cm x 40cm"]
+      medidas: ["9cm x 33cm", "9cm x 40cm"]
     }
   ]
+
 };
 
 
@@ -65,116 +66,126 @@ function salvarCarrinho() {
 
 function carregarProdutos() {
 
+  const params = new URLSearchParams(window.location.search);
+  const categoria = params.get("categoria");
+
   const container = document.getElementById("produtosContainer");
   if (!container) return;
 
   container.innerHTML = "";
 
-  const params = new URLSearchParams(window.location.search);
-  let categoria = params.get("categoria");
-
-  // 🔥 SE ESTIVER NA HOME (SEM CATEGORIA) MOSTRA TODOS OS PRODUTOS
+  // 🔥 SE NÃO TIVER CATEGORIA (HOME) MOSTRA TUDO
   if (!categoria) {
 
     Object.keys(produtos).forEach(cat => {
+
+      container.innerHTML += `<h2 style="margin-top:40px;">${formatarCategoria(cat)}</h2>`;
+
       produtos[cat].forEach(produto => {
-        container.innerHTML += `
-          <div class="card">
-            <h3>${produto.nome}</h3>
-          </div>
-        `;
+        renderProduto(produto, container);
       });
+
     });
 
-    return;
+  } else {
+
+    if (!produtos[categoria]) return;
+
+    produtos[categoria].forEach(produto => {
+      renderProduto(produto, container);
+    });
+
   }
 
-  // 🔥 SE ESTIVER EM PÁGINA DE CATEGORIA
-  if (!produtos[categoria]) return;
+  ativarEventos();
+}
 
-  produtos[categoria].forEach(produto => {
 
-    if (produto.tipo === "variacao") {
+// ===============================
+// RENDERIZAR PRODUTO
+// ===============================
 
-      let opcoes = produto.medidas.map(m =>
-        `<option>${m}</option>`
-      ).join("");
+function renderProduto(produto, container) {
 
-      container.innerHTML += `
-        <div class="card">
+  if (produto.tipo === "variacao") {
 
-          <div class="imagem-centro">
-            Imagem será adicionada aqui
-          </div>
+    let opcoes = produto.medidas.map(m =>
+      `<option>${m}</option>`
+    ).join("");
 
-          <h3>${produto.nome}</h3>
+    container.innerHTML += `
+      <div class="card">
+        <h3>${produto.nome}</h3>
 
-          <select class="medida">
-            ${opcoes}
-          </select>
+        <select class="medida">
+          ${opcoes}
+        </select>
 
-          <div class="contador">
-            <button onclick="alterarQtd(this,-1)">−</button>
-            <span class="qtd">1</span>
-            <button onclick="alterarQtd(this,1)">+</button>
-          </div>
-
-          <button class="btn" onclick="addVariacao('${produto.nome}', this)">
-            Adicionar ao carrinho
-          </button>
-
+        <div class="contador">
+          <button onclick="alterarQtd(this,-1)">−</button>
+          <span class="qtd">1</span>
+          <button onclick="alterarQtd(this,1)">+</button>
         </div>
-      `;
-    }
 
-    if (produto.tipo === "unidade") {
-
-      container.innerHTML += `
-        <div class="card">
-          <h3>${produto.nome}</h3>
-
-          <div class="contador">
-            <button onclick="alterarQtd(this,-1)">−</button>
-            <span class="qtd">1</span>
-            <button onclick="alterarQtd(this,1)">+</button>
-          </div>
-
-          <button class="btn" onclick="addUnidade('${produto.nome}', this)">
-            Adicionar ao carrinho
-          </button>
-        </div>
-      `;
-    }
-
-    if (produto.tipo === "metragem") {
-
-      let opcoes = produto.medidas.map(m =>
-        `<option>${m}</option>`
-      ).join("");
-
-      container.innerHTML += `
-        <div class="card">
-          <h3>${produto.nome}</h3>
-
-          <select class="medida">
-            <option value="">Selecionar medida</option>
-            ${opcoes}
-          </select>
-
-          <input type="number" class="metragem hidden" placeholder="Digite m²">
-
-          <button class="btn hidden" onclick="addMetragem('${produto.nome}', this)">
-            Adicionar ao carrinho
-          </button>
-        </div>
-      `;
-    }
-
-  });
-
-  if (typeof ativarEventos === "function") {
-    ativarEventos();
+        <button class="btn" onclick="addVariacao('${produto.nome}', this)">
+          Adicionar ao carrinho
+        </button>
+      </div>
+    `;
   }
+
+  if (produto.tipo === "unidade") {
+
+    container.innerHTML += `
+      <div class="card">
+        <h3>${produto.nome}</h3>
+
+        <div class="contador">
+          <button onclick="alterarQtd(this,-1)">−</button>
+          <span class="qtd">1</span>
+          <button onclick="alterarQtd(this,1)">+</button>
+        </div>
+
+        <button class="btn" onclick="addUnidade('${produto.nome}', this)">
+          Adicionar ao carrinho
+        </button>
+      </div>
+    `;
+  }
+
+  if (produto.tipo === "metragem") {
+
+    let opcoes = produto.medidas.map(m =>
+      `<option>${m}</option>`
+    ).join("");
+
+    container.innerHTML += `
+      <div class="card">
+        <h3>${produto.nome}</h3>
+
+        <select class="medida">
+          <option value="">Selecionar medida</option>
+          ${opcoes}
+        </select>
+
+        <input type="number" class="metragem hidden" placeholder="Digite m²">
+
+        <button class="btn hidden" onclick="addMetragem('${produto.nome}', this)">
+          Adicionar ao carrinho
+        </button>
+      </div>
+    `;
+  }
+
+}
+
+
+// ===============================
+// FORMATAR CATEGORIA
+// ===============================
+
+function formatarCategoria(cat){
+  return cat.replace(/-/g, " ").toUpperCase();
 }
 
 
