@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,21 +23,31 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 40px;
+  padding:15px 30px;
   position:fixed;
   top:0;
-  background:transparent;
   z-index:999;
-  transition:0.3s;
-}
-
-header.scrolled{
-  background:#111;
-  box-shadow:0 2px 10px rgba(0,0,0,0.4);
+  background:transparent;
 }
 
 .logo img{
-  height:50px;
+  height:45px;
+}
+
+nav{
+  display:flex;
+  gap:25px;
+}
+
+nav a{
+  text-decoration:none;
+  color:#fff;
+  font-weight:600;
+  transition:0.3s;
+}
+
+nav a:hover{
+  color:#e63946;
 }
 
 /* HERO */
@@ -47,119 +58,158 @@ header.scrolled{
   justify-content:center;
   text-align:center;
   padding:0 20px;
-  background:
-  linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-  url('https://i.pinimg.com/1200x/2d/8f/a5/2d8fa5373f9b4c7d07a8687d2717d032.jpg')
-  no-repeat center/cover;
+  background:linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), 
+  url('https://i.pinimg.com/1200x/2d/8f/a5/2d8fa5373f9b4c7d07a8687d2717d032.jpg');
+  background-size:cover;
+  background-position:center;
   color:#fff;
 }
 
 .hero h1{
-  font-size:42px;
-  margin-bottom:15px;
+  font-size:38px;
+  margin-bottom:12px;
 }
 
 .hero p{
-  font-size:18px;
+  font-size:17px;
   margin-bottom:25px;
 }
 
 .btn-produtos{
-  padding:15px 30px;
+  padding:15px 32px;
   border:none;
   background:#e63946;
   color:#fff;
   font-weight:bold;
   cursor:pointer;
-  border-radius:6px;
+  border-radius:8px;
+  transition:0.3s;
 }
 
-/* MENU LISTA LATERAL */
-.lista-produtos{
+.btn-produtos:hover{
+  background:#c92f3b;
+  transform:scale(1.05);
+}
+
+/* MENU LATERAL LUXO */
+.menu-categorias{
   position:fixed;
-  top:100px;
+  top:0;
   left:-260px;
   width:240px;
-  background:#111;
-  padding:20px;
-  border-radius:0 10px 10px 0;
-  transition:0.4s;
-  z-index:1000;
+  height:100%;
+  backdrop-filter:blur(12px);
+  background:rgba(0,0,0,0.85);
+  padding:90px 20px;
+  transition:0.4s ease;
+  z-index:998;
 }
 
-.lista-produtos.active{
+.menu-categorias.active{
   left:0;
 }
 
-.lista-produtos a{
+.menu-categorias a{
   display:block;
-  color:#ccc;
+  color:#fff;
   text-decoration:none;
-  padding:10px 0;
-  border-bottom:1px solid #222;
+  margin:18px 0;
+  font-size:15px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  padding-bottom:10px;
   transition:0.3s;
-  font-size:14px;
 }
 
-.lista-produtos a:hover{
+.menu-categorias a:hover{
   color:#e63946;
   padding-left:8px;
 }
 
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.45);
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
 /* MOBILE */
 @media(max-width:768px){
-  .hero h1{font-size:24px;}
-  .hero p{font-size:14px;}
-  .logo img{height:40px;}
-  .lista-produtos{
-    top:80px;
+  nav{
+    display:none;
+  }
+
+  .hero h1{
+    font-size:24px;
+  }
+
+  .hero p{
+    font-size:14px;
   }
 }
+
 </style>
 </head>
 
 <body>
 
-<header id="header">
+<header>
   <div class="logo">
     <img src="img/logo.png" alt="MM Pré-Moldados">
   </div>
+
+  <nav>
+    <a href="#">Início</a>
+    <a href="#">Sobre</a>
+    <a href="#">Contato</a>
+  </nav>
 </header>
 
 <section class="hero">
   <div>
     <h1>Qualidade, Economia e Confiança</h1>
     <p>Lajes, blocos, manilhas, cobogós, pisos, revestimentos e muito mais</p>
-    <button class="btn-produtos" onclick="toggleLista()">Ver produtos</button>
+    <button class="btn-produtos" onclick="abrirMenu()">Ver produtos</button>
   </div>
 </section>
 
-<!-- LISTA LATERAL -->
-<div class="lista-produtos" id="lista">
-  <a href="blocos.html">Blocos e Canaletas</a>
-  <a href="manilhas.html">Manilhas</a>
-  <a href="lajes.html">Lajes</a>
-  <a href="cobogos.html">Cobogós</a>
-  <a href="pingadeiras.html">Pingadeiras</a>
-  <a href="caixas.html">Caixas</a>
-  <a href="pisos.html">Pisos</a>
-  <a href="meio-fio.html">Meio-fio</a>
-  <a href="revestimento-parede.html">Revestimentos</a>
+<!-- MENU CATEGORIAS -->
+<div class="menu-categorias" id="menuCategorias">
+  <a href="#">Blocos e Canaletas</a>
+  <a href="#">Manilhas</a>
+  <a href="#">Lajes</a>
+  <a href="#">Cobogós</a>
+  <a href="#">Pingadeiras</a>
+  <a href="#">Caixas</a>
+  <a href="#">Pisos</a>
+  <a href="#">Meio-fio</a>
+  <a href="#">Revestimentos</a>
 </div>
 
+<div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+
 <script>
-const header = document.getElementById('header');
+const menu = document.getElementById("menuCategorias");
+const overlay = document.getElementById("overlay");
 
-window.addEventListener("scroll", () => {
-  if(window.scrollY > 50){
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
-  }
-});
+function abrirMenu(){
+  menu.classList.add("active");
+  overlay.classList.add("active");
+}
 
-function toggleLista(){
-  document.getElementById("lista").classList.toggle("active");
+function fecharMenu(){
+  menu.classList.remove("active");
+  overlay.classList.remove("active");
 }
 </script>
 
