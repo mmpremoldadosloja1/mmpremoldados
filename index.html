@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 body{
   margin:0;
   font-family:'Inter', Arial, sans-serif;
@@ -17,56 +16,86 @@ body{
   color:#fff;
 }
 
-/* ===== TOPO LIMPO (SEM CAIXA) ===== */
-
+/* HEADER */
 header{
-  padding:40px 20px 10px 20px;
+  background:#e0e0e0;
+  padding:8px 12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  position:relative;
+  box-shadow:0 2px 10px rgba(0,0,0,0.3);
+}
+
+.logo img{
+  height:100px;
+}
+
+/* BUSCA */
+.search-box{
+  flex:1;
   display:flex;
   justify-content:center;
-  align-items:center;
-  background:transparent; /* remove caixa */
-  box-shadow:none;        /* remove linha */
-  border:none;            /* garante sem borda */
 }
 
-/* LOGO GRANDE */
-.logo img{
-  height:170px;
-  max-width:95%;
+.search-box input{
+  width:100%;
+  max-width:500px;
+  padding:10px;
+  border-radius:6px;
+  border:none;
+  font-size:14px;
+  background:#f2f2f2;
+  color:#000;
 }
 
-/* ===== BARRA CATEGORIAS ===== */
+/* CARRINHO */
+.cart{
+  font-size:20px;
+  color:#005f88;
+  min-width:35px;
+  text-align:center;
+}
 
+/* BARRA CATEGORIAS */
 .barra-categorias{
-  padding:20px;
-  display:flex;
-  justify-content:flex-start;
+  background:linear-gradient(to right,#3f3f3f,#4a4a4a);
+  padding:14px 20px;
+  position:relative;
+  border-bottom:1px solid #2a2a2a;
 }
 
-/* BOTÃO CATEGORIAS */
+/* BOTÃO PREMIUM */
 .categorias-btn{
   background:linear-gradient(135deg,#0077aa,#00aaff);
   color:#fff;
   border:none;
   font-size:14px;
-  padding:12px 26px;
-  border-radius:10px;
+  padding:10px 22px;
+  border-radius:8px;
   cursor:pointer;
   font-weight:600;
-  box-shadow:0 4px 12px rgba(0,0,0,0.3);
-  transition:0.3s;
+  letter-spacing:0.5px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.3);
+  transition:all 0.3s ease;
 }
 
 .categorias-btn:hover{
   transform:translateY(-2px);
   box-shadow:0 6px 18px rgba(0,0,0,0.4);
+  background:linear-gradient(135deg,#0099dd,#00ccff);
+}
+
+.categorias-btn:active{
+  transform:scale(0.97);
 }
 
 /* MENU */
 .menu{
   display:none;
   position:absolute;
-  margin-top:10px;
+  top:55px;
+  left:20px;
   background:#f0f0f0;
   border-radius:10px;
   box-shadow:0 6px 16px rgba(0,0,0,0.4);
@@ -85,18 +114,15 @@ header{
 
 .menu a:hover{
   background:#00aaff;
-  color:#fff;
 }
 
-/* ===== SEÇÕES ===== */
-
+/* SEÇÕES */
 section{
   padding:20px;
 }
 
 h2{
   color:#00aaff;
-  margin-top:10px;
 }
 
 .ver-todos{
@@ -105,7 +131,6 @@ h2{
 }
 
 /* GRID */
-
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
@@ -113,7 +138,6 @@ h2{
 }
 
 /* CARD */
-
 .card{
   background:#1a1a1a;
   border-radius:12px;
@@ -144,11 +168,14 @@ h2{
 }
 
 /* MOBILE */
-
 @media(max-width:768px){
 
   .logo img{
-    height:120px;
+    height:45px;
+  }
+
+  .card img{
+    height:130px;
   }
 
   .grid{
@@ -156,18 +183,26 @@ h2{
   }
 
 }
-
 </style>
 </head>
 
 <body>
 
 <header>
+
   <div class="logo">
     <img src="img/logo.png" alt="MM Pré-Moldados">
   </div>
+
+  <div class="search-box">
+    <input type="text" placeholder="Buscar produtos">
+  </div>
+
+  <div class="cart">🛒</div>
+
 </header>
 
+<!-- BOTÃO ABAIXO DO HEADER -->
 <div class="barra-categorias">
   <button class="categorias-btn" onclick="toggleMenu()">
     Categorias ▼
@@ -187,16 +222,57 @@ h2{
 </div>
 
 <section>
+
   <h2>🔥 Produtos em Destaque</h2>
   <span class="ver-todos">Ver todos</span>
 
   <div class="grid">
-    <!-- seus produtos continuam aqui -->
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-anti-chuva-40.jpg">
+      <h3>Cobogó Anti-Chuva 40x40</h3>
+    </a>
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-16-furos-40.jpg">
+      <h3>Cobogó 16 Furos 40x40</h3>
+    </a>
+
+    <a href="manilhas.html" class="card">
+      <img src="img/manilhas/manilha-90x50.jpg">
+      <h3>Manilha 90x50</h3>
+    </a>
+
+    <a href="pingadeiras.html" class="card">
+      <img src="img/pingadeiras/pingadeira-1m.jpg">
+      <h3>Pingadeira 1m</h3>
+    </a>
+
   </div>
+
+</section>
+
+<section>
+
+  <h2>✨ Novidades</h2>
+
+  <div class="grid">
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-flor-40.jpg">
+      <h3>Cobogó Flor</h3>
+    </a>
+
+    <a href="cobogos.html" class="card">
+      <img src="img/cobogo-estrela-30.jpg">
+      <h3>Cobogó Estrela</h3>
+    </a>
+
+  </div>
+
 </section>
 
 <script>
-
 function toggleMenu(){
   const menu = document.getElementById("menu");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
@@ -207,7 +283,6 @@ document.addEventListener("click", function(e){
     document.getElementById("menu").style.display = "none";
   }
 });
-
 </script>
 
 <script src="produtos.js"></script>
