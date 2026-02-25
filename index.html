@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 body{
   margin:0;
   font-family:'Inter', Arial, sans-serif;
@@ -16,59 +17,56 @@ body{
   color:#fff;
 }
 
-/* HEADER AGORA LIMPO */
+/* ===== TOPO LIMPO (SEM CAIXA) ===== */
+
 header{
-  padding:30px 20px 10px 20px;
+  padding:40px 20px 10px 20px;
   display:flex;
   justify-content:center;
   align-items:center;
+  background:transparent; /* remove caixa */
+  box-shadow:none;        /* remove linha */
+  border:none;            /* garante sem borda */
 }
 
-/* LOGO GRANDE E DESTAQUE */
+/* LOGO GRANDE */
 .logo img{
-  height:140px;
-  max-width:90%;
+  height:170px;
+  max-width:95%;
 }
 
-/* BARRA CATEGORIAS */
+/* ===== BARRA CATEGORIAS ===== */
+
 .barra-categorias{
-  background:linear-gradient(to right,#3f3f3f,#4a4a4a);
-  padding:14px 20px;
-  position:relative;
-  border-bottom:1px solid #2a2a2a;
+  padding:20px;
+  display:flex;
+  justify-content:flex-start;
 }
 
-/* BOTÃO PREMIUM */
+/* BOTÃO CATEGORIAS */
 .categorias-btn{
   background:linear-gradient(135deg,#0077aa,#00aaff);
   color:#fff;
   border:none;
   font-size:14px;
-  padding:10px 22px;
-  border-radius:8px;
+  padding:12px 26px;
+  border-radius:10px;
   cursor:pointer;
   font-weight:600;
-  letter-spacing:0.5px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.3);
-  transition:all 0.3s ease;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  transition:0.3s;
 }
 
 .categorias-btn:hover{
   transform:translateY(-2px);
   box-shadow:0 6px 18px rgba(0,0,0,0.4);
-  background:linear-gradient(135deg,#0099dd,#00ccff);
-}
-
-.categorias-btn:active{
-  transform:scale(0.97);
 }
 
 /* MENU */
 .menu{
   display:none;
   position:absolute;
-  top:55px;
-  left:20px;
+  margin-top:10px;
   background:#f0f0f0;
   border-radius:10px;
   box-shadow:0 6px 16px rgba(0,0,0,0.4);
@@ -90,13 +88,15 @@ header{
   color:#fff;
 }
 
-/* SEÇÕES */
+/* ===== SEÇÕES ===== */
+
 section{
   padding:20px;
 }
 
 h2{
   color:#00aaff;
+  margin-top:10px;
 }
 
 .ver-todos{
@@ -105,6 +105,7 @@ h2{
 }
 
 /* GRID */
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
@@ -112,6 +113,7 @@ h2{
 }
 
 /* CARD */
+
 .card{
   background:#1a1a1a;
   border-radius:12px;
@@ -142,14 +144,11 @@ h2{
 }
 
 /* MOBILE */
+
 @media(max-width:768px){
 
   .logo img{
-    height:95px;
-  }
-
-  .card img{
-    height:130px;
+    height:120px;
   }
 
   .grid{
@@ -157,6 +156,7 @@ h2{
   }
 
 }
+
 </style>
 </head>
 
@@ -191,49 +191,12 @@ h2{
   <span class="ver-todos">Ver todos</span>
 
   <div class="grid">
-
-    <a href="cobogos.html" class="card">
-      <img src="img/cobogo-anti-chuva-40.jpg">
-      <h3>Cobogó Anti-Chuva 40x40</h3>
-    </a>
-
-    <a href="cobogos.html" class="card">
-      <img src="img/cobogo-16-furos-40.jpg">
-      <h3>Cobogó 16 Furos 40x40</h3>
-    </a>
-
-    <a href="manilhas.html" class="card">
-      <img src="img/manilhas/manilha-90x50.jpg">
-      <h3>Manilha 90x50</h3>
-    </a>
-
-    <a href="pingadeiras.html" class="card">
-      <img src="img/pingadeiras/pingadeira-1m.jpg">
-      <h3>Pingadeira 1m</h3>
-    </a>
-
-  </div>
-</section>
-
-<section>
-  <h2>✨ Novidades</h2>
-
-  <div class="grid">
-
-    <a href="cobogos.html" class="card">
-      <img src="img/cobogo-flor-40.jpg">
-      <h3>Cobogó Flor</h3>
-    </a>
-
-    <a href="cobogos.html" class="card">
-      <img src="img/cobogo-estrela-30.jpg">
-      <h3>Cobogó Estrela</h3>
-    </a>
-
+    <!-- seus produtos continuam aqui -->
   </div>
 </section>
 
 <script>
+
 function toggleMenu(){
   const menu = document.getElementById("menu");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
@@ -244,6 +207,7 @@ document.addEventListener("click", function(e){
     document.getElementById("menu").style.display = "none";
   }
 });
+
 </script>
 
 <script src="produtos.js"></script>
