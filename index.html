@@ -30,8 +30,6 @@
     /* BOTÃO CATEGORIAS */
     .area-categorias {
       padding: 15px;
-      display: flex;
-      justify-content: flex-start;
     }
 
     .btn-categorias {
@@ -72,35 +70,6 @@
     .menu-categorias button:hover {
       background: #00bfff;
     }
-
-    h2 {
-      padding: 15px;
-      color: #00bfff;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      padding: 15px;
-    }
-
-    .card {
-      background: #1e1e1e;
-      border-radius: 15px;
-      overflow: hidden;
-      text-align: center;
-    }
-
-    .card img {
-      width: 100%;
-      background: white;
-    }
-
-    .card h3 {
-      padding: 10px;
-      font-size: 16px;
-    }
   </style>
 </head>
 
@@ -124,11 +93,10 @@
     <button onclick="filtrarCategoria('lajes')">Lajes</button>
   </div>
 
-  <h2>🔥 Produtos em Destaque</h2>
-  <div id="produtosDestaque" class="grid"></div>
+  <!-- ⚠️ AQUI ESTÁ O SEGREDO -->
+  <!-- MANTER O ID ORIGINAL QUE O apps.js USA -->
 
-  <h2>✨ Novidades</h2>
-  <div id="produtosNovidades" class="grid"></div>
+  <div id="produtos"></div>
 
   <script src="produtos.js"></script>
   <script src="apps.js"></script>
