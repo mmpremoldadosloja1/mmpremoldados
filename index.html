@@ -39,18 +39,6 @@ header.scrolled{
   height:50px;
 }
 
-/* MENU */
-nav{
-  display:flex;
-  gap:30px;
-}
-
-nav a{
-  text-decoration:none;
-  color:#fff;
-  font-weight:600;
-}
-
 /* HERO */
 .hero{
   height:100vh;
@@ -86,44 +74,36 @@ nav a{
   border-radius:6px;
 }
 
-/* PAINEL DE CATEGORIAS */
-.categorias{
+/* MENU LISTA LATERAL */
+.lista-produtos{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100vh;
+  top:100px;
+  left:-260px;
+  width:240px;
   background:#111;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:2000;
-}
-
-.categorias.active{
-  display:flex;
-}
-
-.categorias-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  width:90%;
-  max-width:900px;
-}
-
-.categorias-grid a{
-  background:#1f1f1f;
   padding:20px;
-  border-radius:10px;
-  text-align:center;
-  color:#fff;
-  text-decoration:none;
-  transition:0.3s;
+  border-radius:0 10px 10px 0;
+  transition:0.4s;
+  z-index:1000;
 }
 
-.categorias-grid a:hover{
-  background:#e63946;
+.lista-produtos.active{
+  left:0;
+}
+
+.lista-produtos a{
+  display:block;
+  color:#ccc;
+  text-decoration:none;
+  padding:10px 0;
+  border-bottom:1px solid #222;
+  transition:0.3s;
+  font-size:14px;
+}
+
+.lista-produtos a:hover{
+  color:#e63946;
+  padding-left:8px;
 }
 
 /* MOBILE */
@@ -131,6 +111,9 @@ nav a{
   .hero h1{font-size:24px;}
   .hero p{font-size:14px;}
   .logo img{height:40px;}
+  .lista-produtos{
+    top:80px;
+  }
 }
 </style>
 </head>
@@ -141,38 +124,27 @@ nav a{
   <div class="logo">
     <img src="img/logo.png" alt="MM Pré-Moldados">
   </div>
-
-  <nav>
-    <a href="#">Início</a>
-    <a href="#">Produtos</a>
-    <a href="#">Sobre</a>
-    <a href="#">Contato</a>
-  </nav>
 </header>
 
 <section class="hero">
   <div>
     <h1>Qualidade, Economia e Confiança</h1>
     <p>Lajes, blocos, manilhas, cobogós, pisos, revestimentos e muito mais</p>
-    <button class="btn-produtos" onclick="abrirCategorias()">Ver produtos</button>
+    <button class="btn-produtos" onclick="toggleLista()">Ver produtos</button>
   </div>
 </section>
 
-<!-- CATEGORIAS -->
-<div class="categorias" id="categorias">
-  <div class="categorias-grid">
-
-    <a href="blocos.html">Blocos e Canaletas</a>
-    <a href="manilhas.html">Manilhas</a>
-    <a href="lajes.html">Lajes</a>
-    <a href="cobogos.html">Cobogós</a>
-    <a href="pingadeiras.html">Pingadeiras</a>
-    <a href="caixas.html">Caixas</a>
-    <a href="pisos.html">Pisos</a>
-    <a href="meio-fio.html">Meio-fio</a>
-    <a href="revestimento-parede.html">Revestimentos</a>
-
-  </div>
+<!-- LISTA LATERAL -->
+<div class="lista-produtos" id="lista">
+  <a href="blocos.html">Blocos e Canaletas</a>
+  <a href="manilhas.html">Manilhas</a>
+  <a href="lajes.html">Lajes</a>
+  <a href="cobogos.html">Cobogós</a>
+  <a href="pingadeiras.html">Pingadeiras</a>
+  <a href="caixas.html">Caixas</a>
+  <a href="pisos.html">Pisos</a>
+  <a href="meio-fio.html">Meio-fio</a>
+  <a href="revestimento-parede.html">Revestimentos</a>
 </div>
 
 <script>
@@ -186,15 +158,9 @@ window.addEventListener("scroll", () => {
   }
 });
 
-function abrirCategorias(){
-  document.getElementById("categorias").classList.add("active");
+function toggleLista(){
+  document.getElementById("lista").classList.toggle("active");
 }
-
-document.getElementById("categorias").addEventListener("click", function(e){
-  if(e.target === this){
-    this.classList.remove("active");
-  }
-});
 </script>
 
 </body>
