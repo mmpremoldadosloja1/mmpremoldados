@@ -1,250 +1,320 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Cobogós | MM Pré-Moldados</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Cobogós | MM Pré-Moldados</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 
-<style>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
 
-/* ============================= */
-/* CARD TRANSPARENTE */
-/* ============================= */
+    h1 {
+      text-align: center;
+      margin: 25px 0 10px;
+    }
 
-.card{
-  background: transparent;
-  box-shadow: none;
-  border: none;
-}
+    h2 {
+      margin: 30px 20px 10px;
+      border-left: 5px solid #c9a24d;
+      padding-left: 10px;
+      color: #333;
+    }
 
-/* ============================= */
-/* IMAGENS MENORES */
-/* ============================= */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 0px;
+    }
 
-.card img{
-  width: 100%;
-  height: 120px;
-  object-fit: contain;
-  margin-bottom: 10px;
-}
+    @media (max-width: 1024px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
 
-/* ============================= */
-/* ANIMAÇÃO DE ENTRADA */
-/* ============================= */
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 5fr; }
+    }
 
-.card{
-  opacity: 0;
-  transform: translateY(40px);
-  animation: aparecer 0.6s ease forwards;
-}
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
 
-.card:nth-child(1){animation-delay:0.1s;}
-.card:nth-child(2){animation-delay:0.2s;}
-.card:nth-child(3){animation-delay:0.3s;}
-.card:nth-child(4){animation-delay:0.4s;}
-.card:nth-child(5){animation-delay:0.5s;}
-.card:nth-child(6){animation-delay:0.6s;}
+    .card img {
+      width: 100%;
+      height: 240px;
+      object-fit: contain;
+      background: #fff;
+    }
 
-@keyframes aparecer{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
+    @media (max-width: 600px) {
+      .card img { height: 300px; }
+    }
 
-</style>
+    .card h3 {
+      margin: 12px 0;
+      font-size: 16px;
+    }
+
+    .contador {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .contador button {
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 50%;
+      background: #ddd;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 10px 18px;
+      background: #111;
+      color: #fff;
+      border-radius: 5px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    .voltar {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      width: 46px;
+      height: 46px;
+      background: #111;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .voltar svg {
+      width: 22px;
+      height: 22px;
+      stroke: #fff;
+      stroke-width: 2.5;
+      fill: none;
+    }
+  </style>
 </head>
 
 <body>
 
-<a href="index.html" class="voltar">
-<svg viewBox="0 0 24 24">
-<path d="M15 18l-6-6 6-6"/>
-</svg>
+<a href="index.html" class="voltar" aria-label="Voltar">
+  <svg viewBox="0 0 24 24">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
 </a>
 
 <h1>Cobogós</h1>
 
-<!-- ================= 40x40 ================= -->
-
+<!-- ================== 40x40 ================== -->
 <h2>Cobogós 40x40</h2>
 <div class="grid">
 
-<div class="card">
-<img src="img/cobogo/cobogo-16-furos-40.jpg">
-<h3>16 Furos 40x40</h3>
+  <div class="card">
+    <img src="img/cobogo-16-furos-40.jpg" alt="Cobogó 16 Furos 40x40">
+    <h3>16 Furos 40x40</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
 
-<div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
+  <div class="card">
+    <img src="img/cobogo-4-pontas-40.jpg" alt="Cobogó 4 Pontas 40x40">
+    <h3>4 Pontas 40x40</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
+
+  <div class="card">
+    <img src="img/cobogo-anti-chuva-40.jpg" alt="Cobogó Anti-Chuva 40x40">
+    <h3>Anti-Chuva 40x40</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
+
+  <div class="card">
+    <img src="img/cobogo-arabe-40.jpg" alt="Cobogó Árabe 40x40">
+    <h3>Árabe 40x40</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
+
+  <div class="card">
+    <img src="img/cobogo-flor-40.jpg" alt="Cobogó Flor 40x40">
+    <h3>Flor 40x40</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
+
+  <div class="card">
+    <img src="img/cobogo-taco-chines-40.jpg" alt="Cobogó Taco Chinês 40x40">
+    <h3>Taco Chinês 40x40</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
+
 </div>
 
-<button class="btn" onclick="addCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-4-pontas-40.jpg">
-<h3>4 Pontas 40x40</h3>
-
-<div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
-</div>
-
-<button class="btn" onclick="addCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-anti-chuva-40.jpg">
-<h3>Anti-Chuva 40x40</h3>
-
-<div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
-</div>
-
-<button class="btn" onclick="addCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-arabe-40.jpg">
-<h3>Árabe 40x40</h3>
-
-<div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
-</div>
-
-<button class="btn" onclick="addCarrinho(this)">Adicionar</button>
-</div>
-
-</div>
-
-<!-- ================= 30x30 ================= -->
-
+<!-- ================== 30x30 ================== -->
 <h2>Cobogós 30x30</h2>
 <div class="grid">
 
-<div class="card">
-<img src="img/cobogo/cobogo-estrela-30.jpg">
-<h3>Estrela 30x30</h3>
+  <div class="card">
+    <img src="img/cobogo-estrela-30.jpg" alt="Cobogó Estrela 30x30">
+    <h3>Estrela 30x30</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
 
-<div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
+  <div class="card">
+    <img src="img/cobogo-estrela-dos-ventos-30.jpg" alt="Cobogó Estrela dos Ventos 30x30">
+    <h3>Estrela dos Ventos 30x30</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
+
+  <div class="card">
+    <img src="img/cobogo-fenestra-30.jpg" alt="Cobogó Fenestra 30x30">
+    <h3>Fenestra 30x30</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
+
+  <div class="card">
+    <img src="img/cobogo-petala-30.jpg" alt="Cobogó Pétala 30x30">
+    <h3>Pétala 30x30</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
+
+  <div class="card">
+    <img src="img/cobogo-quadrado-cruz-30.jpg" alt="Cobogó Quadrado Cruz 30x30">
+    <h3>Quadrado Cruz 30x30</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
+
+  <div class="card">
+    <img src="img/cobogo-xis-30.jpg" alt="Cobogó Xis 30x30">
+    <h3>Xis 30x30</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
+
 </div>
 
-<button class="btn" onclick="addCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-xis-30.jpg">
-<h3>Xis 30x30</h3>
-
-<div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
-</div>
-
-<button class="btn" onclick="addCarrinho(this)">Adicionar</button>
-</div>
-
-</div>
-
-<!-- ================= 24x24 ================= -->
-
+<!-- ================== 24x24 ================== -->
 <h2>Cobogós 24x24</h2>
 <div class="grid">
 
-<div class="card">
-<img src="img/cobogo/cobogo-4-furos-24.jpg">
-<h3>4 Furos 24x24</h3>
-
-<div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
-</div>
-
-<button class="btn" onclick="addCarrinho(this)">Adicionar</button>
-</div>
+  <div class="card">
+    <img src="img/cobogo-4-furos-24.jpg" alt="Cobogó 4 Furos 24x24">
+    <h3>4 Furos 24x24</h3>
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar ao carrinho</button>
+  </div>
 
 </div>
 
 <script>
-
-/* ============================= */
-/* CONTADOR */
-/* ============================= */
-
-function alterarQtd(botao,valor){
-  const span = botao.parentElement.querySelector(".qtd");
-  let qtd = parseInt(span.innerText);
-  qtd = Math.max(1,qtd+valor);
-  span.innerText = qtd;
+function alterarQtd(botao, valor) {
+  const qtdSpan = botao.parentElement.querySelector('.qtd');
+  let qtd = parseInt(qtdSpan.innerText);
+  qtd = Math.max(1, qtd + valor);
+  qtdSpan.innerText = qtd;
 }
 
-/* ============================= */
-/* CARRINHO */
-/* ============================= */
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-function addCarrinho(botao){
+function adicionarCarrinho(botao) {
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const qtd = parseInt(card.querySelector('.qtd').innerText);
 
-  const card = botao.closest(".card");
-  const nome = card.querySelector("h3").innerText;
-  const qtd = parseInt(card.querySelector(".qtd").innerText);
-
-  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-  let existe = carrinho.find(item=>item.nome===nome);
-
-  if(existe){
-    existe.qtd += qtd;
-  }else{
-    carrinho.push({nome,qtd});
+  const existente = carrinho.find(item => item.nome === nome);
+  if (existente) {
+    existente.qtd += qtd;
+  } else {
+    carrinho.push({ nome, qtd });
   }
 
-  localStorage.setItem("carrinho",JSON.stringify(carrinho));
-
-  aviso();
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert('Produto adicionado ao carrinho');
 }
-
-/* ============================= */
-/* AVISO MODERNO */
-/* ============================= */
-
-function aviso(){
-
-  const div = document.createElement("div");
-  div.innerText = "Produto adicionado ✔";
-
-  div.style.position="fixed";
-  div.style.bottom="25px";
-  div.style.left="50%";
-  div.style.transform="translateX(-50%)";
-  div.style.background="#111";
-  div.style.color="#fff";
-  div.style.padding="12px 20px";
-  div.style.borderRadius="8px";
-  div.style.zIndex="9999";
-  div.style.opacity="0";
-  div.style.transition="0.3s";
-
-  document.body.appendChild(div);
-
-  setTimeout(()=>{div.style.opacity="1";},50);
-  setTimeout(()=>{div.style.opacity="0";},1800);
-  setTimeout(()=>{div.remove();},2300);
-}
-
 </script>
 
 </body>
