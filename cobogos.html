@@ -8,7 +8,15 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-/* HEADER */
+
+/* FUNDO ESCURO */
+body{
+  background: linear-gradient(to bottom, #111, #1c1c1c);
+  color:#fff;
+  padding-top:90px;
+}
+
+/* HEADER MODERNO */
 header{
   width:100%;
   display:flex;
@@ -18,39 +26,47 @@ header{
   position:fixed;
   top:0;
   z-index:999;
-  background:transparent;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(10px);
 }
 
+/* LOGO */
 .logo img{
   height:60px;
 }
 
-/* ÍCONES */
-.nav-icons{
+/* NAV */
+nav{
   display:flex;
   gap:25px;
   align-items:center;
 }
 
 .nav-item{
-  text-decoration:none;
-  color:#111;
-  font-size:12px;
-  font-weight:600;
   display:flex;
   flex-direction:column;
   align-items:center;
+  text-decoration:none;
+  color:#fff;
+  font-size:12px;
+  font-weight:600;
+  transition:0.3s;
 }
 
 .nav-item svg{
-  width:26px;
-  height:26px;
-  margin-bottom:2px;
+  width:24px;
+  height:24px;
+  margin-bottom:3px;
 }
 
-/* espaço header */
-body{
-  padding-top:95px;
+.nav-item:hover{
+  color:#ffcc00;
+  transform:scale(1.05);
+}
+
+/* TÍTULOS */
+h1, h2{
+  text-align:center;
 }
 
 /* ANIMAÇÃO */
@@ -73,7 +89,7 @@ body{
   }
 }
 
-/* imagens */
+/* IMAGENS */
 .card img{
   width:100%;
   height:110px;
@@ -82,6 +98,7 @@ body{
   background:transparent;
   border:none;
 }
+
 </style>
 </head>
 
@@ -89,33 +106,32 @@ body{
 
 <header>
   <div class="logo">
-    <img src="img/logos/logo.png">
+    <img src="img/logos/logo.png" alt="MM Pré-Moldados">
   </div>
 
-  <div class="nav-icons">
+  <nav>
 
-    <!-- CASA -->
+    <!-- INÍCIO -->
     <a href="index.html" class="nav-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M3 11L12 3l9 8"/>
-        <path d="M5 10v10h14V10"/>
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
       </svg>
       Início
     </a>
 
     <!-- CARRINHO -->
-    <a href="carrinho.html" class="nav-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="9" cy="21" r="1"/>
-        <circle cx="20" cy="21" r="1"/>
-        <path d="M1 1h4l2.6 13.5a2 2 0 002 1.5h9.8a2 2 0 002-1.6L23 6H6"/>
+    <a href="#" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
       </svg>
       Carrinho
     </a>
 
-  </div>
+  </nav>
 </header>
-
 
 <h1>Cobogós</h1>
 
@@ -191,7 +207,6 @@ body{
 
 </div>
 
-
 <!-- 30x30 -->
 <h2>Cobogós 30x30</h2>
 <div class="grid">
@@ -264,7 +279,6 @@ body{
 
 </div>
 
-
 <!-- 24x24 -->
 <h2>Cobogós 24x24</h2>
 <div class="grid">
@@ -281,7 +295,6 @@ body{
 </div>
 
 </div>
-
 
 <script>
 function alterarQtd(botao, valor){
