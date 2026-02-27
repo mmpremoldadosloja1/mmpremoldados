@@ -3,30 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REVESTIMENTOS DE PAREDE | MM Pré-Moldados</title>
+<title>Revestimento de parede | MM Pré-Moldados</title>
+
+<link rel="stylesheet" href="css/style.css">
 
 <style>
-/* ===== RESET E BASE ===== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: 'Montserrat', sans-serif;
-}
 
+/* FUNDO TOTAL */
 html, body{
   height:100%;
+  background: linear-gradient(to bottom, #ddd, #ccc);
 }
 
 body{
   min-height:100vh;
-  background: linear-gradient(to bottom, #ddd, #ccc);
+  font-family:'Montserrat', sans-serif;
   padding-top:90px;
   overflow-x:hidden;
-  color:#000;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -42,6 +38,10 @@ header{
 nav{
   display:flex;
   align-items:center;
+}
+
+header nav:last-child{
+  margin-right:20px;
 }
 
 .nav-item{
@@ -66,26 +66,25 @@ nav{
   transform:scale(1.05);
 }
 
-/* ===== TÍTULO ===== */
+/* TÍTULO PADRÃO OUTRAS PÁGINAS */
 h1{
   text-align:center;
-  text-transform:uppercase;
   font-size:36px;
   margin-bottom:30px;
   color:#e63946;
+  text-transform:uppercase;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* ===== GRID ===== */
+/* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:20px;
-  padding:0 20px 40px;
-  justify-content:center;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+  padding:0 20px 80px;
 }
 
-/* PC - centralizado */
+/* CENTRALIZAR SOMENTE NO PC */
 @media (min-width:900px){
   .grid{
     grid-template-columns:repeat(2,380px);
@@ -93,16 +92,29 @@ h1{
   }
 }
 
-/* ===== CARD ===== */
-.card{
-  text-align:center;
-  animation:fadeUp .6s ease forwards;
-  opacity:0;
-  transform:translateY(30px);
-  background:transparent; /* elimina branco do card */
+/* CELULAR */
+@media (max-width:768px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
-/* ===== ANIMAÇÃO ===== */
+/* CARD */
+.card{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  text-align:center;
+  opacity:0;
+  transform:translateY(30px);
+  animation:fadeUp .6s ease forwards;
+  transition:transform .2s ease;
+}
+
+.card:active{
+  transform:scale(0.97);
+}
+
 @keyframes fadeUp{
   to{
     opacity:1;
@@ -110,38 +122,50 @@ h1{
   }
 }
 
-/* ===== IMAGEM ===== */
+/* IMAGEM */
 .imagem-placeholder{
   height:130px;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:transparent; /* fundo transparente igual Meio-Fio */
+  background:#eee;
   border-radius:8px;
   margin-bottom:10px;
   font-size:14px;
   color:#666;
 }
 
-/* ===== CONTADOR ===== */
+/* SELECT */
+select{
+  margin:10px 0;
+  padding:7px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  width:100%;
+}
+
+/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .contador button{
-  padding:3px 10px;
-  margin:0 5px;
+  width:28px;
+  height:28px;
+  border:none;
+  border-radius:50%;
+  background:#ddd;
   font-size:16px;
   cursor:pointer;
 }
 
-/* ===== BOTÃO ===== */
+/* BOTÃO */
 .btn{
   width:100%;
-  padding:8px 0;
+  padding:10px 0;
   background:#e63946;
   color:#fff;
   font-weight:bold;
@@ -149,33 +173,13 @@ h1{
   border-radius:6px;
   cursor:pointer;
   transition:.3s;
+  margin-top:auto;
 }
 
 .btn:hover{
   background:#c92f3b;
-  transform:scale(1.05);
 }
 
-/* ===== RESPONSIVO CELULAR ===== */
-@media (max-width:768px){
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-  }
-
-  .imagem-placeholder{
-    height:100px;
-  }
-
-  .btn{
-    padding:6px 0;
-  }
-
-  .contador button{
-    padding:3px 8px;
-    font-size:14px;
-  }
-}
 </style>
 </head>
 
@@ -204,7 +208,7 @@ h1{
   </nav>
 </header>
 
-<h1>REVESTIMENTOS DE PAREDE</h1>
+<h1>Caixas</h1>
 
 <div class="grid" id="gridProdutos"></div>
 
@@ -225,14 +229,16 @@ function menos(btn){
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
+  const variacao = card.querySelector('select').value;
   const qtd = parseInt(card.querySelector('.qtd').innerText);
 
-  const existente = carrinho.find(item => item.nome === nome);
+  const nomeFinal = nome + " - " + variacao;
+  const existente = carrinho.find(item => item.nome === nomeFinal);
 
   if(existente){
     existente.qtd += qtd;
   } else {
-    carrinho.push({ nome: nome, qtd });
+    carrinho.push({ nome: nomeFinal, qtd });
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
@@ -262,9 +268,8 @@ function criarProduto(nome){
   </div>`;
 }
 
-/* ====================== PRODUTOS ====================== */
-criarProduto("Revestimento 3D 30x30cm");
-criarProduto("Revestimento Pedra Lascada 50x20cm");
+criarProduto("Placa 3D 30x30cm");
+criarProduto("Pedra lascada 50x20cm");
 
 </script>
 
