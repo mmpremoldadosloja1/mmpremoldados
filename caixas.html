@@ -9,13 +9,6 @@
 
 <style>
 
-/* RESET GLOBAL */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
 /* GARANTE FUNDO TOTAL */
 html, body{
   height:100%;
@@ -47,7 +40,6 @@ nav{
   align-items:center;
 }
 
-/* AJUSTE CARRINHO */
 header nav:last-child{
   margin-right:20px;
 }
@@ -82,30 +74,32 @@ h1{
   color:#e63946;
 }
 
-/* GRID */
-
-/* MOBILE */
+/* GRID PADRÃO */
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:20px;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
   padding:0 20px 80px;
 }
 
-/* PC - 2 centralizados */
-@media (min-width:900px){
+/* CELULAR = 2 */
+@media (max-width:768px){
   .grid{
-    grid-template-columns:repeat(2,380px);
-    justify-content:center;
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
 /* CARD */
 .card{
   text-align:center;
-  animation:fadeUp .6s ease forwards;
   opacity:0;
   transform:translateY(30px);
+  animation:fadeUp .6s ease forwards;
+  transition:transform .2s ease;
+}
+
+.card:active{
+  transform:scale(0.97);
 }
 
 @keyframes fadeUp{
@@ -146,10 +140,18 @@ select{
 }
 
 .contador button{
-  padding:3px 10px;
-  margin:0 5px;
+  width:28px;
+  height:28px;
+  border:none;
+  border-radius:50%;
+  background:#ddd;
   font-size:16px;
   cursor:pointer;
+  transition:.2s;
+}
+
+.contador button:hover{
+  background:#ccc;
 }
 
 /* BOTÃO */
@@ -223,7 +225,6 @@ function adicionarCarrinho(botao){
   const qtd = parseInt(card.querySelector('.qtd').innerText);
 
   const nomeFinal = nome + " - " + variacao;
-
   const existente = carrinho.find(item => item.nome === nomeFinal);
 
   if(existente){
@@ -236,7 +237,6 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado!");
 }
 
-/* PRODUTOS */
 function criarProduto(nome){
   grid.innerHTML += `
   <div class="card">
@@ -267,6 +267,7 @@ function criarProduto(nome){
 
 criarProduto("Caixa de Passagem 40x40x40");
 criarProduto("Caixa de Energia 30x30x20");
+criarProduto("Caixa de Inspeção 50x50x50");
 
 </script>
 
