@@ -9,7 +9,7 @@
 
 <style>
 
-/* FUNDO IGUAL COBOGÓ */
+/* FUNDO */
 body{
   background: linear-gradient(to bottom, #ddd, #ccc);
   color:#000;
@@ -17,7 +17,7 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER MODERNO */
+/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -30,7 +30,6 @@ header{
   background:transparent;
 }
 
-/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -76,19 +75,41 @@ h1{
   font-size:36px;
   margin-bottom:30px;
   color:#e63946;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* ANIMAÇÃO */
+/* GRID RESPONSIVO */
+
+/* MOBILE */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:20px;
+  padding:0 20px 40px;
+}
+
+/* TABLET */
+@media (min-width:768px){
+  .grid{
+    grid-template-columns:repeat(3, 1fr);
+  }
+}
+
+/* DESKTOP GRANDE */
+@media (min-width:1200px){
+  .grid{
+    grid-template-columns:repeat(3, 1fr);
+    max-width:1200px;
+    margin:0 auto;
+  }
+}
+
+/* CARD */
 .card{
+  text-align:center;
   opacity:0;
   transform:translateY(30px);
   animation:fadeUp 0.6s ease forwards;
 }
-
-.card:nth-child(2){animation-delay:.1s}
-.card:nth-child(3){animation-delay:.2s}
-.card:nth-child(4){animation-delay:.3s}
 
 @keyframes fadeUp{
   to{
@@ -97,29 +118,18 @@ h1{
   }
 }
 
-/* GRID IGUAL COBOGÓ */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
-  gap:20px;
-  padding:0 20px 40px 20px;
-}
-
-/* IMAGEM */
 .card img{
   width:100%;
-  height:110px;
+  height:140px;
   object-fit:contain;
   margin-bottom:10px;
-  background:transparent;
-  border:none;
 }
 
 /* SELECT */
 select{
-  padding:8px;
-  margin-bottom:10px;
   width:100%;
+  padding:7px;
+  margin-bottom:10px;
   border-radius:6px;
   border:1px solid #ccc;
 }
@@ -133,13 +143,13 @@ select{
 }
 
 .contador button{
-  padding:3px 8px;
+  padding:3px 10px;
   margin:0 5px;
   font-size:16px;
   cursor:pointer;
 }
 
-/* BOTÃO VERMELHO PADRÃO */
+/* BOTÃO */
 .btn{
   width:100%;
   padding:8px 0;
@@ -185,7 +195,7 @@ select{
   </nav>
 </header>
 
-<h1>PINGADEIRAS</h1>
+<h1>Pingadeiras</h1>
 
 <div class="grid">
 
@@ -269,8 +279,8 @@ function adicionarCarrinho(botao){
   const medida = card.querySelector('select').value;
 
   const nomeCompleto = nome + " - " + medida;
-  const existente = carrinho.find(item => item.nome === nomeCompleto);
 
+  const existente = carrinho.find(item => item.nome === nomeCompleto);
   if(existente){
     existente.qtd += qtd;
   }else{
