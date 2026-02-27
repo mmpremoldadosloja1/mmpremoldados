@@ -11,28 +11,68 @@
 /* FUNDO */
 body{
   background: linear-gradient(to bottom, #ddd, #ccc);
-  font-family: 'Montserrat', sans-serif;
+  font-family:'Montserrat', sans-serif;
   padding-top:90px;
 }
 
-/* TÍTULO */
+/* HEADER IGUAL COBOGÓS */
+header{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  position:fixed;
+  top:0;
+  z-index:999;
+  background:transparent;
+}
+
+nav{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.nav-right{
+  margin-right:20px;
+}
+
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-decoration:none;
+  color:#000;
+  font-size:12px;
+  font-weight:600;
+}
+
+.nav-item svg{
+  width:24px;
+  height:24px;
+  margin-bottom:3px;
+}
+
+.nav-item:hover{
+  color:#e63946;
+}
+
+/* TITULO */
 h1{
   text-align:center;
   text-transform:uppercase;
   font-size:36px;
-  margin-bottom:20px;
   color:#e63946;
   text-shadow:2px 2px 4px rgba(0,0,0,0.3);
+  margin-bottom:20px;
 }
 
-/* SUBTÍTULO */
 h2{
   text-align:left;
-  margin-top:30px;
-  margin-bottom:15px;
+  margin:30px 0 15px;
   font-size:22px;
   padding-left:20px;
-  text-shadow:1px 1px 2px rgba(0,0,0,0.2);
 }
 
 /* GRID */
@@ -43,7 +83,7 @@ h2{
   padding:0 20px 40px;
 }
 
-/* PC ATÉ 4 PRODUTOS */
+/* PC */
 @media(min-width:900px){
   .grid{
     grid-template-columns:repeat(4,1fr);
@@ -52,18 +92,9 @@ h2{
 
 /* CARD */
 .card{
-  animation:fadeUp .6s ease forwards;
-}
-
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(30px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
 
 /* IMAGEM */
@@ -73,13 +104,11 @@ h2{
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-bottom:10px;
 }
 
 .imagem-container img{
   max-width:100%;
   max-height:100%;
-  object-fit:contain;
 }
 
 /* CONTADOR */
@@ -87,31 +116,24 @@ h2{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:8px;
+  margin:8px 0;
 }
 
 .contador button{
   padding:3px 8px;
   margin:0 5px;
-  font-size:16px;
-  cursor:pointer;
 }
 
 /* BOTÃO */
 .btn{
   width:100%;
-  padding:8px 0;
+  padding:10px 0;
   background:#e63946;
   color:#fff;
   font-weight:bold;
   border:none;
   border-radius:6px;
   cursor:pointer;
-  transition:.3s;
-}
-
-.btn:hover{
-  background:#c92f3b;
 }
 
 </style>
@@ -119,11 +141,28 @@ h2{
 
 <body>
 
-<a href="index.html" class="voltar">
-  <svg viewBox="0 0 24 24">
-    <path d="M15 18l-6-6 6-6"/>
-  </svg>
+<header>
+<nav>
+<a href="index.html" class="nav-item">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M3 10L12 3l9 7"></path>
+<path d="M5 10v10h14V10"></path>
+</svg>
+Início
 </a>
+</nav>
+
+<nav class="nav-right">
+<a href="#" class="nav-item">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="9" cy="20" r="1"></circle>
+<circle cx="18" cy="20" r="1"></circle>
+<path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+</svg>
+Carrinho
+</a>
+</nav>
+</header>
 
 <h1>PISOS E PISADEIRAS</h1>
 
@@ -165,28 +204,23 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado!");
 }
 
-/* TÍTULOS */
 function titulo(texto){
-  grid.innerHTML += `
-  <div style="grid-column:1/-1">
-    <h2>${texto}</h2>
-  </div>`;
+  grid.innerHTML += `<div style="grid-column:1/-1"><h2>${texto}</h2></div>`;
 }
 
-/* PRODUTOS COM IMAGEM */
-function criarProduto(nome, imagem, opcoes = null){
+function criarProduto(nome, img, opcoes=null){
   grid.innerHTML += `
   <div class="card">
 
     <div class="imagem-container">
-      <img src="${imagem}" alt="${nome}">
+      <img src="${img}">
     </div>
 
     <h3>${nome}</h3>
 
     ${opcoes ? `
     <select>
-      ${opcoes.map(op => `<option>${op}</option>`).join('')}
+    ${opcoes.map(o=>`<option>${o}</option>`).join('')}
     </select>` : ''}
 
     <div class="contador">
@@ -200,7 +234,7 @@ function criarProduto(nome, imagem, opcoes = null){
   </div>`;
 }
 
-/* 🔥 PISOS */
+/* PRODUTOS */
 titulo("Pisos");
 
 criarProduto("Piso Quadrado Liso","img/pisos/quadrado.jpg",["40x40cm","50x50cm","60x60cm"]);
@@ -208,14 +242,12 @@ criarProduto("Piso Copacabana 50x50cm","img/pisos/copacabana.jpg");
 criarProduto("Piso Trabalhado em Flor 45x45cm","img/pisos/flor.jpg");
 criarProduto("Piso em X 45x45cm","img/pisos/x.jpg");
 
-/* 🌿 PISADEIRAS */
 titulo("Pisadeiras");
 
 criarProduto("Pezão de Jardim 50cm","img/pisos/pezao.jpg");
 criarProduto("Círculo Estelar 50cm","img/pisos/circulo.jpg");
 criarProduto("Pisadeira Xis 50cm","img/pisos/xis.jpg");
 
-/* ⭐ CONJUNTOS */
 titulo("Conjuntos");
 
 criarProduto("Conjunto Trevo Oriente 60x60cm","img/pisos/trevo.jpg");
