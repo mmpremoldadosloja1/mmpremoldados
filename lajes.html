@@ -10,7 +10,7 @@ body{
   background:#ddd;
   color:#000;
   font-family: 'Montserrat', sans-serif;
-  padding-top:90px;
+  padding-top:70px;
   margin:0;
 }
 
@@ -19,11 +19,12 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 20px;
+  padding:10px 20px;
   position:fixed;
   top:0;
   z-index:999;
-  background:transparent;
+  background:#ddd;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
 
 .nav-item{
@@ -48,7 +49,7 @@ h1{
   font-size:32px;
   margin-bottom:30px;
   color:#e63946;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
 h2{
@@ -59,7 +60,7 @@ h2{
   font-size:20px;
 }
 
-/* GRID QUE FAZ CADA CARD OCUPAR TODA LARGURA */
+/* GRID PARA CARDS */
 .grid{
   display:flex;
   flex-direction:column;
@@ -67,28 +68,17 @@ h2{
   padding:0 10px 50px 10px;
 }
 
-/* CARD ESTILO COBOGÓ, PRENCHENDO LARGURA */
+/* CARD ESTILO COBOGÓ, OCUPANDO LARGURA TOTAL */
 .card{
   background:transparent;
   padding:15px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:flex-start;
   width:100%;
-  min-height:250px;
 }
 
-.card .imagem-placeholder{
-  width:100%;
-  height:120px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#eee;
-  margin-bottom:10px;
-}
-
+/* INPUT E SELECT */
 select, input{
   padding:8px;
   border-radius:6px;
@@ -98,6 +88,7 @@ select, input{
   box-sizing:border-box;
 }
 
+/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
@@ -112,6 +103,7 @@ select, input{
   cursor:pointer;
 }
 
+/* BOTÃO ADICIONAR */
 .btn{
   width:100%;
   padding:10px 0;
@@ -142,7 +134,7 @@ select, input{
     Início
   </a>
 
-  <a href="#" class="nav-item">
+  <a href="#" class="nav-item" style="position:relative;">
     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
       <circle cx="9" cy="20" r="1"></circle>
       <circle cx="18" cy="20" r="1"></circle>
@@ -192,7 +184,6 @@ function adicionarCarrinho(botao){
 function criarProduto(nome, opcoes=null){
   grid.innerHTML += `
   <div class="card">
-    <div class="imagem-placeholder">Imagem</div>
     <h3>${nome}</h3>
     ${opcoes ? `<select>${opcoes.map(op=>`<option>${op}</option>`).join('')}</select>` : ''}
     <div class="contador">
