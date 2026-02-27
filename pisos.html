@@ -48,18 +48,12 @@ header{
   color:#000;
   font-size:12px;
   font-weight:600;
-  transition:.3s;
 }
 
 .nav-item svg{
   width:24px;
   height:24px;
   margin-bottom:3px;
-}
-
-.nav-item:hover{
-  color:#e63946;
-  transform:scale(1.05);
 }
 
 /* TITULOS */
@@ -78,8 +72,6 @@ h2{
 }
 
 /* GRID */
-
-/* MOBILE */
 .grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -87,7 +79,6 @@ h2{
   padding:0 20px 80px;
 }
 
-/* PC - 4 POR LINHA */
 @media (min-width:900px){
   .grid{
     grid-template-columns:repeat(4,1fr);
@@ -97,19 +88,14 @@ h2{
 
 /* CARD */
 .card{
+  display:flex;
+  flex-direction:column;
   text-align:center;
-  opacity:0;
-  transform:translateY(30px);
-  animation:fadeUp .6s ease forwards;
+  background:transparent;
+  min-height:260px;
 }
 
-@keyframes fadeUp{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
+/* IMAGEM */
 .imagem-placeholder{
   width:100%;
   height:110px;
@@ -130,7 +116,7 @@ select{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .contador button{
@@ -138,6 +124,11 @@ select{
   margin:0 5px;
   font-size:16px;
   cursor:pointer;
+}
+
+/* EMPURRA O BOTÃO PARA BAIXO */
+.card .btn{
+  margin-top:auto;
 }
 
 /* BOTÃO */
@@ -150,12 +141,6 @@ select{
   border:none;
   border-radius:6px;
   cursor:pointer;
-  transition:.3s;
-}
-
-.btn:hover{
-  background:#c92f3b;
-  transform:scale(1.05);
 }
 
 </style>
@@ -222,9 +207,7 @@ function adicionarCarrinho(botao){
 }
 
 function titulo(texto){
-  grid.innerHTML += `
-    <h2>${texto}</h2>
-  `;
+  grid.innerHTML += `<h2>${texto}</h2>`;
 }
 
 function criarProduto(nome, opcoes = null){
