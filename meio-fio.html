@@ -9,12 +9,19 @@
 
 <style>
 
+/* 🔥 GARANTE QUE NÃO APAREÇA FUNDO BRANCO */
+html, body{
+  min-height:100%;
+}
+
 /* ===== FUNDO CINZA SUAVE ===== */
 body{
   background: linear-gradient(to bottom, #ddd, #ccc);
+  background-attachment: fixed;
   color:#000;
   padding-top:90px;
   font-family: 'Montserrat', sans-serif;
+  margin:0;
 }
 
 /* ===== HEADER ===== */
@@ -226,7 +233,7 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado");
 }
 
-/* CRIAR PRODUTOS */
+/* PRODUTOS */
 function criar(nome){
   grid.innerHTML += `
   <div class="card">
@@ -245,7 +252,6 @@ function criar(nome){
   </div>`;
 }
 
-/* ===== PRODUTOS ===== */
 [
 "Meio-Fio Arredondado 80x25x8cm",
 "Meio-Fio Cordão 80x25x4cm",
