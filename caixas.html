@@ -9,15 +9,20 @@
 
 <style>
 
-/* RESET PARA REMOVER LINHA BRANCA */
+/* RESET GLOBAL */
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
 
-/* FUNDO PADRÃO */
+/* GARANTE FUNDO TOTAL */
+html, body{
+  height:100%;
+}
+
 body{
+  min-height:100vh;
   background: linear-gradient(to bottom, #ddd, #ccc);
   font-family:'Montserrat', sans-serif;
   padding-top:90px;
@@ -37,10 +42,14 @@ header{
   background:transparent;
 }
 
-/* NAV */
 nav{
   display:flex;
   align-items:center;
+}
+
+/* AJUSTE CARRINHO */
+header nav:last-child{
+  margin-right:20px;
 }
 
 .nav-item{
@@ -51,12 +60,7 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
-  transition:0.3s;
-}
-
-/* AJUSTE DO CARRINHO */
-header nav:last-child{
-  margin-right:20px;
+  transition:.3s;
 }
 
 .nav-item svg{
@@ -85,13 +89,13 @@ h1{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:20px;
-  padding:0 20px 40px;
+  padding:0 20px 80px;
 }
 
-/* PC */
+/* PC - 2 centralizados */
 @media (min-width:900px){
   .grid{
-    grid-template-columns:repeat(2,350px);
+    grid-template-columns:repeat(2,380px);
     justify-content:center;
   }
 }
@@ -232,6 +236,7 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado!");
 }
 
+/* PRODUTOS */
 function criarProduto(nome){
   grid.innerHTML += `
   <div class="card">
@@ -259,8 +264,6 @@ function criarProduto(nome){
 
   </div>`;
 }
-
-/* PRODUTOS */
 
 criarProduto("Caixa de Passagem 40x40x40");
 criarProduto("Caixa de Energia 30x30x20");
