@@ -99,15 +99,12 @@ h2{
 
 /* ===== CARTÕES ===== */
 .card{
-  background:#fff;
-  border-radius:10px;
-  padding:10px;
+  background:transparent; /* sem borda nem fundo */
   text-align:center;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  box-shadow:0 4px 5px rgba(0,0,0,0.1);
   opacity:0;
   transform:translateY(30px);
   animation:fadeUp 0.6s ease forwards;
@@ -168,37 +165,6 @@ h2{
   transform:scale(1.05);
 }
 
-/* ===== BOTÃO VOLTAR ===== */
-.voltar {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  width: 40px;
-  height: 40px;
-  background: #111;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 998;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: transform 0.2s ease;
-}
-
-.voltar svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: #fff;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.voltar:hover {
-  transform: scale(1.08);
-}
-
 </style>
 </head>
 
@@ -226,13 +192,6 @@ h2{
     </a>
   </nav>
 </header>
-
-<!-- BOTÃO VOLTAR -->
-<a href="index.html" class="voltar">
-  <svg viewBox="0 0 24 24">
-    <path d="M15 18l-6-6 6-6"/>
-  </svg>
-</a>
 
 <h1>BLOCOS E CANALETAS</h1>
 
@@ -268,7 +227,7 @@ function adicionarCarrinho(botao){
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert("Produto adicionado ao carrinho!");
+  alert("Produto adicionado");
 }
 
 // Função criar produto
