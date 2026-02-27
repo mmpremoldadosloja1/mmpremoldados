@@ -9,13 +9,12 @@
 
 <style>
 
-/* FUNDO TOTAL (igual meio fio) */
+/* FUNDO TOTAL */
 html, body{
   height:100%;
   background: linear-gradient(to bottom, #ddd, #ccc);
 }
 
-/* REMOVE QUALQUER BRANCO */
 body{
   min-height:100vh;
   font-family:'Montserrat', sans-serif;
@@ -67,12 +66,14 @@ header nav:last-child{
   transform:scale(1.05);
 }
 
-/* TÍTULO */
+/* TÍTULO PADRÃO OUTRAS PÁGINAS */
 h1{
   text-align:center;
   font-size:36px;
   margin-bottom:30px;
   color:#e63946;
+  text-transform:uppercase;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 /* GRID */
@@ -81,6 +82,14 @@ h1{
   grid-template-columns:repeat(3,1fr);
   gap:25px;
   padding:0 20px 80px;
+}
+
+/* CENTRALIZAR SOMENTE NO PC */
+@media (min-width:900px){
+  .grid{
+    grid-template-columns:repeat(2,380px);
+    justify-content:center;
+  }
 }
 
 /* CELULAR */
@@ -153,7 +162,7 @@ select{
   cursor:pointer;
 }
 
-/* BOTÃO ALINHADO */
+/* BOTÃO */
 .btn{
   width:100%;
   padding:10px 0;
@@ -264,7 +273,6 @@ function criarProduto(nome){
   </div>`;
 }
 
-/* SOMENTE OS 2 PRODUTOS */
 criarProduto("Caixa de Passagem 40x40x40");
 criarProduto("Caixa de Energia 30x30x20");
 
