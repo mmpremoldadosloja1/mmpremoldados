@@ -5,20 +5,194 @@
 <title>Pisos e Pisadeiras | MM Pré-Moldados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
+
+<style>
+
+/* FUNDO PADRÃO COBÓGOS */
+body{
+  background: linear-gradient(to bottom, #ddd, #ccc);
+  color:#000;
+  padding-top:90px;
+  font-family: 'Montserrat', sans-serif;
+  margin:0;
+}
+
+/* HEADER */
+header{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  position:fixed;
+  top:0;
+  z-index:999;
+  background:transparent;
+}
+
+/* NAV */
+nav{
+  display:flex;
+  gap:25px;
+  align-items:center;
+}
+
+.nav-left, .nav-right{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.nav-right{
+  margin-right:20px;
+}
+
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-decoration:none;
+  color:#000;
+  font-size:12px;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.nav-item svg{
+  width:24px;
+  height:24px;
+  margin-bottom:3px;
+}
+
+.nav-item:hover{
+  color:#e63946;
+  transform:scale(1.05);
+}
+
+/* TITULOS */
+h1{
+  text-align:center;
+  text-transform:uppercase;
+  font-size:36px;
+  margin-bottom:20px;
+  color:#e63946;
+  text-shadow:2px 2px 4px rgba(0,0,0,0.3);
+}
+
+h2{
+  text-align:left;
+  margin-top:30px;
+  margin-bottom:15px;
+  font-size:22px;
+  padding-left:20px;
+}
+
+/* GRID */
+
+/* MOBILE */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  padding:0 20px 80px;
+}
+
+/* PC */
+@media (min-width:900px){
+  .grid{
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    padding:0 60px 80px;
+  }
+}
+
+/* CARD */
+.card{
+  opacity:0;
+  transform:translateY(30px);
+  animation:fadeUp .6s ease forwards;
+  text-align:center;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* IMAGEM PLACEHOLDER */
+.imagem-placeholder{
+  width:100%;
+  height:110px;
+  background:transparent;
+  margin-bottom:10px;
+}
+
+/* CONTADOR */
+.contador{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.contador button{
+  padding:3px 8px;
+  margin:0 5px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* BOTÃO */
+.btn{
+  width:100%;
+  padding:8px 0;
+  background:#e63946;
+  color:#fff;
+  font-weight:bold;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#c92f3b;
+  transform:scale(1.05);
+}
+
+</style>
 </head>
 
 <body>
 
-<!-- BOTÃO VOLTAR PADRÃO -->
-<a href="index.html" class="voltar">
-  <svg viewBox="0 0 24 24">
-    <path d="M15 18l-6-6 6-6"/>
-  </svg>
-</a>
+<header>
+  <nav class="nav-left">
+    <a href="index.html" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+      Início
+    </a>
+  </nav>
 
-<h1 style="text-align:center; margin-top:60px;">Pisos e Pisadeiras</h1>
+  <nav class="nav-right">
+    <a href="#" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+      Carrinho
+    </a>
+  </nav>
+</header>
 
-<div class="grid" id="gridProdutos" style="padding:20px;"></div>
+<h1>Pisos e Pisadeiras</h1>
+
+<div class="grid" id="gridProdutos"></div>
 
 <script>
 const grid = document.getElementById("gridProdutos");
@@ -52,12 +226,12 @@ function adicionarCarrinho(botao){
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert("Produto adicionado ao carrinho!");
+  alert("Produto adicionado!");
 }
 
 function titulo(texto){
   grid.innerHTML += `
-    <div style="grid-column:1/-1;margin-top:40px">
+    <div style="grid-column:1/-1">
       <h2>${texto}</h2>
     </div>
   `;
@@ -67,9 +241,7 @@ function criarProduto(nome, opcoes = null){
   grid.innerHTML += `
   <div class="card">
 
-    <div class="imagem-placeholder">
-      Imagem será adicionada aqui
-    </div>
+    <div class="imagem-placeholder"></div>
 
     <h3>${nome}</h3>
 
@@ -86,42 +258,28 @@ function criarProduto(nome, opcoes = null){
     </div>
 
     <button class="btn" onclick="adicionarCarrinho(this)">
-      Adicionar ao carrinho
+      Adicionar
     </button>
 
   </div>`;
 }
 
-/* ========================= */
 /* 🔥 PISOS */
-/* ========================= */
-
 titulo("Pisos");
 
-criarProduto("Piso Quadrado Liso", [
-  "40x40cm",
-  "50x50cm",
-  "60x60cm"
-]);
-
+criarProduto("Piso Quadrado Liso", ["40x40cm","50x50cm","60x60cm"]);
 criarProduto("Piso Copacabana 50x50cm");
 criarProduto("Piso Trabalhado em Flor 45x45cm");
 criarProduto("Piso em X 45x45cm");
 
-/* ========================= */
 /* 🌿 PISADEIRAS */
-/* ========================= */
-
 titulo("Pisadeiras");
 
 criarProduto("Pezão de Jardim 50cm");
 criarProduto("Círculo Estelar 50cm");
 criarProduto("Pisadeira Xis 50cm");
 
-/* ========================= */
 /* ⭐ CONJUNTOS */
-/* ========================= */
-
 titulo("Conjuntos");
 
 criarProduto("Conjunto Trevo Oriente 60x60cm");
