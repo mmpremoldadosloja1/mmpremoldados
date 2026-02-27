@@ -2,18 +2,191 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Caixas | MM Pré-Moldados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caixas | MM Pré-Moldados</title>
+
 <link rel="stylesheet" href="css/style.css">
+
+<style>
+
+/* FUNDO PADRÃO */
+body{
+  background: linear-gradient(to bottom, #ddd, #ccc);
+  font-family:'Montserrat', sans-serif;
+  padding-top:90px;
+}
+
+/* HEADER PADRÃO */
+header{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  position:fixed;
+  top:0;
+  z-index:999;
+  background:transparent;
+}
+
+nav{
+  display:flex;
+  gap:25px;
+  align-items:center;
+}
+
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-decoration:none;
+  color:#000;
+  font-size:12px;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.nav-item svg{
+  width:24px;
+  height:24px;
+  margin-bottom:3px;
+}
+
+.nav-item:hover{
+  color:#e63946;
+  transform:scale(1.05);
+}
+
+/* TÍTULO */
+h1{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:30px;
+  color:#e63946;
+}
+
+/* GRID RESPONSIVO */
+
+/* MOBILE */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  padding:0 20px 40px;
+}
+
+/* TABLET */
+@media (min-width:768px){
+  .grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+/* DESKTOP GRANDE */
+@media (min-width:1200px){
+  .grid{
+    grid-template-columns:repeat(3,1fr);
+    max-width:1200px;
+    margin:0 auto;
+  }
+}
+
+/* CARD */
+.card{
+  text-align:center;
+  animation:fadeUp .6s ease forwards;
+  opacity:0;
+  transform:translateY(30px);
+}
+
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.imagem-placeholder{
+  height:120px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#eee;
+  border-radius:8px;
+  margin-bottom:10px;
+  font-size:14px;
+  color:#666;
+}
+
+/* SELECT */
+select{
+  margin:10px 0;
+  padding:7px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  width:100%;
+}
+
+/* CONTADOR */
+.contador{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.contador button{
+  padding:3px 10px;
+  margin:0 5px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* BOTÃO PADRÃO */
+.btn{
+  width:100%;
+  padding:8px 0;
+  background:#e63946;
+  color:#fff;
+  font-weight:bold;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.btn:hover{
+  background:#c92f3b;
+  transform:scale(1.05);
+}
+
+</style>
 </head>
 
 <body>
 
-<a href="index.html" class="voltar">
-  <svg viewBox="0 0 24 24">
-    <path d="M15 18l-6-6 6-6"/>
-  </svg>
-</a>
+<header>
+  <nav>
+    <a href="index.html" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+      Início
+    </a>
+  </nav>
+
+  <nav>
+    <a href="#" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+      Carrinho
+    </a>
+  </nav>
+</header>
 
 <h1>Caixas</h1>
 
@@ -36,11 +209,10 @@ function menos(btn){
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
-  const select = card.querySelector('select');
-  const variacao = select ? select.value : "";
+  const variacao = card.querySelector('select').value;
   const qtd = parseInt(card.querySelector('.qtd').innerText);
 
-  const nomeFinal = variacao ? nome + " - " + variacao : nome;
+  const nomeFinal = nome + " - " + variacao;
 
   const existente = carrinho.find(item => item.nome === nomeFinal);
 
@@ -51,8 +223,7 @@ function adicionarCarrinho(botao){
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-
-  alert("Produto adicionado ao carrinho!");
+  alert("Produto adicionado!");
 }
 
 function criarProduto(nome){
@@ -65,8 +236,8 @@ function criarProduto(nome){
 
     <h3>${nome}</h3>
 
-    <select style="margin:10px 0;padding:6px;border-radius:6px;border:1px solid #ccc;width:100%;">
-      <option>com tampa</option>
+    <select>
+      <option>Com tampa</option>
       <option>Sem tampa</option>
     </select>
 
@@ -77,15 +248,13 @@ function criarProduto(nome){
     </div>
 
     <button class="btn" onclick="adicionarCarrinho(this)">
-      Adicionar ao carrinho
+      Adicionar
     </button>
 
   </div>`;
 }
 
-/* ========================= */
 /* PRODUTOS */
-/* ========================= */
 
 criarProduto("Caixa de Passagem 40x40x40");
 criarProduto("Caixa de Energia 30x30x20");
