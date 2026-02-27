@@ -8,13 +8,23 @@
 
 <style>
 
-/* FUNDO PADRÃO COBÓGOS */
-body{
-  background: linear-gradient(to bottom, #ddd, #ccc);
-  color:#000;
-  padding-top:90px;
-  font-family: 'Montserrat', sans-serif;
+/* RESET */
+*{
   margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html, body{
+  height:100%;
+}
+
+body{
+  min-height:100vh;
+  background: linear-gradient(to bottom, #ddd, #ccc);
+  padding-top:90px;
+  font-family:'Montserrat', sans-serif;
+  overflow-x:hidden;
 }
 
 /* HEADER */
@@ -30,23 +40,6 @@ header{
   background:transparent;
 }
 
-/* NAV */
-nav{
-  display:flex;
-  gap:25px;
-  align-items:center;
-}
-
-.nav-left, .nav-right{
-  display:flex;
-  gap:20px;
-  align-items:center;
-}
-
-.nav-right{
-  margin-right:20px;
-}
-
 .nav-item{
   display:flex;
   flex-direction:column;
@@ -55,7 +48,7 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
-  transition:0.3s;
+  transition:.3s;
 }
 
 .nav-item svg{
@@ -72,17 +65,14 @@ nav{
 /* TITULOS */
 h1{
   text-align:center;
-  text-transform:uppercase;
   font-size:36px;
   margin-bottom:20px;
   color:#e63946;
-  text-shadow:2px 2px 4px rgba(0,0,0,0.3);
 }
 
 h2{
-  text-align:left;
-  margin-top:30px;
-  margin-bottom:15px;
+  grid-column:1/-1;
+  margin:40px 0 15px;
   font-size:22px;
   padding-left:20px;
 }
@@ -97,23 +87,22 @@ h2{
   padding:0 20px 80px;
 }
 
-/* PC */
+/* PC - 4 POR LINHA */
 @media (min-width:900px){
   .grid{
-    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    grid-template-columns:repeat(4,1fr);
     padding:0 60px 80px;
   }
 }
 
 /* CARD */
 .card{
+  text-align:center;
   opacity:0;
   transform:translateY(30px);
   animation:fadeUp .6s ease forwards;
-  text-align:center;
 }
 
-/* ANIMAÇÃO */
 @keyframes fadeUp{
   to{
     opacity:1;
@@ -121,12 +110,19 @@ h2{
   }
 }
 
-/* IMAGEM PLACEHOLDER */
 .imagem-placeholder{
   width:100%;
   height:110px;
-  background:transparent;
   margin-bottom:10px;
+}
+
+/* SELECT */
+select{
+  margin:10px 0;
+  padding:6px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  width:100%;
 }
 
 /* CONTADOR */
@@ -154,7 +150,7 @@ h2{
   border:none;
   border-radius:6px;
   cursor:pointer;
-  transition:0.3s;
+  transition:.3s;
 }
 
 .btn:hover{
@@ -168,26 +164,22 @@ h2{
 <body>
 
 <header>
-  <nav class="nav-left">
-    <a href="index.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path d="M3 10L12 3l9 7"></path>
-        <path d="M5 10v10h14V10"></path>
-      </svg>
-      Início
-    </a>
-  </nav>
+  <a href="index.html" class="nav-item">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M3 10L12 3l9 7"></path>
+      <path d="M5 10v10h14V10"></path>
+    </svg>
+    Início
+  </a>
 
-  <nav class="nav-right">
-    <a href="#" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <circle cx="9" cy="20" r="1"></circle>
-        <circle cx="18" cy="20" r="1"></circle>
-        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-      </svg>
-      Carrinho
-    </a>
-  </nav>
+  <a href="#" class="nav-item">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="9" cy="20" r="1"></circle>
+      <circle cx="18" cy="20" r="1"></circle>
+      <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+    </svg>
+    Carrinho
+  </a>
 </header>
 
 <h1>Pisos e Pisadeiras</h1>
@@ -231,9 +223,7 @@ function adicionarCarrinho(botao){
 
 function titulo(texto){
   grid.innerHTML += `
-    <div style="grid-column:1/-1">
-      <h2>${texto}</h2>
-    </div>
+    <h2>${texto}</h2>
   `;
 }
 
@@ -246,7 +236,7 @@ function criarProduto(nome, opcoes = null){
     <h3>${nome}</h3>
 
     ${opcoes ? `
-      <select style="margin:10px 0;padding:6px;border-radius:6px;border:1px solid #ccc;width:100%;">
+      <select>
         ${opcoes.map(op => `<option>${op}</option>`).join('')}
       </select>
     ` : ''}
@@ -264,24 +254,21 @@ function criarProduto(nome, opcoes = null){
   </div>`;
 }
 
-/* 🔥 PISOS */
+/* PISOS */
 titulo("Pisos");
-
 criarProduto("Piso Quadrado Liso", ["40x40cm","50x50cm","60x60cm"]);
 criarProduto("Piso Copacabana 50x50cm");
 criarProduto("Piso Trabalhado em Flor 45x45cm");
 criarProduto("Piso em X 45x45cm");
 
-/* 🌿 PISADEIRAS */
+/* PISADEIRAS */
 titulo("Pisadeiras");
-
 criarProduto("Pezão de Jardim 50cm");
 criarProduto("Círculo Estelar 50cm");
 criarProduto("Pisadeira Xis 50cm");
 
-/* ⭐ CONJUNTOS */
+/* CONJUNTOS */
 titulo("Conjuntos");
-
 criarProduto("Conjunto Trevo Oriente 60x60cm");
 criarProduto("Conjunto Passarela Estrelado 70x70cm");
 criarProduto("Conjunto Passarela Estelar 140x140cm");
