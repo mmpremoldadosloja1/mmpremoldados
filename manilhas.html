@@ -2,20 +2,175 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Manilhas e Tampas | MM Pré-Moldados</title>
+<title>MANILHAS E TAMPAS | MM Pré-Moldados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
+
+<style>
+/* ===== FUNDO CINZA SUAVE ===== */
+body{
+  background: linear-gradient(to bottom, #ddd, #ccc);
+  color:#000;
+  padding-top:90px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ===== HEADER ===== */
+header{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  position:fixed;
+  top:0;
+  z-index:999;
+  background:transparent;
+}
+
+nav{
+  display:flex;
+  gap:25px;
+  align-items:center;
+}
+
+.nav-left, .nav-right{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.nav-right{
+  margin-right:10px; /* afasta do canto direito */
+}
+
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-decoration:none;
+  color:#000;
+  font-size:12px;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.nav-item svg{
+  width:24px;
+  height:24px;
+  margin-bottom:3px;
+}
+
+.nav-item:hover{
+  color:#e63946;
+  transform:scale(1.05);
+}
+
+/* ===== TITULO PRINCIPAL ===== */
+h1{
+  text-align:center;
+  text-transform:uppercase;
+  font-size:36px;
+  margin-bottom:20px;
+  color:#e63946;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* SUBTÍTULOS À ESQUERDA */
+h2{
+  text-align:left;
+  margin-top:30px;
+  margin-bottom:15px;
+  font-size:22px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  padding-left:20px;
+}
+
+/* GRID DE PRODUTOS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+  gap:20px;
+  padding:0 20px 40px 20px;
+}
+
+/* CARD DE PRODUTO */
+.card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.card img, .imagem-placeholder{
+  width:100%;
+  height:110px;
+  object-fit:contain;
+  margin-bottom:10px;
+  background:transparent;
+}
+
+/* CONTADOR */
+.contador{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.contador button{
+  padding:3px 8px;
+  margin:0 5px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* BOTÃO ADICIONAR VERMELHO */
+.btn{
+  width:100%;
+  padding:8px 0;
+  background:#e63946;
+  color:#fff;
+  font-weight:bold;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#c92f3b;
+  transform:scale(1.05);
+}
+</style>
 </head>
 
 <body>
 
-<a href="index.html" class="voltar">
-  <svg viewBox="0 0 24 24">
-    <path d="M15 18l-6-6 6-6"/>
-  </svg>
-</a>
+<header>
+  <nav class="nav-left">
+    <a href="index.html" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+      Início
+    </a>
+  </nav>
 
-<h1>Manilhas e Tampas</h1>
+  <nav class="nav-right">
+    <a href="#" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+      Carrinho
+    </a>
+  </nav>
+</header>
+
+<h1>MANILHAS E TAMPAS</h1>
 
 <div class="grid" id="gridProdutos"></div>
 
@@ -59,14 +214,12 @@ function adicionarCarrinho(botao){
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-
   alert("Produto adicionado ao carrinho!");
 }
 
 function criarProduto(nome, opcoes = null){
   grid.innerHTML += `
   <div class="card">
-
     <div class="imagem-placeholder">
       Imagem será adicionada aqui
     </div>
@@ -86,9 +239,8 @@ function criarProduto(nome, opcoes = null){
     </div>
 
     <button class="btn" onclick="adicionarCarrinho(this)">
-      Adicionar ao carrinho
+      Adicionar
     </button>
-
   </div>`;
 }
 
@@ -104,7 +256,7 @@ titulo("Manilhas");
 ].forEach(nome => criarProduto(nome));
 
 /* ========================= */
-/* TAMPAS ORGANIZADAS */
+/* TAMPAS */
 /* ========================= */
 
 titulo("Tampas de Manilha");
@@ -113,7 +265,6 @@ criarProduto("Tampa 90cm", ["Aberta", "Fechada"]);
 criarProduto("Tampa 1m", ["Aberta", "Fechada"]);
 criarProduto("Tampa 1,10cm", ["Aberta", "Fechada"]);
 criarProduto("Tampa 1,20cm", ["Aberta", "Fechada"]);
-
 </script>
 
 </body>
