@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COBOGÓS | MM Pré-Moldados</title>
+<title>Cobogós | MM Pré-Moldados</title>
 
 <link rel="stylesheet" href="css/style.css">
 
 <style>
 
-/* FUNDO CLARO-CINZA */
+/* FUNDO CINZA SUAVE */
 body{
-  background: linear-gradient(to bottom, #1c1c1c, #2c2c2c);
-  color:#fff;
+  background: linear-gradient(to bottom, #ddd, #ccc);
+  color:#000;
   padding-top:90px;
   font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER MODERNO TRANSPARENTE */
+/* HEADER MODERNO */
 header{
   width:100%;
   display:flex;
@@ -27,14 +27,24 @@ header{
   position:fixed;
   top:0;
   z-index:999;
-  background: transparent;
+  background:transparent;
 }
 
-/* NAV BOTÕES */
+/* NAV */
 nav{
   display:flex;
   gap:25px;
   align-items:center;
+}
+
+.nav-left, .nav-right{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.nav-right{
+  margin-right:10px; /* afasta do canto direito */
 }
 
 .nav-item{
@@ -42,7 +52,7 @@ nav{
   flex-direction:column;
   align-items:center;
   text-decoration:none;
-  color:#000; /* Preto para contraste com fundo cinza */
+  color:#000;
   font-size:12px;
   font-weight:600;
   transition:0.3s;
@@ -55,31 +65,31 @@ nav{
 }
 
 .nav-item:hover{
-  color:#e63946; /* efeito hover vermelho */
+  color:#e63946;
   transform:scale(1.05);
 }
 
-/* TÍTULOS */
-.titulo-cobogos {
-  text-align: center;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 42px;
-  font-weight: 800;
-  color: #e63946; /* vermelho marcante */
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.3), -2px -2px 6px rgba(0,0,0,0.2);
-  margin-bottom: 10px;
+/* TÍTULO PRINCIPAL */
+h1{
+  text-align:center; /* centralizado */
+  text-transform:uppercase;
+  font-size:36px;
+  margin-bottom:20px;
+  color:#e63946;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-.subtitulo-cobogos {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: #cccccc; /* cinza mais claro */
-  text-align: left;
-  margin-left: 20px;
-  margin-bottom: 30px;
+/* REMOVIDA LINHA VERMELHA */
+/* h1::after{ ... } */
+
+/* SUBTÍTULOS ALINHADOS À ESQUERDA */
+h2{
+  text-align:left; /* canto esquerdo */
+  margin-top:30px;
+  margin-bottom:15px;
+  font-size:22px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  padding-left:20px;
 }
 
 /* ANIMAÇÃO DE ENTRADA */
@@ -102,7 +112,15 @@ nav{
   }
 }
 
-/* IMAGENS */
+/* GRID DE PRODUTOS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+  gap:20px;
+  padding:0 20px 40px 20px;
+}
+
+/* CARTÃO DE PRODUTO */
 .card img{
   width:100%;
   height:110px;
@@ -112,17 +130,31 @@ nav{
   border:none;
 }
 
-/* BOTÃO ADICIONAR VERMELHO */
+.contador{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.contador button{
+  padding:3px 8px;
+  margin:0 5px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* BOTÃO ADICIONAR COM COR VERMELHA */
 .btn{
+  width:100%;
+  padding:8px 0;
   background:#e63946;
   color:#fff;
   font-weight:bold;
-  padding:8px 15px;
   border:none;
   border-radius:6px;
   cursor:pointer;
   transition:0.3s;
-  margin-top:5px;
 }
 
 .btn:hover{
@@ -136,10 +168,7 @@ nav{
 <body>
 
 <header>
-
-  <nav>
-
-    <!-- INÍCIO -->
+  <nav class="nav-left">
     <a href="index.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path d="M3 10L12 3l9 7"></path>
@@ -147,9 +176,10 @@ nav{
       </svg>
       Início
     </a>
+  </nav>
 
-    <!-- CARRINHO -->
-    <a href="#" class="nav-item" style="margin-left:15px;">
+  <nav class="nav-right">
+    <a href="#" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
@@ -157,16 +187,16 @@ nav{
       </svg>
       Carrinho
     </a>
-
   </nav>
 </header>
 
-<h1 class="titulo-cobogos">COBOGÓS</h1>
-<h2 class="subtitulo-cobogos">Cobogós 40x40</h2>
+<h1>COBOGÓS</h1>
 
 <!-- 40x40 -->
+<h2>Cobogós 40x40</h2>
 <div class="grid">
 
+<!-- TODOS OS PRODUTOS MANTIDOS -->
 <div class="card">
 <img src="img/cobogo/cobogo-16-furos-40.jpg">
 <h3>16 Furos 40x40</h3>
@@ -236,7 +266,7 @@ nav{
 </div>
 
 <!-- 30x30 -->
-<h2 class="subtitulo-cobogos">Cobogós 30x30</h2>
+<h2>Cobogós 30x30</h2>
 <div class="grid">
 
 <div class="card">
@@ -308,7 +338,7 @@ nav{
 </div>
 
 <!-- 24x24 -->
-<h2 class="subtitulo-cobogos">Cobogós 24x24</h2>
+<h2>Cobogós 24x24</h2>
 <div class="grid">
 
 <div class="card">
@@ -326,28 +356,28 @@ nav{
 
 <script>
 function alterarQtd(botao, valor){
-const qtdSpan = botao.parentElement.querySelector('.qtd');
-let qtd = parseInt(qtdSpan.innerText);
-qtd = Math.max(1, qtd + valor);
-qtdSpan.innerText = qtd;
+  const qtdSpan = botao.parentElement.querySelector('.qtd');
+  let qtd = parseInt(qtdSpan.innerText);
+  qtd = Math.max(1, qtd + valor);
+  qtdSpan.innerText = qtd;
 }
 
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function adicionarCarrinho(botao){
-const card = botao.closest('.card');
-const nome = card.querySelector('h3').innerText;
-const qtd = parseInt(card.querySelector('.qtd').innerText);
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const qtd = parseInt(card.querySelector('.qtd').innerText);
 
-const existente = carrinho.find(item => item.nome === nome);
-if(existente){
-existente.qtd += qtd;
-}else{
-carrinho.push({nome, qtd});
-}
+  const existente = carrinho.find(item => item.nome === nome);
+  if(existente){
+    existente.qtd += qtd;
+  }else{
+    carrinho.push({nome, qtd});
+  }
 
-localStorage.setItem('carrinho', JSON.stringify(carrinho));
-alert('Produto adicionado');
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert('Produto adicionado');
 }
 </script>
 
