@@ -3,33 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEIO-FIO DE JARDIM | MM Pré-Moldados</title>
+<title>MEIO-FIO | MM Pré-Moldados</title>
 
 <link rel="stylesheet" href="css/style.css">
 
 <style>
 
-/* RESET GLOBAL */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-/* GARANTE FUNDO TOTAL */
-html, body{
-  height:100%;
-}
-
+/* ===== FUNDO CINZA SUAVE ===== */
 body{
-  min-height:100vh;
   background: linear-gradient(to bottom, #ddd, #ccc);
-  font-family:'Montserrat', sans-serif;
+  color:#000;
   padding-top:90px;
-  overflow-x:hidden;
+  font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 header{
   width:100%;
   display:flex;
@@ -44,12 +32,18 @@ header{
 
 nav{
   display:flex;
+  gap:25px;
   align-items:center;
 }
 
-/* AJUSTE CARRINHO */
-header nav:last-child{
-  margin-right:20px;
+.nav-left, .nav-right{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.nav-right{
+  margin-right:10px;
 }
 
 .nav-item{
@@ -60,7 +54,7 @@ header nav:last-child{
   color:#000;
   font-size:12px;
   font-weight:600;
-  transition:.3s;
+  transition:0.3s;
 }
 
 .nav-item svg{
@@ -74,38 +68,47 @@ header nav:last-child{
   transform:scale(1.05);
 }
 
-/* TÍTULO */
+/* ===== TÍTULO ===== */
 h1{
   text-align:center;
+  text-transform:uppercase;
   font-size:36px;
-  margin-bottom:30px;
+  margin-bottom:20px;
   color:#e63946;
+  text-shadow:2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* GRID */
-
-/* MOBILE */
+/* ===== GRID ===== */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
   gap:20px;
-  padding:0 20px 80px;
+  padding:0 20px 40px 20px;
 }
 
-/* PC - 2 centralizados */
-@media (min-width:900px){
+/* 📱 Celular = 2 */
+@media(max-width:768px){
   .grid{
-    grid-template-columns:repeat(3,380px);
-    justify-content:center;
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
-/* CARD */
+/* 💻 Computador = 3 */
+@media(min-width:769px){
+  .grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+/* ===== CARDS ===== */
 .card{
+  background:transparent;
   text-align:center;
-  animation:fadeUp .6s ease forwards;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
   opacity:0;
   transform:translateY(30px);
+  animation:fadeUp .6s ease forwards;
 }
 
 @keyframes fadeUp{
@@ -115,26 +118,13 @@ h1{
   }
 }
 
-/* IMAGEM */
-.imagem-placeholder{
-  height:130px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#eee;
-  border-radius:8px;
-  margin-bottom:10px;
-  font-size:14px;
-  color:#666;
-}
-
-/* SELECT */
-select{
-  margin:10px 0;
-  padding:7px;
-  border-radius:6px;
-  border:1px solid #ccc;
+.card img{
   width:100%;
+  height:160px;
+  object-fit:contain;
+  margin-bottom:10px;
+  background:transparent;
+  border:none;
 }
 
 /* CONTADOR */
@@ -146,7 +136,7 @@ select{
 }
 
 .contador button{
-  padding:3px 10px;
+  padding:3px 8px;
   margin:0 5px;
   font-size:16px;
   cursor:pointer;
@@ -176,7 +166,7 @@ select{
 <body>
 
 <header>
-  <nav>
+  <nav class="nav-left">
     <a href="index.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path d="M3 10L12 3l9 7"></path>
@@ -186,7 +176,7 @@ select{
     </a>
   </nav>
 
-  <nav>
+  <nav class="nav-right">
     <a href="#" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="9" cy="20" r="1"></circle>
@@ -203,9 +193,11 @@ select{
 <div class="grid" id="gridProdutos"></div>
 
 <script>
+
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
+/* CONTADOR */
 function mais(btn){
   const qtd = btn.parentElement.querySelector('.qtd');
   qtd.innerText = parseInt(qtd.innerText) + 1;
@@ -216,37 +208,30 @@ function menos(btn){
   qtd.innerText = Math.max(1, parseInt(qtd.innerText) - 1);
 }
 
+/* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
-  const variacao = card.querySelector('select').value;
   const qtd = parseInt(card.querySelector('.qtd').innerText);
 
-  const nomeFinal = nome + " - " + variacao;
-
-  const existente = carrinho.find(item => item.nome === nomeFinal);
+  const existente = carrinho.find(item => item.nome === nome);
 
   if(existente){
     existente.qtd += qtd;
-  } else {
-    carrinho.push({ nome: nomeFinal, qtd });
+  }else{
+    carrinho.push({nome, qtd});
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert("Produto adicionado!");
+  alert("Produto adicionado");
 }
 
-/* PRODUTOS */
-function criarProduto(nome){
+/* CRIAR PRODUTOS */
+function criar(nome){
   grid.innerHTML += `
   <div class="card">
-
-    <div class="imagem-placeholder">
-      Imagem será adicionada aqui
-    </div>
-
+    <img src="img/meiofio/padrao.jpg" alt="${nome}">
     <h3>${nome}</h3>
-
 
     <div class="contador">
       <button onclick="menos(this)">−</button>
@@ -257,16 +242,17 @@ function criarProduto(nome){
     <button class="btn" onclick="adicionarCarrinho(this)">
       Adicionar
     </button>
-
   </div>`;
 }
 
-criarProduto("Meio-Fio Arredondado 80x25x8cm");
-criarProduto("Meio-Fio Cordão 80x25x4cm");
-criarProduto("Guia de Jardim Ondulado 80x20x4cm");
+/* ===== PRODUTOS ===== */
+[
+"Meio-Fio Arredondado 80x25x8cm",
+"Meio-Fio Cordão 80x25x4cm",
+"Guia de Jardim Ondulado 80x20x4cm"
+].forEach(criar);
 
 </script>
-  
-</style>
-</head>
-<body>
+
+</body>
+</html>
