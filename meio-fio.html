@@ -5,20 +5,194 @@
 <title>Meio-Fio de Jardim | MM Pré-Moldados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
+
+<style>
+
+/* FUNDO */
+body{
+  background: linear-gradient(to bottom, #ddd, #ccc);
+  color:#000;
+  padding-top:90px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* HEADER */
+header{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  position:fixed;
+  top:0;
+  z-index:999;
+  background:transparent;
+}
+
+/* NAV */
+nav{
+  display:flex;
+  gap:25px;
+  align-items:center;
+}
+
+.nav-left, .nav-right{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.nav-right{
+  margin-right:20px;
+}
+
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-decoration:none;
+  color:#000;
+  font-size:12px;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.nav-item svg{
+  width:24px;
+  height:24px;
+  margin-bottom:3px;
+}
+
+.nav-item:hover{
+  color:#e63946;
+  transform:scale(1.05);
+}
+
+/* TÍTULO */
+h1{
+  text-align:center;
+  text-transform:uppercase;
+  font-size:36px;
+  margin-bottom:30px;
+  color:#e63946;
+  text-shadow:2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* GRID */
+
+/* MOBILE → 2 */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  padding:0 20px 40px;
+}
+
+/* PC → 3 */
+@media(min-width:900px){
+  .grid{
+    grid-template-columns:repeat(3,1fr);
+    max-width:1100px;
+    margin:auto;
+  }
+}
+
+/* CARD */
+.card{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:260px;
+  animation:fadeUp .5s ease;
+}
+
+/* IMAGEM */
+.imagem-placeholder{
+  width:100%;
+  height:120px;
+  background:transparent;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:10px;
+}
+
+/* CONTADOR */
+.contador{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:10px 0;
+}
+
+.contador button{
+  padding:3px 8px;
+  margin:0 5px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* BOTÃO */
+.btn{
+  width:100%;
+  padding:8px 0;
+  background:#e63946;
+  color:#fff;
+  font-weight:bold;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  transition:.3s;
+  margin-top:auto;
+}
+
+.btn:hover{
+  background:#c92f3b;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+</style>
 </head>
 
 <body>
 
-<!-- BOTÃO VOLTAR PADRÃO -->
-<a href="index.html" class="voltar">
-  <svg viewBox="0 0 24 24">
-    <path d="M15 18l-6-6 6-6"/>
-  </svg>
-</a>
+<header>
+  <nav class="nav-left">
+    <a href="index.html" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+      Início
+    </a>
+  </nav>
 
-<h1 style="text-align:center; margin-top:60px;">Meio-Fio de Jardim</h1>
+  <nav class="nav-right">
+    <a href="#" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+      Carrinho
+    </a>
+  </nav>
+</header>
 
-<div class="grid" id="gridProdutos" style="padding:20px;"></div>
+<h1>MEIO-FIO DE JARDIM</h1>
+
+<div class="grid" id="gridProdutos"></div>
 
 <script>
 const grid = document.getElementById("gridProdutos");
@@ -74,9 +248,7 @@ function criarProduto(nome){
   </div>`;
 }
 
-/* ========================= */
 /* PRODUTOS */
-/* ========================= */
 
 criarProduto("Meio-Fio Arredondado 80x25x8cm");
 criarProduto("Meio-Fio Cordão 80x25x4cm");
