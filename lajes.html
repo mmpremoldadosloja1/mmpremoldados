@@ -6,42 +6,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* FUNDO CINZA SUAVE */
 body{
-  background: linear-gradient(to bottom, #ddd, #ccc);
+  background:#ddd;
   color:#000;
-  padding-top:90px;
   font-family: 'Montserrat', sans-serif;
+  padding-top:90px;
+  margin:0;
 }
 
-/* HEADER MODERNO */
 header{
   width:100%;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 25px;
+  padding:15px 20px;
   position:fixed;
   top:0;
   z-index:999;
   background:transparent;
-}
-
-/* NAV */
-nav{
-  display:flex;
-  gap:25px;
-  align-items:center;
-}
-
-.nav-left, .nav-right{
-  display:flex;
-  gap:20px;
-  align-items:center;
-}
-
-.nav-right{
-  margin-right:10px; /* afasta do canto direito */
 }
 
 .nav-item{
@@ -52,7 +34,6 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
-  transition:0.3s;
 }
 
 .nav-item svg{
@@ -61,39 +42,32 @@ nav{
   margin-bottom:3px;
 }
 
-.nav-item:hover{
-  color:#e63946;
-  transform:scale(1.05);
-}
-
-/* TÍTULO PRINCIPAL */
 h1{
   text-align:center;
   text-transform:uppercase;
-  font-size:36px;
+  font-size:32px;
   margin-bottom:30px;
   color:#e63946;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* SUBTÍTULOS */
 h2{
   text-align:left;
-  margin-top:30px;
-  margin-bottom:15px;
-  font-size:22px;
-  padding-left:20px;
+  margin-top:20px;
+  margin-bottom:10px;
+  padding-left:10px;
+  font-size:20px;
 }
 
-/* GRID DE PRODUTOS */
+/* GRID QUE FAZ CADA CARD OCUPAR TODA LARGURA */
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
-  gap:15px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
   padding:0 10px 50px 10px;
 }
 
-/* CARTÃO DE PRODUTO */
+/* CARD ESTILO COBOGÓ, PRENCHENDO LARGURA */
 .card{
   background:transparent;
   padding:15px;
@@ -101,24 +75,34 @@ h2{
   flex-direction:column;
   align-items:center;
   justify-content:flex-start;
-  min-height:280px;
   width:100%;
+  min-height:250px;
 }
 
-.card img{
+.card .imagem-placeholder{
   width:100%;
   height:120px;
-  object-fit:contain;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#eee;
   margin-bottom:10px;
-  background:transparent;
-  border:none;
+}
+
+select, input{
+  padding:8px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  margin-top:10px;
+  width:100%;
+  box-sizing:border-box;
 }
 
 .contador{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:8px;
+  margin:10px 0;
 }
 
 .contador button{
@@ -130,7 +114,7 @@ h2{
 
 .btn{
   width:100%;
-  padding:8px 0;
+  padding:10px 0;
   background:#e63946;
   color:#fff;
   font-weight:bold;
@@ -142,7 +126,7 @@ h2{
 
 .btn:hover{
   background:#c92f3b;
-  transform:scale(1.05);
+  transform:scale(1.03);
 }
 </style>
 </head>
@@ -150,26 +134,22 @@ h2{
 <body>
 
 <header>
-  <nav class="nav-left">
-    <a href="index.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path d="M3 10L12 3l9 7"></path>
-        <path d="M5 10v10h14V10"></path>
-      </svg>
-      Início
-    </a>
-  </nav>
+  <a href="index.html" class="nav-item">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M3 10L12 3l9 7"></path>
+      <path d="M5 10v10h14V10"></path>
+    </svg>
+    Início
+  </a>
 
-  <nav class="nav-right">
-    <a href="#" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <circle cx="9" cy="20" r="1"></circle>
-        <circle cx="18" cy="20" r="1"></circle>
-        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-      </svg>
-      Carrinho
-    </a>
-  </nav>
+  <a href="#" class="nav-item">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="9" cy="20" r="1"></circle>
+      <circle cx="18" cy="20" r="1"></circle>
+      <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+    </svg>
+    Carrinho
+  </a>
 </header>
 
 <h1>Lajes Pré-Moldadas</h1>
@@ -179,10 +159,6 @@ h2{
 <script>
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-function titulo(texto){
-  grid.innerHTML += `<div style="grid-column:1/-1; margin-top:20px"><h2>${texto}</h2></div>`;
-}
 
 function mais(btn){
   const qtd = btn.parentElement.querySelector('.qtd');
@@ -216,11 +192,9 @@ function adicionarCarrinho(botao){
 function criarProduto(nome, opcoes=null){
   grid.innerHTML += `
   <div class="card">
-    <div style="height:100px; width:100%; display:flex; align-items:center; justify-content:center; background:#eee; margin-bottom:10px;">
-      Imagem
-    </div>
+    <div class="imagem-placeholder">Imagem</div>
     <h3>${nome}</h3>
-    ${opcoes ? `<select style="margin:10px 0; padding:6px; border-radius:6px; border:1px solid #ccc; width:100%;">${opcoes.map(op=>`<option>${op}</option>`).join('')}</select>` : ''}
+    ${opcoes ? `<select>${opcoes.map(op=>`<option>${op}</option>`).join('')}</select>` : ''}
     <div class="contador">
       <button onclick="menos(this)">−</button>
       <span class="qtd">1</span>
@@ -231,16 +205,13 @@ function criarProduto(nome, opcoes=null){
 }
 
 /* ===== Lajes Teto H8 ===== */
-titulo("Lajes Teto H8");
-["7,5cm x 33cm","7,5cm x 40cm"].forEach(op=>criarProduto("Laje Teto H8", [op]));
+criarProduto("Laje Teto H8", ["7,5cm x 33cm","7,5cm x 40cm"]);
 
 /* ===== Lajes Piso H10 ===== */
-titulo("Lajes Piso H10");
-["9cm x 33cm","9cm x 40cm"].forEach(op=>criarProduto("Laje Piso H10", [op]));
+criarProduto("Laje Piso H10", ["9cm x 33cm","9cm x 40cm"]);
 
 /* ===== Viga por Unidade ===== */
-titulo("Viga por Unidade");
-["H8","H10"].forEach(op=>criarProduto("Viga por Unidade", [op]));
+criarProduto("Viga por Unidade", ["H8","H10"]);
 </script>
 
 </body>
