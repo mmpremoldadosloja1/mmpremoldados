@@ -4,30 +4,30 @@
 <meta charset="UTF-8">
 <title>Meio-Fio de Jardim | MM Pré-Moldados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/style.css">
 
 <style>
 
-/* 🔥 REMOVE LINHA BRANCA */
+/* ================= RESET GLOBAL ================= */
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
 
-html, body{
-  width:100%;
+/* Remove qualquer fundo branco do navegador */
+html{
+  background: linear-gradient(to bottom, #ddd, #ccc);
+}
+
+/* ================= BODY ================= */
+body{
+  font-family: 'Montserrat', sans-serif;
+  background: transparent;
+  padding-top:90px;
   overflow-x:hidden;
 }
 
-/* FUNDO PADRÃO */
-body{
-  background: linear-gradient(to bottom, #ddd, #ccc);
-  font-family: 'Montserrat', sans-serif;
-  padding-top:90px;
-}
-
-/* HEADER */
+/* ================= HEADER ================= */
 header{
   width:100%;
   display:flex;
@@ -44,10 +44,6 @@ header{
   display:flex;
   gap:20px;
   align-items:center;
-}
-
-.nav-right{
-  margin-right:20px;
 }
 
 .nav-item{
@@ -72,7 +68,7 @@ header{
   transform:scale(1.05);
 }
 
-/* TÍTULO */
+/* ================= TÍTULO ================= */
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -82,7 +78,9 @@ h1{
   text-shadow:2px 2px 4px rgba(0,0,0,.3);
 }
 
-/* GRID MOBILE */
+/* ================= GRID ================= */
+
+/* MOBILE = 2 COLUNAS */
 .grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -90,7 +88,7 @@ h1{
   padding:0 20px 40px;
 }
 
-/* GRID PC */
+/* PC = 3 COLUNAS */
 @media(min-width:768px){
   .grid{
     grid-template-columns:repeat(3,1fr);
@@ -99,13 +97,20 @@ h1{
   }
 }
 
-/* CARD */
+/* ================= CARD ================= */
+.card{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:260px;
+}
+
+/* IMAGEM */
 .card img{
   width:100%;
-  height:110px;
+  height:120px;
   object-fit:contain;
   margin-bottom:10px;
-  background:transparent;
 }
 
 /* CONTADOR */
@@ -113,7 +118,7 @@ h1{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:8px;
+  margin:10px 0;
 }
 
 .contador button{
@@ -138,7 +143,6 @@ h1{
 
 .btn:hover{
   background:#c92f3b;
-  transform:scale(1.05);
 }
 
 </style>
@@ -201,14 +205,14 @@ function adicionarCarrinho(botao){
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert("Produto adicionado!");
+  alert("Produto adicionado ao carrinho!");
 }
 
-function criarProduto(nome, img){
+function criarProduto(nome, imagem){
   grid.innerHTML += `
   <div class="card">
 
-    <img src="${img}" alt="${nome}">
+    <img src="${imagem}" alt="${nome}">
 
     <h3>${nome}</h3>
 
@@ -225,7 +229,8 @@ function criarProduto(nome, img){
   </div>`;
 }
 
-/* PRODUTOS */
+/* ================= PRODUTOS ================= */
+
 criarProduto("Meio-Fio Arredondado 80x25x8cm", "img/meiofio/arredondado.jpg");
 criarProduto("Meio-Fio Cordão 80x25x4cm", "img/meiofio/cordao.jpg");
 criarProduto("Guia de Jardim Ondulado 80x20x4cm", "img/meiofio/ondulado.jpg");
