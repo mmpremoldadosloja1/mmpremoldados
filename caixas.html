@@ -9,14 +9,22 @@
 
 <style>
 
+/* RESET PARA REMOVER LINHA BRANCA */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
 /* FUNDO PADRÃO */
 body{
   background: linear-gradient(to bottom, #ddd, #ccc);
   font-family:'Montserrat', sans-serif;
   padding-top:90px;
+  overflow-x:hidden;
 }
 
-/* HEADER PADRÃO */
+/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -29,9 +37,9 @@ header{
   background:transparent;
 }
 
+/* NAV */
 nav{
   display:flex;
-  gap:25px;
   align-items:center;
 }
 
@@ -44,6 +52,11 @@ nav{
   font-size:12px;
   font-weight:600;
   transition:0.3s;
+}
+
+/* AJUSTE DO CARRINHO */
+header nav:last-child{
+  margin-right:20px;
 }
 
 .nav-item svg{
@@ -65,7 +78,7 @@ h1{
   color:#e63946;
 }
 
-/* GRID RESPONSIVO */
+/* GRID */
 
 /* MOBILE */
 .grid{
@@ -75,19 +88,11 @@ h1{
   padding:0 20px 40px;
 }
 
-/* TABLET */
-@media (min-width:768px){
+/* PC */
+@media (min-width:900px){
   .grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
-
-/* DESKTOP GRANDE */
-@media (min-width:1200px){
-  .grid{
-    grid-template-columns:repeat(3,1fr);
-    max-width:1200px;
-    margin:0 auto;
+    grid-template-columns:repeat(2,350px);
+    justify-content:center;
   }
 }
 
@@ -106,8 +111,9 @@ h1{
   }
 }
 
+/* IMAGEM */
 .imagem-placeholder{
-  height:120px;
+  height:130px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -142,7 +148,7 @@ select{
   cursor:pointer;
 }
 
-/* BOTÃO PADRÃO */
+/* BOTÃO */
 .btn{
   width:100%;
   padding:8px 0;
