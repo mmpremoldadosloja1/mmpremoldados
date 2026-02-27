@@ -69,35 +69,27 @@ nav{
   transform:scale(1.05);
 }
 
-/* TÍTULO PRINCIPAL COM ARTE */
+/* TÍTULO PRINCIPAL */
 h1{
-  text-align:center;
+  text-align:center; /* centralizado */
   text-transform:uppercase;
   font-size:36px;
   margin-bottom:20px;
-  position:relative;
-  display:inline-block;
   color:#e63946;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-h1::after{
-  content:"";
-  display:block;
-  width:60%;
-  height:4px;
-  background:#e63946;
-  margin:8px auto 0 auto;
-  border-radius:2px;
-}
+/* REMOVIDA LINHA VERMELHA */
+/* h1::after{ ... } */
 
-/* SUBTÍTULOS */
+/* SUBTÍTULOS ALINHADOS À ESQUERDA */
 h2{
-  text-align:center;
+  text-align:left; /* canto esquerdo */
   margin-top:30px;
   margin-bottom:15px;
   font-size:22px;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  padding-left:20px;
 }
 
 /* ANIMAÇÃO DE ENTRADA */
@@ -152,7 +144,7 @@ h2{
   cursor:pointer;
 }
 
-/* BOTÃO ADICIONAR COM LINHA VERMELHA */
+/* BOTÃO ADICIONAR COM COR VERMELHA */
 .btn{
   width:100%;
   padding:8px 0;
@@ -204,6 +196,7 @@ h2{
 <h2>Cobogós 40x40</h2>
 <div class="grid">
 
+<!-- TODOS OS PRODUTOS MANTIDOS -->
 <div class="card">
 <img src="img/cobogo/cobogo-16-furos-40.jpg">
 <h3>16 Furos 40x40</h3>
