@@ -44,7 +44,7 @@ nav{
 }
 
 .nav-right{
-  margin-right:20px; /* afastando do canto direito */
+  margin-right:20px;
 }
 
 .nav-item{
@@ -69,9 +69,9 @@ nav{
   transform:scale(1.05);
 }
 
-/* TÍTULO PRINCIPAL */
+/* TÍTULO */
 h1{
-  text-align:center; /* centralizado */
+  text-align:center;
   text-transform:uppercase;
   font-size:36px;
   margin-bottom:20px;
@@ -79,7 +79,28 @@ h1{
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* ANIMAÇÃO DE ENTRADA */
+/* GRID */
+.grid{
+  display:grid;
+  gap:20px;
+  padding:0 20px 40px 20px;
+}
+
+/* 📱 MOBILE = 2 */
+@media (max-width:768px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+/* 💻 PC = 3 */
+@media (min-width:769px){
+  .grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+/* ANIMAÇÃO */
 .card{
   opacity:0;
   transform:translateY(30px);
@@ -88,9 +109,6 @@ h1{
 
 .card:nth-child(2){animation-delay:.1s}
 .card:nth-child(3){animation-delay:.2s}
-.card:nth-child(4){animation-delay:.3s}
-.card:nth-child(5){animation-delay:.4s}
-.card:nth-child(6){animation-delay:.5s}
 
 @keyframes fadeUp{
   to{
@@ -99,22 +117,12 @@ h1{
   }
 }
 
-/* GRID DE PRODUTOS */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(60px,1fr));
-  gap:20px;
-  padding:0 20px 40px 20px;
-}
-
-/* CARTÃO DE PRODUTO */
+/* PRODUTO */
 .card img{
   width:100%;
   height:110px;
   object-fit:contain;
   margin-bottom:10px;
-  background:transparent;
-  border:none;
 }
 
 .contador{
@@ -129,9 +137,10 @@ h1{
   margin:0 5px;
   font-size:16px;
   cursor:pointer;
+  border-radius:6px;
 }
 
-/* BOTÃO ADICIONAR COM COR VERMELHA */
+/* BOTÃO */
 .btn{
   width:100%;
   padding:8px 0;
@@ -179,7 +188,8 @@ h1{
 
 <h1>MEIO-FIO DE JARDIM</h1>
 
-<!-- TODOS OS PRODUTOS MANTIDOS -->
+<div class="grid">
+
 <div class="card">
 <img src="img/adicionar-imagem.jpg">
 <h3>Meio-Fio Arredondado 80x25x8cm</h3>
@@ -212,8 +222,6 @@ h1{
 </div>
 <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
 </div>
-
-
 
 </div>
 
