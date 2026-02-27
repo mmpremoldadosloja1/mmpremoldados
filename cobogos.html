@@ -37,6 +37,13 @@ nav{
   align-items:center;
 }
 
+/* BOTÕES INÍCIO E CARRINHO SEPARADOS */
+.nav-left, .nav-right{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
 .nav-item{
   display:flex;
   flex-direction:column;
@@ -164,8 +171,7 @@ h2{
 <body>
 
 <header>
-  <nav>
-
+  <nav class="nav-left">
     <!-- INÍCIO -->
     <a href="index.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -174,7 +180,9 @@ h2{
       </svg>
       Início
     </a>
+  </nav>
 
+  <nav class="nav-right">
     <!-- CARRINHO -->
     <a href="#" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -184,7 +192,6 @@ h2{
       </svg>
       Carrinho
     </a>
-
   </nav>
 </header>
 
