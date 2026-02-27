@@ -42,7 +42,7 @@ nav{
 }
 
 .nav-right{
-  margin-right:10px; /* afasta do canto direito */
+  margin-right:10px;
 }
 
 .nav-item{
@@ -77,7 +77,7 @@ h1{
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* SUBTÍTULOS ALINHADOS À ESQUERDA */
+/* SUBTÍTULOS À ESQUERDA */
 h2{
   text-align:left;
   margin-top:30px;
@@ -127,7 +127,7 @@ h2{
   cursor:pointer;
 }
 
-/* BOTÃO ADICIONAR COM COR VERMELHA */
+/* BOTÃO ADICIONAR VERMELHO */
 .btn{
   width:100%;
   padding:8px 0;
@@ -143,6 +143,15 @@ h2{
 .btn:hover{
   background:#c92f3b;
   transform:scale(1.05);
+}
+
+/* INPUT DE METRAGEM */
+input, select{
+  width:100%;
+  padding:6px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  margin:6px 0;
 }
 </style>
 </head>
@@ -199,7 +208,11 @@ function adicionarCarrinho(botao){
   const nome = card.querySelector('h3').innerText;
   const select = card.querySelector('select');
   const variacao = select ? select.value : "";
-  const qtd = card.querySelector('.qtd') ? parseInt(card.querySelector('.qtd').innerText) : 1;
+  const qtdInput = card.querySelector('input');
+  const qtd = qtdInput ? parseFloat(qtdInput.value) : 1;
+
+  if(select && !variacao) return alert("Escolha uma opção!");
+  if(qtdInput && (!qtd || qtd <= 0)) return alert("Informe a metragem!");
 
   const nomeFinal = variacao ? `${nome} - ${variacao} - ${qtd}m²` : `${nome} - ${qtd}m²`;
 
@@ -214,30 +227,35 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado ao carrinho!");
 }
 
-function criarProduto(nome, opcoes = null){
+function criarProduto(nome, opcoes = null, metragem = false){
   grid.innerHTML += `
   <div class="card">
     <div class="imagem-placeholder">Imagem</div>
     <h3>${nome}</h3>
-    ${opcoes ? `<select style="margin:10px 0;padding:6px;border-radius:6px;border:1px solid #ccc;width:100%;">
-      ${opcoes.map(op => `<option>${op}</option>`).join('')}
+
+    ${opcoes ? `<select>
+      ${opcoes.map(op => `<option value="">Escolher...</option>`).join('')}
     </select>` : ''}
+
+    ${metragem ? `<input type="number" min="1" placeholder="Metragem (m²)">` : ''}
+
     <div class="contador">
       <button onclick="menos(this)">−</button>
       <span class="qtd">1</span>
       <button onclick="mais(this)">+</button>
     </div>
+
     <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
   </div>`;
 }
 
 /* ================= LAJES TETO H8 ================= */
 titulo("Lajes Teto H8");
-criarProduto("Laje Teto H8", ["7,5cm x 33cm","7,5cm x 40cm"]);
+criarProduto("Laje Teto H8", ["7,5cm x 33cm","7,5cm x 40cm"], true);
 
 /* ================= LAJES PISO H10 ================= */
 titulo("Lajes Piso H10");
-criarProduto("Laje Piso H10", ["9cm x 33cm","9cm x 40cm"]);
+criarProduto("Laje Piso H10", ["9cm x 33cm","9cm x 40cm"], true);
 
 /* ================= VIGAS ================= */
 titulo("Vigas por Unidade");
