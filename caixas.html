@@ -9,14 +9,15 @@
 
 <style>
 
-/* GARANTE FUNDO TOTAL */
+/* FUNDO TOTAL (igual meio fio) */
 html, body{
   height:100%;
+  background: linear-gradient(to bottom, #ddd, #ccc);
 }
 
+/* REMOVE QUALQUER BRANCO */
 body{
   min-height:100vh;
-  background: linear-gradient(to bottom, #ddd, #ccc);
   font-family:'Montserrat', sans-serif;
   padding-top:90px;
   overflow-x:hidden;
@@ -74,7 +75,7 @@ h1{
   color:#e63946;
 }
 
-/* GRID PADRÃO */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -82,7 +83,7 @@ h1{
   padding:0 20px 80px;
 }
 
-/* CELULAR = 2 */
+/* CELULAR */
 @media (max-width:768px){
   .grid{
     grid-template-columns:repeat(2,1fr);
@@ -91,6 +92,9 @@ h1{
 
 /* CARD */
 .card{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
   text-align:center;
   opacity:0;
   transform:translateY(30px);
@@ -136,7 +140,7 @@ select{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .contador button{
@@ -147,17 +151,12 @@ select{
   background:#ddd;
   font-size:16px;
   cursor:pointer;
-  transition:.2s;
 }
 
-.contador button:hover{
-  background:#ccc;
-}
-
-/* BOTÃO */
+/* BOTÃO ALINHADO */
 .btn{
   width:100%;
-  padding:8px 0;
+  padding:10px 0;
   background:#e63946;
   color:#fff;
   font-weight:bold;
@@ -165,11 +164,11 @@ select{
   border-radius:6px;
   cursor:pointer;
   transition:.3s;
+  margin-top:auto;
 }
 
 .btn:hover{
   background:#c92f3b;
-  transform:scale(1.05);
 }
 
 </style>
@@ -265,9 +264,9 @@ function criarProduto(nome){
   </div>`;
 }
 
+/* SOMENTE OS 2 PRODUTOS */
 criarProduto("Caixa de Passagem 40x40x40");
 criarProduto("Caixa de Energia 30x30x20");
-criarProduto("Caixa de Inspeção 50x50x50");
 
 </script>
 
