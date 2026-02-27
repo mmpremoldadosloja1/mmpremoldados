@@ -7,168 +7,242 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-.laje-box{
-  background:#fff;
-  padding:20px;
-  border-radius:12px;
-  margin-bottom:30px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+/* FUNDO CINZA SUAVE */
+body{
+  background: linear-gradient(to bottom, #ddd, #ccc);
+  color:#000;
+  padding-top:90px;
+  font-family: 'Montserrat', sans-serif;
 }
 
-.laje-box h2{
-  margin-bottom:15px;
-}
-
-select, input{
-  padding:8px;
-  border-radius:6px;
-  border:1px solid #ccc;
-  margin-top:10px;
+/* HEADER MODERNO */
+header{
   width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  position:fixed;
+  top:0;
+  z-index:999;
+  background:transparent;
 }
 
-.hidden{
-  display:none;
+/* NAV */
+nav{
+  display:flex;
+  gap:25px;
+  align-items:center;
 }
 
-.viga-opcoes{
-  margin-top:15px;
+.nav-left, .nav-right{
+  display:flex;
+  gap:20px;
+  align-items:center;
 }
 
+.nav-right{
+  margin-right:10px; /* afasta do canto direito */
+}
+
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-decoration:none;
+  color:#000;
+  font-size:12px;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.nav-item svg{
+  width:24px;
+  height:24px;
+  margin-bottom:3px;
+}
+
+.nav-item:hover{
+  color:#e63946;
+  transform:scale(1.05);
+}
+
+/* TÍTULO PRINCIPAL */
+h1{
+  text-align:center;
+  text-transform:uppercase;
+  font-size:36px;
+  margin-bottom:20px;
+  color:#e63946;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* SUBTÍTULOS ALINHADOS À ESQUERDA */
+h2{
+  text-align:left;
+  margin-top:30px;
+  margin-bottom:15px;
+  font-size:22px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  padding-left:20px;
+}
+
+/* GRID DE PRODUTOS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+  gap:20px;
+  padding:0 20px 40px 20px;
+}
+
+/* CARTÃO DE PRODUTO */
+.card{
+  background: #fff;
+  border-radius: 10px;
+  padding:10px;
+  text-align: center;
+  box-shadow: 0 4px 5px rgba(0,0,0,0.1);
+}
+
+.card img, .card .imagem-placeholder{
+  width:100%;
+  height:110px;
+  object-fit:contain;
+  margin-bottom:10px;
+  background:transparent;
+}
+
+/* CONTADOR */
+.contador{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.contador button{
+  padding:3px 8px;
+  margin:0 5px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* BOTÃO ADICIONAR COM COR VERMELHA */
 .btn{
-  margin-top:15px;
+  width:100%;
+  padding:8px 0;
+  background:#e63946;
+  color:#fff;
+  font-weight:bold;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#c92f3b;
+  transform:scale(1.05);
 }
 </style>
-
 </head>
+
 <body>
 
-<a href="index.html" class="voltar">
-  <svg viewBox="0 0 24 24">
-    <path d="M15 18l-6-6 6-6"/>
-  </svg>
-</a>
+<header>
+  <nav class="nav-left">
+    <a href="index.html" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+      Início
+    </a>
+  </nav>
 
-<h1 style="text-align:center; margin-top:60px;">Lajes Pré-Moldadas</h1>
+  <nav class="nav-right">
+    <a href="#" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+      Carrinho
+    </a>
+  </nav>
+</header>
 
-<div style="padding:20px; max-width:800px; margin:auto;">
+<h1>LAJES PRÉ-MOLDADAS</h1>
 
-<!-- LAJE TETO H8 -->
-<div class="laje-box">
-  <h2>Laje Teto H8</h2>
-
-  <label>Selecionar medida:</label>
-  <select id="medidaH8">
-    <option value="">Escolher...</option>
-    <option>7,5cm x 33cm</option>
-    <option>7,5cm x 40cm</option>
-  </select>
-
-  <div id="metragemH8" class="hidden">
-    <label>Adicionar metragem (m²):</label>
-    <input type="number" min="1" id="qtdH8">
-    <button class="btn" onclick="addLaje('Laje Teto H8', 'medidaH8', 'qtdH8')">Adicionar ao carrinho</button>
-  </div>
-</div>
-
-<!-- LAJE PISO H10 -->
-<div class="laje-box">
-  <h2>Laje Piso H10</h2>
-
-  <label>Selecionar medida:</label>
-  <select id="medidaH10">
-    <option value="">Escolher...</option>
-    <option>9cm x 33cm</option>
-    <option>9cm x 40cm</option>
-  </select>
-
-  <div id="metragemH10" class="hidden">
-    <label>Adicionar metragem (m²):</label>
-    <input type="number" min="1" id="qtdH10">
-    <button class="btn" onclick="addLaje('Laje Piso H10', 'medidaH10', 'qtdH10')">Adicionar ao carrinho</button>
-  </div>
-</div>
-
-<!-- VIGA POR UNIDADE -->
-<div class="laje-box">
-  <h2>Viga por Unidade</h2>
-
-  <label>Selecionar modelo:</label>
-  <select id="tipoViga">
-    <option value="">Escolher...</option>
-    <option>H8</option>
-    <option>H10</option>
-  </select>
-
-  <div id="vigaTamanhoBox" class="hidden">
-    <label>Digite o tamanho (ex: 1.50):</label>
-    <input type="number" step="0.10" min="1.5" max="6" id="tamanhoViga">
-
-    <div id="vigaQtdBox" class="hidden viga-opcoes">
-      <label>Quantidade:</label>
-      <input type="number" min="1" id="qtdViga">
-      <button class="btn" onclick="addViga()">Adicionar ao carrinho</button>
-    </div>
-  </div>
-</div>
-
-</div>
+<div class="grid" id="gridProdutos"></div>
 
 <script>
-
+const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* MOSTRAR METRAGEM QUANDO ESCOLHER */
-document.getElementById("medidaH8").addEventListener("change", function(){
-  document.getElementById("metragemH8").classList.toggle("hidden", this.value === "");
-});
+function titulo(texto){
+  grid.innerHTML += `<div style="grid-column:1/-1;margin-top:20px"><h2>${texto}</h2></div>`;
+}
 
-document.getElementById("medidaH10").addEventListener("change", function(){
-  document.getElementById("metragemH10").classList.toggle("hidden", this.value === "");
-});
+function mais(btn){
+  const qtd = btn.parentElement.querySelector('.qtd');
+  qtd.innerText = parseInt(qtd.innerText) + 1;
+}
 
-/* MOSTRAR TAMANHO VIGA */
-document.getElementById("tipoViga").addEventListener("change", function(){
-  document.getElementById("vigaTamanhoBox").classList.toggle("hidden", this.value === "");
-});
+function menos(btn){
+  const qtd = btn.parentElement.querySelector('.qtd');
+  qtd.innerText = Math.max(1, parseInt(qtd.innerText) - 1);
+}
 
-/* MOSTRAR QUANTIDADE APÓS DIGITAR TAMANHO */
-document.getElementById("tamanhoViga").addEventListener("input", function(){
-  const tamanho = parseFloat(this.value);
-  if(tamanho >= 1.5 && tamanho <= 6){
-    document.getElementById("vigaQtdBox").classList.remove("hidden");
+function adicionarCarrinho(botao){
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const select = card.querySelector('select');
+  const variacao = select ? select.value : "";
+  const qtd = card.querySelector('.qtd') ? parseInt(card.querySelector('.qtd').innerText) : 1;
+
+  const nomeFinal = variacao ? `${nome} - ${variacao} - ${qtd}m²` : `${nome} - ${qtd}m²`;
+
+  const existente = carrinho.find(item => item.nome === nomeFinal);
+  if(existente){
+    existente.qtd += 1;
   } else {
-    document.getElementById("vigaQtdBox").classList.add("hidden");
+    carrinho.push({nome: nomeFinal, qtd:1});
   }
-});
 
-/* ADICIONAR LAJE */
-function addLaje(nome, selectId, qtdId){
-  const medida = document.getElementById(selectId).value;
-  const qtd = document.getElementById(qtdId).value;
-
-  if(!medida || !qtd) return alert("Preencha todos os campos!");
-
-  const produto = `${nome} - ${medida} - ${qtd}m²`;
-
-  carrinho.push({nome: produto, qtd:1});
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
-  alert("Adicionado ao carrinho!");
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert("Produto adicionado ao carrinho!");
 }
 
-/* ADICIONAR VIGA */
-function addViga(){
-  const tipo = document.getElementById("tipoViga").value;
-  const tamanho = document.getElementById("tamanhoViga").value;
-  const qtd = document.getElementById("qtdViga").value;
-
-  if(!tipo || !tamanho || !qtd) return alert("Preencha todos os campos!");
-
-  const produto = `Viga ${tipo} - ${tamanho}m`;
-  carrinho.push({nome: produto, qtd: parseInt(qtd)});
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
-  alert("Adicionado ao carrinho!");
+function criarProduto(nome, opcoes = null){
+  grid.innerHTML += `
+  <div class="card">
+    <div class="imagem-placeholder">Imagem</div>
+    <h3>${nome}</h3>
+    ${opcoes ? `<select style="margin:10px 0;padding:6px;border-radius:6px;border:1px solid #ccc;width:100%;">
+      ${opcoes.map(op => `<option>${op}</option>`).join('')}
+    </select>` : ''}
+    <div class="contador">
+      <button onclick="menos(this)">−</button>
+      <span class="qtd">1</span>
+      <button onclick="mais(this)">+</button>
+    </div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+  </div>`;
 }
+
+/* ================= LAJES TETO H8 ================= */
+titulo("Lajes Teto H8");
+criarProduto("Laje Teto H8", ["7,5cm x 33cm","7,5cm x 40cm"]);
+
+/* ================= LAJES PISO H10 ================= */
+titulo("Lajes Piso H10");
+criarProduto("Laje Piso H10", ["9cm x 33cm","9cm x 40cm"]);
+
+/* ================= VIGAS ================= */
+titulo("Vigas por Unidade");
+criarProduto("Viga H8");
+criarProduto("Viga H10");
 
 </script>
 
