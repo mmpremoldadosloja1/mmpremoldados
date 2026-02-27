@@ -90,20 +90,19 @@ h2{
 /* GRID DE PRODUTOS */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+  grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
   gap:20px;
   padding:0 20px 40px 20px;
 }
 
-/* CARTÃO DE PRODUTO */
+/* CARTÃO DE PRODUTO TRANSPARENTE */
 .card{
-  background: #fff;
-  border-radius: 10px;
+  background: transparent;
   padding:10px;
   text-align: center;
-  box-shadow: 0 4px 5px rgba(0,0,0,0.1);
 }
 
+/* IMAGEM OU PLACEHOLDER */
 .card img, .card .imagem-placeholder{
   width:100%;
   height:110px;
@@ -145,7 +144,7 @@ h2{
   transform:scale(1.05);
 }
 
-/* INPUT DE METRAGEM */
+/* INPUT E SELECT */
 input, select{
   width:100%;
   padding:6px;
@@ -195,12 +194,12 @@ function titulo(texto){
 
 function mais(btn){
   const qtd = btn.parentElement.querySelector('.qtd');
-  qtd.innerText = parseInt(qtd.innerText) + 1;
+  qtd.innerText = parseFloat(qtd.innerText) + 1;
 }
 
 function menos(btn){
   const qtd = btn.parentElement.querySelector('.qtd');
-  qtd.innerText = Math.max(1, parseInt(qtd.innerText) - 1);
+  qtd.innerText = Math.max(1, parseFloat(qtd.innerText) - 1);
 }
 
 function adicionarCarrinho(botao){
@@ -209,7 +208,7 @@ function adicionarCarrinho(botao){
   const select = card.querySelector('select');
   const variacao = select ? select.value : "";
   const qtdInput = card.querySelector('input');
-  const qtd = qtdInput ? parseFloat(qtdInput.value) : 1;
+  const qtd = qtdInput ? parseFloat(qtdInput.value) : parseFloat(card.querySelector('.qtd').innerText);
 
   if(select && !variacao) return alert("Escolha uma opção!");
   if(qtdInput && (!qtd || qtd <= 0)) return alert("Informe a metragem!");
@@ -227,40 +226,38 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado ao carrinho!");
 }
 
-function criarProduto(nome, opcoes = null, metragem = false){
+function criarProduto(nome, opcoes = null, metragem = false, descricao = ""){
   grid.innerHTML += `
   <div class="card">
     <div class="imagem-placeholder">Imagem</div>
     <h3>${nome}</h3>
-
+    ${descricao ? `<p style="font-size:14px; text-align:left; margin-left:5px;">${descricao}</p>` : ''}
     ${opcoes ? `<select>
-      ${opcoes.map(op => `<option value="">Escolher...</option>`).join('')}
+      <option value="">Escolher...</option>
+      ${opcoes.map(op => `<option>${op}</option>`).join('')}
     </select>` : ''}
-
     ${metragem ? `<input type="number" min="1" placeholder="Metragem (m²)">` : ''}
-
     <div class="contador">
       <button onclick="menos(this)">−</button>
       <span class="qtd">1</span>
       <button onclick="mais(this)">+</button>
     </div>
-
     <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
   </div>`;
 }
 
 /* ================= LAJES TETO H8 ================= */
 titulo("Lajes Teto H8");
-criarProduto("Laje Teto H8", ["7,5cm x 33cm","7,5cm x 40cm"], true);
+criarProduto("Laje Teto H8", ["7,5cm x 33cm","7,5cm x 40cm"], true, "Laje pré-moldada para teto, resistente e prática para construção rápida.");
 
 /* ================= LAJES PISO H10 ================= */
 titulo("Lajes Piso H10");
-criarProduto("Laje Piso H10", ["9cm x 33cm","9cm x 40cm"], true);
+criarProduto("Laje Piso H10", ["9cm x 33cm","9cm x 40cm"], true, "Laje pré-moldada para piso, ideal para alta resistência e durabilidade.");
 
 /* ================= VIGAS ================= */
 titulo("Vigas por Unidade");
-criarProduto("Viga H8");
-criarProduto("Viga H10");
+criarProduto("Viga H8", null, true, "Viga pré-moldada H8, resistente para lajes e colunas.");
+criarProduto("Viga H10", null, true, "Viga pré-moldada H10, indicada para pisos pesados.");
 
 </script>
 
