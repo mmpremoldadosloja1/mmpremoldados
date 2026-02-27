@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-/* FUNDO CINZA SUAVE */
 body{
   background: linear-gradient(to bottom, #ddd, #ccc);
   color:#000;
@@ -15,7 +14,6 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER MODERNO */
 header{
   width:100%;
   display:flex;
@@ -28,7 +26,6 @@ header{
   background:transparent;
 }
 
-/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -67,7 +64,6 @@ nav{
   transform:scale(1.05);
 }
 
-/* TÍTULO PRINCIPAL */
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -77,7 +73,6 @@ h1{
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* SUBTÍTULOS À ESQUERDA */
 h2{
   text-align:left;
   margin-top:30px;
@@ -87,7 +82,6 @@ h2{
   padding-left:20px;
 }
 
-/* GRID DE PRODUTOS */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
@@ -95,23 +89,20 @@ h2{
   padding:0 20px 40px 20px;
 }
 
-/* CARTÃO DE PRODUTO TRANSPARENTE */
 .card{
   background: transparent;
-  padding:10px;
-  text-align: center;
+  padding:15px;
+  text-align:center;
 }
 
-/* IMAGEM OU PLACEHOLDER */
 .card img, .card .imagem-placeholder{
   width:100%;
-  height:110px;
+  height:120px;
   object-fit:contain;
   margin-bottom:10px;
   background:transparent;
 }
 
-/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
@@ -126,10 +117,9 @@ h2{
   cursor:pointer;
 }
 
-/* BOTÃO ADICIONAR VERMELHO */
 .btn{
   width:100%;
-  padding:8px 0;
+  padding:10px 0;
   background:#e63946;
   color:#fff;
   font-weight:bold;
@@ -144,10 +134,9 @@ h2{
   transform:scale(1.05);
 }
 
-/* INPUT E SELECT */
 input, select{
   width:100%;
-  padding:6px;
+  padding:8px;
   border-radius:6px;
   border:1px solid #ccc;
   margin:6px 0;
@@ -226,12 +215,11 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado ao carrinho!");
 }
 
-function criarProduto(nome, opcoes = null, metragem = false, descricao = ""){
+function criarProduto(nome, opcoes = null, metragem = false){
   grid.innerHTML += `
   <div class="card">
     <div class="imagem-placeholder">Imagem</div>
     <h3>${nome}</h3>
-    ${descricao ? `<p style="font-size:14px; text-align:left; margin-left:5px;">${descricao}</p>` : ''}
     ${opcoes ? `<select>
       <option value="">Escolher...</option>
       ${opcoes.map(op => `<option>${op}</option>`).join('')}
@@ -246,19 +234,18 @@ function criarProduto(nome, opcoes = null, metragem = false, descricao = ""){
   </div>`;
 }
 
-/* ================= LAJES TETO H8 ================= */
+/* ===== LAJES TETO H8 ===== */
 titulo("Lajes Teto H8");
-criarProduto("Laje Teto H8", ["7,5cm x 33cm","7,5cm x 40cm"], true, "Laje pré-moldada para teto, resistente e prática para construção rápida.");
+criarProduto("Laje Teto H8", ["7,5cm x 33cm","7,5cm x 40cm"], true);
 
-/* ================= LAJES PISO H10 ================= */
+/* ===== LAJES PISO H10 ===== */
 titulo("Lajes Piso H10");
-criarProduto("Laje Piso H10", ["9cm x 33cm","9cm x 40cm"], true, "Laje pré-moldada para piso, ideal para alta resistência e durabilidade.");
+criarProduto("Laje Piso H10", ["9cm x 33cm","9cm x 40cm"], true);
 
-/* ================= VIGAS ================= */
+/* ===== VIGAS ===== */
 titulo("Vigas por Unidade");
-criarProduto("Viga H8", null, true, "Viga pré-moldada H8, resistente para lajes e colunas.");
-criarProduto("Viga H10", null, true, "Viga pré-moldada H10, indicada para pisos pesados.");
-
+criarProduto("Viga H8", null, true);
+criarProduto("Viga H10", null, true);
 </script>
 
 </body>
