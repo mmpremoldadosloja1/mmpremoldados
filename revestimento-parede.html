@@ -9,10 +9,10 @@
 
 <style>
 
-/* FUNDO TOTAL */
+/* FUNDO BRANCO */
 html, body{
   height:100%;
-  background: linear-gradient(to bottom, #ddd, #ccc);
+  background:#fff;
 }
 
 body{
@@ -22,7 +22,7 @@ body{
   overflow-x:hidden;
 }
 
-/* HEADER */
+/* HEADER SEM SOMBRA */
 header{
   width:100%;
   display:flex;
@@ -32,7 +32,8 @@ header{
   position:fixed;
   top:0;
   z-index:999;
-  background:transparent;
+  background:#fff;
+  box-shadow:none;
 }
 
 nav{
@@ -66,14 +67,13 @@ header nav:last-child{
   transform:scale(1.05);
 }
 
-/* TÍTULO PADRÃO OUTRAS PÁGINAS */
+/* TÍTULO */
 h1{
   text-align:center;
   font-size:36px;
   margin-bottom:30px;
   color:#e63946;
   text-transform:uppercase;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 /* GRID */
@@ -84,7 +84,7 @@ h1{
   padding:0 20px 80px;
 }
 
-/* CENTRALIZAR SOMENTE NO PC */
+/* CENTRALIZAR NO PC */
 @media (min-width:900px){
   .grid{
     grid-template-columns:repeat(2,380px);
@@ -92,19 +92,26 @@ h1{
   }
 }
 
-/* CELULAR */
+/* MOBILE */
 @media (max-width:768px){
   .grid{
     grid-template-columns:repeat(2,1fr);
   }
 }
 
-/* CARD */
+/* CARD PADRÃO NOVO */
 .card{
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   text-align:center;
+
+  background:#f9f9f9;
+  border-radius:12px;
+  padding:15px;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+
   opacity:0;
   transform:translateY(30px);
   animation:fadeUp .6s ease forwards;
@@ -128,7 +135,7 @@ h1{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#eee;
+  background:#fff;
   border-radius:8px;
   margin-bottom:10px;
   font-size:14px;
@@ -229,16 +236,14 @@ function menos(btn){
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
-  const variacao = card.querySelector('select').value;
   const qtd = parseInt(card.querySelector('.qtd').innerText);
 
-  const nomeFinal = nome + " - " + variacao;
-  const existente = carrinho.find(item => item.nome === nomeFinal);
+  const existente = carrinho.find(item => item.nome === nome);
 
   if(existente){
     existente.qtd += qtd;
   } else {
-    carrinho.push({ nome: nomeFinal, qtd });
+    carrinho.push({ nome, qtd });
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
