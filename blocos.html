@@ -9,15 +9,15 @@
 
 <style>
 
-/* ===== FUNDO CINZA SUAVE E FONTE ===== */
+/* ===== FUNDO PADRÃO ===== */
 body{
-  background: linear-gradient(to bottom, #ddd, #ccc);
+  background:#fff;
   color:#000;
   padding-top:90px;
   font-family: 'Montserrat', sans-serif;
 }
 
-/* ===== HEADER MODERNO ===== */
+/* ===== HEADER ===== */
 header{
   width:100%;
   display:flex;
@@ -27,10 +27,9 @@ header{
   position:fixed;
   top:0;
   z-index:999;
-  background:transparent;
+  background:#fff;
 }
 
-/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -44,7 +43,7 @@ nav{
 }
 
 .nav-right{
-  margin-right:10px; /* afasta do canto direito */
+  margin-right:10px;
 }
 
 .nav-item{
@@ -69,27 +68,24 @@ nav{
   transform:scale(1.05);
 }
 
-/* ===== TÍTULO PRINCIPAL ===== */
+/* ===== TÍTULO ===== */
 h1{
-  text-align:center; /* centralizado */
+  text-align:center;
   text-transform:uppercase;
   font-size:36px;
   margin-bottom:20px;
   color:#e63946;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* SUBTÍTULOS À ESQUERDA */
 h2{
   text-align:left;
   margin-top:30px;
   margin-bottom:15px;
   font-size:22px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   padding-left:20px;
 }
 
-/* ===== GRID DE PRODUTOS ===== */
+/* ===== GRID ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
@@ -97,24 +93,23 @@ h2{
   padding:0 20px 40px 20px;
 }
 
-/* ===== CARTÕES ===== */
+/* ===== CARD PADRÃO IGUAL OUTROS ===== */
 .card{
-  background:transparent; /* sem borda nem fundo */
+  background:#fff;
+  border-radius:10px;
+  padding:12px;
   text-align:center;
+
   display:flex;
   flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  justify-content:space-between;
+
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+
   opacity:0;
   transform:translateY(30px);
   animation:fadeUp 0.6s ease forwards;
 }
-
-.card:nth-child(2){animation-delay:.1s}
-.card:nth-child(3){animation-delay:.2s}
-.card:nth-child(4){animation-delay:.3s}
-.card:nth-child(5){animation-delay:.4s}
-.card:nth-child(6){animation-delay:.5s}
 
 @keyframes fadeUp{
   to{
@@ -123,13 +118,26 @@ h2{
   }
 }
 
-.card img{
+/* IMAGEM PADRÃO */
+.imagem-container{
   width:100%;
-  height:160px;
+  height:120px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.imagem-container img{
+  max-width:100%;
+  max-height:100%;
   object-fit:contain;
-  margin-bottom:10px;
-  background:transparent;
-  border:none;
+}
+
+/* TITULO */
+.card h3{
+  font-size:14px;
+  margin:10px 0;
+  min-height:40px;
 }
 
 /* CONTADOR */
@@ -137,7 +145,7 @@ h2{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:8px;
+  margin:8px 0;
 }
 
 .contador button{
@@ -147,7 +155,7 @@ h2{
   cursor:pointer;
 }
 
-/* BOTÃO ADICIONAR VERMELHO */
+/* BOTÃO */
 .btn{
   width:100%;
   padding:8px 0;
@@ -201,7 +209,6 @@ h2{
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-// Funções de contagem
 function mais(btn){
   const qtd = btn.parentElement.querySelector('.qtd');
   qtd.innerText = parseInt(qtd.innerText) + 1;
@@ -212,7 +219,6 @@ function menos(btn){
   qtd.innerText = Math.max(1, parseInt(qtd.innerText) - 1);
 }
 
-// Função adicionar carrinho
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -230,11 +236,14 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado");
 }
 
-// Função criar produto
 function criar(nome){
   grid.innerHTML += `
   <div class="card">
-    <img src="img/blocos/padrao.jpg" alt="${nome}">
+
+    <div class="imagem-container">
+      <img src="img/blocos/padrao.jpg" alt="${nome}">
+    </div>
+
     <h3>${nome}</h3>
 
     <div class="contador">
@@ -250,7 +259,6 @@ function criar(nome){
   </div>`;
 }
 
-// Função adicionar título
 function titulo(texto){
   grid.innerHTML += `
     <div style="grid-column:1/-1;margin-top:20px">
@@ -259,28 +267,25 @@ function titulo(texto){
   `;
 }
 
-// ====================== BLOCO DE VEDAÇÃO ======================
+/* PRODUTOS */
 titulo("Bloco de vedação");
 [
 "Bloco c/fundo 09x19x39cm",
 "Bloco vazado 14x19x39cm"
 ].forEach(criar);
 
-// ====================== CANALETA DE VEDAÇÃO ======================
 titulo("Canaleta de vedação");
 [
 "Canaleta de 09x19x39cm",
 "Canaleta de 14x19x39cm"
 ].forEach(criar);
 
-// ===== BLOCO PARA FECHAMENTO DE COLUNA C/ SEGMENTO =====
 titulo("Bloco para fechamento de coluna C/segmento");
 [
 "Bloco de pilar 09x19x39cm",
 "Bloco de pilar 14x19x39cm"
 ].forEach(criar);
 
-// ===== BLOCO PARA FECHAMENTO DE COLUNA S/ SEGMENTO =====
 titulo("Bloco para fechamento de coluna isolada");
 [
 "Quadrado de pilar de 19x19x19cm",
