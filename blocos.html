@@ -9,7 +9,7 @@
 
 <style>
 
-/* ===== FUNDO ===== */
+/* FUNDO BRANCO PADRÃO */
 body{
   background:#fff;
   color:#000;
@@ -17,7 +17,7 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER */
+/* HEADER LIMPO */
 header{
   width:100%;
   display:flex;
@@ -28,8 +28,10 @@ header{
   top:0;
   z-index:999;
   background:#fff;
+  box-shadow:none;
 }
 
+/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -43,7 +45,7 @@ nav{
 }
 
 .nav-right{
-  margin-right:10px;
+  margin-right:20px;
 }
 
 .nav-item{
@@ -66,7 +68,7 @@ nav{
   color:#e63946;
 }
 
-/* TITULOS */
+/* TITULO */
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -91,33 +93,25 @@ h2{
   padding:0 20px 40px;
 }
 
-/* CARD */
+/* CARD PADRÃO IGUAL COBOGÓ */
 .card{
   background:#fff;
-  border-radius:10px;
-  padding:12px;
+  border-radius:12px;
+  padding:15px;
   text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
 
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
 /* IMAGEM */
-.imagem-container{
+.card img{
   width:100%;
-  height:120px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.imagem-container img{
-  max-width:100%;
-  max-height:100%;
+  height:140px;
   object-fit:contain;
+  margin-bottom:10px;
 }
 
 /* TITULO */
@@ -127,18 +121,19 @@ h2{
   min-height:40px;
 }
 
-/* ===== CONTADOR PERFEITO ===== */
+/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin:8px 0;
+  margin:10px 0;
 }
 
-/* BOTÕES + E - CENTRALIZADOS */
+/* 🔥 BOTÕES CORRIGIDOS (IGUAL COBOGÓ) */
 .contador button{
   width:32px;
   height:32px;
+  margin:0 5px;
 
   display:flex;
   align-items:center;
@@ -147,30 +142,21 @@ h2{
   font-size:18px;
   font-weight:bold;
 
-  background:#eee;
-  border:1px solid #ccc;
+  border:none;
   border-radius:6px;
-
+  background:#eee;
   cursor:pointer;
-  line-height:1; /* ESSENCIAL */
-}
-
-/* número */
-.qtd{
-  min-width:25px;
-  text-align:center;
-  font-weight:600;
 }
 
 /* BOTÃO */
 .btn{
   width:100%;
-  padding:8px 0;
+  padding:10px 0;
   background:#e63946;
   color:#fff;
   font-weight:bold;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
 }
 
@@ -184,26 +170,26 @@ h2{
 <body>
 
 <header>
-  <nav class="nav-left">
-    <a href="index.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path d="M3 10L12 3l9 7"></path>
-        <path d="M5 10v10h14V10"></path>
-      </svg>
-      Início
-    </a>
-  </nav>
+<nav class="nav-left">
+<a href="index.html" class="nav-item">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M3 10L12 3l9 7"></path>
+<path d="M5 10v10h14V10"></path>
+</svg>
+Início
+</a>
+</nav>
 
-  <nav class="nav-right">
-    <a href="#" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <circle cx="9" cy="20" r="1"></circle>
-        <circle cx="18" cy="20" r="1"></circle>
-        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-      </svg>
-      Carrinho
-    </a>
-  </nav>
+<nav class="nav-right">
+<a href="#" class="nav-item">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="9" cy="20" r="1"></circle>
+<circle cx="18" cy="20" r="1"></circle>
+<path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+</svg>
+Carrinho
+</a>
+</nav>
 </header>
 
 <h1>BLOCOS E CANALETAS</h1>
@@ -244,11 +230,7 @@ function adicionarCarrinho(botao){
 function criar(nome){
   grid.innerHTML += `
   <div class="card">
-
-    <div class="imagem-container">
-      <img src="img/blocos/padrao.jpg" alt="${nome}">
-    </div>
-
+    <img src="img/blocos/padrao.jpg">
     <h3>${nome}</h3>
 
     <div class="contador">
@@ -260,18 +242,18 @@ function criar(nome){
     <button class="btn" onclick="adicionarCarrinho(this)">
       Adicionar
     </button>
-
   </div>`;
 }
 
 function titulo(texto){
   grid.innerHTML += `
-    <div style="grid-column:1/-1;margin-top:20px">
+    <div style="grid-column:1/-1">
       <h2>${texto}</h2>
     </div>
   `;
 }
 
+/* PRODUTOS */
 titulo("Bloco de vedação");
 [
 "Bloco c/fundo 09x19x39cm",
