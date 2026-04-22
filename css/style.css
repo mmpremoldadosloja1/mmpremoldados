@@ -1,19 +1,20 @@
 /* ============================= */
-/* RESET E BASE */
+/* RESET BASE LIMPO */
 /* ============================= */
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
 }
 
+/* REMOVE FUNDO GLOBAL (cada página controla) */
 body {
-  background: #f4f4f4;
-  padding: 60px 20px 40px;
+  padding-top: 90px;
 }
 
+/* TITULOS BASE */
 h1 {
   text-align: center;
   margin-bottom: 30px;
@@ -27,208 +28,79 @@ h2 {
 h3 {
   margin: 10px 0;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 
 /* ============================= */
-/* BOTÃO VOLTAR PADRÃO */
-/* ============================= */
-
-.voltar {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  width: 40px;
-  height: 40px;
-  background: #111;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: transform 0.2s ease;
-}
-
-.voltar svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: #fff;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.voltar:hover {
-  transform: scale(1.08);
-}
-
-
-/* ============================= */
-/* GRID PADRÃO */
+/* GRID BASE (SEM FORÇAR LAYOUT) */
 /* ============================= */
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  max-width: 1200px;
-  margin: 0 auto;
+  gap: 20px;
 }
 
 
 /* ============================= */
-/* CARD PADRÃO - TRANSPARENTE */
+/* CARD BASE (SEM INTERFERÊNCIA) */
 /* ============================= */
 
 .card {
-  background: rgba(255,255,255,0.0); /* transparente */
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  box-shadow: none; /* remove sombra */
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
 }
 
 
 /* ============================= */
-/* PADRÃO DE IMAGEM - REDUZIDA E SEM BORDA */
+/* IMAGEM BASE */
 /* ============================= */
 
-.imagem-placeholder, 
+.imagem-placeholder,
 .card img {
   width: 100%;
-  height: 120px; /* reduzido para mais compacto */
   object-fit: contain;
-  background: transparent;
-  border-radius: 0;
-  margin-bottom: 15px;
-  border: none; /* sem borda */
 }
 
 
 /* ============================= */
-/* CONTADOR PADRÃO */
+/* CONTADOR BASE */
 /* ============================= */
 
 .contador {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 10px 0;
-}
-
-.contador button {
-  width: 28px;
-  height: 28px;
-  border: none;
-  border-radius: 50%;
-  background: #ddd;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.contador button:hover {
-  background: #ccc;
+  justify-content: center;
+  gap: 10px;
 }
 
 .qtd {
   font-weight: bold;
-  font-size: 14px;
 }
 
 
 /* ============================= */
-/* BOTÃO PADRÃO */
+/* BOTÃO BASE */
 /* ============================= */
 
 .btn {
-  margin-top: 10px;
-  padding: 6px 12px;
-  border: none;
-  background: #111;
-  color: #fff;
-  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s ease;
-  font-size: 14px;
-}
-
-.btn:hover {
-  background: #333;
+  border: none;
 }
 
 
 /* ============================= */
-/* RESPONSIVO - CELULAR */
+/* RESPONSIVO */
 /* ============================= */
 
 @media (max-width: 768px) {
-
-  body {
-    padding: 50px 10px 30px;
-  }
-
-  /* FORÇA 2 PRODUTOS POR LINHA */
   .grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
   }
-
-  .card {
-    padding: 12px;
-  }
-
-  .imagem-placeholder, 
-  .card img {
-    height: 100px; /* menor no celular */
-  }
-
-  h3 {
-    font-size: 13px;
-  }
-
-  .btn {
-    padding: 6px 10px;
-    font-size: 13px;
-  }
-
-  .contador button {
-    width: 26px;
-    height: 26px;
-    font-size: 14px;
-  }
-
-  .qtd {
-    font-size: 13px;
-  }
-
 }
 
-
-/* ============================= */
-/* RESPONSIVO - TELAS MUITO PEQUENAS */
-/* ============================= */
-
 @media (max-width: 400px) {
-
-  /* 1 produto por linha só em celular muito pequeno */
   .grid {
     grid-template-columns: 1fr;
   }
-
 }
