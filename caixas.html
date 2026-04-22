@@ -5,24 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Caixas | MM Pré-Moldados</title>
 
-<link rel="stylesheet" href="css/style.css">
-
 <style>
 
-/* FUNDO TOTAL */
-html, body{
-  height:100%;
-  background: linear-gradient(to bottom, #ddd, #ccc);
-}
-
+/* FUNDO BRANCO PADRÃO */
 body{
-  min-height:100vh;
-  font-family:'Montserrat', sans-serif;
+  background:#fff;
+  color:#000;
   padding-top:90px;
-  overflow-x:hidden;
+  font-family:'Montserrat', sans-serif;
 }
 
-/* HEADER */
+/* HEADER LIMPO */
 header{
   width:100%;
   display:flex;
@@ -32,9 +25,10 @@ header{
   position:fixed;
   top:0;
   z-index:999;
-  background:transparent;
+  background:#fff;
 }
 
+/* NAV */
 nav{
   display:flex;
   align-items:center;
@@ -73,41 +67,36 @@ h1{
   margin-bottom:30px;
   color:#e63946;
   text-transform:uppercase;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:25px;
-  padding:0 20px 80px;
+  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+  gap:20px;
+  padding:0 20px 40px;
 }
 
-/* PC */
-@media (min-width:900px){
-  .grid{
-    grid-template-columns:repeat(2,380px);
-    justify-content:center;
-  }
-}
-
-/* MOBILE */
-@media (max-width:768px){
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-/* CARD */
+/* CARD IGUAL COBOGÓ */
 .card{
+  background:#fff;
+  border-radius:12px;
+  padding:15px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  text-align:center;
+
   opacity:0;
   transform:translateY(30px);
   animation:fadeUp .6s ease forwards;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 12px 25px rgba(0,0,0,0.12);
 }
 
 @keyframes fadeUp{
@@ -119,15 +108,22 @@ h1{
 
 /* IMAGEM */
 .imagem-placeholder{
-  height:130px;
+  height:110px;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#eee;
+  background:#f5f5f5;
   border-radius:8px;
   margin-bottom:10px;
+  font-size:13px;
+  color:#777;
+}
+
+/* TITULO PRODUTO */
+.card h3{
+  margin:10px 0;
   font-size:14px;
-  color:#666;
+  min-height:40px;
 }
 
 /* SELECT */
@@ -139,12 +135,12 @@ select{
   width:100%;
 }
 
-/* ===== CONTADOR PADRÃO CORRETO ===== */
+/* CONTADOR PADRÃO COBOGÓ */
 .contador{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
 .contador button{
@@ -165,14 +161,14 @@ select{
   color:#fff;
   font-weight:bold;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
-  transition:.3s;
-  margin-top:auto;
+  transition:0.3s;
 }
 
 .btn:hover{
   background:#c92f3b;
+  transform:scale(1.05);
 }
 
 </style>
@@ -203,7 +199,7 @@ select{
   </nav>
 </header>
 
-<h1>Caixas</h1>
+<h1>CAIXAS</h1>
 
 <div class="grid" id="gridProdutos"></div>
 
