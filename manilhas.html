@@ -7,15 +7,16 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-/* ===== FUNDO CINZA SUAVE ===== */
+
+/* FUNDO PADRÃO */
 body{
-  background: linear-gradient(to bottom, #ddd, #ccc);
+  background:#fff;
   color:#000;
   padding-top:90px;
   font-family: 'Montserrat', sans-serif;
 }
 
-/* ===== HEADER ===== */
+/* HEADER LIMPO */
 header{
   width:100%;
   display:flex;
@@ -25,7 +26,8 @@ header{
   position:fixed;
   top:0;
   z-index:999;
-  background:transparent;
+  background:#fff;
+  box-shadow:none;
 }
 
 nav{
@@ -41,7 +43,7 @@ nav{
 }
 
 .nav-right{
-  margin-right:10px; /* afasta do canto direito */
+  margin-right:20px;
 }
 
 .nav-item{
@@ -52,7 +54,6 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
-  transition:0.3s;
 }
 
 .nav-item svg{
@@ -63,51 +64,74 @@ nav{
 
 .nav-item:hover{
   color:#e63946;
-  transform:scale(1.05);
 }
 
-/* ===== TITULO PRINCIPAL ===== */
+/* TITULO */
 h1{
   text-align:center;
   text-transform:uppercase;
   font-size:36px;
   margin-bottom:20px;
   color:#e63946;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* SUBTÍTULOS À ESQUERDA */
 h2{
   text-align:left;
   margin-top:30px;
   margin-bottom:15px;
   font-size:22px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   padding-left:20px;
 }
 
-/* GRID DE PRODUTOS */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
   gap:20px;
-  padding:0 20px 40px 20px;
+  padding:0 20px 40px;
 }
 
-/* CARD DE PRODUTO */
+/* CARD PADRÃO */
 .card{
+  background:#fff;
+  border-radius:12px;
+  padding:15px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+
   display:flex;
   flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  justify-content:space-between;
 }
 
-.card img, .imagem-placeholder{
+/* IMAGEM */
+.imagem-placeholder{
   width:100%;
   height:110px;
-  object-fit:contain;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   margin-bottom:10px;
-  background:transparent;
+  background:#f5f5f5;
+  border-radius:8px;
+  color:#777;
+  font-size:13px;
+}
+
+/* TITULO CARD */
+.card h3{
+  font-size:14px;
+  margin:10px 0;
+  min-height:40px;
+}
+
+/* SELECT */
+select{
+  width:100%;
+  padding:7px;
+  margin:10px 0;
+  border-radius:6px;
+  border:1px solid #ccc;
 }
 
 /* CONTADOR */
@@ -115,33 +139,44 @@ h2{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:8px;
+  margin:10px 0;
 }
 
+/* BOTÕES CORRIGIDOS */
 .contador button{
-  padding:3px 8px;
+  width:32px;
+  height:32px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
   margin:0 5px;
-  font-size:16px;
+  font-size:18px;
+  font-weight:bold;
+
+  border:none;
+  border-radius:6px;
+  background:#eee;
   cursor:pointer;
 }
 
-/* BOTÃO ADICIONAR VERMELHO */
+/* BOTÃO */
 .btn{
   width:100%;
-  padding:8px 0;
+  padding:10px 0;
   background:#e63946;
   color:#fff;
   font-weight:bold;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
-  transition:0.3s;
 }
 
 .btn:hover{
   background:#c92f3b;
-  transform:scale(1.05);
 }
+
 </style>
 </head>
 
@@ -180,7 +215,7 @@ let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function titulo(texto) {
   grid.innerHTML += `
-    <div style="grid-column:1/-1;margin-top:30px">
+    <div style="grid-column:1/-1">
       <h2>${texto}</h2>
     </div>
   `;
@@ -220,6 +255,7 @@ function adicionarCarrinho(botao){
 function criarProduto(nome, opcoes = null){
   grid.innerHTML += `
   <div class="card">
+
     <div class="imagem-placeholder">
       Imagem será adicionada aqui
     </div>
@@ -227,7 +263,7 @@ function criarProduto(nome, opcoes = null){
     <h3>${nome}</h3>
 
     ${opcoes ? `
-      <select style="margin:10px 0;padding:6px;border-radius:6px;border:1px solid #ccc;width:100%;">
+      <select>
         ${opcoes.map(op => `<option>${op}</option>`).join('')}
       </select>
     ` : ''}
@@ -241,13 +277,11 @@ function criarProduto(nome, opcoes = null){
     <button class="btn" onclick="adicionarCarrinho(this)">
       Adicionar
     </button>
+
   </div>`;
 }
 
-/* ========================= */
 /* MANILHAS */
-/* ========================= */
-
 titulo("Manilhas");
 
 [
@@ -255,10 +289,7 @@ titulo("Manilhas");
 "Manilha 1,10m x 50cm"
 ].forEach(nome => criarProduto(nome));
 
-/* ========================= */
 /* TAMPAS */
-/* ========================= */
-
 titulo("Tampas de Manilha");
 
 criarProduto("Tampa 90cm", ["Aberta", "Fechada"]);
