@@ -26,9 +26,9 @@ header{
   top:0;
   z-index:999;
   background:#fff;
-  box-shadow:none;
 }
 
+/* NAV */
 nav{
   display:flex;
   gap:20px;
@@ -65,32 +65,34 @@ h1{
   text-transform:uppercase;
   font-size:36px;
   color:#e63946;
-  margin-bottom:20px;
+  margin-bottom:30px;
 }
 
 h2{
   text-align:left;
-  margin:30px 0 15px;
+  margin:40px 0 15px;
   font-size:22px;
-  padding-left:20px;
+  padding-left:10px;
 }
 
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
-  gap:20px;
-  padding:0 20px 40px;
+  grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
+  gap:25px;
+  padding:0 20px 60px;
 }
 
-/* PC */
-@media(min-width:900px){
+/* CENTRALIZA IGUAL OUTRAS PÁGINAS */
+@media(min-width:1000px){
   .grid{
+    max-width:1200px;
+    margin:0 auto;
     grid-template-columns:repeat(4,1fr);
   }
 }
 
-/* CARD PADRONIZADO */
+/* CARD PADRÃO (IGUAL PINGADEIRAS) */
 .card{
   display:flex;
   flex-direction:column;
@@ -99,10 +101,9 @@ h2{
 
   background:#f9f9f9;
   border-radius:10px;
-  padding:12px;
+  padding:15px;
 
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
-
   transition:0.2s;
 }
 
@@ -136,17 +137,17 @@ h2{
 select{
   width:100%;
   padding:7px;
-  margin-bottom:8px;
+  margin-bottom:10px;
   border-radius:6px;
   border:1px solid #ccc;
 }
 
-/* CONTADOR PADRÃO */
+/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin:8px 0;
+  margin:10px 0;
 }
 
 .contador button{
