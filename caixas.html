@@ -66,7 +66,7 @@ header nav:last-child{
   transform:scale(1.05);
 }
 
-/* TÍTULO PADRÃO OUTRAS PÁGINAS */
+/* TÍTULO */
 h1{
   text-align:center;
   font-size:36px;
@@ -84,7 +84,7 @@ h1{
   padding:0 20px 80px;
 }
 
-/* CENTRALIZAR SOMENTE NO PC */
+/* PC */
 @media (min-width:900px){
   .grid{
     grid-template-columns:repeat(2,380px);
@@ -92,7 +92,7 @@ h1{
   }
 }
 
-/* CELULAR */
+/* MOBILE */
 @media (max-width:768px){
   .grid{
     grid-template-columns:repeat(2,1fr);
@@ -108,11 +108,6 @@ h1{
   opacity:0;
   transform:translateY(30px);
   animation:fadeUp .6s ease forwards;
-  transition:transform .2s ease;
-}
-
-.card:active{
-  transform:scale(0.97);
 }
 
 @keyframes fadeUp{
@@ -144,7 +139,7 @@ select{
   width:100%;
 }
 
-/* CONTADOR */
+/* ===== CONTADOR PADRÃO CORRETO ===== */
 .contador{
   display:flex;
   justify-content:center;
@@ -153,13 +148,13 @@ select{
 }
 
 .contador button{
-  width:28px;
-  height:28px;
-  border:none;
-  border-radius:50%;
-  background:#ddd;
+  padding:5px 10px;
+  margin:0 5px;
   font-size:16px;
   cursor:pointer;
+  border:none;
+  border-radius:5px;
+  background:#eee;
 }
 
 /* BOTÃO */
@@ -233,6 +228,7 @@ function adicionarCarrinho(botao){
   const qtd = parseInt(card.querySelector('.qtd').innerText);
 
   const nomeFinal = nome + " - " + variacao;
+
   const existente = carrinho.find(item => item.nome === nomeFinal);
 
   if(existente){
