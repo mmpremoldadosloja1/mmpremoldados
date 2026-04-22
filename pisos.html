@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Pisos e Pisadeiras | MM Pré-Moldados</title>
+<title>Blocos e Canaletas | MM Pré-Moldados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
 
@@ -82,7 +82,6 @@ h2{
   padding:0 20px 60px;
 }
 
-/* CENTRALIZA */
 @media(min-width:1000px){
   .grid{
     max-width:1200px;
@@ -91,29 +90,24 @@ h2{
   }
 }
 
-/* CARD PADRÃO (CORRIGIDO) */
+/* CARD PADRÃO */
 .card{
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   text-align:center;
 
-  background:#ffffff; /* CORRIGIDO */
+  background:#fff;
   border-radius:10px;
   padding:15px;
 
   box-shadow:0 6px 14px rgba(0,0,0,0.08);
-  transition:0.2s;
-}
-
-.card:active{
-  transform:scale(0.97);
 }
 
 /* IMAGEM */
 .imagem-container{
   width:100%;
-  height:150px;
+  height:130px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -130,15 +124,6 @@ h2{
   font-size:14px;
   margin:10px 0;
   min-height:40px;
-}
-
-/* SELECT */
-select{
-  width:100%;
-  padding:7px;
-  margin-bottom:10px;
-  border-radius:6px;
-  border:1px solid #ccc;
 }
 
 /* CONTADOR */
@@ -204,7 +189,7 @@ Carrinho
 </nav>
 </header>
 
-<h1>PISOS E PISADEIRAS</h1>
+<h1>BLOCOS E CANALETAS</h1>
 
 <div class="grid" id="gridProdutos"></div>
 
@@ -226,18 +211,14 @@ function menos(btn){
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
-  const select = card.querySelector('select');
-  const variacao = select ? select.value : "";
   const qtd = parseInt(card.querySelector('.qtd').innerText);
 
-  const nomeFinal = variacao ? nome + " - " + variacao : nome;
-
-  const existente = carrinho.find(item => item.nome === nomeFinal);
+  const existente = carrinho.find(item => item.nome === nome);
 
   if(existente){
     existente.qtd += qtd;
   }else{
-    carrinho.push({ nome: nomeFinal, qtd });
+    carrinho.push({ nome, qtd });
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
@@ -248,7 +229,7 @@ function titulo(texto){
   grid.innerHTML += `<div style="grid-column:1/-1"><h2>${texto}</h2></div>`;
 }
 
-function criarProduto(nome, img, opcoes=null){
+function criarProduto(nome, img){
   grid.innerHTML += `
   <div class="card">
 
@@ -257,11 +238,6 @@ function criarProduto(nome, img, opcoes=null){
     </div>
 
     <h3>${nome}</h3>
-
-    ${opcoes ? `
-    <select>
-    ${opcoes.map(o=>`<option>${o}</option>`).join('')}
-    </select>` : ''}
 
     <div class="contador">
       <button onclick="menos(this)">−</button>
@@ -275,24 +251,19 @@ function criarProduto(nome, img, opcoes=null){
 }
 
 /* PRODUTOS */
-titulo("Pisos");
+titulo("Blocos");
 
-criarProduto("Piso Quadrado Liso","img/pisos/piso-quadrado.jpg",["40x40cm","50x50cm","60x60cm"]);
-criarProduto("Piso Copacabana 50x50cm","img/pisos/copacabana.jpg");
-criarProduto("Piso Trabalhado em Flor 45x45cm","img/pisos/flor.jpg");
-criarProduto("Piso em X 45x45cm","img/pisos/piso.jpg");
+criarProduto("Bloco 9x19x39","img/blocos/bloco-9.jpg");
+criarProduto("Bloco 11,5x19x39","img/blocos/bloco-11.jpg");
+criarProduto("Bloco 14x19x39","img/blocos/bloco-14.jpg");
+criarProduto("Bloco 19x19x39","img/blocos/bloco-19.jpg");
 
-titulo("Pisadeiras");
+titulo("Canaletas");
 
-criarProduto("Pezão de Jardim 50cm","img/pisos/pezao.jpg");
-criarProduto("Círculo Estelar 50cm","img/pisos/circulo-estelar.jpg");
-criarProduto("Pisadeira Xis 50cm","img/pisos/pisadeira-x.jpg");
-
-titulo("Conjuntos");
-
-criarProduto("Conjunto Trevo Oriente 60x60cm","img/pisos/trevo-oriente.jpg");
-criarProduto("Conjunto circulo Cruzado 70x70cm","img/pisos/passarela.jpg");
-criarProduto("Conjunto Circulo Cruzado 140x140cm","img/pisos/conjunto-circulo-quadrado.jpg");
+criarProduto("Canaleta 9","img/blocos/canaleta-9.jpg");
+criarProduto("Canaleta 11,5","img/blocos/canaleta-11.jpg");
+criarProduto("Canaleta 14","img/blocos/canaleta-14.jpg");
+criarProduto("Canaleta 19","img/blocos/canaleta-19.jpg");
 
 </script>
 
