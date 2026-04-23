@@ -9,7 +9,6 @@
 
 <style>
 
-/* FUNDO BRANCO PADRÃO */
 body{
   background:#fff;
   color:#000;
@@ -17,7 +16,6 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER LIMPO */
 header{
   width:100%;
   display:flex;
@@ -28,10 +26,8 @@ header{
   top:0;
   z-index:999;
   background:#fff;
-  box-shadow:none;
 }
 
-/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -68,7 +64,6 @@ nav{
   color:#e63946;
 }
 
-/* TITULO */
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -78,14 +73,12 @@ h1{
 }
 
 h2{
-  text-align:left;
   margin-top:30px;
   margin-bottom:15px;
   font-size:22px;
   padding-left:20px;
 }
 
-/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
@@ -93,7 +86,6 @@ h2{
   padding:0 20px 40px;
 }
 
-/* CARD */
 .card{
   background:#fff;
   border-radius:12px;
@@ -119,6 +111,7 @@ h2{
   min-height:40px;
 }
 
+/* CONTADOR NOVO */
 .contador{
   display:flex;
   justify-content:center;
@@ -130,15 +123,21 @@ h2{
   width:32px;
   height:32px;
   margin:0 5px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   font-size:18px;
-  font-weight:bold;
   border:none;
   border-radius:6px;
   background:#eee;
   cursor:pointer;
+}
+
+/* INPUT QUANTIDADE */
+.qtd-input{
+  width:60px;
+  height:32px;
+  text-align:center;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:14px;
 }
 
 .btn{
@@ -194,20 +193,20 @@ let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 /* CONTADOR */
 function mais(btn){
-  const qtd = btn.parentElement.querySelector('.qtd');
-  qtd.innerText = parseInt(qtd.innerText) + 1;
+  const input = btn.parentElement.querySelector('.qtd-input');
+  input.value = parseInt(input.value) + 1;
 }
 
 function menos(btn){
-  const qtd = btn.parentElement.querySelector('.qtd');
-  qtd.innerText = Math.max(1, parseInt(qtd.innerText) - 1);
+  const input = btn.parentElement.querySelector('.qtd-input');
+  input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
 /* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
-  const qtd = parseInt(card.querySelector('.qtd').innerText);
+  const qtd = parseInt(card.querySelector('.qtd-input').value);
 
   const existente = carrinho.find(item => item.nome === nome);
 
@@ -221,7 +220,7 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado");
 }
 
-/* CRIAR CARD (SEM BUG) */
+/* CRIAR */
 function criar(nome){
   const card = document.createElement("div");
   card.className = "card";
@@ -232,7 +231,7 @@ function criar(nome){
 
     <div class="contador">
       <button onclick="menos(this)">−</button>
-      <span class="qtd">1</span>
+      <input type="number" class="qtd-input" value="1" min="1">
       <button onclick="mais(this)">+</button>
     </div>
 
@@ -244,13 +243,10 @@ function criar(nome){
   grid.appendChild(card);
 }
 
-/* CRIAR TÍTULO (SEM BUG) */
 function titulo(texto){
   const div = document.createElement("div");
   div.style.gridColumn = "1/-1";
-
   div.innerHTML = `<h2>${texto}</h2>`;
-
   grid.appendChild(div);
 }
 
