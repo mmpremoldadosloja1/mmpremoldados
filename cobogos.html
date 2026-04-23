@@ -17,7 +17,7 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER */
+/* HEADER SEM SOMBRA */
 header{
   width:100%;
   display:flex;
@@ -28,6 +28,8 @@ header{
   top:0;
   z-index:999;
   background:#fff;
+  box-shadow:none;
+  border:none;
 }
 
 /* NAV */
@@ -55,6 +57,7 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
+  transition:0.3s;
 }
 
 .nav-item svg{
@@ -65,9 +68,10 @@ nav{
 
 .nav-item:hover{
   color:#e63946;
+  transform:scale(1.05);
 }
 
-/* TITULO */
+/* TÍTULO */
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -76,6 +80,7 @@ h1{
   color:#e63946;
 }
 
+/* SUBTÍTULOS */
 h2{
   text-align:left;
   margin-top:30px;
@@ -92,7 +97,7 @@ h2{
   padding:0 20px 40px 20px;
 }
 
-/* CARD */
+/* CARD PADRÃO NOVO */
 .card{
   background:#fff;
   border-radius:12px;
@@ -104,11 +109,29 @@ h2{
   display:flex;
   flex-direction:column;
   justify-content:space-between;
+
+  opacity:0;
+  transform:translateY(30px);
+  animation:fadeUp 0.6s ease forwards;
 }
 
 .card:hover{
   transform:translateY(-5px);
   box-shadow:0 12px 25px rgba(0,0,0,0.12);
+}
+
+/* ANIMAÇÃO */
+.card:nth-child(2){animation-delay:.1s}
+.card:nth-child(3){animation-delay:.2s}
+.card:nth-child(4){animation-delay:.3s}
+.card:nth-child(5){animation-delay:.4s}
+.card:nth-child(6){animation-delay:.5s}
+
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 /* IMAGEM */
@@ -119,7 +142,7 @@ h2{
   margin-bottom:10px;
 }
 
-/* TEXTO */
+/* TÍTULO DO CARD */
 .card h3{
   margin:10px 0;
   font-size:14px;
@@ -142,12 +165,6 @@ h2{
   border:none;
   border-radius:5px;
   background:#eee;
-}
-
-.qtd{
-  font-weight:bold;
-  min-width:20px;
-  text-align:center;
 }
 
 /* BOTÃO */
@@ -174,30 +191,31 @@ h2{
 <body>
 
 <header>
-<nav class="nav-left">
-<a href="index.html" class="nav-item">
-<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-<path d="M3 10L12 3l9 7"></path>
-<path d="M5 10v10h14V10"></path>
-</svg>
-Início
-</a>
-</nav>
+  <nav class="nav-left">
+    <a href="index.html" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+      Início
+    </a>
+  </nav>
 
-<nav class="nav-right">
-<a href="#" class="nav-item">
-<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-<circle cx="9" cy="20" r="1"></circle>
-<circle cx="18" cy="20" r="1"></circle>
-<path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-</svg>
-Carrinho
-</a>
-</nav>
+  <nav class="nav-right">
+    <a href="#" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+      Carrinho
+    </a>
+  </nav>
 </header>
 
 <h1>COBOGÓS</h1>
 
+<!-- 40x40 -->
 <h2>Cobogós 40x40</h2>
 <div class="grid">
 
@@ -205,31 +223,160 @@ Carrinho
 <img src="img/cobogo/cobogo-16-furos-40.jpg">
 <h3>16 Furos 40x40</h3>
 <div class="contador">
-<button onmousedown="segurar(this,-1)" onmouseup="parar(this)" onmouseleave="parar(this)">−</button>
+<button onclick="alterarQtd(this,-1)">−</button>
 <span class="qtd">1</span>
-<button onmousedown="segurar(this,1)" onmouseup="parar(this)" onmouseleave="parar(this)">+</button>
+<button onclick="alterarQtd(this,1)">+</button>
 </div>
 <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
 </div>
 
-<!-- (repita os outros cards exatamente iguais, já funciona pra todos) -->
+<div class="card">
+<img src="img/cobogo/cobogo-4-pontas-40.jpg">
+<h3>4 Pontas 40x40</h3>
+<div class="contador">
+<button onclick="alterarQtd(this,-1)">−</button>
+<span class="qtd">1</span>
+<button onclick="alterarQtd(this,1)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-anti-chuva-40.jpg">
+<h3>Anti-Chuva 40x40</h3>
+<div class="contador">
+<button onclick="alterarQtd(this,-1)">−</button>
+<span class="qtd">1</span>
+<button onclick="alterarQtd(this,1)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-arabe-40.jpg">
+<h3>Árabe 40x40</h3>
+<div class="contador">
+<button onclick="alterarQtd(this,-1)">−</button>
+<span class="qtd">1</span>
+<button onclick="alterarQtd(this,1)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-flor-40.jpg">
+<h3>Flor 40x40</h3>
+<div class="contador">
+<button onclick="alterarQtd(this,-1)">−</button>
+<span class="qtd">1</span>
+<button onclick="alterarQtd(this,1)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-taco-chines-40.jpg">
+<h3>Taco Chinês 40x40</h3>
+<div class="contador">
+<button onclick="alterarQtd(this,-1)">−</button>
+<span class="qtd">1</span>
+<button onclick="alterarQtd(this,1)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+</div>
+
+<!-- 30x30 -->
+<h2>Cobogós 30x30</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-estrela-30.jpg">
+<h3>Estrela 30x30</h3>
+<div class="contador">
+<button onclick="alterarQtd(this,-1)">−</button>
+<span class="qtd">1</span>
+<button onclick="alterarQtd(this,1)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-estrela-dos-ventos-30.jpg">
+<h3>Estrela dos Ventos 30x30</h3>
+<div class="contador">
+<button onclick="alterarQtd(this,-1)">−</button>
+<span class="qtd">1</span>
+<button onclick="alterarQtd(this,1)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-fenestra-30.jpg">
+<h3>Fenestra 30x30</h3>
+<div class="contador">
+<button onclick="alterarQtd(this,-1)">−</button>
+<span class="qtd">1</span>
+<button onclick="alterarQtd(this,1)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-petala-30.jpg">
+<h3>Pétala 30x30</h3>
+<div class="contador">
+<button onclick="alterarQtd(this,-1)">−</button>
+<span class="qtd">1</span>
+<button onclick="alterarQtd(this,1)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-quadrado-cruz-30.jpg">
+<h3>Quadrado Cruz 30x30</h3>
+<div class="contador">
+<button onclick="alterarQtd(this,-1)">−</button>
+<span class="qtd">1</span>
+<button onclick="alterarQtd(this,1)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-xis-30.jpg">
+<h3>Xis 30x30</h3>
+<div class="contador">
+<button onclick="alterarQtd(this,-1)">−</button>
+<span class="qtd">1</span>
+<button onclick="alterarQtd(this,1)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+</div>
+
+<!-- 24x24 -->
+<h2>Cobogós 24x24</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-4-furos-24.jpg">
+<h3>4 Furos 24x24</h3>
+<div class="contador">
+<button onclick="alterarQtd(this,-1)">−</button>
+<span class="qtd">1</span>
+<button onclick="alterarQtd(this,1)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
 
 </div>
 
 <script>
-
-/* SEGURAR BOTÃO */
-function segurar(btn, valor){
-  alterarQtd(btn, valor);
-  btn.timer = setInterval(() => {
-    alterarQtd(btn, valor);
-  }, 120);
-}
-
-function parar(btn){
-  clearInterval(btn.timer);
-}
-
 function alterarQtd(botao, valor){
   const qtdSpan = botao.parentElement.querySelector('.qtd');
   let qtd = parseInt(qtdSpan.innerText);
@@ -237,7 +384,6 @@ function alterarQtd(botao, valor){
   qtdSpan.innerText = qtd;
 }
 
-/* CARRINHO */
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function adicionarCarrinho(botao){
@@ -246,17 +392,15 @@ function adicionarCarrinho(botao){
   const qtd = parseInt(card.querySelector('.qtd').innerText);
 
   const existente = carrinho.find(item => item.nome === nome);
-
   if(existente){
     existente.qtd += qtd;
-  } else {
+  }else{
     carrinho.push({nome, qtd});
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   alert('Produto adicionado');
 }
-
 </script>
 
 </body>
