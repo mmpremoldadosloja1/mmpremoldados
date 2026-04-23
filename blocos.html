@@ -6,7 +6,6 @@
 <title>BLOCOS E CANALETAS | MM Pré-Moldados</title>
 
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/header.css">
 </head>
 
 <body>
@@ -36,14 +35,26 @@
 
 <h1>BLOCOS E CANALETAS</h1>
 
-<div class="grid" id="gridProdutos"></div>
+<!-- BLOCO DE VEDAÇÃO -->
+<h2>Bloco de vedação</h2>
+<div class="grid" id="grid1"></div>
+
+<!-- CANALETA -->
+<h2>Canaleta de vedação</h2>
+<div class="grid" id="grid2"></div>
+
+<!-- PILAR C/ SEGMENTO -->
+<h2>Bloco para fechamento de coluna C/segmento</h2>
+<div class="grid" id="grid3"></div>
+
+<!-- PILAR ISOLADO -->
+<h2>Bloco para fechamento de coluna isolada</h2>
+<div class="grid" id="grid4"></div>
 
 <script>
 
-const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* CONTADOR */
 function alterarQtd(botao, valor){
   const qtdSpan = botao.parentElement.querySelector('.qtd');
   let qtd = parseInt(qtdSpan.innerText);
@@ -51,7 +62,6 @@ function alterarQtd(botao, valor){
   qtdSpan.innerText = qtd;
 }
 
-/* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -69,9 +79,8 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado");
 }
 
-/* CRIAR CARD */
-function criar(nome){
-  grid.innerHTML += `
+function criar(gridId, nome){
+  document.getElementById(gridId).innerHTML += `
   <div class="card">
     <img src="img/blocos/padrao.jpg" alt="${nome}">
     <h3>${nome}</h3>
@@ -88,39 +97,27 @@ function criar(nome){
   </div>`;
 }
 
-/* TÍTULO DE SEÇÃO */
-function titulo(texto){
-  grid.innerHTML += `
-    <div class="secao-titulo">
-      <h2>${texto}</h2>
-    </div>
-  `;
-}
-
 /* PRODUTOS */
-titulo("Bloco de vedação");
+
 [
 "Bloco c/fundo 09x19x39cm",
 "Bloco vazado 14x19x39cm"
-].forEach(criar);
+].forEach(p => criar("grid1", p));
 
-titulo("Canaleta de vedação");
 [
 "Canaleta de 09x19x39cm",
 "Canaleta de 14x19x39cm"
-].forEach(criar);
+].forEach(p => criar("grid2", p));
 
-titulo("Bloco para fechamento de coluna C/segmento");
 [
 "Bloco de pilar 09x19x39cm",
 "Bloco de pilar 14x19x39cm"
-].forEach(criar);
+].forEach(p => criar("grid3", p));
 
-titulo("Bloco para fechamento de coluna isolada");
 [
 "Quadrado de pilar de 19x19x19cm",
 "Quadrado de pilar de 25x25x19cm"
-].forEach(criar);
+].forEach(p => criar("grid4", p));
 
 </script>
 
