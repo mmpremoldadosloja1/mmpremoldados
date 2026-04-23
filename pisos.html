@@ -71,46 +71,54 @@ h1{
   margin-bottom:30px;
 }
 
-/* SUBTITULO */
+/* SUBTITULOS */
 h2{
   text-align:left;
   margin:40px 0 15px;
   font-size:22px;
-  padding-left:20px;
+  padding-left:10px;
 }
 
-/* GRID IGUAL COBOGÓS */
+/* GRID (MANTIDO ORIGINAL) */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
-  gap:20px;
-  padding:0 20px 40px 20px;
-
-  max-width:1100px;
-  margin:0 auto;
+  grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
+  gap:25px;
+  padding:0 20px 60px;
 }
 
-/* CARD IGUAL COBOGÓS */
-.card{
-  background:#fff;
-  border-radius:12px;
-  padding:15px;
-  text-align:center;
-  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+@media(min-width:1000px){
+  .grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+}
 
+/* CARD (MANTIDO ORIGINAL) */
+.card{
   display:flex;
   flex-direction:column;
   justify-content:space-between;
+  text-align:center;
+
+  background:#fff;
+  border-radius:10px;
+  padding:15px;
+
+  box-shadow:0 6px 14px rgba(0,0,0,0.08);
+  transition:0.2s;
+}
+
+.card:active{
+  transform:scale(0.97);
 }
 
 /* IMAGEM */
 .imagem-container{
   width:100%;
-  height:130px;
+  height:150px;
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-bottom:10px;
 }
 
 .imagem-container img{
@@ -130,13 +138,12 @@ h2{
 select{
   width:100%;
   padding:7px;
-  margin:10px 0;
+  margin-bottom:10px;
   border-radius:6px;
   border:1px solid #ccc;
-  font-family:'Montserrat', sans-serif;
 }
 
-/* CONTADOR IGUAL COBOGÓS (DIGITÁVEL) */
+/* CONTADOR IGUAL COBOGÓS (SÓ PADRÃO VISUAL) */
 .contador{
   display:flex;
   justify-content:center;
@@ -162,7 +169,7 @@ select{
   padding:5px;
 }
 
-/* BOTÃO IGUAL COBOGÓS */
+/* BOTÃO */
 .btn{
   width:100%;
   padding:10px 0;
@@ -170,14 +177,13 @@ select{
   color:#fff;
   font-weight:bold;
   border:none;
-  border-radius:8px;
+  border-radius:6px;
   cursor:pointer;
-  transition:0.3s;
+  transition:.3s;
 }
 
 .btn:hover{
   background:#c92f3b;
-  transform:scale(1.05);
 }
 
 </style>
@@ -186,26 +192,26 @@ select{
 <body>
 
 <header>
-  <nav>
-    <a href="index.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path d="M3 10L12 3l9 7"></path>
-        <path d="M5 10v10h14V10"></path>
-      </svg>
-      Início
-    </a>
-  </nav>
+<nav>
+<a href="index.html" class="nav-item">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M3 10L12 3l9 7"></path>
+<path d="M5 10v10h14V10"></path>
+</svg>
+Início
+</a>
+</nav>
 
-  <nav class="nav-right">
-    <a href="#" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <circle cx="9" cy="20" r="1"></circle>
-        <circle cx="18" cy="20" r="1"></circle>
-        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-      </svg>
-      Carrinho
-    </a>
-  </nav>
+<nav class="nav-right">
+<a href="#" class="nav-item">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="9" cy="20" r="1"></circle>
+<circle cx="18" cy="20" r="1"></circle>
+<path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+</svg>
+Carrinho
+</a>
+</nav>
 </header>
 
 <h1>PISOS E PISADEIRAS</h1>
