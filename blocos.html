@@ -35,19 +35,15 @@
 
 <h1>BLOCOS E CANALETAS</h1>
 
-<!-- BLOCO DE VEDAÇÃO -->
 <h2>Bloco de vedação</h2>
 <div class="grid" id="grid1"></div>
 
-<!-- CANALETA -->
 <h2>Canaleta de vedação</h2>
 <div class="grid" id="grid2"></div>
 
-<!-- PILAR C/ SEGMENTO -->
 <h2>Bloco para fechamento de coluna C/segmento</h2>
 <div class="grid" id="grid3"></div>
 
-<!-- PILAR ISOLADO -->
 <h2>Bloco para fechamento de coluna isolada</h2>
 <div class="grid" id="grid4"></div>
 
@@ -82,7 +78,10 @@ function adicionarCarrinho(botao){
 function criar(gridId, nome){
   document.getElementById(gridId).innerHTML += `
   <div class="card">
-    <img src="img/blocos/padrao.jpg" alt="${nome}">
+    <img src="img/blocos/padrao.jpg" 
+         onerror="this.src='img/placeholder.jpg'"
+         alt="${nome}">
+    
     <h3>${nome}</h3>
 
     <div class="contador">
