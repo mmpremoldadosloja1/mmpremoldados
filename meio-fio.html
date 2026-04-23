@@ -188,9 +188,9 @@ h1{
 <h3>Meio-Fio Arredondado 80x25x8cm</h3>
 
 <div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
+<button>−</button>
 <span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
+<button>+</button>
 </div>
 
 <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
@@ -201,9 +201,9 @@ h1{
 <h3>Meio-Fio Cordão 80x25x4cm</h3>
 
 <div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
+<button>−</button>
 <span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
+<button>+</button>
 </div>
 
 <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
@@ -214,9 +214,9 @@ h1{
 <h3>Guia de Jardim Ondulado 80x20x4cm</h3>
 
 <div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
+<button>−</button>
 <span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
+<button>+</button>
 </div>
 
 <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
@@ -225,12 +225,45 @@ h1{
 </div>
 
 <script>
+
+/* ========================= */
+/* CONTADOR COM SEGURAR CLIQUE */
+/* ========================= */
+
 function alterarQtd(botao, valor){
   const qtdSpan = botao.parentElement.querySelector('.qtd');
   let qtd = parseInt(qtdSpan.innerText);
   qtd = Math.max(1, qtd + valor);
   qtdSpan.innerText = qtd;
 }
+
+function segurar(botao, valor){
+  alterarQtd(botao, valor);
+
+  botao._interval = setInterval(()=>{
+    alterarQtd(botao, valor);
+  }, 120);
+}
+
+function parar(botao){
+  clearInterval(botao._interval);
+}
+
+/* APLICA EM TODOS */
+document.querySelectorAll('.contador button').forEach(btn=>{
+  const valor = btn.innerText.trim() === '+' ? 1 : -1;
+
+  btn.onmousedown = () => segurar(btn, valor);
+  btn.onmouseup = () => parar(btn);
+  btn.onmouseleave = () => parar(btn);
+
+  btn.ontouchstart = () => segurar(btn, valor);
+  btn.ontouchend = () => parar(btn);
+});
+
+/* ========================= */
+/* CARRINHO */
+/* ========================= */
 
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
@@ -249,6 +282,7 @@ function adicionarCarrinho(botao){
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   alert('Produto adicionado');
 }
+
 </script>
 
 </body>
