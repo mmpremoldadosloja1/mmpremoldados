@@ -17,7 +17,7 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER SEM SOMBRA */
+/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -28,8 +28,8 @@ header{
   top:0;
   z-index:999;
   background:#fff;
-  box-shadow:none; /* <<< REMOVIDO A SOMBRA */
-  border:none; /* garantia extra */
+  box-shadow:none;
+  border:none;
 }
 
 /* NAV */
@@ -101,7 +101,7 @@ h1{
   }
 }
 
-/* CARD COM SOMBRA */
+/* CARD */
 .card{
   background:#fff;
   border-radius:12px;
@@ -223,9 +223,9 @@ select{
 </select>
 
 <div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
+<button>−</button>
 <span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
+<button>+</button>
 </div>
 
 <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
@@ -244,9 +244,9 @@ select{
 </select>
 
 <div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
+<button>−</button>
 <span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
+<button>+</button>
 </div>
 
 <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
@@ -261,9 +261,9 @@ select{
 </select>
 
 <div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
+<button>−</button>
 <span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
+<button>+</button>
 </div>
 
 <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
@@ -272,6 +272,8 @@ select{
 </div>
 
 <script>
+
+/* CONTADOR BASE */
 function alterarQtd(botao, valor){
   const qtdSpan = botao.parentElement.querySelector('.qtd');
   let qtd = parseInt(qtdSpan.innerText);
@@ -279,6 +281,32 @@ function alterarQtd(botao, valor){
   qtdSpan.innerText = qtd;
 }
 
+/* SEGURAR */
+function segurar(botao, valor){
+  alterarQtd(botao, valor);
+
+  botao._interval = setInterval(()=>{
+    alterarQtd(botao, valor);
+  }, 120);
+}
+
+function parar(botao){
+  clearInterval(botao._interval);
+}
+
+/* ATIVAR EM TODOS */
+document.querySelectorAll('.contador button').forEach(btn=>{
+  const valor = btn.innerText.trim() === '+' ? 1 : -1;
+
+  btn.onmousedown = () => segurar(btn, valor);
+  btn.onmouseup = () => parar(btn);
+  btn.onmouseleave = () => parar(btn);
+
+  btn.ontouchstart = () => segurar(btn, valor);
+  btn.ontouchend = () => parar(btn);
+});
+
+/* CARRINHO */
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function adicionarCarrinho(botao){
@@ -299,6 +327,7 @@ function adicionarCarrinho(botao){
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   alert('Produto adicionado');
 }
+
 </script>
 
 </body>
