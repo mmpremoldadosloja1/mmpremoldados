@@ -14,6 +14,7 @@ body{
   background: linear-gradient(to bottom, #ddd, #ccc);
   padding-top:90px;
   font-family: 'Montserrat', sans-serif;
+  margin:0;
 }
 
 /* HEADER */
@@ -45,13 +46,7 @@ nav{
   font-weight:600;
 }
 
-.nav-item svg{
-  width:24px;
-  height:24px;
-  margin-bottom:3px;
-}
-
-/* TÍTULO */
+/* TITULO */
 h1{
   text-align:center;
   font-size:36px;
@@ -59,20 +54,31 @@ h1{
   color:#e63946;
 }
 
-/* GRID CENTRALIZADA IGUAL PINGADEIRAS */
+/* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(260px, 300px));
-  justify-content:center;
   gap:25px;
   padding:0 20px 60px;
 }
 
-/* CARD PADRÃO (IGUAL PINGADEIRAS) */
+@media(min-width:900px){
+  .grid{
+    grid-template-columns:repeat(3,280px);
+    justify-content:center;
+  }
+}
+
+@media(max-width:768px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+/* CARD IGUAL PINGADEIRAS */
 .card{
   background:#fff;
   border-radius:12px;
-  padding:20px;
+  padding:15px;
   text-align:center;
 
   display:flex;
@@ -80,25 +86,22 @@ h1{
   justify-content:space-between;
 
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
-  transition:0.3s;
 }
 
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 25px rgba(0,0,0,0.12);
-}
-
-/* IMAGEM CENTRALIZADA */
-.imagem-container{
+/* CONTAINER DA IMAGEM (ESSA É A CHAVE) */
+.imagem-box{
   width:100%;
   height:140px;
   display:flex;
   align-items:center;
   justify-content:center;
+  background:#fff;
+  border-radius:8px;
   margin-bottom:10px;
 }
 
-.imagem-container img{
+/* IMAGEM CENTRALIZADA */
+.imagem-box img{
   max-width:100%;
   max-height:100%;
   object-fit:contain;
@@ -108,10 +111,9 @@ h1{
 .card h3{
   font-size:14px;
   margin:10px 0;
-  min-height:40px;
 }
 
-/* CONTADOR IGUAL COBOGO */
+/* CONTADOR PADRÃO CORRETO */
 .contador{
   display:flex;
   justify-content:center;
@@ -123,14 +125,10 @@ h1{
   padding:5px 10px;
   margin:0 5px;
   font-size:16px;
-  cursor:pointer;
   border:none;
   border-radius:5px;
   background:#eee;
-}
-
-.qtd{
-  font-weight:bold;
+  cursor:pointer;
 }
 
 /* BOTÃO */
@@ -143,11 +141,6 @@ h1{
   border:none;
   border-radius:8px;
   cursor:pointer;
-  transition:0.3s;
-}
-
-.btn:hover{
-  background:#c92f3b;
 }
 
 </style>
@@ -157,24 +150,11 @@ h1{
 
 <header>
   <nav>
-    <a href="index.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path d="M3 10L12 3l9 7"></path>
-        <path d="M5 10v10h14V10"></path>
-      </svg>
-      Início
-    </a>
+    <a href="index.html" class="nav-item">Início</a>
   </nav>
 
   <nav>
-    <a href="#" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <circle cx="9" cy="20" r="1"></circle>
-        <circle cx="18" cy="20" r="1"></circle>
-        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-      </svg>
-      Carrinho
-    </a>
+    <a href="#" class="nav-item">Carrinho</a>
   </nav>
 </header>
 
@@ -216,12 +196,12 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado");
 }
 
-/* PRODUTOS */
+/* PRODUTO */
 function criar(nome){
   grid.innerHTML += `
   <div class="card">
 
-    <div class="imagem-container">
+    <div class="imagem-box">
       <img src="img/meiofio/guia-de-jardim.jpg" alt="${nome}">
     </div>
 
