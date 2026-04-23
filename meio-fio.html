@@ -9,15 +9,15 @@
 
 <style>
 
-/* FUNDO BRANCO */
+/* BASE */
 body{
   background:#fff;
   color:#000;
   padding-top:90px;
-  font-family: 'Montserrat', sans-serif;
+  font-family:'Montserrat', sans-serif;
 }
 
-/* HEADER */
+/* HEADER IGUAL COBOGÓS */
 header{
   width:100%;
   display:flex;
@@ -30,16 +30,9 @@ header{
   background:#fff;
 }
 
-/* NAV */
 nav{
   display:flex;
   gap:25px;
-  align-items:center;
-}
-
-.nav-left, .nav-right{
-  display:flex;
-  gap:20px;
   align-items:center;
 }
 
@@ -62,6 +55,7 @@ nav{
   width:24px;
   height:24px;
   margin-bottom:3px;
+  stroke:currentColor;
 }
 
 .nav-item:hover{
@@ -69,7 +63,7 @@ nav{
   transform:scale(1.05);
 }
 
-/* TÍTULO */
+/* TITULO */
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -78,7 +72,7 @@ h1{
   color:#e63946;
 }
 
-/* GRID */
+/* GRID (MANTIDO ORIGINAL) */
 .grid{
   display:grid;
   grid-template-columns:repeat(2, 1fr);
@@ -99,7 +93,7 @@ h1{
   }
 }
 
-/* CARD */
+/* CARD (SEM ALTERAÇÃO DE TAMANHO) */
 .card{
   background:#fff;
   border-radius:12px;
@@ -114,6 +108,7 @@ h1{
   box-shadow:0 12px 25px rgba(0,0,0,0.12);
 }
 
+/* IMAGEM */
 .card img{
   width:100%;
   height:140px;
@@ -121,22 +116,37 @@ h1{
   margin-bottom:10px;
 }
 
-/* CONTADOR */
+/* TITULO CARD */
+.card h3{
+  margin:10px 0;
+  font-size:14px;
+  min-height:40px;
+}
+
+/* CONTADOR IGUAL COBOGÓS (DIGITÁVEL) */
 .contador{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:10px;
+  gap:5px;
+  margin:10px 0;
 }
 
 .contador button{
   padding:5px 10px;
-  margin:0 5px;
   font-size:16px;
   cursor:pointer;
   border:none;
   border-radius:5px;
   background:#eee;
+}
+
+.contador input{
+  width:50px;
+  text-align:center;
+  border:1px solid #ccc;
+  border-radius:5px;
+  padding:5px;
 }
 
 /* BOTÃO */
@@ -183,100 +193,74 @@ h1{
 
 <div class="grid">
 
-<div class="card">
-<img src="img/meiofio/arredondado.jpg">
-<h3>Meio-Fio Arredondado 80x25x8cm</h3>
+  <div class="card">
+    <img src="img/meiofio/arredondado.jpg">
+    <h3>Meio-Fio Arredondado 80x25x8cm</h3>
 
-<div class="contador">
-<button>−</button>
-<span class="qtd">1</span>
-<button>+</button>
-</div>
+    <div class="contador">
+      <button onclick="diminuir(this)">−</button>
+      <input type="number" class="qtd" value="1" min="1">
+      <button onclick="aumentar(this)">+</button>
+    </div>
 
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+  </div>
 
-<div class="card">
-<img src="img/meiofio/cordao.jpg">
-<h3>Meio-Fio Cordão 80x25x4cm</h3>
+  <div class="card">
+    <img src="img/meiofio/cordao.jpg">
+    <h3>Meio-Fio Cordão 80x25x4cm</h3>
 
-<div class="contador">
-<button>−</button>
-<span class="qtd">1</span>
-<button>+</button>
-</div>
+    <div class="contador">
+      <button onclick="diminuir(this)">−</button>
+      <input type="number" class="qtd" value="1" min="1">
+      <button onclick="aumentar(this)">+</button>
+    </div>
 
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+  </div>
 
-<div class="card">
-<img src="img/meiofio/ondulado.jpg">
-<h3>Guia de Jardim Ondulado 80x20x4cm</h3>
+  <div class="card">
+    <img src="img/meiofio/ondulado.jpg">
+    <h3>Guia de Jardim Ondulado 80x20x4cm</h3>
 
-<div class="contador">
-<button>−</button>
-<span class="qtd">1</span>
-<button>+</button>
-</div>
+    <div class="contador">
+      <button onclick="diminuir(this)">−</button>
+      <input type="number" class="qtd" value="1" min="1">
+      <button onclick="aumentar(this)">+</button>
+    </div>
 
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+  </div>
 
 </div>
 
 <script>
 
-/* ========================= */
-/* CONTADOR COM SEGURAR CLIQUE */
-/* ========================= */
-
-function alterarQtd(botao, valor){
-  const qtdSpan = botao.parentElement.querySelector('.qtd');
-  let qtd = parseInt(qtdSpan.innerText);
-  qtd = Math.max(1, qtd + valor);
-  qtdSpan.innerText = qtd;
+/* CONTADOR IGUAL COBOGÓS */
+function aumentar(btn){
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = parseInt(input.value) + 1;
 }
 
-function segurar(botao, valor){
-  alterarQtd(botao, valor);
-
-  botao._interval = setInterval(()=>{
-    alterarQtd(botao, valor);
-  }, 120);
+function diminuir(btn){
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-function parar(botao){
-  clearInterval(botao._interval);
-}
-
-/* APLICA EM TODOS */
-document.querySelectorAll('.contador button').forEach(btn=>{
-  const valor = btn.innerText.trim() === '+' ? 1 : -1;
-
-  btn.onmousedown = () => segurar(btn, valor);
-  btn.onmouseup = () => parar(btn);
-  btn.onmouseleave = () => parar(btn);
-
-  btn.ontouchstart = () => segurar(btn, valor);
-  btn.ontouchend = () => parar(btn);
-});
-
-/* ========================= */
 /* CARRINHO */
-/* ========================= */
-
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
-  const qtd = parseInt(card.querySelector('.qtd').innerText);
+  const qtd = parseInt(card.querySelector('.qtd').value);
 
   const existente = carrinho.find(item => item.nome === nome);
+
   if(existente){
     existente.qtd += qtd;
-  }else{
-    carrinho.push({nome, qtd});
+  } else {
+    carrinho.push({ nome, qtd });
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
