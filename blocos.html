@@ -6,190 +6,32 @@
 <title>BLOCOS E CANALETAS | MM Pré-Moldados</title>
 
 <link rel="stylesheet" href="css/style.css">
-
-<style>
-
-/* FUNDO BRANCO PADRÃO */
-body{
-  background:#fff;
-  color:#000;
-  padding-top:90px;
-  font-family: 'Montserrat', sans-serif;
-}
-
-/* HEADER LIMPO */
-header{
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 25px;
-  position:fixed;
-  top:0;
-  z-index:999;
-  background:#fff;
-  box-shadow:none;
-}
-
-/* NAV */
-nav{
-  display:flex;
-  gap:25px;
-  align-items:center;
-}
-
-.nav-left, .nav-right{
-  display:flex;
-  gap:20px;
-  align-items:center;
-}
-
-.nav-right{
-  margin-right:20px;
-}
-
-.nav-item{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-decoration:none;
-  color:#000;
-  font-size:12px;
-  font-weight:600;
-}
-
-.nav-item svg{
-  width:24px;
-  height:24px;
-  margin-bottom:3px;
-}
-
-.nav-item:hover{
-  color:#e63946;
-}
-
-/* TITULO */
-h1{
-  text-align:center;
-  text-transform:uppercase;
-  font-size:36px;
-  margin-bottom:20px;
-  color:#e63946;
-}
-
-h2{
-  text-align:left;
-  margin-top:30px;
-  margin-bottom:15px;
-  font-size:22px;
-  padding-left:20px;
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
-  gap:20px;
-  padding:0 20px 40px;
-}
-
-/* CARD PADRÃO IGUAL COBOGÓ */
-.card{
-  background:#fff;
-  border-radius:12px;
-  padding:15px;
-  text-align:center;
-  box-shadow:0 8px 20px rgba(0,0,0,0.08);
-
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-
-/* IMAGEM */
-.card img{
-  width:100%;
-  height:140px;
-  object-fit:contain;
-  margin-bottom:10px;
-}
-
-/* TITULO */
-.card h3{
-  font-size:14px;
-  margin:10px 0;
-  min-height:40px;
-}
-
-/* CONTADOR */
-.contador{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin:10px 0;
-}
-
-/* 🔥 BOTÕES CORRIGIDOS (IGUAL COBOGÓ) */
-.contador button{
-  width:32px;
-  height:32px;
-  margin:0 5px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:18px;
-  font-weight:bold;
-
-  border:none;
-  border-radius:6px;
-  background:#eee;
-  cursor:pointer;
-}
-
-/* BOTÃO */
-.btn{
-  width:100%;
-  padding:10px 0;
-  background:#e63946;
-  color:#fff;
-  font-weight:bold;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-.btn:hover{
-  background:#c92f3b;
-}
-
-</style>
+<link rel="stylesheet" href="css/header.css">
 </head>
 
 <body>
 
 <header>
-<nav class="nav-left">
-<a href="index.html" class="nav-item">
-<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-<path d="M3 10L12 3l9 7"></path>
-<path d="M5 10v10h14V10"></path>
-</svg>
-Início
-</a>
-</nav>
+  <nav class="nav-left">
+    <a href="index.html" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+      Início
+    </a>
+  </nav>
 
-<nav class="nav-right">
-<a href="#" class="nav-item">
-<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-<circle cx="9" cy="20" r="1"></circle>
-<circle cx="18" cy="20" r="1"></circle>
-<path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-</svg>
-Carrinho
-</a>
-</nav>
+  <nav class="nav-right">
+    <a href="#" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+      Carrinho
+    </a>
+  </nav>
 </header>
 
 <h1>BLOCOS E CANALETAS</h1>
@@ -197,19 +39,19 @@ Carrinho
 <div class="grid" id="gridProdutos"></div>
 
 <script>
+
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-function mais(btn){
-  const qtd = btn.parentElement.querySelector('.qtd');
-  qtd.innerText = parseInt(qtd.innerText) + 1;
+/* CONTADOR */
+function alterarQtd(botao, valor){
+  const qtdSpan = botao.parentElement.querySelector('.qtd');
+  let qtd = parseInt(qtdSpan.innerText);
+  qtd = Math.max(1, qtd + valor);
+  qtdSpan.innerText = qtd;
 }
 
-function menos(btn){
-  const qtd = btn.parentElement.querySelector('.qtd');
-  qtd.innerText = Math.max(1, parseInt(qtd.innerText) - 1);
-}
-
+/* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -227,16 +69,17 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado");
 }
 
+/* CRIAR CARD */
 function criar(nome){
   grid.innerHTML += `
   <div class="card">
-    <img src="img/blocos/padrao.jpg">
+    <img src="img/blocos/padrao.jpg" alt="${nome}">
     <h3>${nome}</h3>
 
     <div class="contador">
-      <button onclick="menos(this)">−</button>
+      <button onclick="alterarQtd(this,-1)">−</button>
       <span class="qtd">1</span>
-      <button onclick="mais(this)">+</button>
+      <button onclick="alterarQtd(this,1)">+</button>
     </div>
 
     <button class="btn" onclick="adicionarCarrinho(this)">
@@ -245,9 +88,10 @@ function criar(nome){
   </div>`;
 }
 
+/* TÍTULO DE SEÇÃO */
 function titulo(texto){
   grid.innerHTML += `
-    <div style="grid-column:1/-1">
+    <div class="secao-titulo">
       <h2>${texto}</h2>
     </div>
   `;
