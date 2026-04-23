@@ -16,7 +16,7 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER PADRÃO COBOGÓ */
+/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -27,8 +27,6 @@ header{
   top:0;
   z-index:999;
   background:#fff;
-  box-shadow:none;
-  border:none;
 }
 
 nav{
@@ -80,7 +78,6 @@ h1{
 }
 
 h2{
-  text-align:left;
   margin-top:30px;
   margin-bottom:15px;
   font-size:22px;
@@ -95,7 +92,7 @@ h2{
   padding:0 20px 40px;
 }
 
-/* CARD IGUAL COBOGÓ */
+/* CARD */
 .card{
   background:#fff;
   border-radius:12px;
@@ -138,28 +135,20 @@ h2{
   min-height:40px;
 }
 
-/* CONTADOR */
+/* CONTADOR DIGITÁVEL */
 .contador{
   display:flex;
   justify-content:center;
-  align-items:center;
   margin:10px 0;
 }
 
-.contador button{
-  padding:5px 10px;
-  margin:0 5px;
-  font-size:16px;
-  cursor:pointer;
-  border:none;
-  border-radius:5px;
-  background:#eee;
-}
-
-.qtd{
-  font-weight:bold;
-  min-width:20px;
+.qtd-input{
+  width:60px;
+  padding:6px;
   text-align:center;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-weight:bold;
 }
 
 /* BOTÃO */
@@ -217,31 +206,11 @@ Carrinho
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* CONTADOR */
-function alterarQtd(botao, valor){
-  const qtdSpan = botao.parentElement.querySelector('.qtd');
-  let qtd = parseInt(qtdSpan.innerText);
-  qtd = Math.max(1, qtd + valor);
-  qtdSpan.innerText = qtd;
-}
-
-function segurar(botao, valor){
-  alterarQtd(botao, valor);
-
-  botao._interval = setInterval(()=>{
-    alterarQtd(botao, valor);
-  }, 120);
-}
-
-function parar(botao){
-  clearInterval(botao._interval);
-}
-
 /* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
-  const qtd = parseInt(card.querySelector('.qtd').innerText);
+  const qtd = parseInt(card.querySelector('.qtd-input').value) || 1;
 
   const existente = carrinho.find(item => item.nome === nome);
 
@@ -265,25 +234,7 @@ function criar(nome){
     <h3>${nome}</h3>
 
     <div class="contador">
-      <button 
-        onmousedown="segurar(this,-1)" 
-        onmouseup="parar(this)" 
-        onmouseleave="parar(this)"
-        ontouchstart="segurar(this,-1)" 
-        ontouchend="parar(this)">
-        −
-      </button>
-
-      <span class="qtd">1</span>
-
-      <button 
-        onmousedown="segurar(this,1)" 
-        onmouseup="parar(this)" 
-        onmouseleave="parar(this)"
-        ontouchstart="segurar(this,1)" 
-        ontouchend="parar(this)">
-        +
-      </button>
+      <input type="number" class="qtd-input" value="1" min="1">
     </div>
 
     <button class="btn" onclick="adicionarCarrinho(this)">
