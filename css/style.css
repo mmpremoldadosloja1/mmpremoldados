@@ -12,7 +12,50 @@
 body {
   background: #fff;
   color: #000;
-  padding: 90px 20px 40px;
+  padding-top: 90px;
+}
+
+
+/* ============================= */
+/* HEADER (IMPORTANTE) */
+/* ============================= */
+
+header{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  position:fixed;
+  top:0;
+  z-index:999;
+  background:#fff;
+}
+
+nav{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-decoration:none;
+  color:#000;
+  font-size:12px;
+  font-weight:600;
+}
+
+.nav-item svg{
+  width:24px;
+  height:24px;
+  margin-bottom:3px;
+}
+
+.nav-item:hover{
+  color:#e63946;
 }
 
 
@@ -40,13 +83,13 @@ h3 {
 
 
 /* ============================= */
-/* GRID PADRÃO */
+/* GRID */
 /* ============================= */
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 25px;
+  gap: 20px;
   padding: 0 20px 40px;
 }
 
@@ -65,28 +108,13 @@ h3 {
 
 
 /* ============================= */
-/* TÍTULO DE SEÇÃO */
-/* ============================= */
-
-.secao-titulo{
-  grid-column: 1 / -1;
-}
-
-.secao-titulo h2{
-  text-align:left;
-  margin:30px 0 15px;
-  padding-left:10px;
-}
-
-
-/* ============================= */
-/* CARD PADRÃO */
+/* CARD */
 /* ============================= */
 
 .card {
   background:#fff;
   border-radius:12px;
-  padding:20px;
+  padding:15px;
   text-align:center;
 
   display:flex;
@@ -104,19 +132,19 @@ h3 {
 
 
 /* ============================= */
-/* IMAGEM PADRÃO */
+/* IMAGEM */
 /* ============================= */
 
 .card img {
   width:100%;
-  height:140px;
+  height:130px;
   object-fit:contain;
   margin-bottom:10px;
 }
 
 
 /* ============================= */
-/* CONTADOR PADRÃO CORRIGIDO */
+/* CONTADOR (CORRIGIDO) */
 /* ============================= */
 
 .contador{
@@ -127,49 +155,35 @@ h3 {
   gap:8px;
 }
 
-/* BOTÕES CORRETOS */
 .contador button{
-  width:36px;
-  height:36px;
+  width:34px;
+  height:34px;
   border:none;
-  border-radius:6px; /* 🔥 corrigido (antes era redondo) */
+  border-radius:6px;
   background:#eee;
   font-size:18px;
   font-weight:bold;
   cursor:pointer;
-  transition:all 0.2s ease;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  user-select:none;         /* 🔥 impede seleção ao segurar */
-  -webkit-user-select:none;
-  touch-action:none;        /* 🔥 resolve mobile */
+  user-select:none;
+  touch-action:none;
 }
 
 .contador button:hover{
   background:#e63946;
   color:#fff;
-  transform:scale(1.05);
 }
 
-/* INPUT QTD */
+/* QUANTIDADE */
+.qtd,
 .qtd-input{
-  width:60px;
-  height:36px;
+  min-width:40px;
   text-align:center;
-  border:1px solid #ddd;
-  border-radius:6px;
-  font-size:14px;
   font-weight:bold;
-  outline:none;
-}
-
-/* FOCUS */
-.qtd-input:focus{
-  border-color:#e63946;
-  box-shadow:0 0 5px rgba(230,57,70,0.3);
 }
 
 
@@ -186,17 +200,15 @@ h3 {
   border:none;
   border-radius:8px;
   cursor:pointer;
-  transition:0.3s;
 }
 
 .btn:hover {
   background:#c92f3b;
-  transform:scale(1.05);
 }
 
 
 /* ============================= */
-/* RESPONSIVO EXTRA */
+/* RESPONSIVO */
 /* ============================= */
 
 @media (max-width: 480px){
