@@ -16,6 +16,7 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
+/* HEADER PADRÃO COBOGÓ */
 header{
   width:100%;
   display:flex;
@@ -26,6 +27,8 @@ header{
   top:0;
   z-index:999;
   background:#fff;
+  box-shadow:none;
+  border:none;
 }
 
 nav{
@@ -44,6 +47,7 @@ nav{
   margin-right:20px;
 }
 
+/* NAV COM EFEITO */
 .nav-item{
   display:flex;
   flex-direction:column;
@@ -52,6 +56,7 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
+  transition:0.3s;
 }
 
 .nav-item svg{
@@ -62,8 +67,10 @@ nav{
 
 .nav-item:hover{
   color:#e63946;
+  transform:scale(1.05);
 }
 
+/* TITULOS */
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -73,12 +80,14 @@ h1{
 }
 
 h2{
+  text-align:left;
   margin-top:30px;
   margin-bottom:15px;
   font-size:22px;
   padding-left:20px;
 }
 
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
@@ -86,21 +95,39 @@ h2{
   padding:0 20px 40px;
 }
 
+/* CARD IGUAL COBOGÓ */
 .card{
   background:#fff;
   border-radius:12px;
   padding:15px;
   text-align:center;
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  transition:0.3s;
 
   display:flex;
   flex-direction:column;
   justify-content:space-between;
+
+  opacity:0;
+  transform:translateY(30px);
+  animation:fadeUp 0.6s ease forwards;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 12px 25px rgba(0,0,0,0.12);
+}
+
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .card img{
   width:100%;
-  height:140px;
+  height:110px;
   object-fit:contain;
   margin-bottom:10px;
 }
@@ -111,7 +138,7 @@ h2{
   min-height:40px;
 }
 
-/* CONTADOR IGUAL COBOGÓ */
+/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
@@ -132,10 +159,10 @@ h2{
 .qtd{
   font-weight:bold;
   min-width:20px;
-  display:inline-block;
   text-align:center;
 }
 
+/* BOTÃO */
 .btn{
   width:100%;
   padding:10px 0;
@@ -145,10 +172,12 @@ h2{
   border:none;
   border-radius:8px;
   cursor:pointer;
+  transition:0.3s;
 }
 
 .btn:hover{
   background:#c92f3b;
+  transform:scale(1.05);
 }
 
 </style>
@@ -184,13 +213,11 @@ Carrinho
 <div class="grid" id="gridProdutos"></div>
 
 <script>
+
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* ========================= */
-/* CONTADOR COM SEGURAR CLIQUE */
-/* ========================= */
-
+/* CONTADOR */
 function alterarQtd(botao, valor){
   const qtdSpan = botao.parentElement.querySelector('.qtd');
   let qtd = parseInt(qtdSpan.innerText);
@@ -210,10 +237,7 @@ function parar(botao){
   clearInterval(botao._interval);
 }
 
-/* ========================= */
 /* CARRINHO */
-/* ========================= */
-
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -231,10 +255,7 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado");
 }
 
-/* ========================= */
-/* CRIAR CARDS */
-/* ========================= */
-
+/* CRIAR CARD */
 function criar(nome){
   const card = document.createElement("div");
   card.className = "card";
@@ -280,7 +301,7 @@ function titulo(texto){
   grid.appendChild(div);
 }
 
-/* PRODUTOS */
+/* PRODUTOS (TODOS MANTIDOS) */
 titulo("Bloco de vedação");
 [
 "Bloco c/fundo 09x19x39cm",
