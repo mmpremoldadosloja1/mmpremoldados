@@ -111,7 +111,7 @@ h2{
   min-height:40px;
 }
 
-/* CONTADOR */
+/* CONTADOR IGUAL COBOGÓ */
 .contador{
   display:flex;
   justify-content:center;
@@ -120,24 +120,20 @@ h2{
 }
 
 .contador button{
-  width:32px;
-  height:32px;
+  padding:5px 10px;
   margin:0 5px;
-  font-size:18px;
-  border:none;
-  border-radius:6px;
-  background:#eee;
+  font-size:16px;
   cursor:pointer;
+  border:none;
+  border-radius:5px;
+  background:#eee;
 }
 
-/* INPUT */
-.qtd-input{
-  width:60px;
-  height:32px;
+.qtd{
+  font-weight:bold;
+  min-width:20px;
+  display:inline-block;
   text-align:center;
-  border:1px solid #ccc;
-  border-radius:6px;
-  font-size:14px;
 }
 
 .btn{
@@ -192,32 +188,26 @@ const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 /* ========================= */
-/* CONTADOR COM HOLD */
+/* CONTADOR COM SEGURAR CLIQUE */
 /* ========================= */
 
-let interval;
-
-// acelerar ao segurar
-function iniciarMais(btn){
-  alterar(btn, 1);
-  interval = setInterval(() => alterar(btn, 1), 120);
+function alterarQtd(botao, valor){
+  const qtdSpan = botao.parentElement.querySelector('.qtd');
+  let qtd = parseInt(qtdSpan.innerText);
+  qtd = Math.max(1, qtd + valor);
+  qtdSpan.innerText = qtd;
 }
 
-function iniciarMenos(btn){
-  alterar(btn, -1);
-  interval = setInterval(() => alterar(btn, -1), 120);
+function segurar(botao, valor){
+  alterarQtd(botao, valor);
+
+  botao._interval = setInterval(()=>{
+    alterarQtd(botao, valor);
+  }, 120);
 }
 
-// parar quando soltar
-function parar(){
-  clearInterval(interval);
-}
-
-// função base
-function alterar(btn, valor){
-  const input = btn.parentElement.querySelector('.qtd-input');
-  let atual = parseInt(input.value);
-  input.value = Math.max(1, atual + valor);
+function parar(botao){
+  clearInterval(botao._interval);
 }
 
 /* ========================= */
@@ -227,7 +217,7 @@ function alterar(btn, valor){
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
-  const qtd = parseInt(card.querySelector('.qtd-input').value);
+  const qtd = parseInt(card.querySelector('.qtd').innerText);
 
   const existente = carrinho.find(item => item.nome === nome);
 
@@ -242,7 +232,7 @@ function adicionarCarrinho(botao){
 }
 
 /* ========================= */
-/* CRIAR CARD */
+/* CRIAR CARDS */
 /* ========================= */
 
 function criar(nome){
@@ -255,22 +245,24 @@ function criar(nome){
 
     <div class="contador">
       <button 
-        onmousedown="iniciarMenos(this)" 
-        onmouseup="parar()" 
-        onmouseleave="parar()"
-        ontouchstart="iniciarMenos(this)" 
-        ontouchend="parar()"
-      >−</button>
+        onmousedown="segurar(this,-1)" 
+        onmouseup="parar(this)" 
+        onmouseleave="parar(this)"
+        ontouchstart="segurar(this,-1)" 
+        ontouchend="parar(this)">
+        −
+      </button>
 
-      <input type="number" class="qtd-input" value="1" min="1">
+      <span class="qtd">1</span>
 
       <button 
-        onmousedown="iniciarMais(this)" 
-        onmouseup="parar()" 
-        onmouseleave="parar()"
-        ontouchstart="iniciarMais(this)" 
-        ontouchend="parar()"
-      >+</button>
+        onmousedown="segurar(this,1)" 
+        onmouseup="parar(this)" 
+        onmouseleave="parar(this)"
+        ontouchstart="segurar(this,1)" 
+        ontouchend="parar(this)">
+        +
+      </button>
     </div>
 
     <button class="btn" onclick="adicionarCarrinho(this)">
