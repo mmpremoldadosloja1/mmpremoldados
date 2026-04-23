@@ -65,7 +65,7 @@ h3 {
 
 
 /* ============================= */
-/* TÍTULO DE SEÇÃO (categorias) */
+/* TÍTULO DE SEÇÃO */
 /* ============================= */
 
 .secao-titulo{
@@ -116,33 +116,57 @@ h3 {
 
 
 /* ============================= */
-/* CONTADOR */
+/* CONTADOR BONITO */
 /* ============================= */
 
-.contador {
+.contador{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin:10px 0;
+  margin:12px 0;
+  gap:8px;
 }
 
-.contador button {
-  padding:5px 10px;
-  margin:0 5px;
-  font-size:16px;
+/* BOTÕES */
+.contador button{
+  width:34px;
+  height:34px;
   border:none;
-  border-radius:5px;
-  background:#eee;
+  border-radius:50%;
+  background:#f0f0f0;
+  font-size:18px;
+  font-weight:bold;
   cursor:pointer;
+  transition:all 0.2s ease;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.contador button:hover{
+  background:#e63946;
+  color:#fff;
+  transform:scale(1.1);
+}
+
+/* INPUT */
+.qtd-input{
+  width:60px;
+  height:34px;
+  text-align:center;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:bold;
+  outline:none;
   transition:0.2s;
 }
 
-.contador button:hover {
-  background:#ddd;
-}
-
-.qtd {
-  font-weight:bold;
+/* FOCUS */
+.qtd-input:focus{
+  border-color:#e63946;
+  box-shadow:0 0 5px rgba(230,57,70,0.3);
 }
 
 
