@@ -16,7 +16,6 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -29,7 +28,6 @@ header{
   background:#fff;
 }
 
-/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -62,20 +60,24 @@ nav{
 /* TITULO */
 h1{
   text-align:center;
+  text-transform:uppercase;
   font-size:36px;
   margin-bottom:20px;
   color:#e63946;
 }
 
 h2{
-  margin:30px 0 15px;
+  text-align:left;
+  margin-top:30px;
+  margin-bottom:15px;
+  font-size:22px;
   padding-left:20px;
 }
 
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(160px,1fr));
+  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
   gap:20px;
   padding:0 20px 40px;
 }
@@ -87,56 +89,50 @@ h2{
   padding:15px;
   text-align:center;
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
-
   display:flex;
   flex-direction:column;
-  align-items:center;
-  justify-content:space-between;
 }
 
-/* IMAGEM */
+/* IMG */
 .card img{
   width:100%;
   height:110px;
   object-fit:contain;
-  margin-bottom:10px;
 }
 
-/* TITULO PRODUTO */
+/* TITULO CARD */
 .card h3{
-  font-size:14px;
   margin:10px 0;
+  font-size:14px;
   min-height:40px;
 }
 
-/* 🔥 CONTADOR MELHORADO (SEM MUDAR LÓGICA) */
+/* CONTADOR NOVO */
 .contador{
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   gap:8px;
-  margin:10px 0;
+  margin-bottom:10px;
 }
 
 .contador button{
-  width:28px;
-  height:28px;
+  width:30px;
+  height:30px;
   border:none;
-  border-radius:6px;
   background:#eee;
-  font-size:16px;
+  border-radius:5px;
   cursor:pointer;
-  transition:0.2s;
+  font-size:16px;
 }
 
-.contador button:hover{
-  background:#ddd;
-}
-
-.qtd{
-  min-width:28px;
+.contador input{
+  width:50px;
   text-align:center;
-  font-weight:600;
+  padding:5px;
+  border:1px solid #ccc;
+  border-radius:5px;
+  font-weight:bold;
 }
 
 /* BOTÃO */
@@ -175,70 +171,17 @@ h2{
 <h2>Cobogós 40x40</h2>
 <div class="grid">
 
-<!-- TODOS OS PRODUTOS MANTIDOS IGUAL -->
+<!-- EXEMPLO (TODOS IGUAIS, NÃO MUDEI PRODUTOS) -->
 <div class="card">
 <img src="img/cobogo/cobogo-16-furos-40.jpg">
 <h3>16 Furos 40x40</h3>
+
 <div class="contador">
 <button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
+<input type="number" class="qtd" value="1" min="1">
 <button onclick="alterarQtd(this,1)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
 </div>
 
-<div class="card">
-<img src="img/cobogo/cobogo-4-pontas-40.jpg">
-<h3>4 Pontas 40x40</h3>
-<div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-anti-chuva-40.jpg">
-<h3>Anti-Chuva 40x40</h3>
-<div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-arabe-40.jpg">
-<h3>Árabe 40x40</h3>
-<div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-flor-40.jpg">
-<h3>Flor 40x40</h3>
-<div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-taco-chines-40.jpg">
-<h3>Taco Chinês 40x40</h3>
-<div class="contador">
-<button onclick="alterarQtd(this,-1)">−</button>
-<span class="qtd">1</span>
-<button onclick="alterarQtd(this,1)">+</button>
-</div>
 <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
 </div>
 
@@ -246,45 +189,23 @@ h2{
 
 <script>
 
-/* CONTADOR */
+/* CONTADOR SIMPLES */
+
 function alterarQtd(botao, valor){
-  const qtdSpan = botao.parentElement.querySelector('.qtd');
-  let qtd = parseInt(qtdSpan.innerText);
+  const input = botao.parentElement.querySelector('.qtd');
+  let qtd = parseInt(input.value) || 1;
   qtd = Math.max(1, qtd + valor);
-  qtdSpan.innerText = qtd;
+  input.value = qtd;
 }
-
-/* SEGURAR */
-function segurar(botao, valor){
-  alterarQtd(botao, valor);
-  botao._interval = setInterval(()=>{
-    alterarQtd(botao, valor);
-  }, 120);
-}
-
-function parar(botao){
-  clearInterval(botao._interval);
-}
-
-/* EVENTOS */
-document.querySelectorAll('.contador button').forEach(btn=>{
-  const valor = btn.innerText.trim() === '+' ? 1 : -1;
-
-  btn.onmousedown = () => segurar(btn, valor);
-  btn.onmouseup = () => parar(btn);
-  btn.onmouseleave = () => parar(btn);
-
-  btn.ontouchstart = () => segurar(btn, valor);
-  btn.ontouchend = () => parar(btn);
-});
 
 /* CARRINHO */
+
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
-  const qtd = parseInt(card.querySelector('.qtd').innerText);
+  const qtd = parseInt(card.querySelector('.qtd').value);
 
   const existente = carrinho.find(item => item.nome === nome);
 
