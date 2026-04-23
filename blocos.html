@@ -111,51 +111,33 @@ h2{
   min-height:40px;
 }
 
-/* 🔥 CONTADOR BONITO */
+/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin:12px 0;
-  gap:8px;
+  margin:10px 0;
 }
 
 .contador button{
-  width:34px;
-  height:34px;
-  border:none;
-  border-radius:50%;
-  background:#f0f0f0;
+  width:32px;
+  height:32px;
+  margin:0 5px;
   font-size:18px;
-  font-weight:bold;
+  border:none;
+  border-radius:6px;
+  background:#eee;
   cursor:pointer;
-  transition:0.2s;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
 
-.contador button:hover{
-  background:#e63946;
-  color:#fff;
-  transform:scale(1.1);
-}
-
+/* INPUT */
 .qtd-input{
   width:60px;
-  height:34px;
+  height:32px;
   text-align:center;
-  border:1px solid #ddd;
-  border-radius:8px;
+  border:1px solid #ccc;
+  border-radius:6px;
   font-size:14px;
-  font-weight:bold;
-  outline:none;
-}
-
-.qtd-input:focus{
-  border-color:#e63946;
-  box-shadow:0 0 5px rgba(230,57,70,0.3);
 }
 
 .btn{
@@ -167,12 +149,10 @@ h2{
   border:none;
   border-radius:8px;
   cursor:pointer;
-  transition:0.3s;
 }
 
 .btn:hover{
   background:#c92f3b;
-  transform:scale(1.05);
 }
 
 </style>
@@ -211,18 +191,39 @@ Carrinho
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* CONTADOR */
-function mais(btn){
-  const input = btn.parentElement.querySelector('.qtd-input');
-  input.value = parseInt(input.value) + 1;
+/* ========================= */
+/* CONTADOR COM HOLD */
+/* ========================= */
+
+let interval;
+
+// acelerar ao segurar
+function iniciarMais(btn){
+  alterar(btn, 1);
+  interval = setInterval(() => alterar(btn, 1), 120);
 }
 
-function menos(btn){
-  const input = btn.parentElement.querySelector('.qtd-input');
-  input.value = Math.max(1, parseInt(input.value) - 1);
+function iniciarMenos(btn){
+  alterar(btn, -1);
+  interval = setInterval(() => alterar(btn, -1), 120);
 }
 
+// parar quando soltar
+function parar(){
+  clearInterval(interval);
+}
+
+// função base
+function alterar(btn, valor){
+  const input = btn.parentElement.querySelector('.qtd-input');
+  let atual = parseInt(input.value);
+  input.value = Math.max(1, atual + valor);
+}
+
+/* ========================= */
 /* CARRINHO */
+/* ========================= */
+
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -240,7 +241,10 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado");
 }
 
-/* CRIAR */
+/* ========================= */
+/* CRIAR CARD */
+/* ========================= */
+
 function criar(nome){
   const card = document.createElement("div");
   card.className = "card";
@@ -250,9 +254,23 @@ function criar(nome){
     <h3>${nome}</h3>
 
     <div class="contador">
-      <button onclick="menos(this)">−</button>
+      <button 
+        onmousedown="iniciarMenos(this)" 
+        onmouseup="parar()" 
+        onmouseleave="parar()"
+        ontouchstart="iniciarMenos(this)" 
+        ontouchend="parar()"
+      >−</button>
+
       <input type="number" class="qtd-input" value="1" min="1">
-      <button onclick="mais(this)">+</button>
+
+      <button 
+        onmousedown="iniciarMais(this)" 
+        onmouseup="parar()" 
+        onmouseleave="parar()"
+        ontouchstart="iniciarMais(this)" 
+        ontouchend="parar()"
+      >+</button>
     </div>
 
     <button class="btn" onclick="adicionarCarrinho(this)">
