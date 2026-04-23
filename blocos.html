@@ -135,11 +135,22 @@ h2{
   min-height:40px;
 }
 
-/* CONTADOR DIGITÁVEL */
+/* CONTADOR COMPLETO */
 .contador{
   display:flex;
   justify-content:center;
+  align-items:center;
+  gap:8px;
   margin:10px 0;
+}
+
+.contador button{
+  padding:5px 10px;
+  font-size:16px;
+  cursor:pointer;
+  border:none;
+  border-radius:5px;
+  background:#eee;
 }
 
 .qtd-input{
@@ -206,6 +217,14 @@ Carrinho
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
+/* CONTADOR */
+function alterarQtd(btn, valor){
+  const input = btn.parentElement.querySelector('.qtd-input');
+  let qtd = parseInt(input.value) || 1;
+  qtd = Math.max(1, qtd + valor);
+  input.value = qtd;
+}
+
 /* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
@@ -234,7 +253,9 @@ function criar(nome){
     <h3>${nome}</h3>
 
     <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
       <input type="number" class="qtd-input" value="1" min="1">
+      <button onclick="alterarQtd(this,1)">+</button>
     </div>
 
     <button class="btn" onclick="adicionarCarrinho(this)">
