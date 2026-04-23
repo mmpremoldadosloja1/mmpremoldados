@@ -30,7 +30,6 @@ header{
   background:#fff;
 }
 
-/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -79,16 +78,18 @@ h1{
   color:#e63946;
 }
 
-/* GRID IGUAL COBOGÓS */
+/* ========================= */
+/* GRID AJUSTADO (DESKTOP MELHOR CENTRALIZADO) */
+/* ========================= */
+
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+  grid-template-columns:repeat(auto-fit, minmax(180px, 220px));
   gap:20px;
   padding:0 20px 40px 20px;
 
-  max-width:1100px;
-  margin:0 auto;
-  justify-content:center;
+  justify-content:center;   /* CENTRALIZA DE VERDADE */
+  align-items:start;
 }
 
 /* CARD IGUAL COBOGÓS */
@@ -105,21 +106,13 @@ h1{
 }
 
 /* IMAGEM */
-.imagem-container{
+.imagem-placeholder{
   width:100%;
   height:110px;
   display:flex;
   align-items:center;
   justify-content:center;
   margin-bottom:10px;
-}
-
-.imagem-placeholder{
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   background:#f5f5f5;
   border-radius:8px;
   font-size:13px;
@@ -143,7 +136,7 @@ select{
   font-family:'Montserrat', sans-serif;
 }
 
-/* CONTADOR IGUAL COBOGÓS (DIGITÁVEL) */
+/* CONTADOR IGUAL COBOGÓS */
 .contador{
   display:flex;
   justify-content:center;
@@ -169,7 +162,7 @@ select{
   padding:5px;
 }
 
-/* BOTÃO IGUAL COBOGÓS */
+/* BOTÃO */
 .btn{
   width:100%;
   padding:10px 0;
@@ -224,7 +217,7 @@ select{
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* CONTADOR IGUAL COBOGÓS */
+/* CONTADOR */
 function aumentar(btn){
   const input = btn.parentElement.querySelector('.qtd');
   input.value = parseInt(input.value) + 1;
@@ -261,9 +254,7 @@ function criarProduto(nome){
   grid.innerHTML += `
   <div class="card">
 
-    <div class="imagem-placeholder">
-      Imagem
-    </div>
+    <div class="imagem-placeholder">Imagem</div>
 
     <h3>${nome}</h3>
 
