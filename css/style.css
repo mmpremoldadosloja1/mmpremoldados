@@ -6,17 +6,25 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 }
 
 body {
-  background: #f4f4f4;
-  padding: 60px 20px 40px;
+  background: #fff; /* PADRÃO DEFINITIVO */
+  color: #000;
+  padding: 90px 20px 40px;
 }
+
+
+/* ============================= */
+/* TÍTULOS */
+/* ============================= */
 
 h1 {
   text-align: center;
   margin-bottom: 30px;
+  color: #e63946;
+  text-transform: uppercase;
 }
 
 h2 {
@@ -27,42 +35,7 @@ h2 {
 h3 {
   margin: 10px 0;
   text-align: center;
-  font-size: 15px;
-}
-
-
-/* ============================= */
-/* BOTÃO VOLTAR PADRÃO */
-/* ============================= */
-
-.voltar {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  width: 40px;
-  height: 40px;
-  background: #111;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: transform 0.2s ease;
-}
-
-.voltar svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: #fff;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.voltar:hover {
-  transform: scale(1.08);
+  font-size: 14px;
 }
 
 
@@ -72,163 +45,164 @@ h3 {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 0 20px 40px;
+}
+
+@media (min-width: 768px){
+  .grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px){
+  .grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width:1200px){
+  .grid{
+    max-width:1100px;
+    margin:0 auto;
+  }
 }
 
 
 /* ============================= */
-/* CARD PADRÃO - TRANSPARENTE */
+/* CARD PADRÃO */
 /* ============================= */
 
 .card {
-  background: rgba(255,255,255,0.0); /* transparente */
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
+  background:#fff;
+  border-radius:12px;
+  padding:20px;
+  text-align:center;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 
-  box-shadow: none; /* remove sombra */
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  transition:0.3s;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+  transform: translateY(-5px);
+  box-shadow:0 12px 25px rgba(0,0,0,0.12);
 }
 
 
 /* ============================= */
-/* PADRÃO DE IMAGEM - REDUZIDA E SEM BORDA */
+/* IMAGEM PADRÃO */
 /* ============================= */
 
-.imagem-placeholder, 
 .card img {
-  width: 100%;
-  height: 120px; /* reduzido para mais compacto */
-  object-fit: contain;
-  background: transparent;
-  border-radius: 0;
-  margin-bottom: 15px;
-  border: none; /* sem borda */
+  width:100%;
+  height:140px;
+  object-fit:contain;
+  margin-bottom:10px;
 }
 
 
 /* ============================= */
-/* CONTADOR PADRÃO */
+/* CONTADOR */
 /* ============================= */
 
 .contador {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 10px 0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:10px 0;
 }
 
 .contador button {
-  width: 28px;
-  height: 28px;
-  border: none;
-  border-radius: 50%;
-  background: #ddd;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.contador button:hover {
-  background: #ccc;
+  padding:5px 10px;
+  margin:0 5px;
+  font-size:16px;
+  border:none;
+  border-radius:5px;
+  background:#eee;
+  cursor:pointer;
 }
 
 .qtd {
-  font-weight: bold;
-  font-size: 14px;
+  font-weight:bold;
 }
 
 
 /* ============================= */
-/* BOTÃO PADRÃO */
+/* BOTÃO */
 /* ============================= */
 
 .btn {
-  margin-top: 10px;
-  padding: 6px 12px;
-  border: none;
-  background: #111;
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  font-size: 14px;
+  width:100%;
+  padding:10px 0;
+  background:#e63946;
+  color:#fff;
+  font-weight:bold;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.3s;
 }
 
 .btn:hover {
-  background: #333;
+  background:#c92f3b;
+  transform:scale(1.05);
 }
 
 
 /* ============================= */
-/* RESPONSIVO - CELULAR */
+/* HEADER PADRÃO */
 /* ============================= */
 
-@media (max-width: 768px) {
-
-  body {
-    padding: 50px 10px 30px;
-  }
-
-  /* FORÇA 2 PRODUTOS POR LINHA */
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-
-  .card {
-    padding: 12px;
-  }
-
-  .imagem-placeholder, 
-  .card img {
-    height: 100px; /* menor no celular */
-  }
-
-  h3 {
-    font-size: 13px;
-  }
-
-  .btn {
-    padding: 6px 10px;
-    font-size: 13px;
-  }
-
-  .contador button {
-    width: 26px;
-    height: 26px;
-    font-size: 14px;
-  }
-
-  .qtd {
-    font-size: 13px;
-  }
-
+header{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  position:fixed;
+  top:0;
+  z-index:999;
+  background:#fff;
 }
 
+nav{
+  display:flex;
+  gap:25px;
+  align-items:center;
+}
 
-/* ============================= */
-/* RESPONSIVO - TELAS MUITO PEQUENAS */
-/* ============================= */
+.nav-left, .nav-right{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
 
-@media (max-width: 400px) {
+.nav-right{
+  margin-right:20px;
+}
 
-  /* 1 produto por linha só em celular muito pequeno */
-  .grid {
-    grid-template-columns: 1fr;
-  }
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-decoration:none;
+  color:#000;
+  font-size:12px;
+  font-weight:600;
+  transition:0.3s;
+}
 
+.nav-item svg{
+  width:24px;
+  height:24px;
+  margin-bottom:3px;
+}
+
+.nav-item:hover{
+  color:#e63946;
+  transform:scale(1.05);
 }
