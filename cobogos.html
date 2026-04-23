@@ -28,6 +28,7 @@ header{
   background:#fff;
 }
 
+/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -52,12 +53,21 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
+  transition:0.3s;
 }
 
+/* ÍCONE */
 .nav-item svg{
   width:24px;
   height:24px;
   margin-bottom:3px;
+  stroke:currentColor;
+}
+
+/* 🔥 HOVER ADICIONADO */
+.nav-item:hover{
+  color:#e63946;
+  transform:scale(1.05);
 }
 
 h1{
@@ -106,7 +116,7 @@ h2{
   min-height:40px;
 }
 
-/* NOVO CONTADOR */
+/* CONTADOR NOVO */
 .contador{
   display:flex;
   justify-content:center;
@@ -132,6 +142,7 @@ h2{
   padding:5px;
 }
 
+/* BOTÃO */
 .btn{
   width:100%;
   padding:10px 0;
@@ -141,6 +152,12 @@ h2{
   border:none;
   border-radius:8px;
   cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#c92f3b;
+  transform:scale(1.05);
 }
 
 </style>
@@ -151,7 +168,7 @@ h2{
 <header>
   <nav class="nav-left">
     <a href="index.html" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <path d="M3 10L12 3l9 7"></path>
         <path d="M5 10v10h14V10"></path>
       </svg>
@@ -161,7 +178,7 @@ h2{
 
   <nav class="nav-right">
     <a href="#" class="nav-item">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
         <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
