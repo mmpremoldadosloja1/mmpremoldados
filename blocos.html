@@ -111,33 +111,51 @@ h2{
   min-height:40px;
 }
 
-/* CONTADOR NOVO */
+/* 🔥 CONTADOR BONITO */
 .contador{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin:10px 0;
+  margin:12px 0;
+  gap:8px;
 }
 
 .contador button{
-  width:32px;
-  height:32px;
-  margin:0 5px;
-  font-size:18px;
+  width:34px;
+  height:34px;
   border:none;
-  border-radius:6px;
-  background:#eee;
+  border-radius:50%;
+  background:#f0f0f0;
+  font-size:18px;
+  font-weight:bold;
   cursor:pointer;
+  transition:0.2s;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* INPUT QUANTIDADE */
+.contador button:hover{
+  background:#e63946;
+  color:#fff;
+  transform:scale(1.1);
+}
+
 .qtd-input{
   width:60px;
-  height:32px;
+  height:34px;
   text-align:center;
-  border:1px solid #ccc;
-  border-radius:6px;
+  border:1px solid #ddd;
+  border-radius:8px;
   font-size:14px;
+  font-weight:bold;
+  outline:none;
+}
+
+.qtd-input:focus{
+  border-color:#e63946;
+  box-shadow:0 0 5px rgba(230,57,70,0.3);
 }
 
 .btn{
@@ -149,10 +167,12 @@ h2{
   border:none;
   border-radius:8px;
   cursor:pointer;
+  transition:0.3s;
 }
 
 .btn:hover{
   background:#c92f3b;
+  transform:scale(1.05);
 }
 
 </style>
