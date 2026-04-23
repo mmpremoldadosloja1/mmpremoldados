@@ -1,53 +1,51 @@
-/* ========================= */
-/* CONTADOR GLOBAL */
-/* ========================= */
+function iniciarContadores(){
 
-function alterarQtd(input, valor){
-  let qtd = parseInt(input.value) || 1;
-  qtd = Math.max(1, qtd + valor);
-  input.value = qtd;
-}
+  document.querySelectorAll('.contador-box').forEach(box=>{
 
-function segurar(btn, input, valor){
-  alterarQtd(input, valor);
+    const input = box.querySelector('.contador-input');
+    const btnMais = box.querySelector('.mais');
+    const btnMenos = box.querySelector('.menos');
 
-  btn._interval = setInterval(()=>{
-    alterarQtd(input, valor);
-  }, 120);
-}
+    let intervalo;
 
-function parar(btn){
-  clearInterval(btn._interval);
-}
+    function alterar(valor){
+      let qtd = parseInt(input.value) || 1;
+      qtd = Math.max(1, qtd + valor);
+      input.value = qtd;
+    }
 
-document.addEventListener("DOMContentLoaded", ()=>{
+    function segurar(botao, valor){
+      alterar(valor);
+      intervalo = setInterval(()=>alterar(valor), 120);
+    }
 
-  document.querySelectorAll('.contador').forEach(contador=>{
+    function parar(){
+      clearInterval(intervalo);
+    }
 
-    const botoes = contador.querySelectorAll('button');
-    const input = contador.querySelector('input');
+    // CLIQUE NORMAL
+    btnMais.onclick = ()=>alterar(1);
+    btnMenos.onclick = ()=>alterar(-1);
 
-    const menos = botoes[0];
-    const mais = botoes[1];
+    // SEGURAR
+    btnMais.onmousedown = ()=>segurar(btnMais, 1);
+    btnMenos.onmousedown = ()=>segurar(btnMenos, -1);
 
-    /* - */
-    menos.onmousedown = () => segurar(menos, input, -1);
-    menos.onmouseup = () => parar(menos);
-    menos.onmouseleave = () => parar(menos);
+    btnMais.onmouseup = parar;
+    btnMenos.onmouseup = parar;
 
-    menos.ontouchstart = () => segurar(menos, input, -1);
-    menos.ontouchend = () => parar(menos);
+    btnMais.onmouseleave = parar;
+    btnMenos.onmouseleave = parar;
 
-    /* + */
-    mais.onmousedown = () => segurar(mais, input, 1);
-    mais.onmouseup = () => parar(mais);
-    mais.onmouseleave = () => parar(mais);
+    // MOBILE
+    btnMais.ontouchstart = ()=>segurar(btnMais, 1);
+    btnMenos.ontouchstart = ()=>segurar(btnMenos, -1);
 
-    mais.ontouchstart = () => segurar(mais, input, 1);
-    mais.ontouchend = () => parar(mais);
+    btnMais.ontouchend = parar;
+    btnMenos.ontouchend = parar;
 
-    /* DIGITAÇÃO */
-    input.oninput = ()=>{
+    // DIGITAÇÃO MANUAL
+    input.onchange = ()=>{
       if(input.value < 1 || input.value === ""){
         input.value = 1;
       }
@@ -55,4 +53,4 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   });
 
-});
+}
