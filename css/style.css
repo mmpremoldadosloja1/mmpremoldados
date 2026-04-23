@@ -116,7 +116,7 @@ h3 {
 
 
 /* ============================= */
-/* CONTADOR BONITO */
+/* CONTADOR PADRÃO CORRIGIDO */
 /* ============================= */
 
 .contador{
@@ -127,13 +127,13 @@ h3 {
   gap:8px;
 }
 
-/* BOTÕES */
+/* BOTÕES CORRETOS */
 .contador button{
-  width:34px;
-  height:34px;
+  width:36px;
+  height:36px;
   border:none;
-  border-radius:50%;
-  background:#f0f0f0;
+  border-radius:6px; /* 🔥 corrigido (antes era redondo) */
+  background:#eee;
   font-size:18px;
   font-weight:bold;
   cursor:pointer;
@@ -142,25 +142,28 @@ h3 {
   display:flex;
   align-items:center;
   justify-content:center;
+
+  user-select:none;         /* 🔥 impede seleção ao segurar */
+  -webkit-user-select:none;
+  touch-action:none;        /* 🔥 resolve mobile */
 }
 
 .contador button:hover{
   background:#e63946;
   color:#fff;
-  transform:scale(1.1);
+  transform:scale(1.05);
 }
 
-/* INPUT */
+/* INPUT QTD */
 .qtd-input{
   width:60px;
-  height:34px;
+  height:36px;
   text-align:center;
   border:1px solid #ddd;
-  border-radius:8px;
+  border-radius:6px;
   font-size:14px;
   font-weight:bold;
   outline:none;
-  transition:0.2s;
 }
 
 /* FOCUS */
