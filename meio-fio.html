@@ -5,26 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MEIO-FIO | MM Pré-Moldados</title>
 
-<link rel="stylesheet" href="css/style.css">
-
 <style>
 
-/* 🔥 GARANTE QUE NÃO APAREÇA FUNDO BRANCO */
-html, body{
-  min-height:100%;
-}
-
-/* ===== FUNDO CINZA SUAVE ===== */
+/* FUNDO PADRÃO */
 body{
-  background: linear-gradient(to bottom, #ddd, #ccc);
-  background-attachment: fixed;
+  background:#fff;
   color:#000;
   padding-top:90px;
-  font-family: 'Montserrat', sans-serif;
-  margin:0;
+  font-family:'Montserrat', sans-serif;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -34,23 +25,17 @@ header{
   position:fixed;
   top:0;
   z-index:999;
-  background:transparent;
+  background:#fff;
 }
 
+/* NAV */
 nav{
   display:flex;
-  gap:25px;
   align-items:center;
 }
 
-.nav-left, .nav-right{
-  display:flex;
-  gap:20px;
-  align-items:center;
-}
-
-.nav-right{
-  margin-right:10px;
+header nav:last-child{
+  margin-right:20px;
 }
 
 .nav-item{
@@ -61,7 +46,7 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
-  transition:0.3s;
+  transition:.3s;
 }
 
 .nav-item svg{
@@ -75,63 +60,60 @@ nav{
   transform:scale(1.05);
 }
 
-/* ===== TÍTULO ===== */
+/* TITULO */
 h1{
   text-align:center;
-  text-transform:uppercase;
   font-size:36px;
-  margin-bottom:20px;
+  margin-bottom:30px;
   color:#e63946;
-  text-shadow:2px 2px 4px rgba(0,0,0,0.3);
+  text-transform:uppercase;
 }
 
-/* ===== GRID ===== */
+/* GRID */
 .grid{
   display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(160px,1fr));
   gap:20px;
-  padding:0 20px 40px 20px;
+  padding:0 20px 40px;
 }
 
-/* 📱 Celular = 2 */
-@media(max-width:768px){
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-/* 💻 Computador = 3 */
-@media(min-width:769px){
-  .grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
-
-/* ===== CARDS ===== */
+/* CARD PADRÃO */
 .card{
-  background:transparent;
+  background:#fff;
+  border-radius:12px;
+  padding:15px;
   text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+
   display:flex;
   flex-direction:column;
   align-items:center;
-  opacity:0;
-  transform:translateY(30px);
-  animation:fadeUp .6s ease forwards;
+  justify-content:space-between;
 }
 
-@keyframes fadeUp{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-.card img{
+/* IMAGEM (PADRÃO CORRETO) */
+.imagem-container{
   width:100%;
-  height:160px;
-  object-fit:contain;
+  height:120px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
   margin-bottom:10px;
-  background:transparent;
-  border:none;
+}
+
+.imagem-container img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+}
+
+/* TITULO PRODUTO */
+.card h3{
+  margin:10px 0;
+  font-size:14px;
+  min-height:40px;
 }
 
 /* CONTADOR */
@@ -139,32 +121,33 @@ h1{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .contador button{
-  padding:3px 8px;
+  padding:5px 10px;
   margin:0 5px;
   font-size:16px;
   cursor:pointer;
+  border:none;
+  border-radius:5px;
+  background:#eee;
 }
 
 /* BOTÃO */
 .btn{
   width:100%;
-  padding:8px 0;
+  padding:10px 0;
   background:#e63946;
   color:#fff;
   font-weight:bold;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
-  transition:.3s;
 }
 
 .btn:hover{
   background:#c92f3b;
-  transform:scale(1.05);
 }
 
 </style>
@@ -173,7 +156,7 @@ h1{
 <body>
 
 <header>
-  <nav class="nav-left">
+  <nav>
     <a href="index.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path d="M3 10L12 3l9 7"></path>
@@ -183,7 +166,7 @@ h1{
     </a>
   </nav>
 
-  <nav class="nav-right">
+  <nav>
     <a href="#" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="9" cy="20" r="1"></circle>
@@ -237,7 +220,11 @@ function adicionarCarrinho(botao){
 function criar(nome){
   grid.innerHTML += `
   <div class="card">
-    <img src="img/meiofio/guia-de-jardim.jpg" alt="${nome}">
+
+    <div class="imagem-container">
+      <img src="img/meiofio/guia-de-jardim.jpg" alt="${nome}">
+    </div>
+
     <h3>${nome}</h3>
 
     <div class="contador">
@@ -249,6 +236,7 @@ function criar(nome){
     <button class="btn" onclick="adicionarCarrinho(this)">
       Adicionar
     </button>
+
   </div>`;
 }
 
