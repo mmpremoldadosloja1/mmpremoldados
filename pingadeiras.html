@@ -9,15 +9,15 @@
 
 <style>
 
-/* FUNDO BRANCO */
+/* BASE */
 body{
   background:#fff;
   color:#000;
   padding-top:90px;
-  font-family: 'Montserrat', sans-serif;
+  font-family:'Montserrat', sans-serif;
 }
 
-/* HEADER */
+/* HEADER IGUAL COBOGÓS */
 header{
   width:100%;
   display:flex;
@@ -28,8 +28,6 @@ header{
   top:0;
   z-index:999;
   background:#fff;
-  box-shadow:none;
-  border:none;
 }
 
 /* NAV */
@@ -64,6 +62,7 @@ nav{
   width:24px;
   height:24px;
   margin-bottom:3px;
+  stroke:currentColor;
 }
 
 .nav-item:hover{
@@ -71,67 +70,53 @@ nav{
   transform:scale(1.05);
 }
 
-/* TÍTULO */
+/* TITULO IGUAL COBOGÓS */
 h1{
   text-align:center;
   text-transform:uppercase;
   font-size:36px;
-  margin-bottom:30px;
+  margin-bottom:20px;
   color:#e63946;
 }
 
-/* GRID */
+/* GRID IGUAL COBOGÓS */
 .grid{
   display:grid;
-  grid-template-columns:repeat(2, 1fr);
-  gap:25px;
-  padding:0 20px 40px;
+  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+  gap:20px;
+  padding:0 20px 40px 20px;
+
+  max-width:1100px;
+  margin:0 auto;
+  justify-content:center;
 }
 
-@media (min-width:768px){
-  .grid{
-    grid-template-columns:repeat(3, 1fr);
-  }
-}
-
-@media (min-width:1200px){
-  .grid{
-    max-width:1100px;
-    margin:0 auto;
-  }
-}
-
-/* CARD */
+/* CARD IGUAL COBOGÓS */
 .card{
   background:#fff;
   border-radius:12px;
-  padding:20px;
+  padding:15px;
   text-align:center;
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
-  transition:0.3s;
 
-  opacity:0;
-  transform:translateY(30px);
-  animation:fadeUp 0.6s ease forwards;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
 
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 25px rgba(0,0,0,0.12);
-}
-
-@keyframes fadeUp{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
+/* IMAGEM */
 .card img{
   width:100%;
-  height:140px;
+  height:110px;
   object-fit:contain;
   margin-bottom:10px;
+}
+
+/* TITULO */
+.card h3{
+  margin:10px 0;
+  font-size:14px;
+  min-height:40px;
 }
 
 /* SELECT */
@@ -141,19 +126,20 @@ select{
   margin-bottom:10px;
   border-radius:6px;
   border:1px solid #ccc;
+  font-family:'Montserrat', sans-serif;
 }
 
-/* CONTADOR */
+/* CONTADOR IGUAL COBOGÓS (DIGITÁVEL) */
 .contador{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:10px;
+  gap:5px;
+  margin-bottom:8px;
 }
 
 .contador button{
   padding:5px 10px;
-  margin:0 5px;
   font-size:16px;
   cursor:pointer;
   border:none;
@@ -161,7 +147,15 @@ select{
   background:#eee;
 }
 
-/* BOTÃO */
+.contador input{
+  width:50px;
+  text-align:center;
+  border:1px solid #ccc;
+  border-radius:5px;
+  padding:5px;
+}
+
+/* BOTÃO IGUAL COBOGÓS */
 .btn{
   width:100%;
   padding:10px 0;
@@ -211,100 +205,78 @@ select{
 
 <div class="grid">
 
-<div class="card">
-<img src="img/pingadeira/casinha.jpg">
-<h3>Pingadeira Casinha</h3>
+  <div class="card">
+    <img src="img/pingadeira/casinha.jpg">
+    <h3>Pingadeira Casinha</h3>
 
-<select>
-<option>1m x 20cm</option>
-<option>1m x 23cm</option>
-<option>1m x 25cm</option>
-<option>1m x 30cm</option>
-</select>
+    <select>
+      <option>1m x 20cm</option>
+      <option>1m x 23cm</option>
+      <option>1m x 25cm</option>
+      <option>1m x 30cm</option>
+    </select>
 
-<div class="contador">
-<button>−</button>
-<span class="qtd">1</span>
-<button>+</button>
-</div>
+    <div class="contador">
+      <button onclick="diminuir(this)">−</button>
+      <input type="number" class="qtd" value="1" min="1">
+      <button onclick="aumentar(this)">+</button>
+    </div>
 
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+  </div>
 
-<div class="card">
-<img src="img/pingadeira/reta.jpg">
-<h3>Pingadeira Reta</h3>
+  <div class="card">
+    <img src="img/pingadeira/reta.jpg">
+    <h3>Pingadeira Reta</h3>
 
-<select>
-<option>1m x 20cm</option>
-<option>1m x 23cm</option>
-<option>1m x 25cm</option>
-<option>1m x 30cm</option>
-<option>1m x 40cm</option>
-</select>
+    <select>
+      <option>1m x 20cm</option>
+      <option>1m x 23cm</option>
+      <option>1m x 25cm</option>
+      <option>1m x 30cm</option>
+      <option>1m x 40cm</option>
+    </select>
 
-<div class="contador">
-<button>−</button>
-<span class="qtd">1</span>
-<button>+</button>
-</div>
+    <div class="contador">
+      <button onclick="diminuir(this)">−</button>
+      <input type="number" class="qtd" value="1" min="1">
+      <button onclick="aumentar(this)">+</button>
+    </div>
 
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+  </div>
 
-<div class="card">
-<img src="img/pingadeira/degrau.jpg">
-<h3>Pingadeira Degrau</h3>
+  <div class="card">
+    <img src="img/pingadeira/degrau.jpg">
+    <h3>Pingadeira Degrau</h3>
 
-<select>
-<option>1m x 20cm</option>
-</select>
+    <select>
+      <option>1m x 20cm</option>
+    </select>
 
-<div class="contador">
-<button>−</button>
-<span class="qtd">1</span>
-<button>+</button>
-</div>
+    <div class="contador">
+      <button onclick="diminuir(this)">−</button>
+      <input type="number" class="qtd" value="1" min="1">
+      <button onclick="aumentar(this)">+</button>
+    </div>
 
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+  </div>
 
 </div>
 
 <script>
 
-/* CONTADOR BASE */
-function alterarQtd(botao, valor){
-  const qtdSpan = botao.parentElement.querySelector('.qtd');
-  let qtd = parseInt(qtdSpan.innerText);
-  qtd = Math.max(1, qtd + valor);
-  qtdSpan.innerText = qtd;
+/* CONTADOR IGUAL COBOGÓS */
+function aumentar(btn){
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = parseInt(input.value) + 1;
 }
 
-/* SEGURAR */
-function segurar(botao, valor){
-  alterarQtd(botao, valor);
-
-  botao._interval = setInterval(()=>{
-    alterarQtd(botao, valor);
-  }, 120);
+function diminuir(btn){
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = Math.max(1, parseInt(input.value) - 1);
 }
-
-function parar(botao){
-  clearInterval(botao._interval);
-}
-
-/* ATIVAR EM TODOS */
-document.querySelectorAll('.contador button').forEach(btn=>{
-  const valor = btn.innerText.trim() === '+' ? 1 : -1;
-
-  btn.onmousedown = () => segurar(btn, valor);
-  btn.onmouseup = () => parar(btn);
-  btn.onmouseleave = () => parar(btn);
-
-  btn.ontouchstart = () => segurar(btn, valor);
-  btn.ontouchend = () => parar(btn);
-});
 
 /* CARRINHO */
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
@@ -312,20 +284,21 @@ let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
-  const qtd = parseInt(card.querySelector('.qtd').innerText);
+  const qtd = parseInt(card.querySelector('.qtd').value);
   const medida = card.querySelector('select').value;
 
   const nomeCompleto = nome + " - " + medida;
 
   const existente = carrinho.find(item => item.nome === nomeCompleto);
+
   if(existente){
     existente.qtd += qtd;
-  }else{
-    carrinho.push({nome: nomeCompleto, qtd});
+  } else {
+    carrinho.push({ nome: nomeCompleto, qtd });
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert('Produto adicionado');
+  alert("Produto adicionado");
 }
 
 </script>
