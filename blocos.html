@@ -75,13 +75,16 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado");
 }
 
+/* CRIA CARD SEM PISCAR */
 function criar(gridId, nome){
-  document.getElementById(gridId).innerHTML += `
-  <div class="card">
-    <img src="img/blocos/padrao.jpg" 
-         onerror="this.src='img/placeholder.jpg'"
-         alt="${nome}">
-    
+
+  const grid = document.getElementById(gridId);
+
+  const card = document.createElement("div");
+  card.className = "card";
+
+  card.innerHTML = `
+    <img src="img/blocos/padrao.jpg" alt="${nome}">
     <h3>${nome}</h3>
 
     <div class="contador">
@@ -93,7 +96,9 @@ function criar(gridId, nome){
     <button class="btn" onclick="adicionarCarrinho(this)">
       Adicionar
     </button>
-  </div>`;
+  `;
+
+  grid.appendChild(card);
 }
 
 /* PRODUTOS */
