@@ -82,7 +82,6 @@ h2{
   padding:0 20px 60px;
 }
 
-/* CENTRALIZA */
 @media(min-width:1000px){
   .grid{
     max-width:1200px;
@@ -91,14 +90,14 @@ h2{
   }
 }
 
-/* CARD PADRÃO (CORRIGIDO) */
+/* CARD */
 .card{
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   text-align:center;
 
-  background:#ffffff; /* CORRIGIDO */
+  background:#ffffff;
   border-radius:10px;
   padding:15px;
 
@@ -125,7 +124,7 @@ h2{
   object-fit:contain;
 }
 
-/* TITULO PRODUTO */
+/* TITULO */
 .card h3{
   font-size:14px;
   margin:10px 0;
@@ -213,16 +212,42 @@ Carrinho
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-function mais(btn){
-  const qtd = btn.parentElement.querySelector('.qtd');
-  qtd.innerText = parseInt(qtd.innerText) + 1;
+/* CONTADOR BASE */
+function alterarQtd(botao, valor){
+  const qtdSpan = botao.parentElement.querySelector('.qtd');
+  let qtd = parseInt(qtdSpan.innerText);
+  qtd = Math.max(1, qtd + valor);
+  qtdSpan.innerText = qtd;
 }
 
-function menos(btn){
-  const qtd = btn.parentElement.querySelector('.qtd');
-  qtd.innerText = Math.max(1, parseInt(qtd.innerText) - 1);
+/* SEGURAR */
+function segurar(botao, valor){
+  alterarQtd(botao, valor);
+
+  botao._interval = setInterval(()=>{
+    alterarQtd(botao, valor);
+  }, 120);
 }
 
+function parar(botao){
+  clearInterval(botao._interval);
+}
+
+/* ATIVAR SEGURAR */
+function ativarSegurar(){
+  document.querySelectorAll('.contador button').forEach(btn=>{
+    const valor = btn.innerText.trim() === '+' ? 1 : -1;
+
+    btn.onmousedown = () => segurar(btn, valor);
+    btn.onmouseup = () => parar(btn);
+    btn.onmouseleave = () => parar(btn);
+
+    btn.ontouchstart = () => segurar(btn, valor);
+    btn.ontouchend = () => parar(btn);
+  });
+}
+
+/* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -244,10 +269,12 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado!");
 }
 
+/* TITULO */
 function titulo(texto){
   grid.innerHTML += `<div style="grid-column:1/-1"><h2>${texto}</h2></div>`;
 }
 
+/* PRODUTO */
 function criarProduto(nome, img, opcoes=null){
   grid.innerHTML += `
   <div class="card">
@@ -264,9 +291,9 @@ function criarProduto(nome, img, opcoes=null){
     </select>` : ''}
 
     <div class="contador">
-      <button onclick="menos(this)">−</button>
+      <button>−</button>
       <span class="qtd">1</span>
-      <button onclick="mais(this)">+</button>
+      <button>+</button>
     </div>
 
     <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
@@ -293,6 +320,9 @@ titulo("Conjuntos");
 criarProduto("Conjunto Trevo Oriente 60x60cm","img/pisos/trevo-oriente.jpg");
 criarProduto("Conjunto Passarela Estrelado 70x70cm","img/pisos/passarela.jpg");
 criarProduto("Conjunto Circulo Quadrado 140x140cm","img/pisos/conjunto-circulo-quadrado.jpg");
+
+/* ATIVA SEGURAR DEPOIS DE CRIAR */
+ativarSegurar();
 
 </script>
 
