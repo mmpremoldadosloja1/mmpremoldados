@@ -2,20 +2,21 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Pisos e Pisadeiras | MM Pré-Moldados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pisos e Pisadeiras | MM Pré-Moldados</title>
+
 <link rel="stylesheet" href="css/style.css">
 
 <style>
 
-/* FUNDO */
+/* BASE */
 body{
   background:#fff;
   font-family:'Montserrat', sans-serif;
   padding-top:90px;
 }
 
-/* HEADER */
+/* HEADER IGUAL COBOGÓS */
 header{
   width:100%;
   display:flex;
@@ -30,7 +31,7 @@ header{
 
 nav{
   display:flex;
-  gap:20px;
+  gap:25px;
   align-items:center;
 }
 
@@ -46,16 +47,19 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
+  transition:0.3s;
 }
 
 .nav-item svg{
   width:24px;
   height:24px;
   margin-bottom:3px;
+  stroke:currentColor;
 }
 
 .nav-item:hover{
   color:#e63946;
+  transform:scale(1.05);
 }
 
 /* TITULO */
@@ -67,55 +71,46 @@ h1{
   margin-bottom:30px;
 }
 
+/* SUBTITULO */
 h2{
   text-align:left;
   margin:40px 0 15px;
   font-size:22px;
-  padding-left:10px;
+  padding-left:20px;
 }
 
-/* GRID */
+/* GRID IGUAL COBOGÓS */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
-  gap:25px;
-  padding:0 20px 60px;
+  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+  gap:20px;
+  padding:0 20px 40px 20px;
+
+  max-width:1100px;
+  margin:0 auto;
 }
 
-@media(min-width:1000px){
-  .grid{
-    max-width:1200px;
-    margin:0 auto;
-    grid-template-columns:repeat(4,1fr);
-  }
-}
-
-/* CARD */
+/* CARD IGUAL COBOGÓS */
 .card{
+  background:#fff;
+  border-radius:12px;
+  padding:15px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  text-align:center;
-
-  background:#ffffff;
-  border-radius:10px;
-  padding:15px;
-
-  box-shadow:0 6px 14px rgba(0,0,0,0.08);
-  transition:0.2s;
-}
-
-.card:active{
-  transform:scale(0.97);
 }
 
 /* IMAGEM */
 .imagem-container{
   width:100%;
-  height:150px;
+  height:130px;
   display:flex;
   align-items:center;
   justify-content:center;
+  margin-bottom:10px;
 }
 
 .imagem-container img{
@@ -124,7 +119,7 @@ h2{
   object-fit:contain;
 }
 
-/* TITULO */
+/* TITULO CARD */
 .card h3{
   font-size:14px;
   margin:10px 0;
@@ -135,22 +130,23 @@ h2{
 select{
   width:100%;
   padding:7px;
-  margin-bottom:10px;
+  margin:10px 0;
   border-radius:6px;
   border:1px solid #ccc;
+  font-family:'Montserrat', sans-serif;
 }
 
-/* CONTADOR */
+/* CONTADOR IGUAL COBOGÓS (DIGITÁVEL) */
 .contador{
   display:flex;
   justify-content:center;
   align-items:center;
+  gap:5px;
   margin:10px 0;
 }
 
 .contador button{
-  padding:4px 10px;
-  margin:0 5px;
+  padding:5px 10px;
   font-size:16px;
   cursor:pointer;
   border:none;
@@ -158,7 +154,15 @@ select{
   background:#eee;
 }
 
-/* BOTÃO */
+.contador input{
+  width:50px;
+  text-align:center;
+  border:1px solid #ccc;
+  border-radius:5px;
+  padding:5px;
+}
+
+/* BOTÃO IGUAL COBOGÓS */
 .btn{
   width:100%;
   padding:10px 0;
@@ -166,13 +170,14 @@ select{
   color:#fff;
   font-weight:bold;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
-  transition:.3s;
+  transition:0.3s;
 }
 
 .btn:hover{
   background:#c92f3b;
+  transform:scale(1.05);
 }
 
 </style>
@@ -181,26 +186,26 @@ select{
 <body>
 
 <header>
-<nav>
-<a href="index.html" class="nav-item">
-<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-<path d="M3 10L12 3l9 7"></path>
-<path d="M5 10v10h14V10"></path>
-</svg>
-Início
-</a>
-</nav>
+  <nav>
+    <a href="index.html" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+      Início
+    </a>
+  </nav>
 
-<nav class="nav-right">
-<a href="#" class="nav-item">
-<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-<circle cx="9" cy="20" r="1"></circle>
-<circle cx="18" cy="20" r="1"></circle>
-<path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-</svg>
-Carrinho
-</a>
-</nav>
+  <nav class="nav-right">
+    <a href="#" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+      Carrinho
+    </a>
+  </nav>
 </header>
 
 <h1>PISOS E PISADEIRAS</h1>
@@ -212,39 +217,24 @@ Carrinho
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* CONTADOR BASE */
-function alterarQtd(botao, valor){
-  const qtdSpan = botao.parentElement.querySelector('.qtd');
-  let qtd = parseInt(qtdSpan.innerText);
-  qtd = Math.max(1, qtd + valor);
-  qtdSpan.innerText = qtd;
+/* TITULOS */
+function titulo(texto){
+  grid.innerHTML += `
+    <div style="grid-column:1/-1">
+      <h2>${texto}</h2>
+    </div>
+  `;
 }
 
-/* SEGURAR */
-function segurar(botao, valor){
-  alterarQtd(botao, valor);
-
-  botao._interval = setInterval(()=>{
-    alterarQtd(botao, valor);
-  }, 120);
+/* CONTADOR IGUAL COBOGÓS */
+function aumentar(btn){
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = parseInt(input.value) + 1;
 }
 
-function parar(botao){
-  clearInterval(botao._interval);
-}
-
-/* ATIVAR SEGURAR */
-function ativarSegurar(){
-  document.querySelectorAll('.contador button').forEach(btn=>{
-    const valor = btn.innerText.trim() === '+' ? 1 : -1;
-
-    btn.onmousedown = () => segurar(btn, valor);
-    btn.onmouseup = () => parar(btn);
-    btn.onmouseleave = () => parar(btn);
-
-    btn.ontouchstart = () => segurar(btn, valor);
-    btn.ontouchend = () => parar(btn);
-  });
+function diminuir(btn){
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
 /* CARRINHO */
@@ -253,7 +243,7 @@ function adicionarCarrinho(botao){
   const nome = card.querySelector('h3').innerText;
   const select = card.querySelector('select');
   const variacao = select ? select.value : "";
-  const qtd = parseInt(card.querySelector('.qtd').innerText);
+  const qtd = parseInt(card.querySelector('.qtd').value);
 
   const nomeFinal = variacao ? nome + " - " + variacao : nome;
 
@@ -261,17 +251,12 @@ function adicionarCarrinho(botao){
 
   if(existente){
     existente.qtd += qtd;
-  }else{
+  } else {
     carrinho.push({ nome: nomeFinal, qtd });
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   alert("Produto adicionado!");
-}
-
-/* TITULO */
-function titulo(texto){
-  grid.innerHTML += `<div style="grid-column:1/-1"><h2>${texto}</h2></div>`;
 }
 
 /* PRODUTO */
@@ -286,17 +271,20 @@ function criarProduto(nome, img, opcoes=null){
     <h3>${nome}</h3>
 
     ${opcoes ? `
-    <select>
-    ${opcoes.map(o=>`<option>${o}</option>`).join('')}
-    </select>` : ''}
+      <select>
+        ${opcoes.map(o=>`<option>${o}</option>`).join('')}
+      </select>
+    ` : ''}
 
     <div class="contador">
-      <button>−</button>
-      <span class="qtd">1</span>
-      <button>+</button>
+      <button onclick="diminuir(this)">−</button>
+      <input type="number" class="qtd" value="1" min="1">
+      <button onclick="aumentar(this)">+</button>
     </div>
 
-    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+    <button class="btn" onclick="adicionarCarrinho(this)">
+      Adicionar
+    </button>
 
   </div>`;
 }
@@ -320,9 +308,6 @@ titulo("Conjuntos");
 criarProduto("Conjunto Trevo Oriente 60x60cm","img/pisos/trevo-oriente.jpg");
 criarProduto("Conjunto Passarela Estrelado 70x70cm","img/pisos/passarela.jpg");
 criarProduto("Conjunto Circulo Quadrado 140x140cm","img/pisos/conjunto-circulo-quadrado.jpg");
-
-/* ATIVA SEGURAR DEPOIS DE CRIAR */
-ativarSegurar();
 
 </script>
 
