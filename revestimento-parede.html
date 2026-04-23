@@ -3,21 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meio-Fio | MM Pré-Moldados</title>
+<title>Revestimento de parede | MM Pré-Moldados</title>
 
 <link rel="stylesheet" href="css/style.css">
 
 <style>
 
 /* FUNDO BRANCO */
-body{
+html, body{
+  height:100%;
   background:#fff;
-  color:#000;
-  padding-top:90px;
-  font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER */
+body{
+  min-height:100vh;
+  font-family:'Montserrat', sans-serif;
+  padding-top:90px;
+  overflow-x:hidden;
+}
+
+/* HEADER SEM SOMBRA */
 header{
   width:100%;
   display:flex;
@@ -28,22 +33,15 @@ header{
   top:0;
   z-index:999;
   background:#fff;
+  box-shadow:none;
 }
 
-/* NAV */
 nav{
   display:flex;
-  gap:25px;
   align-items:center;
 }
 
-.nav-left, .nav-right{
-  display:flex;
-  gap:20px;
-  align-items:center;
-}
-
-.nav-right{
+header nav:last-child{
   margin-right:20px;
 }
 
@@ -55,7 +53,7 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
-  transition:0.3s;
+  transition:.3s;
 }
 
 .nav-item svg{
@@ -72,53 +70,71 @@ nav{
 /* TÍTULO */
 h1{
   text-align:center;
-  text-transform:uppercase;
   font-size:36px;
   margin-bottom:30px;
   color:#e63946;
+  text-transform:uppercase;
 }
 
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(2, 1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:25px;
-  padding:0 20px 40px;
+  padding:0 20px 80px;
 }
 
-@media (min-width:768px){
+/* CENTRALIZAR NO PC */
+@media (min-width:900px){
   .grid{
-    grid-template-columns:repeat(3, 1fr);
+    grid-template-columns:repeat(2,380px);
+    justify-content:center;
   }
 }
 
-@media (min-width:1200px){
+/* MOBILE */
+@media (max-width:768px){
   .grid{
-    max-width:1100px;
-    margin:0 auto;
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
 /* CARD */
 .card{
-  background:#fff;
-  border-radius:12px;
-  padding:20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
   text-align:center;
-  box-shadow:0 8px 20px rgba(0,0,0,0.08);
-  transition:0.3s;
+
+  background:#f9f9f9;
+  border-radius:12px;
+  padding:15px;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+
+  opacity:0;
+  transform:translateY(30px);
+  animation:fadeUp .6s ease forwards;
 }
 
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 25px rgba(0,0,0,0.12);
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
-.card img{
-  width:100%;
-  height:140px;
-  object-fit:contain;
+/* IMAGEM */
+.imagem-placeholder{
+  height:130px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border-radius:8px;
   margin-bottom:10px;
+  font-size:14px;
+  color:#666;
 }
 
 /* CONTADOR */
@@ -147,8 +163,14 @@ h1{
   color:#fff;
   font-weight:bold;
   border:none;
-  border-radius:8px;
+  border-radius:6px;
   cursor:pointer;
+  transition:.3s;
+  margin-top:auto;
+}
+
+.btn:hover{
+  background:#c92f3b;
 }
 
 </style>
@@ -157,7 +179,7 @@ h1{
 <body>
 
 <header>
-  <nav class="nav-left">
+  <nav>
     <a href="index.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path d="M3 10L12 3l9 7"></path>
@@ -167,7 +189,7 @@ h1{
     </a>
   </nav>
 
-  <nav class="nav-right">
+  <nav>
     <a href="#" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="9" cy="20" r="1"></circle>
@@ -179,54 +201,16 @@ h1{
   </nav>
 </header>
 
-<h1>MEIO-FIO DE JARDIM</h1>
+<h1>REVESTIMENTO DE PAREDE</h1>
 
-<div class="grid">
-
-<div class="card">
-<img src="img/meiofio/arredondado.jpg">
-<h3>Meio-Fio Arredondado 80x25x8cm</h3>
-
-<div class="contador">
-<button>−</button>
-<span class="qtd">1</span>
-<button>+</button>
-</div>
-
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/meiofio/cordao.jpg">
-<h3>Meio-Fio Cordão 80x25x4cm</h3>
-
-<div class="contador">
-<button>−</button>
-<span class="qtd">1</span>
-<button>+</button>
-</div>
-
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/meiofio/ondulado.jpg">
-<h3>Guia de Jardim Ondulado 80x20x4cm</h3>
-
-<div class="contador">
-<button>−</button>
-<span class="qtd">1</span>
-<button>+</button>
-</div>
-
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-</div>
+<div class="grid" id="gridProdutos"></div>
 
 <script>
 
-/* ===== CONTADOR COM SEGURAR ===== */
+const grid = document.getElementById("gridProdutos");
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+/* ===== CONTADOR PADRÃO (CLIQUE CONTÍNUO) ===== */
 
 function alterarQtd(botao, valor){
   const qtdSpan = botao.parentElement.querySelector('.qtd');
@@ -247,21 +231,7 @@ function parar(botao){
   clearInterval(botao._interval);
 }
 
-/* APLICA EM TODOS */
-document.querySelectorAll('.contador button').forEach(btn=>{
-  const valor = btn.innerText.trim() === '+' ? 1 : -1;
-
-  btn.onmousedown = () => segurar(btn, valor);
-  btn.onmouseup = () => parar(btn);
-  btn.onmouseleave = () => parar(btn);
-
-  btn.ontouchstart = () => segurar(btn, valor);
-  btn.ontouchend = () => parar(btn);
-});
-
 /* ===== CARRINHO ===== */
-
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
@@ -272,13 +242,59 @@ function adicionarCarrinho(botao){
 
   if(existente){
     existente.qtd += qtd;
-  }else{
-    carrinho.push({nome, qtd});
+  } else {
+    carrinho.push({ nome, qtd });
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert('Produto adicionado');
+  alert("Produto adicionado!");
 }
+
+/* ===== CRIAR PRODUTOS ===== */
+
+function criarProduto(nome){
+  grid.innerHTML += `
+  <div class="card">
+
+    <div class="imagem-placeholder">
+      Imagem será adicionada aqui
+    </div>
+
+    <h3>${nome}</h3>
+
+    <div class="contador">
+      <button>−</button>
+      <span class="qtd">1</span>
+      <button>+</button>
+    </div>
+
+    <button class="btn" onclick="adicionarCarrinho(this)">
+      Adicionar
+    </button>
+
+  </div>`;
+}
+
+/* PRODUTOS */
+criarProduto("Placa 3D 30x30cm");
+criarProduto("Pedra lascada 50x20cm");
+
+/* ===== ATIVAR SEGURAR EM TODOS ===== */
+
+document.addEventListener("DOMContentLoaded", ()=>{
+
+  document.querySelectorAll('.contador button').forEach(btn=>{
+    const valor = btn.innerText.trim() === '+' ? 1 : -1;
+
+    btn.onmousedown = () => segurar(btn, valor);
+    btn.onmouseup = () => parar(btn);
+    btn.onmouseleave = () => parar(btn);
+
+    btn.ontouchstart = () => segurar(btn, valor);
+    btn.ontouchend = () => parar(btn);
+  });
+
+});
 
 </script>
 
