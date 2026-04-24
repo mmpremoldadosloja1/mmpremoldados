@@ -16,6 +16,11 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
+/* 🔥 REMOVE ESPAÇO DO HEADER */
+body.sem-header{
+  padding-top:0 !important;
+}
+
 /* HEADER */
 header{
   width:100%;
@@ -27,12 +32,6 @@ header{
   top:0;
   z-index:999;
   background:#fff;
-  transition:0.3s;
-}
-
-/* 🔥 AGORA SOME DE VERDADE */
-header.hidden{
-  display:none;
 }
 
 /* NAV */
@@ -85,7 +84,7 @@ nav{
   box-shadow:-5px 0 20px rgba(0,0,0,0.2);
   padding:20px;
   transition:0.3s;
-  z-index:2000; /* 🔥 acima de tudo */
+  z-index:2000;
   display:flex;
   flex-direction:column;
 }
@@ -133,7 +132,7 @@ nav{
   opacity:0;
   pointer-events:none;
   transition:0.3s;
-  z-index:1500; /* 🔥 maior que header */
+  z-index:1500;
 }
 
 .overlay.active{
@@ -271,6 +270,7 @@ Carrinho
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
+/* CONTADOR */
 function alterarQtd(btn, valor){
   const input = btn.parentElement.querySelector('.qtd-input');
   let qtd = parseInt(input.value) || 1;
@@ -278,6 +278,7 @@ function alterarQtd(btn, valor){
   input.value = qtd;
 }
 
+/* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -295,13 +296,13 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado");
 }
 
-/* 🔥 ABRIR CARRINHO */
+/* 🔥 ABRIR */
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
 
-  /* 🔥 AGORA SOME DE VERDADE */
-  document.getElementById("header").classList.add("hidden");
+  document.getElementById("header").style.display = "none";
+  document.body.classList.add("sem-header");
 
   renderizar();
 }
@@ -311,9 +312,11 @@ function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
 
-  document.getElementById("header").classList.remove("hidden");
+  document.getElementById("header").style.display = "flex";
+  document.body.classList.remove("sem-header");
 }
 
+/* RENDER */
 function renderizar(){
   const lista = document.getElementById("lista");
   lista.innerHTML = "";
@@ -333,12 +336,14 @@ function renderizar(){
   });
 }
 
+/* REMOVER */
 function remover(i){
   carrinho.splice(i,1);
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
   renderizar();
 }
 
+/* WHATS */
 function enviarWhatsApp(){
   let msg = "Pedido:%0A";
   carrinho.forEach(item=>{
@@ -359,11 +364,13 @@ function criar(nome){
 
     <div class="contador">
       <button onclick="alterarQtd(this,-1)">−</button>
-      <input type="number" class="qtd-input" value="1">
+      <input type="number" class="qtd-input" value="1" min="1">
       <button onclick="alterarQtd(this,1)">+</button>
     </div>
 
-    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+    <button class="btn" onclick="adicionarCarrinho(this)">
+      Adicionar
+    </button>
   `;
 
   grid.appendChild(card);
@@ -376,6 +383,7 @@ function titulo(texto){
   grid.appendChild(div);
 }
 
+/* LISTA COMPLETA */
 titulo("Bloco de vedação");
 [
 "Bloco c/fundo 09x19x39cm",
