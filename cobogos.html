@@ -16,7 +16,6 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER TRANSPARENTE */
 header{
   width:100%;
   display:flex;
@@ -26,7 +25,12 @@ header{
   position:fixed;
   top:0;
   z-index:999;
-  background:transparent; /* 👈 AGORA TRANSPARENTE */
+  background:#fff;
+  transition:0.3s;
+}
+
+header.transparente{
+  background:transparent;
 }
 
 /* NAV */
@@ -54,7 +58,7 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
-  cursor:pointer;
+  transition:0.3s;
 }
 
 .nav-item svg{
@@ -62,6 +66,11 @@ nav{
   height:24px;
   margin-bottom:3px;
   stroke:currentColor;
+}
+
+.nav-item:hover{
+  color:#e63946;
+  transform:scale(1.05);
 }
 
 /* ===== CARRINHO ===== */
@@ -119,7 +128,7 @@ nav{
   position:fixed;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.4);
   opacity:0;
   pointer-events:none;
   transition:0.3s;
@@ -132,6 +141,7 @@ nav{
 }
 
 /* ===== SEU CSS ORIGINAL ===== */
+
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -189,6 +199,7 @@ h2{
 .contador button{
   padding:5px 10px;
   font-size:16px;
+  cursor:pointer;
   border:none;
   border-radius:5px;
   background:#eee;
@@ -213,12 +224,17 @@ h2{
   cursor:pointer;
 }
 
+.btn:hover{
+  background:#c92f3b;
+  transform:scale(1.05);
+}
+
 </style>
 </head>
 
 <body>
 
-<header>
+<header id="header">
   <nav class="nav-left">
     <a href="index.html" class="nav-item">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
@@ -230,9 +246,14 @@ h2{
   </nav>
 
   <nav class="nav-right">
-    <div class="nav-item" onclick="abrirCarrinho()">
-      🛒 Carrinho
-    </div>
+    <a href="#" class="nav-item" onclick="abrirCarrinho(); return false;">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+      Carrinho
+    </a>
   </nav>
 </header>
 
@@ -247,21 +268,208 @@ h2{
 
 <h1>COBOGÓS</h1>
 
-<!-- 🔥 TODOS OS SEUS PRODUTOS CONTINUAM AQUI (NÃO REMOVA NADA) -->
+<h2>Cobogós 40x40</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-16-furos-40.jpg">
+<h3>16 Furos 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-4-pontas-40.jpg">
+<h3>4 Pontas 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-anti-chuva-40.jpg">
+<h3>Anti-Chuva 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-arabe-40.jpg">
+<h3>Árabe 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-flor-40.jpg">
+<h3>Flor 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-taco-chines-40.jpg">
+<h3>Taco Chinês 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+</div>
+
+<h2>Cobogós 30x30</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-estrela-30.jpg">
+<h3>Estrela 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-estrela-dos-ventos-30.jpg">
+<h3>Estrela dos Ventos 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-fenestra-30.jpg">
+<h3>Fenestra 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-petala-30.jpg">
+<h3>Pétala 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-quadrado-cruz-30.jpg">
+<h3>Quadrado Cruz 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-xis-30.jpg">
+<h3>Xis 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+</div>
+
+<h2>Cobogós 24x24</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-4-furos-24.jpg">
+<h3>4 Furos 24x24</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+</div>
 
 <script>
 
+function aumentar(btn){
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = parseInt(input.value) + 1;
+}
+
+function diminuir(btn){
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = Math.max(1, parseInt(input.value) - 1);
+}
+
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function adicionarCarrinho(botao){
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const qtd = parseInt(card.querySelector('.qtd').value);
+
+  const existente = carrinho.find(item => item.nome === nome);
+
+  if(existente){
+    existente.qtd += qtd;
+  }else{
+    carrinho.push({nome, qtd});
+  }
+
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert('Produto adicionado');
+}
+
+/* NOVO CARRINHO */
 
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
+  document.getElementById("header").classList.add("transparente");
   renderizar();
 }
 
 function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
+  document.getElementById("header").classList.remove("transparente");
 }
 
 function renderizar(){
@@ -290,45 +498,12 @@ function remover(i){
 }
 
 function enviarWhatsApp(){
-  if(carrinho.length === 0){
-    alert("Carrinho vazio");
-    return;
-  }
-
   let msg = "Pedido:%0A";
   carrinho.forEach(item=>{
     msg += `${item.nome} - ${item.qtd}%0A`;
   });
 
   window.open(`https://wa.me/5561999385680?text=${msg}`);
-}
-
-/* FUNÇÕES ORIGINAIS */
-function aumentar(btn){
-  const input = btn.parentElement.querySelector('.qtd');
-  input.value++;
-}
-
-function diminuir(btn){
-  const input = btn.parentElement.querySelector('.qtd');
-  input.value = Math.max(1, input.value - 1);
-}
-
-function adicionarCarrinho(botao){
-  const card = botao.closest('.card');
-  const nome = card.querySelector('h3').innerText;
-  const qtd = parseInt(card.querySelector('.qtd').value);
-
-  const existente = carrinho.find(item => item.nome === nome);
-
-  if(existente){
-    existente.qtd += qtd;
-  }else{
-    carrinho.push({nome, qtd});
-  }
-
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert('Produto adicionado');
 }
 
 </script>
