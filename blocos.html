@@ -27,8 +27,16 @@ header{
   top:0;
   z-index:999;
   background:#fff;
+  transition:0.3s;
 }
 
+/* 🔥 ESCONDE HEADER */
+header.sumir{
+  opacity:0;
+  pointer-events:none;
+}
+
+/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -45,7 +53,6 @@ nav{
   margin-right:20px;
 }
 
-/* NAV */
 .nav-item{
   display:flex;
   flex-direction:column;
@@ -68,7 +75,74 @@ nav{
   transform:scale(1.05);
 }
 
-/* TITULOS */
+/* ===== CARRINHO ===== */
+.carrinho-lateral{
+  position:fixed;
+  top:0;
+  right:-350px;
+  width:320px;
+  height:100%;
+  background:#fff;
+  box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+  padding:20px;
+  transition:0.3s;
+  z-index:1001;
+  display:flex;
+  flex-direction:column;
+}
+
+.carrinho-lateral.active{
+  right:0;
+}
+
+.lista-carrinho{
+  flex:1;
+  overflow-y:auto;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.remover{
+  background:#e63946;
+  color:#fff;
+  border:none;
+  padding:3px 8px;
+  border-radius:4px;
+  cursor:pointer;
+}
+
+.btn-finalizar{
+  padding:15px;
+  background:#25D366;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+  z-index:1000;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* RESTO ORIGINAL */
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -84,7 +158,6 @@ h2{
   padding-left:20px;
 }
 
-/* GRID MOBILE (PADRÃO) */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
@@ -92,7 +165,6 @@ h2{
   padding:0 20px 40px;
 }
 
-/* DESKTOP (MAIOR E CENTRALIZADO) */
 @media (min-width:1000px){
   .grid{
     grid-template-columns:repeat(4, 230px);
@@ -111,7 +183,6 @@ h2{
   }
 }
 
-/* CARD */
 .card{
   background:#fff;
   border-radius:12px;
@@ -154,7 +225,6 @@ h2{
   min-height:40px;
 }
 
-/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
@@ -181,7 +251,6 @@ h2{
   font-weight:bold;
 }
 
-/* BOTÃO */
 .btn{
   width:100%;
   padding:10px 0;
@@ -191,7 +260,6 @@ h2{
   border:none;
   border-radius:8px;
   cursor:pointer;
-  transition:0.3s;
 }
 
 .btn:hover{
@@ -204,7 +272,7 @@ h2{
 
 <body>
 
-<header>
+<header id="header">
 <nav class="nav-left">
 <a href="index.html" class="nav-item">
 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -216,7 +284,7 @@ Início
 </nav>
 
 <nav class="nav-right">
-<a href="#" class="nav-item">
+<a href="#" class="nav-item" onclick="abrirCarrinho(); return false;">
 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
 <circle cx="9" cy="20" r="1"></circle>
 <circle cx="18" cy="20" r="1"></circle>
@@ -226,6 +294,15 @@ Carrinho
 </a>
 </nav>
 </header>
+
+<!-- CARRINHO -->
+<div class="carrinho-lateral" id="carrinho">
+  <h3>Seu Carrinho</h3>
+  <div class="lista-carrinho" id="lista"></div>
+  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
+</div>
+
+<div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
 
 <h1>BLOCOS E CANALETAS</h1>
 
@@ -316,6 +393,54 @@ titulo("Bloco para fechamento de coluna isolada");
 "Quadrado de pilar de 19x19x19cm",
 "Quadrado de pilar de 25x25x19cm"
 ].forEach(criar);
+
+/* ABRIR / FECHAR */
+function abrirCarrinho(){
+  document.getElementById("carrinho").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+  document.getElementById("header").classList.add("sumir");
+  renderizar();
+}
+
+function fecharCarrinho(){
+  document.getElementById("carrinho").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+  document.getElementById("header").classList.remove("sumir");
+}
+
+function renderizar(){
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  if(carrinho.length === 0){
+    lista.innerHTML = "Carrinho vazio";
+    return;
+  }
+
+  carrinho.forEach((item, i)=>{
+    lista.innerHTML += `
+      <div class="item">
+        ${item.nome} (x${item.qtd})
+        <button class="remover" onclick="remover(${i})">X</button>
+      </div>
+    `;
+  });
+}
+
+function remover(i){
+  carrinho.splice(i,1);
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  renderizar();
+}
+
+function enviarWhatsApp(){
+  let msg = "Pedido:%0A";
+  carrinho.forEach(item=>{
+    msg += `${item.nome} - ${item.qtd}%0A`;
+  });
+
+  window.open(`https://wa.me/5561999385680?text=${msg}`);
+}
 
 </script>
 
