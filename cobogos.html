@@ -12,7 +12,7 @@
 body{
   background:#fff;
   color:#000;
-  padding-top:110px; /* aumentei espaço do topo */
+  padding-top:90px;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -20,12 +20,12 @@ body{
 header{
   width:100%;
   display:flex;
-  justify-content:space-between;
+  justify-content:flex-end; /* só carrinho agora */
   align-items:center;
   padding:15px 25px;
   position:fixed;
   top:0;
-  z-index:1000; /* agora ele fica acima */
+  z-index:999;
   background:#fff;
 }
 
@@ -33,12 +33,6 @@ header{
 nav{
   display:flex;
   gap:25px;
-  align-items:center;
-}
-
-.nav-left, .nav-right{
-  display:flex;
-  gap:20px;
   align-items:center;
 }
 
@@ -69,12 +63,12 @@ nav{
   transform:scale(1.05);
 }
 
-/* BOTÃO MENU (AGORA ABAIXO DO HEADER) */
+/* BOTÃO MENU */
 .btn-menu{
   position:fixed;
-  top:85px; /* 👈 desce ele */
+  top:20px;
   left:20px;
-  z-index:999; /* abaixo do header */
+  z-index:1000;
   padding:10px 15px;
   background:#e63946;
   color:#fff;
@@ -93,7 +87,7 @@ nav{
   height:100%;
   backdrop-filter:blur(12px);
   background:rgba(0,0,0,0.88);
-  padding:110px 20px; /* ajustado pro header */
+  padding:90px 20px;
   transition:0.4s ease;
   z-index:998;
 }
@@ -236,16 +230,21 @@ h2{
 <button class="btn-menu" onclick="abrirMenu()">☰ Produtos</button>
 
 <header>
-  <nav class="nav-left">
-    <a href="index.html" class="nav-item">Início</a>
-  </nav>
-
   <nav class="nav-right">
-    <a href="#" class="nav-item">Carrinho</a>
+    <a href="#" class="nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+      Carrinho
+    </a>
   </nav>
 </header>
 
+<!-- MENU -->
 <div class="menu-categorias" id="menuCategorias">
+  <a href="index.html">🏠 Início</a>
   <a href="blocos.html">Blocos e Canaletas</a>
   <a href="manilhas.html">Manilhas</a>
   <a href="lajes.html">Lajes</a>
@@ -259,7 +258,10 @@ h2{
 
 <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
 
+<!-- TODO seu conteúdo continua EXATAMENTE igual aqui -->
+
 <script>
+
 const menu = document.getElementById("menuCategorias");
 const overlay = document.getElementById("overlay");
 
@@ -272,6 +274,7 @@ function fecharMenu(){
   menu.classList.remove("active");
   overlay.classList.remove("active");
 }
+
 </script>
 
 </body>
