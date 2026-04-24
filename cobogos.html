@@ -1,3 +1,5 @@
+eu vou mandar os codigos e voce me devolve já atualizado sem modificar o que já funciona
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -16,7 +18,6 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -29,6 +30,7 @@ header{
   background:#fff;
 }
 
+/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -56,6 +58,7 @@ nav{
   transition:0.3s;
 }
 
+/* ÍCONE */
 .nav-item svg{
   width:24px;
   height:24px;
@@ -63,6 +66,7 @@ nav{
   stroke:currentColor;
 }
 
+/* 🔥 HOVER ADICIONADO */
 .nav-item:hover{
   color:#e63946;
   transform:scale(1.05);
@@ -91,7 +95,6 @@ h2{
   padding:0 20px 40px 20px;
 }
 
-/* CARD (mantido) */
 .card{
   background:#fff;
   border-radius:12px;
@@ -103,44 +106,19 @@ h2{
   justify-content:space-between;
 }
 
-/* ===== GALERIA (NOVA SEM ALTERAR PRODUTOS) ===== */
-.gallery{
-  display:flex;
-  gap:8px;
-  align-items:flex-start;
-}
-
-.main-img{
+.card img{
   width:100%;
   height:110px;
   object-fit:contain;
-  cursor:pointer;
-  flex:1;
 }
 
-.thumbs{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-}
-
-.thumbs img{
-  width:28px;
-  height:28px;
-  object-fit:cover;
-  border-radius:4px;
-  cursor:pointer;
-  border:1px solid #ddd;
-}
-
-/* TEXTO */
 .card h3{
   margin:10px 0;
   font-size:14px;
   min-height:40px;
 }
 
-/* CONTADOR (NÃO MEXIDO) */
+/* CONTADOR NOVO */
 .contador{
   display:flex;
   justify-content:center;
@@ -184,34 +162,6 @@ h2{
   transform:scale(1.05);
 }
 
-/* MODAL */
-.modal{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.9);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-
-.modal img{
-  max-width:90%;
-  max-height:90%;
-}
-
-.modal span{
-  position:absolute;
-  top:20px;
-  right:30px;
-  font-size:30px;
-  color:#fff;
-  cursor:pointer;
-}
-
 </style>
 </head>
 
@@ -245,42 +195,163 @@ h2{
 <h2>Cobogós 40x40</h2>
 <div class="grid">
 
-<!-- 1 -->
 <div class="card">
-  <div class="gallery">
-    <img class="main-img" src="img/cobogo/cobogo-16-furos-40.jpg" onclick="abrirModal(this)">
-    <div class="thumbs">
-      <img src="img/cobogo/cobogo-16-furos-40.jpg" onclick="trocar(this)">
-      <img src="img/cobogo/cobogo-16-furos-40.jpg" onclick="trocar(this)">
-      <img src="img/cobogo/cobogo-16-furos-40.jpg" onclick="trocar(this)">
-    </div>
-  </div>
-
-  <h3>16 Furos 40x40</h3>
-
-  <div class="contador">
-    <button onclick="diminuir(this)">−</button>
-    <input type="number" class="qtd" value="1" min="1">
-    <button onclick="aumentar(this)">+</button>
-  </div>
-
-  <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+<img src="img/cobogo/cobogo-16-furos-40.jpg">
+<h3>16 Furos 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
 </div>
 
-<!-- TODOS OS OUTROS PRODUTOS CONTINUAM IGUAIS -->
-<!-- NÃO FOI REMOVIDO NADA -->
+<div class="card">
+<img src="img/cobogo/cobogo-4-pontas-40.jpg">
+<h3>4 Pontas 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-anti-chuva-40.jpg">
+<h3>Anti-Chuva 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-arabe-40.jpg">
+<h3>Árabe 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-flor-40.jpg">
+<h3>Flor 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-taco-chines-40.jpg">
+<h3>Taco Chinês 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
 
 </div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <span onclick="fecharModal()">×</span>
-  <img id="modalImg">
+<h2>Cobogós 30x30</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-estrela-30.jpg">
+<h3>Estrela 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-estrela-dos-ventos-30.jpg">
+<h3>Estrela dos Ventos 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-fenestra-30.jpg">
+<h3>Fenestra 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-petala-30.jpg">
+<h3>Pétala 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-quadrado-cruz-30.jpg">
+<h3>Quadrado Cruz 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-xis-30.jpg">
+<h3>Xis 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+</div>
+
+<h2>Cobogós 24x24</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-4-furos-24.jpg">
+<h3>4 Furos 24x24</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
 </div>
 
 <script>
 
-/* CONTADOR */
 function aumentar(btn){
   const input = btn.parentElement.querySelector('.qtd');
   input.value = parseInt(input.value) + 1;
@@ -291,7 +362,6 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-/* CARRINHO (INALTERADO) */
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function adicionarCarrinho(botao){
@@ -303,26 +373,12 @@ function adicionarCarrinho(botao){
 
   if(existente){
     existente.qtd += qtd;
-  } else {
+  }else{
     carrinho.push({nome, qtd});
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   alert('Produto adicionado');
-}
-
-/* GALERIA */
-function trocar(img){
-  img.closest('.gallery').querySelector('.main-img').src = img.src;
-}
-
-function abrirModal(img){
-  document.getElementById("modal").style.display = "flex";
-  document.getElementById("modalImg").src = img.src;
-}
-
-function fecharModal(){
-  document.getElementById("modal").style.display = "none";
 }
 
 </script>
