@@ -31,10 +31,10 @@ header{
   transition:0.3s;
 }
 
-/* 🔥 IGUAL AOS OUTROS (CORRETO) */
-header.escondido{
-  z-index:-1;
+/* 🔥 ESCONDER HEADER TOTAL */
+header.hide{
   opacity:0;
+  pointer-events:none;
 }
 
 /* NAV */
@@ -173,6 +173,7 @@ h2{
   justify-content:center;
 }
 
+/* DESKTOP */
 @media (min-width:1000px){
   .grid{
     grid-template-columns:repeat(4, 230px);
@@ -271,6 +272,11 @@ select{
   cursor:pointer;
 }
 
+.btn:hover{
+  background:#c92f3b;
+  transform:scale(1.05);
+}
+
 </style>
 </head>
 
@@ -359,18 +365,18 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado ao carrinho!");
 }
 
-/* 🔥 IGUAL AOS OUTROS */
+/* CARRINHO LATERAL */
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-  document.getElementById("header").classList.add("escondido");
+  document.getElementById("header").classList.add("hide");
   renderizar();
 }
 
 function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-  document.getElementById("header").classList.remove("escondido");
+  document.getElementById("header").classList.remove("hide");
 }
 
 function renderizar(){
@@ -408,20 +414,6 @@ function enviarWhatsApp(){
 }
 
 /* PRODUTOS */
-titulo("Manilhas");
-
-[
-"Manilha 90cm x 50cm",
-"Manilha 1,10m x 50cm"
-].forEach(nome => criarProduto(nome));
-
-titulo("Tampas de Manilha");
-
-criarProduto("Tampa 90cm", ["Aberta", "Fechada"]);
-criarProduto("Tampa 1m", ["Aberta", "Fechada"]);
-criarProduto("Tampa 1,10cm", ["Aberta", "Fechada"]);
-criarProduto("Tampa 1,20cm", ["Aberta", "Fechada"]);
-
 function criarProduto(nome, opcoes = null){
   grid.innerHTML += `
   <div class="card">
@@ -450,6 +442,20 @@ function criarProduto(nome, opcoes = null){
 
   </div>`;
 }
+
+titulo("Manilhas");
+
+[
+"Manilha 90cm x 50cm",
+"Manilha 1,10m x 50cm"
+].forEach(nome => criarProduto(nome));
+
+titulo("Tampas de Manilha");
+
+criarProduto("Tampa 90cm", ["Aberta", "Fechada"]);
+criarProduto("Tampa 1m", ["Aberta", "Fechada"]);
+criarProduto("Tampa 1,10cm", ["Aberta", "Fechada"]);
+criarProduto("Tampa 1,20cm", ["Aberta", "Fechada"]);
 
 </script>
 
