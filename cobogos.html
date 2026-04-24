@@ -29,8 +29,8 @@ header{
   transition:0.3s;
 }
 
-/* 🔥 HEADER SOME TOTALMENTE */
-header.oculto{
+/* ✅ HEADER SOME DE VERDADE */
+header.escondido{
   opacity:0;
   pointer-events:none;
 }
@@ -142,7 +142,7 @@ nav{
   pointer-events:auto;
 }
 
-/* ===== PRODUTOS ===== */
+/* ===== SEU CSS ORIGINAL ===== */
 
 h1{
   text-align:center;
@@ -259,6 +259,7 @@ h2{
   </nav>
 </header>
 
+<!-- CARRINHO -->
 <div class="carrinho-lateral" id="carrinho">
   <h3>Seu Carrinho</h3>
   <div class="lista-carrinho" id="lista"></div>
@@ -461,14 +462,14 @@ function adicionarCarrinho(botao){
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-  document.getElementById("header").classList.add("oculto");
+  document.getElementById("header").classList.add("escondido"); // ✅ AQUI
   renderizar();
 }
 
 function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-  document.getElementById("header").classList.remove("oculto");
+  document.getElementById("header").classList.remove("escondido"); // ✅ AQUI
 }
 
 function renderizar(){
