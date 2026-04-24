@@ -29,10 +29,10 @@ header{
   transition:0.3s;
 }
 
-header.transparente{
-  background:transparent !important;
-  box-shadow:none !important;
-  border:none !important;
+/* 🔥 HEADER SOME TOTALMENTE */
+header.oculto{
+  opacity:0;
+  pointer-events:none;
 }
 
 /* NAV */
@@ -461,14 +461,14 @@ function adicionarCarrinho(botao){
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-  document.getElementById("header").classList.add("transparente");
+  document.getElementById("header").classList.add("oculto");
   renderizar();
 }
 
 function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-  document.getElementById("header").classList.remove("transparente");
+  document.getElementById("header").classList.remove("oculto");
 }
 
 function renderizar(){
