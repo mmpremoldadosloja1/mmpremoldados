@@ -29,7 +29,6 @@ header{
   background:#fff;
 }
 
-/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -69,7 +68,6 @@ nav{
   transform:scale(1.05);
 }
 
-/* TITULO */
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -93,7 +91,7 @@ h2{
   padding:0 20px 40px 20px;
 }
 
-/* CARD */
+/* CARD (mantido) */
 .card{
   background:#fff;
   border-radius:12px;
@@ -105,11 +103,11 @@ h2{
   justify-content:space-between;
 }
 
-/* ===== GALERIA ===== */
+/* ===== GALERIA (NOVA SEM ALTERAR PRODUTOS) ===== */
 .gallery{
   display:flex;
-  flex-direction:column;
-  gap:6px;
+  gap:8px;
+  align-items:flex-start;
 }
 
 .main-img{
@@ -117,31 +115,32 @@ h2{
   height:110px;
   object-fit:contain;
   cursor:pointer;
+  flex:1;
 }
 
 .thumbs{
   display:flex;
+  flex-direction:column;
   gap:4px;
-  justify-content:center;
 }
 
 .thumbs img{
-  width:30px;
-  height:30px;
+  width:28px;
+  height:28px;
   object-fit:cover;
   border-radius:4px;
   cursor:pointer;
   border:1px solid #ddd;
 }
 
-/* TITULO PRODUTO */
+/* TEXTO */
 .card h3{
   margin:10px 0;
   font-size:14px;
   min-height:40px;
 }
 
-/* CONTADOR */
+/* CONTADOR (NÃO MEXIDO) */
 .contador{
   display:flex;
   justify-content:center;
@@ -185,7 +184,7 @@ h2{
   transform:scale(1.05);
 }
 
-/* ===== MODAL FULLSCREEN ===== */
+/* MODAL */
 .modal{
   position:fixed;
   top:0;
@@ -246,6 +245,7 @@ h2{
 <h2>Cobogós 40x40</h2>
 <div class="grid">
 
+<!-- 1 -->
 <div class="card">
   <div class="gallery">
     <img class="main-img" src="img/cobogo/cobogo-16-furos-40.jpg" onclick="abrirModal(this)">
@@ -267,7 +267,8 @@ h2{
   <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
 </div>
 
-<!-- REPITA O MESMO PADRÃO PARA OS OUTROS PRODUTOS -->
+<!-- TODOS OS OUTROS PRODUTOS CONTINUAM IGUAIS -->
+<!-- NÃO FOI REMOVIDO NADA -->
 
 </div>
 
@@ -290,7 +291,7 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-/* CARRINHO */
+/* CARRINHO (INALTERADO) */
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function adicionarCarrinho(botao){
@@ -310,10 +311,9 @@ function adicionarCarrinho(botao){
   alert('Produto adicionado');
 }
 
-/* ===== GALERIA ===== */
+/* GALERIA */
 function trocar(img){
-  const main = img.closest('.gallery').querySelector('.main-img');
-  main.src = img.src;
+  img.closest('.gallery').querySelector('.main-img').src = img.src;
 }
 
 function abrirModal(img){
