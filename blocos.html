@@ -27,13 +27,15 @@ header{
   top:0;
   z-index:999;
   background:#fff;
+  transition:0.3s;
 }
 
-/* 🔥 SOME COMPLETAMENTE */
-header.oculto{
+/* 🔥 AGORA SOME DE VERDADE */
+header.hidden{
   display:none;
 }
 
+/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -83,7 +85,7 @@ nav{
   box-shadow:-5px 0 20px rgba(0,0,0,0.2);
   padding:20px;
   transition:0.3s;
-  z-index:1001;
+  z-index:2000; /* 🔥 acima de tudo */
   display:flex;
   flex-direction:column;
 }
@@ -131,7 +133,7 @@ nav{
   opacity:0;
   pointer-events:none;
   transition:0.3s;
-  z-index:1000;
+  z-index:1500; /* 🔥 maior que header */
 }
 
 .overlay.active{
@@ -163,16 +165,6 @@ h2{
   padding:0 20px 40px;
 }
 
-@media (min-width:1000px){
-  .grid{
-    grid-template-columns:repeat(4, 230px);
-    justify-content:center;
-    max-width:1200px;
-    margin:0 auto;
-    gap:25px;
-  }
-}
-
 /* CARD */
 .card{
   background:#fff;
@@ -180,8 +172,6 @@ h2{
   padding:15px;
   text-align:center;
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
-  transition:0.3s;
-
   display:flex;
   flex-direction:column;
   justify-content:space-between;
@@ -209,7 +199,6 @@ h2{
 
 .contador button{
   padding:5px 10px;
-  font-size:16px;
   cursor:pointer;
   border:none;
   border-radius:5px;
@@ -222,7 +211,6 @@ h2{
   text-align:center;
   border:1px solid #ccc;
   border-radius:6px;
-  font-weight:bold;
 }
 
 /* BOTÃO */
@@ -235,10 +223,6 @@ h2{
   border:none;
   border-radius:8px;
   cursor:pointer;
-}
-
-.btn:hover{
-  background:#c92f3b;
 }
 
 </style>
@@ -287,7 +271,6 @@ Carrinho
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* CONTADOR */
 function alterarQtd(btn, valor){
   const input = btn.parentElement.querySelector('.qtd-input');
   let qtd = parseInt(input.value) || 1;
@@ -295,7 +278,6 @@ function alterarQtd(btn, valor){
   input.value = qtd;
 }
 
-/* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -313,74 +295,23 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado");
 }
 
-/* CRIAR CARD */
-function criar(nome){
-  const card = document.createElement("div");
-  card.className = "card";
-
-  card.innerHTML = `
-    <img src="img/blocos/padrao.jpg">
-    <h3>${nome}</h3>
-
-    <div class="contador">
-      <button onclick="alterarQtd(this,-1)">−</button>
-      <input type="number" class="qtd-input" value="1" min="1">
-      <button onclick="alterarQtd(this,1)">+</button>
-    </div>
-
-    <button class="btn" onclick="adicionarCarrinho(this)">
-      Adicionar
-    </button>
-  `;
-
-  grid.appendChild(card);
-}
-
-function titulo(texto){
-  const div = document.createElement("div");
-  div.style.gridColumn = "1/-1";
-  div.innerHTML = `<h2>${texto}</h2>`;
-  grid.appendChild(div);
-}
-
-/* PRODUTOS (NÃO ALTEREI NADA) */
-titulo("Bloco de vedação");
-[
-"Bloco c/fundo 09x19x39cm",
-"Bloco vazado 14x19x39cm"
-].forEach(criar);
-
-titulo("Canaleta de vedação");
-[
-"Canaleta de 09x19x39cm",
-"Canaleta de 14x19x39cm"
-].forEach(criar);
-
-titulo("Bloco para fechamento de coluna C/segmento");
-[
-"Bloco de pilar 09x19x39cm",
-"Bloco de pilar 14x19x39cm"
-].forEach(criar);
-
-titulo("Bloco para fechamento de coluna isolada");
-[
-"Quadrado de pilar de 19x19x19cm",
-"Quadrado de pilar de 25x25x19cm"
-].forEach(criar);
-
-/* 🔥 CARRINHO FUNCIONANDO */
-
+/* 🔥 ABRIR CARRINHO */
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-  document.getElementById("header").classList.add("oculto"); // SUME DE VERDADE
+
+  /* 🔥 AGORA SOME DE VERDADE */
+  document.getElementById("header").classList.add("hidden");
+
   renderizar();
 }
 
+/* 🔥 FECHAR */
 function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-  document.getElementById("header").classList.remove("oculto");
+
+  document.getElementById("header").classList.remove("hidden");
 }
 
 function renderizar(){
@@ -416,6 +347,58 @@ function enviarWhatsApp(){
 
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
+
+/* PRODUTOS */
+function criar(nome){
+  const card = document.createElement("div");
+  card.className = "card";
+
+  card.innerHTML = `
+    <img src="img/blocos/padrao.jpg">
+    <h3>${nome}</h3>
+
+    <div class="contador">
+      <button onclick="alterarQtd(this,-1)">−</button>
+      <input type="number" class="qtd-input" value="1">
+      <button onclick="alterarQtd(this,1)">+</button>
+    </div>
+
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+  `;
+
+  grid.appendChild(card);
+}
+
+function titulo(texto){
+  const div = document.createElement("div");
+  div.style.gridColumn = "1/-1";
+  div.innerHTML = `<h2>${texto}</h2>`;
+  grid.appendChild(div);
+}
+
+titulo("Bloco de vedação");
+[
+"Bloco c/fundo 09x19x39cm",
+"Bloco vazado 14x19x39cm"
+].forEach(criar);
+
+titulo("Canaleta de vedação");
+[
+"Canaleta de 09x19x39cm",
+"Canaleta de 14x19x39cm"
+].forEach(criar);
+
+titulo("Bloco para fechamento de coluna C/segmento");
+[
+"Bloco de pilar 09x19x39cm",
+"Bloco de pilar 14x19x39cm"
+].forEach(criar);
+
+titulo("Bloco para fechamento de coluna isolada");
+[
+"Quadrado de pilar de 19x19x19cm",
+"Quadrado de pilar de 25x25x19cm"
+].forEach(criar);
 
 </script>
 
