@@ -30,6 +30,12 @@ header{
   background:#fff;
 }
 
+/* 🔥 ESCONDER HEADER */
+header.escondido{
+  display:none;
+}
+
+/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -69,6 +75,73 @@ nav{
   transform:scale(1.05);
 }
 
+/* ===== CARRINHO ===== */
+.carrinho-lateral{
+  position:fixed;
+  top:0;
+  right:-350px;
+  width:320px;
+  height:100%;
+  background:#fff;
+  box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+  padding:20px;
+  transition:0.3s;
+  z-index:1001;
+  display:flex;
+  flex-direction:column;
+}
+
+.carrinho-lateral.active{
+  right:0;
+}
+
+.lista-carrinho{
+  flex:1;
+  overflow-y:auto;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.remover{
+  background:#e63946;
+  color:#fff;
+  border:none;
+  padding:3px 8px;
+  border-radius:4px;
+  cursor:pointer;
+}
+
+.btn-finalizar{
+  padding:15px;
+  background:#25D366;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+  z-index:1000;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
 /* TITULO */
 h1{
   text-align:center;
@@ -86,19 +159,17 @@ h2{
   padding-left:20px;
 }
 
-/* GRID MOBILE (PADRÃO) */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
   gap:20px;
   padding:0 20px 40px;
-
   max-width:1100px;
   margin:0 auto;
   justify-content:center;
 }
 
-/* DESKTOP (MAIOR + CENTRALIZADO) */
 @media (min-width:1000px){
   .grid{
     grid-template-columns:repeat(4, 230px);
@@ -157,7 +228,6 @@ select{
   margin:10px 0;
   border-radius:6px;
   border:1px solid #ccc;
-  font-family:'Montserrat', sans-serif;
 }
 
 /* CONTADOR */
@@ -196,12 +266,6 @@ select{
   border:none;
   border-radius:8px;
   cursor:pointer;
-  transition:0.3s;
-}
-
-.btn:hover{
-  background:#c92f3b;
-  transform:scale(1.05);
 }
 
 </style>
@@ -209,7 +273,7 @@ select{
 
 <body>
 
-<header>
+<header id="header">
   <nav class="nav-left">
     <a href="index.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -221,7 +285,7 @@ select{
   </nav>
 
   <nav class="nav-right">
-    <a href="#" class="nav-item">
+    <a href="#" class="nav-item" onclick="abrirCarrinho(); return false;">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
@@ -231,6 +295,15 @@ select{
     </a>
   </nav>
 </header>
+
+<!-- CARRINHO -->
+<div class="carrinho-lateral" id="carrinho">
+  <h3>Seu Carrinho</h3>
+  <div class="lista-carrinho" id="lista"></div>
+  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
+</div>
+
+<div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
 
 <h1>MANILHAS E TAMPAS</h1>
 
@@ -283,7 +356,69 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado ao carrinho!");
 }
 
-/* PRODUTO */
+/* 🔥 ABRIR / FECHAR COM HEADER SUMINDO */
+function abrirCarrinho(){
+  document.getElementById("carrinho").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+  document.getElementById("header").classList.add("escondido");
+  renderizar();
+}
+
+function fecharCarrinho(){
+  document.getElementById("carrinho").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+  document.getElementById("header").classList.remove("escondido");
+}
+
+function renderizar(){
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  if(carrinho.length === 0){
+    lista.innerHTML = "Carrinho vazio";
+    return;
+  }
+
+  carrinho.forEach((item, i)=>{
+    lista.innerHTML += `
+      <div class="item">
+        ${item.nome} (x${item.qtd})
+        <button class="remover" onclick="remover(${i})">X</button>
+      </div>
+    `;
+  });
+}
+
+function remover(i){
+  carrinho.splice(i,1);
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  renderizar();
+}
+
+function enviarWhatsApp(){
+  let msg = "Pedido:%0A";
+  carrinho.forEach(item=>{
+    msg += `${item.nome} - ${item.qtd}%0A`;
+  });
+
+  window.open(`https://wa.me/5561999385680?text=${msg}`);
+}
+
+/* PRODUTOS */
+titulo("Manilhas");
+
+[
+"Manilha 90cm x 50cm",
+"Manilha 1,10m x 50cm"
+].forEach(nome => criarProduto(nome));
+
+titulo("Tampas de Manilha");
+
+criarProduto("Tampa 90cm", ["Aberta", "Fechada"]);
+criarProduto("Tampa 1m", ["Aberta", "Fechada"]);
+criarProduto("Tampa 1,10cm", ["Aberta", "Fechada"]);
+criarProduto("Tampa 1,20cm", ["Aberta", "Fechada"]);
+
 function criarProduto(nome, opcoes = null){
   grid.innerHTML += `
   <div class="card">
@@ -312,21 +447,6 @@ function criarProduto(nome, opcoes = null){
 
   </div>`;
 }
-
-/* PRODUTOS */
-titulo("Manilhas");
-
-[
-"Manilha 90cm x 50cm",
-"Manilha 1,10m x 50cm"
-].forEach(nome => criarProduto(nome));
-
-titulo("Tampas de Manilha");
-
-criarProduto("Tampa 90cm", ["Aberta", "Fechada"]);
-criarProduto("Tampa 1m", ["Aberta", "Fechada"]);
-criarProduto("Tampa 1,10cm", ["Aberta", "Fechada"]);
-criarProduto("Tampa 1,20cm", ["Aberta", "Fechada"]);
 
 </script>
 
