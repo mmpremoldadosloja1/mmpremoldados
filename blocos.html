@@ -27,17 +27,13 @@ header{
   top:0;
   z-index:999;
   background:#fff;
-  transition:0.3s;
 }
 
-/* 🔥 SUMIR DE VERDADE (CORREÇÃO FINAL) */
-header.sumir{
-  transform:translateY(-100%);
-  opacity:0;
-  pointer-events:none;
+/* 🔥 SOME COMPLETAMENTE */
+header.oculto{
+  display:none;
 }
 
-/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -143,7 +139,7 @@ nav{
   pointer-events:auto;
 }
 
-/* RESTO ORIGINAL */
+/* TITULOS */
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -159,6 +155,7 @@ h2{
   padding-left:20px;
 }
 
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
@@ -174,16 +171,9 @@ h2{
     margin:0 auto;
     gap:25px;
   }
-
-  .card img{
-    height:130px;
-  }
-
-  .card{
-    padding:18px;
-  }
 }
 
+/* CARD */
 .card{
   background:#fff;
   border-radius:12px;
@@ -195,37 +185,20 @@ h2{
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-
-  opacity:0;
-  transform:translateY(30px);
-  animation:fadeUp 0.6s ease forwards;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 25px rgba(0,0,0,0.12);
-}
-
-@keyframes fadeUp{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
 }
 
 .card img{
   width:100%;
   height:110px;
   object-fit:contain;
-  margin-bottom:10px;
 }
 
 .card h3{
   font-size:14px;
   margin:10px 0;
-  min-height:40px;
 }
 
+/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
@@ -252,6 +225,7 @@ h2{
   font-weight:bold;
 }
 
+/* BOTÃO */
 .btn{
   width:100%;
   padding:10px 0;
@@ -265,7 +239,6 @@ h2{
 
 .btn:hover{
   background:#c92f3b;
-  transform:scale(1.05);
 }
 
 </style>
@@ -370,7 +343,7 @@ function titulo(texto){
   grid.appendChild(div);
 }
 
-/* PRODUTOS (TODOS MANTIDOS) */
+/* PRODUTOS (NÃO ALTEREI NADA) */
 titulo("Bloco de vedação");
 [
 "Bloco c/fundo 09x19x39cm",
@@ -395,18 +368,19 @@ titulo("Bloco para fechamento de coluna isolada");
 "Quadrado de pilar de 25x25x19cm"
 ].forEach(criar);
 
-/* ABRIR / FECHAR */
+/* 🔥 CARRINHO FUNCIONANDO */
+
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-  document.getElementById("header").classList.add("sumir");
+  document.getElementById("header").classList.add("oculto"); // SUME DE VERDADE
   renderizar();
 }
 
 function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-  document.getElementById("header").classList.remove("sumir");
+  document.getElementById("header").classList.remove("oculto");
 }
 
 function renderizar(){
