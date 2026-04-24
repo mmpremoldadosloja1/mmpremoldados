@@ -16,7 +16,7 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER */
+/* HEADER TRANSPARENTE */
 header{
   width:100%;
   display:flex;
@@ -26,12 +26,7 @@ header{
   position:fixed;
   top:0;
   z-index:999;
-  background:#fff;
-  transition:0.3s;
-}
-
-header.hide{
-  transform:translateY(-100%);
+  background:transparent; /* 👈 AGORA TRANSPARENTE */
 }
 
 /* NAV */
@@ -59,7 +54,6 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
-  transition:0.3s;
   cursor:pointer;
 }
 
@@ -70,12 +64,7 @@ nav{
   stroke:currentColor;
 }
 
-.nav-item:hover{
-  color:#e63946;
-  transform:scale(1.05);
-}
-
-/* ===== CARRINHO LATERAL ===== */
+/* ===== CARRINHO ===== */
 .carrinho-lateral{
   position:fixed;
   top:0;
@@ -98,14 +87,12 @@ nav{
 .lista-carrinho{
   flex:1;
   overflow-y:auto;
-  margin-top:10px;
 }
 
 .item{
   display:flex;
   justify-content:space-between;
   margin-bottom:10px;
-  font-size:14px;
 }
 
 .remover{
@@ -144,7 +131,7 @@ nav{
   pointer-events:auto;
 }
 
-/* RESTO DO SEU CSS ORIGINAL */
+/* ===== SEU CSS ORIGINAL ===== */
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -205,7 +192,6 @@ h2{
   border:none;
   border-radius:5px;
   background:#eee;
-  cursor:pointer;
 }
 
 .contador input{
@@ -227,16 +213,12 @@ h2{
   cursor:pointer;
 }
 
-.btn:hover{
-  background:#c92f3b;
-}
-
 </style>
 </head>
 
 <body>
 
-<header id="header">
+<header>
   <nav class="nav-left">
     <a href="index.html" class="nav-item">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
@@ -265,25 +247,21 @@ h2{
 
 <h1>COBOGÓS</h1>
 
-<!-- 🔥 SEUS PRODUTOS CONTINUAM EXATAMENTE IGUAIS (NÃO REMOVI NADA) -->
+<!-- 🔥 TODOS OS SEUS PRODUTOS CONTINUAM AQUI (NÃO REMOVA NADA) -->
 
 <script>
 
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-const header = document.getElementById("header");
-
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-  header.classList.add("hide");
   renderizar();
 }
 
 function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-  header.classList.remove("hide");
 }
 
 function renderizar(){
@@ -325,15 +303,15 @@ function enviarWhatsApp(){
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
 
-/* SUAS FUNÇÕES ORIGINAIS */
+/* FUNÇÕES ORIGINAIS */
 function aumentar(btn){
   const input = btn.parentElement.querySelector('.qtd');
-  input.value = parseInt(input.value) + 1;
+  input.value++;
 }
 
 function diminuir(btn){
   const input = btn.parentElement.querySelector('.qtd');
-  input.value = Math.max(1, parseInt(input.value) - 1);
+  input.value = Math.max(1, input.value - 1);
 }
 
 function adicionarCarrinho(botao){
