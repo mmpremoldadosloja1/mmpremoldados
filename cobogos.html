@@ -16,6 +16,7 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
+/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -29,8 +30,10 @@ header{
   transition:0.3s;
 }
 
+/* 🔥 AGORA SOME DE VERDADE */
 header.transparente{
-  background:transparent;
+  opacity:0;
+  pointer-events:none;
 }
 
 /* NAV */
@@ -339,93 +342,6 @@ h2{
 
 </div>
 
-<h2>Cobogós 30x30</h2>
-<div class="grid">
-
-<div class="card">
-<img src="img/cobogo/cobogo-estrela-30.jpg">
-<h3>Estrela 30x30</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-estrela-dos-ventos-30.jpg">
-<h3>Estrela dos Ventos 30x30</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-fenestra-30.jpg">
-<h3>Fenestra 30x30</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-petala-30.jpg">
-<h3>Pétala 30x30</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-quadrado-cruz-30.jpg">
-<h3>Quadrado Cruz 30x30</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-xis-30.jpg">
-<h3>Xis 30x30</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-</div>
-
-<h2>Cobogós 24x24</h2>
-<div class="grid">
-
-<div class="card">
-<img src="img/cobogo/cobogo-4-furos-24.jpg">
-<h3>4 Furos 24x24</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-</div>
-
 <script>
 
 function aumentar(btn){
@@ -456,8 +372,6 @@ function adicionarCarrinho(botao){
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   alert('Produto adicionado');
 }
-
-/* NOVO CARRINHO */
 
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
