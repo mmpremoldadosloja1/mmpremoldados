@@ -17,6 +17,18 @@ body {
 
 
 /* ============================= */
+/* HEADER (AJUSTE NOVO) */
+/* ============================= */
+
+/* Quando o carrinho abrir */
+header.carrinho-aberto{
+  background: transparent !important;
+  box-shadow: none !important;
+  transition: 0.3s;
+}
+
+
+/* ============================= */
 /* TÍTULOS */
 /* ============================= */
 
