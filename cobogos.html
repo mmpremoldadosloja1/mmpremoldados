@@ -12,7 +12,7 @@
 body{
   background:#fff;
   color:#000;
-  padding-top:90px;
+  padding-top:110px; /* aumentei espaço do topo */
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -25,7 +25,7 @@ header{
   padding:15px 25px;
   position:fixed;
   top:0;
-  z-index:999;
+  z-index:1000; /* agora ele fica acima */
   background:#fff;
 }
 
@@ -69,12 +69,12 @@ nav{
   transform:scale(1.05);
 }
 
-/* BOTÃO MENU */
+/* BOTÃO MENU (AGORA ABAIXO DO HEADER) */
 .btn-menu{
   position:fixed;
-  top:20px;
+  top:85px; /* 👈 desce ele */
   left:20px;
-  z-index:1000;
+  z-index:999; /* abaixo do header */
   padding:10px 15px;
   background:#e63946;
   color:#fff;
@@ -93,7 +93,7 @@ nav{
   height:100%;
   backdrop-filter:blur(12px);
   background:rgba(0,0,0,0.88);
-  padding:90px 20px;
+  padding:110px 20px; /* ajustado pro header */
   transition:0.4s ease;
   z-index:998;
 }
@@ -111,7 +111,6 @@ nav{
   font-weight:600;
   border-bottom:1px solid rgba(255,255,255,0.1);
   padding-bottom:10px;
-  transition:0.3s;
 }
 
 .menu-categorias a:hover{
@@ -238,28 +237,14 @@ h2{
 
 <header>
   <nav class="nav-left">
-    <a href="index.html" class="nav-item">
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-        <path d="M3 10L12 3l9 7"></path>
-        <path d="M5 10v10h14V10"></path>
-      </svg>
-      Início
-    </a>
+    <a href="index.html" class="nav-item">Início</a>
   </nav>
 
   <nav class="nav-right">
-    <a href="#" class="nav-item">
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-        <circle cx="9" cy="20" r="1"></circle>
-        <circle cx="18" cy="20" r="1"></circle>
-        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-      </svg>
-      Carrinho
-    </a>
+    <a href="#" class="nav-item">Carrinho</a>
   </nav>
 </header>
 
-<!-- MENU -->
 <div class="menu-categorias" id="menuCategorias">
   <a href="blocos.html">Blocos e Canaletas</a>
   <a href="manilhas.html">Manilhas</a>
@@ -274,168 +259,7 @@ h2{
 
 <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
 
-<h1>COBOGÓS</h1>
-
-<h2>Cobogós 40x40</h2>
-<div class="grid">
-
-<div class="card">
-<img src="img/cobogo/cobogo-16-furos-40.jpg">
-<h3>16 Furos 40x40</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-4-pontas-40.jpg">
-<h3>4 Pontas 40x40</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-anti-chuva-40.jpg">
-<h3>Anti-Chuva 40x40</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-arabe-40.jpg">
-<h3>Árabe 40x40</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-flor-40.jpg">
-<h3>Flor 40x40</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-taco-chines-40.jpg">
-<h3>Taco Chinês 40x40</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-</div>
-
-<h2>Cobogós 30x30</h2>
-<div class="grid">
-
-<div class="card">
-<img src="img/cobogo/cobogo-estrela-30.jpg">
-<h3>Estrela 30x30</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-estrela-dos-ventos-30.jpg">
-<h3>Estrela dos Ventos 30x30</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-fenestra-30.jpg">
-<h3>Fenestra 30x30</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-petala-30.jpg">
-<h3>Pétala 30x30</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-quadrado-cruz-30.jpg">
-<h3>Quadrado Cruz 30x30</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-<div class="card">
-<img src="img/cobogo/cobogo-xis-30.jpg">
-<h3>Xis 30x30</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-</div>
-
-<h2>Cobogós 24x24</h2>
-<div class="grid">
-
-<div class="card">
-<img src="img/cobogo/cobogo-4-furos-24.jpg">
-<h3>4 Furos 24x24</h3>
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1" min="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
-
-</div>
-
 <script>
-
 const menu = document.getElementById("menuCategorias");
 const overlay = document.getElementById("overlay");
 
@@ -448,36 +272,6 @@ function fecharMenu(){
   menu.classList.remove("active");
   overlay.classList.remove("active");
 }
-
-function aumentar(btn){
-  const input = btn.parentElement.querySelector('.qtd');
-  input.value = parseInt(input.value) + 1;
-}
-
-function diminuir(btn){
-  const input = btn.parentElement.querySelector('.qtd');
-  input.value = Math.max(1, parseInt(input.value) - 1);
-}
-
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-function adicionarCarrinho(botao){
-  const card = botao.closest('.card');
-  const nome = card.querySelector('h3').innerText;
-  const qtd = parseInt(card.querySelector('.qtd').value);
-
-  const existente = carrinho.find(item => item.nome === nome);
-
-  if(existente){
-    existente.qtd += qtd;
-  }else{
-    carrinho.push({nome, qtd});
-  }
-
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert('Produto adicionado');
-}
-
 </script>
 
 </body>
