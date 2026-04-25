@@ -16,7 +16,12 @@ body{
   padding-top:90px;
 }
 
-/* HEADER IGUAL COBOGÓS */
+/* 🔥 REMOVE ESPAÇO QUANDO ABRIR CARRINHO */
+body.sem-header{
+  padding-top:0 !important;
+}
+
+/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -27,8 +32,15 @@ header{
   top:0;
   z-index:999;
   background:#fff;
+  transition:0.3s;
 }
 
+/* 🔥 SOME TOTAL */
+header.sumir{
+  display:none;
+}
+
+/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -62,6 +74,73 @@ nav{
   transform:scale(1.05);
 }
 
+/* ===== CARRINHO ===== */
+.carrinho-lateral{
+  position:fixed;
+  top:0;
+  right:-350px;
+  width:320px;
+  height:100%;
+  background:#fff;
+  box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+  padding:20px;
+  transition:0.3s;
+  z-index:1001;
+  display:flex;
+  flex-direction:column;
+}
+
+.carrinho-lateral.active{
+  right:0;
+}
+
+.lista-carrinho{
+  flex:1;
+  overflow-y:auto;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.remover{
+  background:#e63946;
+  color:#fff;
+  border:none;
+  padding:3px 8px;
+  border-radius:4px;
+  cursor:pointer;
+}
+
+.btn-finalizar{
+  padding:15px;
+  background:#25D366;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+  z-index:1000;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
 /* TITULO */
 h1{
   text-align:center;
@@ -71,7 +150,6 @@ h1{
   margin-bottom:30px;
 }
 
-/* SUBTITULOS */
 h2{
   text-align:left;
   margin:40px 0 15px;
@@ -79,7 +157,7 @@ h2{
   padding-left:10px;
 }
 
-/* GRID (MANTIDO ORIGINAL) */
+/* GRID ORIGINAL */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
@@ -93,7 +171,7 @@ h2{
   }
 }
 
-/* CARD (MANTIDO ORIGINAL) */
+/* CARD ORIGINAL */
 .card{
   display:flex;
   flex-direction:column;
@@ -127,7 +205,7 @@ h2{
   object-fit:contain;
 }
 
-/* TITULO CARD */
+/* TITULO */
 .card h3{
   font-size:14px;
   margin:10px 0;
@@ -143,7 +221,7 @@ select{
   border:1px solid #ccc;
 }
 
-/* CONTADOR IGUAL COBOGÓS (SÓ PADRÃO VISUAL) */
+/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
@@ -179,7 +257,6 @@ select{
   border:none;
   border-radius:6px;
   cursor:pointer;
-  transition:.3s;
 }
 
 .btn:hover{
@@ -191,7 +268,7 @@ select{
 
 <body>
 
-<header>
+<header id="header">
 <nav>
 <a href="index.html" class="nav-item">
 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -203,7 +280,7 @@ Início
 </nav>
 
 <nav class="nav-right">
-<a href="#" class="nav-item">
+<a href="#" class="nav-item" onclick="abrirCarrinho(); return false;">
 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
 <circle cx="9" cy="20" r="1"></circle>
 <circle cx="18" cy="20" r="1"></circle>
@@ -214,6 +291,15 @@ Carrinho
 </nav>
 </header>
 
+<!-- CARRINHO -->
+<div class="carrinho-lateral" id="carrinho">
+  <h3>Seu Carrinho</h3>
+  <div class="lista-carrinho" id="lista"></div>
+  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
+</div>
+
+<div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
+
 <h1>PISOS E PISADEIRAS</h1>
 
 <div class="grid" id="gridProdutos"></div>
@@ -223,7 +309,6 @@ Carrinho
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* TITULOS */
 function titulo(texto){
   grid.innerHTML += `
     <div style="grid-column:1/-1">
@@ -232,7 +317,6 @@ function titulo(texto){
   `;
 }
 
-/* CONTADOR IGUAL COBOGÓS */
 function aumentar(btn){
   const input = btn.parentElement.querySelector('.qtd');
   input.value = parseInt(input.value) + 1;
@@ -243,7 +327,6 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-/* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -265,7 +348,79 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado!");
 }
 
-/* PRODUTO */
+/* 🔥 CONTROLE DO CARRINHO */
+function abrirCarrinho(){
+  document.getElementById("carrinho").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+
+  document.getElementById("header").classList.add("sumir");
+  document.body.classList.add("sem-header");
+
+  renderizar();
+}
+
+function fecharCarrinho(){
+  document.getElementById("carrinho").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+
+  document.getElementById("header").classList.remove("sumir");
+  document.body.classList.remove("sem-header");
+}
+
+function renderizar(){
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  if(carrinho.length === 0){
+    lista.innerHTML = "Carrinho vazio";
+    return;
+  }
+
+  carrinho.forEach((item, i)=>{
+    lista.innerHTML += `
+      <div class="item">
+        ${item.nome} (x${item.qtd})
+        <button class="remover" onclick="remover(${i})">X</button>
+      </div>
+    `;
+  });
+}
+
+function remover(i){
+  carrinho.splice(i,1);
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  renderizar();
+}
+
+function enviarWhatsApp(){
+  let msg = "Pedido:%0A";
+  carrinho.forEach(item=>{
+    msg += `${item.nome} - ${item.qtd}%0A`;
+  });
+
+  window.open(`https://wa.me/5561999385680?text=${msg}`);
+}
+
+/* PRODUTOS */
+titulo("Pisos");
+
+criarProduto("Piso Quadrado Liso","img/pisos/piso-quadrado.jpg",["40x40cm","50x50cm","60x60cm"]);
+criarProduto("Piso Copacabana 50x50cm","img/pisos/copacabana.jpg");
+criarProduto("Piso Trabalhado em Flor 45x45cm","img/pisos/flor.jpg");
+criarProduto("Piso em X 45x45cm","img/pisos/piso.jpg");
+
+titulo("Pisadeiras");
+
+criarProduto("Pezão de Jardim 50cm","img/pisos/pezao.jpg");
+criarProduto("Círculo Estelar 50cm","img/pisos/circulo-estelar.jpg");
+criarProduto("Pisadeira Xis 50cm","img/pisos/pisadeira-x.jpg");
+
+titulo("Conjuntos");
+
+criarProduto("Conjunto Trevo Oriente 60x60cm","img/pisos/trevo-oriente.jpg");
+criarProduto("Conjunto Passarela Estrelado 70x70cm","img/pisos/passarela.jpg");
+criarProduto("Conjunto Circulo Quadrado 140x140cm","img/pisos/conjunto-circulo-quadrado.jpg");
+
 function criarProduto(nome, img, opcoes=null){
   grid.innerHTML += `
   <div class="card">
@@ -294,26 +449,6 @@ function criarProduto(nome, img, opcoes=null){
 
   </div>`;
 }
-
-/* PRODUTOS */
-titulo("Pisos");
-
-criarProduto("Piso Quadrado Liso","img/pisos/piso-quadrado.jpg",["40x40cm","50x50cm","60x60cm"]);
-criarProduto("Piso Copacabana 50x50cm","img/pisos/copacabana.jpg");
-criarProduto("Piso Trabalhado em Flor 45x45cm","img/pisos/flor.jpg");
-criarProduto("Piso em X 45x45cm","img/pisos/piso.jpg");
-
-titulo("Pisadeiras");
-
-criarProduto("Pezão de Jardim 50cm","img/pisos/pezao.jpg");
-criarProduto("Círculo Estelar 50cm","img/pisos/circulo-estelar.jpg");
-criarProduto("Pisadeira Xis 50cm","img/pisos/pisadeira-x.jpg");
-
-titulo("Conjuntos");
-
-criarProduto("Conjunto Trevo Oriente 60x60cm","img/pisos/trevo-oriente.jpg");
-criarProduto("Conjunto Passarela Estrelado 70x70cm","img/pisos/passarela.jpg");
-criarProduto("Conjunto Circulo Quadrado 140x140cm","img/pisos/conjunto-circulo-quadrado.jpg");
 
 </script>
 
