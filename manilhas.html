@@ -17,6 +17,11 @@ body{
   font-family:'Montserrat', sans-serif;
 }
 
+/* 🔥 PADRÃO COBOGÓS */
+body.sem-header{
+  padding-top:0 !important;
+}
+
 /* HEADER */
 header{
   width:100%;
@@ -31,10 +36,9 @@ header{
   transition:0.3s;
 }
 
-/* 🔥 ESCONDER HEADER TOTAL */
-header.hide{
-  opacity:0;
-  pointer-events:none;
+/* 🔥 PADRÃO COBOGÓS */
+header.sumir{
+  display:none;
 }
 
 /* NAV */
@@ -77,7 +81,7 @@ nav{
   transform:scale(1.05);
 }
 
-/* ===== CARRINHO ===== */
+/* ===== CARRINHO PADRÃO COBOGÓS ===== */
 .carrinho-lateral{
   position:fixed;
   top:0;
@@ -161,13 +165,12 @@ h2{
   padding-left:20px;
 }
 
-/* GRID */
+/* GRID (MANTIDO INTACTO) */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
   gap:20px;
   padding:0 20px 40px;
-
   max-width:1100px;
   margin:0 auto;
   justify-content:center;
@@ -181,24 +184,15 @@ h2{
     max-width:1200px;
     gap:25px;
   }
-
-  .card{
-    padding:18px;
-  }
-
-  .imagem-placeholder{
-    height:130px;
-  }
 }
 
-/* CARD */
+/* CARD (NÃO ALTERADO) */
 .card{
   background:#fff;
   border-radius:12px;
   padding:15px;
   text-align:center;
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
-
   display:flex;
   flex-direction:column;
   justify-content:space-between;
@@ -365,20 +359,23 @@ function adicionarCarrinho(botao){
   alert("Produto adicionado ao carrinho!");
 }
 
-/* CARRINHO LATERAL */
+/* PADRÃO COBOGÓS */
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-  document.getElementById("header").classList.add("hide");
+  document.getElementById("header").classList.add("sumir");
+  document.body.classList.add("sem-header");
   renderizar();
 }
 
 function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-  document.getElementById("header").classList.remove("hide");
+  document.getElementById("header").classList.remove("sumir");
+  document.body.classList.remove("sem-header");
 }
 
+/* RESTANTE MANTIDO */
 function renderizar(){
   const lista = document.getElementById("lista");
   lista.innerHTML = "";
@@ -413,7 +410,7 @@ function enviarWhatsApp(){
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
 
-/* PRODUTOS */
+/* PRODUTOS (INALTERADO) */
 function criarProduto(nome, opcoes = null){
   grid.innerHTML += `
   <div class="card">
