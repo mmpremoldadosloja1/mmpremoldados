@@ -85,6 +85,7 @@ nav{
   border:none;
   padding:3px 8px;
   border-radius:4px;
+  cursor:pointer;
 }
 
 .overlay{
@@ -103,16 +104,8 @@ nav{
   pointer-events:auto;
 }
 
-/* TITULO */
-h1{
-  text-align:center;
-  color:#e63946;
-  margin-bottom:30px;
-}
+/* ===== SUA ESTRUTURA (MANTIDA) ===== */
 
-/* ===== LAYOUT ===== */
-
-/* MOBILE = FOLHA */
 .container{
   display:flex;
   flex-direction:column;
@@ -120,53 +113,20 @@ h1{
   padding:20px;
 }
 
-/* DESKTOP = LINHA */
 @media(min-width:900px){
   .container{
     flex-direction:row;
-    justify-content:center;
-    align-items:flex-start;
   }
 }
 
-/* BLOCO */
 .bloco{
   background:#fff;
   border-radius:12px;
   padding:20px;
   box-shadow:0 6px 15px rgba(0,0,0,0.1);
   width:100%;
-  max-width:350px;
 }
 
-/* IMAGEM */
-.img-box{
-  height:120px;
-  background:#f5f5f5;
-  border-radius:8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:10px;
-}
-
-/* INPUTS */
-select,input{
-  width:100%;
-  padding:8px;
-  margin-top:10px;
-  border-radius:6px;
-  border:1px solid #ccc;
-}
-
-/* LABEL DESABILITADO */
-.select-label{
-  color:#999;
-  font-size:13px;
-  margin-top:10px;
-}
-
-/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
@@ -180,14 +140,17 @@ select,input{
   border:none;
   background:#eee;
   border-radius:5px;
+  cursor:pointer;
 }
 
 .contador input{
   width:50px;
   text-align:center;
+  border:1px solid #ccc;
+  border-radius:5px;
+  padding:5px;
 }
 
-/* BOTÃO */
 .btn{
   width:100%;
   padding:10px;
@@ -226,6 +189,7 @@ select,input{
   </nav>
 </header>
 
+<!-- CARRINHO -->
 <div class="carrinho-lateral" id="carrinho">
   <h3>Seu Carrinho</h3>
   <div id="lista" class="lista-carrinho"></div>
@@ -234,195 +198,110 @@ select,input{
 
 <div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
 
-<h1>LAJES</h1>
+<h1 style="text-align:center;color:#e63946;">LAJES</h1>
 
 <div class="container">
 
-<!-- LAJES -->
+<!-- EXEMPLO BLOCO (MANTIDO) -->
 <div class="bloco">
-  <div class="img-box">Imagem</div>
 
-  <div class="select-label">Selecione a laje</div>
-  <select id="tipoLaje" onchange="atualizarIsopor()">
-    <option value="">Selecione</option>
-    <option value="H8">Laje Teto H8</option>
-    <option value="H10">Laje Piso H10</option>
-  </select>
-
-  <select id="isopor"></select>
-
-  <input type="number" id="comprimento" placeholder="Comprimento (m)">
-  <input type="number" id="largura" placeholder="Largura (m)">
-
-  <input type="text" id="area" placeholder="m²" readonly>
-
-  <button class="btn" onclick="addLaje()">Adicionar</button>
-</div>
-
-<!-- VIGAS -->
-<div class="bloco">
-  <div class="img-box">Imagem</div>
-
-  <select id="tipoViga">
-    <option>H8 Teto</option>
-    <option>H10 Piso</option>
-  </select>
-
-  <input list="listaVigas" placeholder="Tamanho">
-  <datalist id="listaVigas"></datalist>
+  <h3>Produto Exemplo</h3>
 
   <div class="contador">
     <button onclick="diminuir(this)">−</button>
-    <input type="number" class="qtd" value="1">
+    <input type="number" class="qtd" value="1" min="1">
     <button onclick="aumentar(this)">+</button>
   </div>
 
-  <button class="btn" onclick="addViga()">Adicionar</button>
-</div>
+  <button class="btn" onclick="adicionarCarrinho(this)">
+    Adicionar
+  </button>
 
-<!-- ISOPOR -->
-<div class="bloco">
-  <div class="img-box">Imagem</div>
-
-  <select id="tipoIso">
-    <option>7,5x33cm</option>
-    <option>7,5x40cm</option>
-    <option>9x33cm</option>
-    <option>9x40cm</option>
-  </select>
-
-  <div class="contador">
-    <button onclick="diminuir(this)">−</button>
-    <input type="number" class="qtd" value="1">
-    <button onclick="aumentar(this)">+</button>
-  </div>
-
-  <button class="btn" onclick="addIso()">Adicionar</button>
 </div>
 
 </div>
 
 <script>
 
-/* GERAR TAMANHOS VIGA */
-for(let i=80;i<=600;i+=10){
-  listaVigas.innerHTML += `<option value="${i}cm">`;
-}
-
-/* ISOPOR DINÂMICO */
-function atualizarIsopor(){
-  const tipo = document.getElementById("tipoLaje").value;
-  const iso = document.getElementById("isopor");
-
-  iso.innerHTML = "";
-
-  if(tipo==="H8"){
-    iso.innerHTML = `<option>7,5x33cm</option><option>7,5x40cm</option>`;
-  }
-
-  if(tipo==="H10"){
-    iso.innerHTML = `<option>9x33cm</option><option>9x40cm</option>`;
-  }
-}
-
-/* AREA */
-document.getElementById("comprimento").oninput = calc;
-document.getElementById("largura").oninput = calc;
-
-function calc(){
-  const c = comprimento.value;
-  const l = largura.value;
-  if(c && l){
-    area.value = (c*l).toFixed(2)+" m²";
-  }
-}
-
-/* CONTADOR */
+/* CONTADOR IGUAL COBOGÓ */
 function aumentar(btn){
-  const input = btn.parentElement.querySelector('input');
-  input.value++;
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = parseInt(input.value) + 1;
 }
 
 function diminuir(btn){
-  const input = btn.parentElement.querySelector('input');
-  input.value = Math.max(1,input.value-1);
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
 /* CARRINHO */
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-function salvar(){
+function adicionarCarrinho(botao){
+  const card = botao.closest('.bloco');
+  const nome = card.querySelector('h3').innerText;
+  const qtd = parseInt(card.querySelector('.qtd').value);
+
+  const existente = carrinho.find(item => item.nome === nome);
+
+  if(existente){
+    existente.qtd += qtd;
+  } else {
+    carrinho.push({ nome, qtd });
+  }
+
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  alert("Produto adicionado");
 }
 
-function addLaje(){
-  const tipo = tipoLaje.value;
-  const iso = isopor.value;
-  const m2 = area.value;
-
-  carrinho.push({nome:`${tipo} - ${iso} (${m2})`,qtd:1});
-  salvar(); alert("Adicionado");
-}
-
-function addViga(){
-  const tipo = tipoViga.value;
-  const tam = document.querySelector('#tipoViga + input').value;
-  const qtd = document.querySelector('#tipoViga ~ .contador input').value;
-
-  carrinho.push({nome:`Viga ${tipo} ${tam}`,qtd});
-  salvar(); alert("Adicionado");
-}
-
-function addIso(){
-  const tipo = tipoIso.value;
-  const qtd = document.querySelector('#tipoIso ~ .contador input').value;
-
-  carrinho.push({nome:`Isopor ${tipo}`,qtd});
-  salvar(); alert("Adicionado");
-}
-
-/* CARRINHO UI */
+/* ABRIR/FECHAR */
 function abrirCarrinho(){
-  carrinhoDiv.classList.add("active");
-  overlay.classList.add("active");
-  header.classList.add("sumir");
+  document.getElementById("carrinho").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+  document.getElementById("header").classList.add("sumir");
   document.body.classList.add("sem-header");
-  render();
+  renderizar();
 }
 
 function fecharCarrinho(){
-  carrinhoDiv.classList.remove("active");
-  overlay.classList.remove("active");
-  header.classList.remove("sumir");
+  document.getElementById("carrinho").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+  document.getElementById("header").classList.remove("sumir");
   document.body.classList.remove("sem-header");
 }
 
-const carrinhoDiv = document.getElementById("carrinho");
-const overlay = document.getElementById("overlay");
-const header = document.getElementById("header");
+/* RENDER */
+function renderizar(){
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
 
-function render(){
-  lista.innerHTML="";
-  carrinho.forEach((item,i)=>{
-    lista.innerHTML+=`
-    <div class="item">
-      ${item.nome} (x${item.qtd})
-      <button onclick="remover(${i})">X</button>
-    </div>`;
+  if(carrinho.length === 0){
+    lista.innerHTML = "Carrinho vazio";
+    return;
+  }
+
+  carrinho.forEach((item, i)=>{
+    lista.innerHTML += `
+      <div class="item">
+        ${item.nome} (x${item.qtd})
+        <button class="remover" onclick="remover(${i})">X</button>
+      </div>
+    `;
   });
 }
 
 function remover(i){
   carrinho.splice(i,1);
-  salvar();
-  render();
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  renderizar();
 }
 
 function enviarWhatsApp(){
-  let msg="Pedido:%0A";
-  carrinho.forEach(i=>{
-    msg+=`${i.nome} - ${i.qtd}%0A`;
+  let msg = "Pedido:%0A";
+  carrinho.forEach(item=>{
+    msg += `${item.nome} - ${item.qtd}%0A`;
   });
+
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
 
