@@ -15,7 +15,7 @@ body{
   overflow-x:hidden;
 }
 
-/* HEADER IGUAL COBOGO */
+/* HEADER (COBOGÓS) */
 body.sem-header{
   padding-top:0 !important;
 }
@@ -38,12 +38,6 @@ header.sumir{
 
 nav{
   display:flex;
-  gap:25px;
-  align-items:center;
-}
-
-.nav-left, .nav-right{
-  display:flex;
   gap:20px;
   align-items:center;
 }
@@ -61,20 +55,22 @@ nav{
 .nav-item svg{
   width:24px;
   height:24px;
+  margin-bottom:3px;
   stroke:currentColor;
 }
 
 /* CARRINHO */
 .carrinho-lateral{
   position:fixed;
-  right:-350px;
   top:0;
+  right:-350px;
   width:320px;
   height:100%;
   background:#fff;
-  z-index:1001;
+  box-shadow:-5px 0 20px rgba(0,0,0,0.2);
   padding:20px;
   transition:0.3s;
+  z-index:1001;
   display:flex;
   flex-direction:column;
 }
@@ -120,6 +116,7 @@ nav{
   background:rgba(0,0,0,0.4);
   opacity:0;
   pointer-events:none;
+  transition:0.3s;
   z-index:1000;
 }
 
@@ -128,16 +125,16 @@ nav{
   pointer-events:auto;
 }
 
-/* BLOCO */
+/* BLOCO ORIGINAL */
 .bloco{
   background:#fff;
   margin:20px;
   padding:20px;
   border-radius:12px;
   box-shadow:0 5px 15px rgba(0,0,0,0.08);
+  overflow:hidden;
 }
 
-/* IMG */
 .imagem{
   width:100%;
   height:150px;
@@ -146,7 +143,6 @@ nav{
   margin-bottom:15px;
 }
 
-/* INPUT */
 select, input{
   width:100%;
   padding:10px;
@@ -155,7 +151,11 @@ select, input{
   border:1px solid #ccc;
 }
 
-/* CONTADOR IGUAL COBOGO */
+select:invalid{
+  color:#999;
+}
+
+/* CONTADOR IGUAL COBOGÓS */
 .contador{
   display:flex;
   justify-content:center;
@@ -166,20 +166,19 @@ select, input{
 
 .contador button{
   padding:5px 10px;
+  font-size:16px;
   border:none;
-  background:#eee;
   border-radius:5px;
+  background:#eee;
   cursor:pointer;
 }
 
 .contador input{
   width:60px;
   text-align:center;
-  border:1px solid #ccc;
-  border-radius:5px;
 }
 
-/* BTN */
+/* BOTÃO */
 .btn{
   margin-top:15px;
   width:100%;
@@ -191,7 +190,7 @@ select, input{
   cursor:pointer;
 }
 
-/* DESKTOP */
+/* DESKTOP LINHA */
 @media(min-width:900px){
 
   .bloco{
@@ -203,6 +202,7 @@ select, input{
   .imagem{
     width:200px;
     height:140px;
+    flex-shrink:0;
   }
 
   .conteudo{
@@ -227,7 +227,7 @@ select, input{
 
 <!-- HEADER CORRETO -->
 <header id="header">
-  <nav class="nav-left">
+  <nav>
     <a href="index.html" class="nav-item">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <path d="M3 10L12 3l9 7"></path>
@@ -237,7 +237,7 @@ select, input{
     </a>
   </nav>
 
-  <nav class="nav-right">
+  <nav>
     <a href="#" class="nav-item" onclick="abrirCarrinho();return false;">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <circle cx="9" cy="20" r="1"></circle>
@@ -260,7 +260,8 @@ select, input{
 
 <h1 style="text-align:center;color:#e63946;">LAJES</h1>
 
-<!-- SUA ESTRUTURA ORIGINAL (INTOCADA) -->
+<!-- ===== SEU CONTEÚDO ORIGINAL (INTACTO) ===== -->
+
 <div class="bloco">
 <div class="imagem"></div>
 
@@ -286,50 +287,145 @@ select, input{
 </div>
 </div>
 
+<div class="bloco">
+<div class="imagem"></div>
+
+<div class="conteudo">
+
+<select id="tipoViga">
+<option>H8 TETO</option>
+<option>H10 PISO</option>
+</select>
+
+<input list="listaVigas" id="tamViga" placeholder="Tamanho">
+<datalist id="listaVigas"></datalist>
+
+<div class="contador">
+<button onclick="dim('qv')">−</button>
+<input id="qv" value="1">
+<button onclick="mais('qv')">+</button>
+</div>
+
+<button class="btn" onclick="addViga()">Adicionar</button>
+
+</div>
+</div>
+
+<div class="bloco">
+<div class="imagem"></div>
+
+<div class="conteudo">
+
+<select id="tipoIso">
+<option>H8 - 7,5x33</option>
+<option>H8 - 7,5x40</option>
+<option>H10 - 9x33</option>
+<option>H10 - 9x40</option>
+</select>
+
+<div class="contador">
+<button onclick="dim('qi')">−</button>
+<input id="qi" value="1">
+<button onclick="mais('qi')">+</button>
+</div>
+
+<button class="btn" onclick="addIso()">Adicionar</button>
+
+</div>
+</div>
+
 <script>
 
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* CARRINHO */
+/* ===== SUA LÓGICA ORIGINAL ===== */
+
+function atualizarIsopor(){
+  const tipo = document.getElementById("tipoLaje").value;
+  const select = document.getElementById("isopor");
+
+  select.innerHTML = `<option disabled selected>Selecione o isopor</option>`;
+
+  if(tipo === "H8"){
+    select.innerHTML += `<option>7,5x33</option>`;
+    select.innerHTML += `<option>7,5x40</option>`;
+  }
+
+  if(tipo === "H10"){
+    select.innerHTML += `<option>9x33</option>`;
+    select.innerHTML += `<option>9x40</option>`;
+  }
+}
+
+document.getElementById("c").oninput = calc;
+document.getElementById("l").oninput = calc;
+
+function calc(){
+  let c = parseFloat(c.value)||0;
+  let l = parseFloat(l.value)||0;
+  m2.innerText = (c*l).toFixed(2)+" m²";
+}
+
+function mais(id){
+  let el = document.getElementById(id);
+  el.value = parseInt(el.value||1)+1;
+}
+
+function dim(id){
+  let el = document.getElementById(id);
+  el.value = Math.max(1, parseInt(el.value||1)-1);
+}
+
+for(let i=0.8;i<=6;i+=0.1){
+  listaVigas.innerHTML += `<option value="${i.toFixed(1)}m">`;
+}
+
+function addLaje(){ carrinho.push({nome:"Laje",qtd:1}); salvar(); }
+function addViga(){ carrinho.push({nome:"Viga",qtd:1}); salvar(); }
+function addIso(){ carrinho.push({nome:"Isopor",qtd:1}); salvar(); }
+
+/* ===== CARRINHO COBOGÓS ===== */
+
+function salvar(){
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  renderizar();
+}
+
 function abrirCarrinho(){
-  carrinhoEl.classList.add("active");
+  carrinho.classList.add("active");
   overlay.classList.add("active");
   header.classList.add("sumir");
   document.body.classList.add("sem-header");
-  render();
+  renderizar();
 }
 
 function fecharCarrinho(){
-  carrinhoEl.classList.remove("active");
+  carrinho.classList.remove("active");
   overlay.classList.remove("active");
   header.classList.remove("sumir");
   document.body.classList.remove("sem-header");
 }
 
-function render(){
-  lista.innerHTML="";
+function renderizar(){
+  lista.innerHTML = "";
+
   if(carrinho.length === 0){
-    lista.innerHTML="Carrinho vazio";
+    lista.innerHTML = "Carrinho vazio";
     return;
   }
 
   carrinho.forEach((item,i)=>{
-    lista.innerHTML+=`
-    <div class="item">
-      ${item.nome} (x${item.qtd})
-      <button class="remover" onclick="remover(${i})">X</button>
-    </div>`;
+    lista.innerHTML += `
+      <div class="item">
+        ${item.nome} (x${item.qtd})
+        <button class="remover" onclick="remover(${i})">X</button>
+      </div>`;
   });
 }
 
 function remover(i){
   carrinho.splice(i,1);
   salvar();
-}
-
-function salvar(){
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  render();
 }
 
 function enviar(){
@@ -339,10 +435,6 @@ function enviar(){
   });
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
-
-const carrinhoEl = document.getElementById("carrinho");
-const overlay = document.getElementById("overlay");
-const header = document.getElementById("header");
 
 </script>
 
