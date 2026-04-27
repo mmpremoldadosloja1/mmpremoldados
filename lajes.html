@@ -14,16 +14,22 @@ body{
   padding:20px;
 }
 
-/* TÍTULO */
+/* TITULO */
 h1{
   text-align:center;
   color:#e63946;
-  margin-bottom:30px;
+  margin-bottom:20px;
 }
 
-/* CAIXA PRINCIPAL */
+/* SUBTITULO */
+h2{
+  margin-top:25px;
+  color:#333;
+}
+
+/* CONTAINER */
 .container{
-  max-width:600px;
+  max-width:650px;
   margin:auto;
   background:#fff;
   padding:20px;
@@ -35,7 +41,7 @@ h1{
 select, input{
   width:100%;
   padding:10px;
-  margin:10px 0;
+  margin:8px 0;
   border-radius:8px;
   border:1px solid #ccc;
 }
@@ -91,26 +97,56 @@ select, input{
 
 <div class="container">
 
-  <!-- SELEÇÃO -->
-  <label>Tipo de Laje</label>
-  <select id="tipo">
+  <!-- LAJE -->
+  <h2>Lajes</h2>
+
+  <select id="tipoLaje">
     <option>Laje Teto H8</option>
     <option>Laje Piso H10</option>
-    <option>Viga</option>
   </select>
 
-  <label>Medida</label>
-  <select id="medida">
+  <select id="medidaLaje">
     <option>7,5cm x 33cm</option>
     <option>7,5cm x 40cm</option>
     <option>9cm x 33cm</option>
     <option>9cm x 40cm</option>
   </select>
 
-  <label>Quantidade</label>
-  <input type="number" id="qtd" value="1" min="1">
+  <input type="number" id="qtdLaje" value="1" min="1">
 
-  <button class="btn add" onclick="adicionar()">Adicionar ao pedido</button>
+  <button class="btn add" onclick="addLaje()">Adicionar Laje</button>
+
+  <!-- VIGA -->
+  <h2>Vigas</h2>
+
+  <select id="tipoViga">
+    <option>H8</option>
+    <option>H10</option>
+  </select>
+
+  <select id="tamViga">
+    <option>2 metros</option>
+    <option>3 metros</option>
+    <option>4 metros</option>
+  </select>
+
+  <input type="number" id="qtdViga" value="1" min="1">
+
+  <button class="btn add" onclick="addViga()">Adicionar Viga</button>
+
+  <!-- ISOPOR -->
+  <h2>Isopor</h2>
+
+  <select id="tamIsopor">
+    <option>7,5 x 33cm</option>
+    <option>8 x 40cm</option>
+    <option>9 x 33cm</option>
+    <option>9 x 40cm</option>
+  </select>
+
+  <input type="number" id="qtdIsopor" value="1" min="1">
+
+  <button class="btn add" onclick="addIsopor()">Adicionar Isopor</button>
 
   <!-- LISTA -->
   <div class="lista" id="lista"></div>
@@ -123,24 +159,46 @@ select, input{
 
 let carrinho = [];
 
-function adicionar(){
-  const tipo = document.getElementById("tipo").value;
-  const medida = document.getElementById("medida").value;
-  const qtd = document.getElementById("qtd").value;
+/* ADICIONAR LAJE */
+function addLaje(){
+  const tipo = document.getElementById("tipoLaje").value;
+  const medida = document.getElementById("medidaLaje").value;
+  const qtd = parseInt(document.getElementById("qtdLaje").value);
 
-  const nome = tipo + " - " + medida;
+  adicionarItem(`${tipo} - ${medida}`, qtd);
+}
 
+/* ADICIONAR VIGA */
+function addViga(){
+  const tipo = document.getElementById("tipoViga").value;
+  const tamanho = document.getElementById("tamViga").value;
+  const qtd = parseInt(document.getElementById("qtdViga").value);
+
+  adicionarItem(`Viga ${tipo} - ${tamanho}`, qtd);
+}
+
+/* ADICIONAR ISOPOR */
+function addIsopor(){
+  const tamanho = document.getElementById("tamIsopor").value;
+  const qtd = parseInt(document.getElementById("qtdIsopor").value);
+
+  adicionarItem(`Isopor - ${tamanho}`, qtd);
+}
+
+/* FUNÇÃO GLOBAL */
+function adicionarItem(nome, qtd){
   const existente = carrinho.find(item => item.nome === nome);
 
   if(existente){
-    existente.qtd += parseInt(qtd);
+    existente.qtd += qtd;
   } else {
-    carrinho.push({nome, qtd: parseInt(qtd)});
+    carrinho.push({nome, qtd});
   }
 
   renderizar();
 }
 
+/* RENDER */
 function renderizar(){
   const lista = document.getElementById("lista");
   lista.innerHTML = "";
@@ -155,11 +213,13 @@ function renderizar(){
   });
 }
 
+/* REMOVER */
 function remover(i){
   carrinho.splice(i,1);
   renderizar();
 }
 
+/* WHATSAPP */
 function enviar(){
   if(carrinho.length === 0){
     alert("Adicione itens!");
