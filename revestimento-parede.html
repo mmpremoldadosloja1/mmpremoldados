@@ -18,7 +18,12 @@ html, body{
   overflow-x:hidden;
 }
 
-/* HEADER IGUAL COBOGÓS */
+/* 🔥 REMOVE ESPAÇO */
+body.sem-header{
+  padding-top:0 !important;
+}
+
+/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -29,8 +34,15 @@ header{
   top:0;
   z-index:999;
   background:#fff;
+  transition:0.3s;
 }
 
+/* 🔥 SOME TOTAL */
+header.sumir{
+  display:none;
+}
+
+/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -62,6 +74,73 @@ nav{
 .nav-item:hover{
   color:#e63946;
   transform:scale(1.05);
+}
+
+/* ===== CARRINHO ===== */
+.carrinho-lateral{
+  position:fixed;
+  top:0;
+  right:-350px;
+  width:320px;
+  height:100%;
+  background:#fff;
+  box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+  padding:20px;
+  transition:0.3s;
+  z-index:1001;
+  display:flex;
+  flex-direction:column;
+}
+
+.carrinho-lateral.active{
+  right:0;
+}
+
+.lista-carrinho{
+  flex:1;
+  overflow-y:auto;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.remover{
+  background:#e63946;
+  color:#fff;
+  border:none;
+  padding:3px 8px;
+  border-radius:4px;
+  cursor:pointer;
+}
+
+.btn-finalizar{
+  padding:15px;
+  background:#25D366;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+  z-index:1000;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
 }
 
 /* TITULO */
@@ -132,7 +211,7 @@ h1{
   color:#666;
 }
 
-/* CONTADOR PADRÃO COBOGÓS */
+/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
@@ -181,7 +260,7 @@ h1{
 
 <body>
 
-<header>
+<header id="header">
   <nav>
     <a href="index.html" class="nav-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -192,8 +271,8 @@ h1{
     </a>
   </nav>
 
-  <nav>
-    <a href="#" class="nav-item">
+  <nav class="nav-right">
+    <a href="#" class="nav-item" onclick="abrirCarrinho(); return false;">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
@@ -204,6 +283,15 @@ h1{
   </nav>
 </header>
 
+<!-- CARRINHO -->
+<div class="carrinho-lateral" id="carrinho">
+  <h3>Seu Carrinho</h3>
+  <div class="lista-carrinho" id="lista"></div>
+  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
+</div>
+
+<div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
+
 <h1>REVESTIMENTO DE PAREDE</h1>
 
 <div class="grid" id="gridProdutos"></div>
@@ -213,7 +301,6 @@ h1{
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* CONTADOR */
 function aumentar(btn){
   const input = btn.parentElement.querySelector('.qtd');
   input.value = parseInt(input.value) + 1;
@@ -224,7 +311,6 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-/* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -240,6 +326,59 @@ function adicionarCarrinho(botao){
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   alert("Produto adicionado!");
+}
+
+/* 🔥 CONTROLE DO CARRINHO */
+function abrirCarrinho(){
+  document.getElementById("carrinho").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+
+  document.getElementById("header").classList.add("sumir");
+  document.body.classList.add("sem-header");
+
+  renderizar();
+}
+
+function fecharCarrinho(){
+  document.getElementById("carrinho").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+
+  document.getElementById("header").classList.remove("sumir");
+  document.body.classList.remove("sem-header");
+}
+
+function renderizar(){
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  if(carrinho.length === 0){
+    lista.innerHTML = "Carrinho vazio";
+    return;
+  }
+
+  carrinho.forEach((item, i)=>{
+    lista.innerHTML += `
+      <div class="item">
+        ${item.nome} (x${item.qtd})
+        <button class="remover" onclick="remover(${i})">X</button>
+      </div>
+    `;
+  });
+}
+
+function remover(i){
+  carrinho.splice(i,1);
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  renderizar();
+}
+
+function enviarWhatsApp(){
+  let msg = "Pedido:%0A";
+  carrinho.forEach(item=>{
+    msg += `${item.nome} - ${item.qtd}%0A`;
+  });
+
+  window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
 
 /* PRODUTOS */
