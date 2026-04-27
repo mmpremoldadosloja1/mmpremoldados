@@ -3,19 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lajes Pré-Moldadas</title>
+<title>Cobogós | MM Pré-Moldados</title>
+
+<link rel="stylesheet" href="css/style.css">
 
 <style>
 
 body{
-  margin:0;
-  font-family:'Montserrat', sans-serif;
-  background:#f5f5f5;
+  background:#fff;
+  color:#000;
   padding-top:90px;
-  overflow-x:hidden;
+  font-family: 'Montserrat', sans-serif;
 }
 
-/* HEADER (COBOGÓS) */
+/* 🔥 NOVO */
 body.sem-header{
   padding-top:0 !important;
 }
@@ -30,16 +31,29 @@ header{
   top:0;
   z-index:999;
   background:#fff;
+  transition:0.3s;
 }
 
+/* 🔥 NOVO */
 header.sumir{
   display:none;
 }
 
+/* NAV */
 nav{
+  display:flex;
+  gap:25px;
+  align-items:center;
+}
+
+.nav-left, .nav-right{
   display:flex;
   gap:20px;
   align-items:center;
+}
+
+.nav-right{
+  margin-right:20px;
 }
 
 .nav-item{
@@ -50,6 +64,7 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
+  transition:0.3s;
 }
 
 .nav-item svg{
@@ -59,7 +74,12 @@ nav{
   stroke:currentColor;
 }
 
-/* CARRINHO */
+.nav-item:hover{
+  color:#e63946;
+  transform:scale(1.05);
+}
+
+/* ===== CARRINHO ===== */
 .carrinho-lateral{
   position:fixed;
   top:0;
@@ -109,6 +129,7 @@ nav{
   cursor:pointer;
 }
 
+/* OVERLAY */
 .overlay{
   position:fixed;
   width:100%;
@@ -125,99 +146,93 @@ nav{
   pointer-events:auto;
 }
 
-/* BLOCO ORIGINAL */
-.bloco{
-  background:#fff;
-  margin:20px;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.08);
-  overflow:hidden;
+/* ===== SEU CSS ORIGINAL ===== */
+
+h1{
+  text-align:center;
+  text-transform:uppercase;
+  font-size:36px;
+  margin-bottom:20px;
+  color:#e63946;
 }
 
-.imagem{
-  width:100%;
-  height:150px;
-  background:#eee;
-  border-radius:10px;
+h2{
+  text-align:left;
+  margin-top:30px;
   margin-bottom:15px;
+  font-size:22px;
+  padding-left:20px;
 }
 
-select, input{
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+  gap:20px;
+  padding:0 20px 40px 20px;
+}
+
+.card{
+  background:#fff;
+  border-radius:12px;
+  padding:15px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.card img{
   width:100%;
-  padding:10px;
-  margin-top:10px;
-  border-radius:6px;
-  border:1px solid #ccc;
+  height:110px;
+  object-fit:contain;
 }
 
-select:invalid{
-  color:#999;
+.card h3{
+  margin:10px 0;
+  font-size:14px;
+  min-height:40px;
 }
 
-/* CONTADOR IGUAL COBOGÓS */
 .contador{
   display:flex;
   justify-content:center;
   align-items:center;
   gap:5px;
-  margin-top:10px;
+  margin-bottom:8px;
 }
 
 .contador button{
   padding:5px 10px;
   font-size:16px;
+  cursor:pointer;
   border:none;
   border-radius:5px;
   background:#eee;
-  cursor:pointer;
 }
 
 .contador input{
-  width:60px;
+  width:50px;
   text-align:center;
+  border:1px solid #ccc;
+  border-radius:5px;
+  padding:5px;
 }
 
-/* BOTÃO */
 .btn{
-  margin-top:15px;
   width:100%;
-  padding:12px;
+  padding:10px 0;
   background:#e63946;
   color:#fff;
+  font-weight:bold;
   border:none;
   border-radius:8px;
   cursor:pointer;
 }
 
-/* DESKTOP LINHA */
-@media(min-width:900px){
-
-  .bloco{
-    display:flex;
-    gap:20px;
-    align-items:center;
-  }
-
-  .imagem{
-    width:200px;
-    height:140px;
-    flex-shrink:0;
-  }
-
-  .conteudo{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    width:100%;
-  }
-
-  .conteudo select,
-  .conteudo input{
-    width:auto;
-    min-width:140px;
-  }
-
+.btn:hover{
+  background:#c92f3b;
+  transform:scale(1.05);
 }
 
 </style>
@@ -225,9 +240,8 @@ select:invalid{
 
 <body>
 
-<!-- HEADER CORRETO -->
 <header id="header">
-  <nav>
+  <nav class="nav-left">
     <a href="index.html" class="nav-item">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <path d="M3 10L12 3l9 7"></path>
@@ -237,8 +251,8 @@ select:invalid{
     </a>
   </nav>
 
-  <nav>
-    <a href="#" class="nav-item" onclick="abrirCarrinho();return false;">
+  <nav class="nav-right">
+    <a href="#" class="nav-item" onclick="abrirCarrinho(); return false;">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
@@ -253,160 +267,222 @@ select:invalid{
 <div class="carrinho-lateral" id="carrinho">
   <h3>Seu Carrinho</h3>
   <div class="lista-carrinho" id="lista"></div>
-  <button class="btn-finalizar" onclick="enviar()">Finalizar</button>
+  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
 </div>
 
 <div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
 
-<h1 style="text-align:center;color:#e63946;">LAJES</h1>
+<h1>COBOGÓS</h1>
 
-<!-- ===== SEU CONTEÚDO ORIGINAL (INTACTO) ===== -->
+<h2>Cobogós 40x40</h2>
+<div class="grid">
 
-<div class="bloco">
-<div class="imagem"></div>
-
-<div class="conteudo">
-
-<select id="tipoLaje" required onchange="atualizarIsopor()">
-<option value="" disabled selected>Selecione a laje</option>
-<option value="H8">Laje de Teto H8</option>
-<option value="H10">Laje de Piso H10</option>
-</select>
-
-<select id="isopor" required>
-<option value="" disabled selected>Selecione o isopor</option>
-</select>
-
-<input type="number" id="c" placeholder="Comprimento">
-<input type="number" id="l" placeholder="Largura">
-
-<div id="m2">0 m²</div>
-
-<button class="btn" onclick="addLaje()">Adicionar</button>
-
-</div>
-</div>
-
-<div class="bloco">
-<div class="imagem"></div>
-
-<div class="conteudo">
-
-<select id="tipoViga">
-<option>H8 TETO</option>
-<option>H10 PISO</option>
-</select>
-
-<input list="listaVigas" id="tamViga" placeholder="Tamanho">
-<datalist id="listaVigas"></datalist>
-
+<div class="card">
+<img src="img/cobogo/cobogo-16-furos-40.jpg">
+<h3>16 Furos 40x40</h3>
 <div class="contador">
-<button onclick="dim('qv')">−</button>
-<input id="qv" value="1">
-<button onclick="mais('qv')">+</button>
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
 </div>
 
-<button class="btn" onclick="addViga()">Adicionar</button>
-
-</div>
-</div>
-
-<div class="bloco">
-<div class="imagem"></div>
-
-<div class="conteudo">
-
-<select id="tipoIso">
-<option>H8 - 7,5x33</option>
-<option>H8 - 7,5x40</option>
-<option>H10 - 9x33</option>
-<option>H10 - 9x40</option>
-</select>
-
+<div class="card">
+<img src="img/cobogo/cobogo-4-pontas-40.jpg">
+<h3>4 Pontas 40x40</h3>
 <div class="contador">
-<button onclick="dim('qi')">−</button>
-<input id="qi" value="1">
-<button onclick="mais('qi')">+</button>
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
 </div>
 
-<button class="btn" onclick="addIso()">Adicionar</button>
+<div class="card">
+<img src="img/cobogo/cobogo-anti-chuva-40.jpg">
+<h3>Anti-Chuva 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-arabe-40.jpg">
+<h3>Árabe 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-flor-40.jpg">
+<h3>Flor 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-taco-chines-40.jpg">
+<h3>Taco Chinês 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
 
 </div>
+
+<h2>Cobogós 30x30</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-estrela-30.jpg">
+<h3>Estrela 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-estrela-dos-ventos-30.jpg">
+<h3>Estrela dos Ventos 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-fenestra-30.jpg">
+<h3>Fenestra 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-petala-30.jpg">
+<h3>Pétala 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-quadrado-cruz-30.jpg">
+<h3>Quadrado Cruz 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-xis-30.jpg">
+<h3>Xis 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+</div>
+
+<h2>Cobogós 24x24</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-4-furos-24.jpg">
+<h3>4 Furos 24x24</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
 </div>
 
 <script>
 
+function aumentar(btn){
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = parseInt(input.value) + 1;
+}
+
+function diminuir(btn){
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = Math.max(1, parseInt(input.value) - 1);
+}
+
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* ===== SUA LÓGICA ORIGINAL ===== */
+function adicionarCarrinho(botao){
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const qtd = parseInt(card.querySelector('.qtd').value);
 
-function atualizarIsopor(){
-  const tipo = document.getElementById("tipoLaje").value;
-  const select = document.getElementById("isopor");
+  const existente = carrinho.find(item => item.nome === nome);
 
-  select.innerHTML = `<option disabled selected>Selecione o isopor</option>`;
-
-  if(tipo === "H8"){
-    select.innerHTML += `<option>7,5x33</option>`;
-    select.innerHTML += `<option>7,5x40</option>`;
+  if(existente){
+    existente.qtd += qtd;
+  }else{
+    carrinho.push({nome, qtd});
   }
 
-  if(tipo === "H10"){
-    select.innerHTML += `<option>9x33</option>`;
-    select.innerHTML += `<option>9x40</option>`;
-  }
-}
-
-document.getElementById("c").oninput = calc;
-document.getElementById("l").oninput = calc;
-
-function calc(){
-  let c = parseFloat(c.value)||0;
-  let l = parseFloat(l.value)||0;
-  m2.innerText = (c*l).toFixed(2)+" m²";
-}
-
-function mais(id){
-  let el = document.getElementById(id);
-  el.value = parseInt(el.value||1)+1;
-}
-
-function dim(id){
-  let el = document.getElementById(id);
-  el.value = Math.max(1, parseInt(el.value||1)-1);
-}
-
-for(let i=0.8;i<=6;i+=0.1){
-  listaVigas.innerHTML += `<option value="${i.toFixed(1)}m">`;
-}
-
-function addLaje(){ carrinho.push({nome:"Laje",qtd:1}); salvar(); }
-function addViga(){ carrinho.push({nome:"Viga",qtd:1}); salvar(); }
-function addIso(){ carrinho.push({nome:"Isopor",qtd:1}); salvar(); }
-
-/* ===== CARRINHO COBOGÓS ===== */
-
-function salvar(){
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  renderizar();
+  alert('Produto adicionado');
 }
 
 function abrirCarrinho(){
-  carrinho.classList.add("active");
-  overlay.classList.add("active");
-  header.classList.add("sumir");
+  document.getElementById("carrinho").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+
+  document.getElementById("header").classList.add("sumir");
   document.body.classList.add("sem-header");
+
   renderizar();
 }
 
 function fecharCarrinho(){
-  carrinho.classList.remove("active");
-  overlay.classList.remove("active");
-  header.classList.remove("sumir");
+  document.getElementById("carrinho").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+
+  document.getElementById("header").classList.remove("sumir");
   document.body.classList.remove("sem-header");
 }
 
 function renderizar(){
+  const lista = document.getElementById("lista");
   lista.innerHTML = "";
 
   if(carrinho.length === 0){
@@ -414,25 +490,28 @@ function renderizar(){
     return;
   }
 
-  carrinho.forEach((item,i)=>{
+  carrinho.forEach((item, i)=>{
     lista.innerHTML += `
       <div class="item">
         ${item.nome} (x${item.qtd})
         <button class="remover" onclick="remover(${i})">X</button>
-      </div>`;
+      </div>
+    `;
   });
 }
 
 function remover(i){
   carrinho.splice(i,1);
-  salvar();
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  renderizar();
 }
 
-function enviar(){
-  let msg="Pedido:%0A";
-  carrinho.forEach(i=>{
-    msg+=`${i.nome} - ${i.qtd}%0A`;
+function enviarWhatsApp(){
+  let msg = "Pedido:%0A";
+  carrinho.forEach(item=>{
+    msg += `${item.nome} - ${item.qtd}%0A`;
   });
+
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
 
