@@ -15,7 +15,7 @@ body{
   overflow-x:hidden;
 }
 
-/* 🔥 HEADER IGUAL COBOGO */
+/* ===== HEADER IGUAL COBOGO ===== */
 body.sem-header{
   padding-top:0 !important;
 }
@@ -30,7 +30,6 @@ header{
   top:0;
   z-index:999;
   background:#fff;
-  transition:0.3s;
 }
 
 header.sumir{
@@ -70,7 +69,7 @@ nav{
   stroke:currentColor;
 }
 
-/* CARRINHO IGUAL COBOGO */
+/* ===== CARRINHO ===== */
 .carrinho-lateral{
   position:fixed;
   top:0;
@@ -95,31 +94,6 @@ nav{
   overflow-y:auto;
 }
 
-.item{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
-.remover{
-  background:#e63946;
-  color:#fff;
-  border:none;
-  padding:3px 8px;
-  border-radius:4px;
-  cursor:pointer;
-}
-
-.btn-finalizar{
-  padding:15px;
-  background:#25D366;
-  color:#fff;
-  border:none;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
 .overlay{
   position:fixed;
   width:100%;
@@ -127,7 +101,6 @@ nav{
   background:rgba(0,0,0,0.4);
   opacity:0;
   pointer-events:none;
-  transition:0.3s;
   z-index:1000;
 }
 
@@ -136,7 +109,7 @@ nav{
   pointer-events:auto;
 }
 
-/* RESTO DO SEU CSS (INALTERADO) */
+/* ===== SEU CSS ORIGINAL ===== */
 
 .bloco{
   background:#fff;
@@ -229,7 +202,7 @@ select:invalid{
 
 <body>
 
-<!-- HEADER IGUAL COBOGO -->
+<!-- HEADER CORRETO -->
 <header id="header">
   <nav class="nav-left">
     <a href="index.html" class="nav-item">
@@ -257,14 +230,14 @@ select:invalid{
 <div class="carrinho-lateral" id="carrinho">
   <h3>Seu Carrinho</h3>
   <div class="lista-carrinho" id="lista"></div>
-  <button class="btn-finalizar" onclick="enviar()">Finalizar</button>
+  <button class="btn" onclick="enviar()">Finalizar</button>
 </div>
 
 <div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
 
 <h1 style="text-align:center;color:#e63946;">LAJES</h1>
 
-<!-- SUA ESTRUTURA ORIGINAL (NÃO ALTERADA) -->
+<!-- ===== LAJES (INALTERADO) ===== -->
 <div class="bloco">
 <div class="imagem"></div>
 
@@ -290,10 +263,61 @@ select:invalid{
 </div>
 </div>
 
+<!-- ===== VIGAS (INALTERADO) ===== -->
+<div class="bloco">
+<div class="imagem"></div>
+
+<div class="conteudo">
+
+<select id="tipoViga">
+<option>H8 TETO</option>
+<option>H10 PISO</option>
+</select>
+
+<input list="listaVigas" id="tamViga" placeholder="Tamanho">
+
+<datalist id="listaVigas"></datalist>
+
+<div class="contador">
+<button onclick="dim('qv')">-</button>
+<input id="qv" value="1">
+<button onclick="mais('qv')">+</button>
+</div>
+
+<button class="btn" onclick="addViga()">Adicionar</button>
+
+</div>
+</div>
+
+<!-- ===== ISOPOR (INALTERADO) ===== -->
+<div class="bloco">
+<div class="imagem"></div>
+
+<div class="conteudo">
+
+<select id="tipoIso">
+<option>H8 - 7,5x33</option>
+<option>H8 - 7,5x40</option>
+<option>H10 - 9x33</option>
+<option>H10 - 9x40</option>
+</select>
+
+<div class="contador">
+<button onclick="dim('qi')">-</button>
+<input id="qi" value="1">
+<button onclick="mais('qi')">+</button>
+</div>
+
+<button class="btn" onclick="addIso()">Adicionar</button>
+
+</div>
+</div>
+
 <script>
 
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
+/* ISOPOR */
 function atualizarIsopor(){
   const tipo = document.getElementById("tipoLaje").value;
   const select = document.getElementById("isopor");
@@ -311,25 +335,53 @@ function atualizarIsopor(){
   }
 }
 
+/* CONTADOR */
+function mais(id){
+  let el = document.getElementById(id);
+  el.value = parseInt(el.value||1)+1;
+}
+
+function dim(id){
+  let el = document.getElementById(id);
+  el.value = Math.max(1, parseInt(el.value||1)-1);
+}
+
+/* LISTA VIGAS */
+for(let i=0.8;i<=6;i+=0.1){
+  listaVigas.innerHTML += `<option value="${i.toFixed(1)}m">`;
+}
+
+/* ADD */
+function addLaje(){ carrinho.push({nome:"Laje", qtd:1}); salvar(); }
+function addViga(){ carrinho.push({nome:"Viga", qtd:1}); salvar(); }
+function addIso(){ carrinho.push({nome:"Isopor", qtd:1}); salvar(); }
+
+/* CARRINHO */
+function salvar(){
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  render();
+}
+
 function abrirCarrinho(){
-  carrinho.classList.add("active");
-  overlay.classList.add("active");
-  header.classList.add("sumir");
+  document.getElementById("carrinho").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+  document.getElementById("header").classList.add("sumir");
   document.body.classList.add("sem-header");
   render();
 }
 
 function fecharCarrinho(){
-  carrinho.classList.remove("active");
-  overlay.classList.remove("active");
-  header.classList.remove("sumir");
+  document.getElementById("carrinho").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+  document.getElementById("header").classList.remove("sumir");
   document.body.classList.remove("sem-header");
 }
 
 function render(){
+  const lista = document.getElementById("lista");
   lista.innerHTML="";
-  carrinho.forEach(i=>{
-    lista.innerHTML+=`${i.nome} (${i.qtd})<br>`;
+  carrinho.forEach((i,index)=>{
+    lista.innerHTML += `${i.nome} (${i.qtd})<br>`;
   });
 }
 
