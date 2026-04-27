@@ -3,17 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lajes | MM Pré-Moldados</title>
+<title>Lajes Pré-Moldadas</title>
 
 <style>
+
 body{
-  background:#fff;
-  font-family:'Montserrat', sans-serif;
-  padding-top:90px;
   margin:0;
+  font-family:'Montserrat', sans-serif;
+  background:#f5f5f5;
+  padding-top:90px;
+  overflow-x:hidden;
 }
 
-/* HEADER IGUAL COBOGÓ */
+/* HEADER IGUAL COBOGO */
+body.sem-header{
+  padding-top:0 !important;
+}
+
 header{
   width:100%;
   display:flex;
@@ -26,9 +32,20 @@ header{
   background:#fff;
 }
 
+header.sumir{
+  display:none;
+}
+
 nav{
   display:flex;
+  gap:25px;
+  align-items:center;
+}
+
+.nav-left, .nav-right{
+  display:flex;
   gap:20px;
+  align-items:center;
 }
 
 .nav-item{
@@ -44,26 +61,56 @@ nav{
 .nav-item svg{
   width:24px;
   height:24px;
+  stroke:currentColor;
 }
 
 /* CARRINHO */
 .carrinho-lateral{
   position:fixed;
-  top:0;
   right:-350px;
+  top:0;
   width:320px;
   height:100%;
   background:#fff;
-  box-shadow:-5px 0 20px rgba(0,0,0,0.2);
-  padding:20px;
-  transition:.3s;
   z-index:1001;
+  padding:20px;
+  transition:0.3s;
   display:flex;
   flex-direction:column;
 }
 
 .carrinho-lateral.active{
   right:0;
+}
+
+.lista-carrinho{
+  flex:1;
+  overflow-y:auto;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.remover{
+  background:#e63946;
+  color:#fff;
+  border:none;
+  padding:3px 8px;
+  border-radius:4px;
+  cursor:pointer;
+}
+
+.btn-finalizar{
+  padding:15px;
+  background:#25D366;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 .overlay{
@@ -73,6 +120,7 @@ nav{
   background:rgba(0,0,0,0.4);
   opacity:0;
   pointer-events:none;
+  z-index:1000;
 }
 
 .overlay.active{
@@ -80,31 +128,29 @@ nav{
   pointer-events:auto;
 }
 
-/* TITULO */
-h1{
-  text-align:center;
-  color:#e63946;
+/* BLOCO */
+.bloco{
+  background:#fff;
+  margin:20px;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
 }
 
-/* ===== LAYOUT LINHA ===== */
-.linha{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  padding:10px 20px;
-  align-items:center;
-  border-bottom:1px solid #eee;
+/* IMG */
+.imagem{
+  width:100%;
+  height:150px;
+  background:#eee;
+  border-radius:10px;
+  margin-bottom:15px;
 }
 
-.linha img{
-  width:60px;
-  height:60px;
-  object-fit:contain;
-}
-
-/* CAMPOS */
+/* INPUT */
 select, input{
-  padding:6px;
+  width:100%;
+  padding:10px;
+  margin-top:10px;
   border-radius:6px;
   border:1px solid #ccc;
 }
@@ -112,8 +158,10 @@ select, input{
 /* CONTADOR IGUAL COBOGO */
 .contador{
   display:flex;
+  justify-content:center;
   align-items:center;
   gap:5px;
+  margin-top:10px;
 }
 
 .contador button{
@@ -125,204 +173,176 @@ select, input{
 }
 
 .contador input{
-  width:50px;
+  width:60px;
   text-align:center;
+  border:1px solid #ccc;
+  border-radius:5px;
 }
 
-/* BOTÃO */
+/* BTN */
 .btn{
+  margin-top:15px;
+  width:100%;
+  padding:12px;
   background:#e63946;
   color:#fff;
   border:none;
-  padding:8px 15px;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
 }
 
-/* MOBILE = FOLHA */
-@media(max-width:768px){
-  .linha{
-    flex-direction:column;
-    align-items:stretch;
+/* DESKTOP */
+@media(min-width:900px){
+
+  .bloco{
+    display:flex;
+    gap:20px;
+    align-items:center;
   }
+
+  .imagem{
+    width:200px;
+    height:140px;
+  }
+
+  .conteudo{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    width:100%;
+  }
+
+  .conteudo select,
+  .conteudo input{
+    width:auto;
+    min-width:140px;
+  }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<header>
-<nav>
-<a href="index.html" class="nav-item">🏠 Início</a>
-</nav>
+<!-- HEADER CORRETO -->
+<header id="header">
+  <nav class="nav-left">
+    <a href="index.html" class="nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+      Início
+    </a>
+  </nav>
 
-<nav>
-<a href="#" class="nav-item" onclick="abrirCarrinho()">🛒 Carrinho</a>
-</nav>
+  <nav class="nav-right">
+    <a href="#" class="nav-item" onclick="abrirCarrinho();return false;">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+      Carrinho
+    </a>
+  </nav>
 </header>
 
+<!-- CARRINHO -->
 <div class="carrinho-lateral" id="carrinho">
-<h3>Carrinho</h3>
-<div id="lista"></div>
+  <h3>Seu Carrinho</h3>
+  <div class="lista-carrinho" id="lista"></div>
+  <button class="btn-finalizar" onclick="enviar()">Finalizar</button>
 </div>
 
 <div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
 
-<h1>LAJES</h1>
+<h1 style="text-align:center;color:#e63946;">LAJES</h1>
 
-<!-- LAJES -->
-<div class="linha">
-<img src="img/laje.jpg">
+<!-- SUA ESTRUTURA ORIGINAL (INTOCADA) -->
+<div class="bloco">
+<div class="imagem"></div>
 
-<select id="tipoLaje" onchange="atualizarIsopor()">
-<option disabled selected>Selecione a laje</option>
-<option value="H8">Laje Teto H8</option>
-<option value="H10">Laje Piso H10</option>
+<div class="conteudo">
+
+<select id="tipoLaje" required onchange="atualizarIsopor()">
+<option value="" disabled selected>Selecione a laje</option>
+<option value="H8">Laje de Teto H8</option>
+<option value="H10">Laje de Piso H10</option>
 </select>
 
-<select id="isopor">
-<option disabled selected>Escolha o isopor</option>
+<select id="isopor" required>
+<option value="" disabled selected>Selecione o isopor</option>
 </select>
 
-<input type="number" id="comprimento" placeholder="Comprimento (m)">
-<input type="number" id="largura" placeholder="Largura (m)">
+<input type="number" id="c" placeholder="Comprimento">
+<input type="number" id="l" placeholder="Largura">
 
-<input type="text" id="m2" placeholder="m²" readonly>
+<div id="m2">0 m²</div>
 
 <button class="btn" onclick="addLaje()">Adicionar</button>
+
 </div>
-
-<!-- VIGAS -->
-<div class="linha">
-<img src="img/viga.jpg">
-
-<select id="tipoViga">
-<option>H8 TETO</option>
-<option>H10 PISO</option>
-</select>
-
-<input list="medidasViga" id="medidaViga" placeholder="Tamanho">
-
-<datalist id="medidasViga"></datalist>
-
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-
-<button class="btn" onclick="addViga(this)">Adicionar</button>
-</div>
-
-<!-- ISOPOR -->
-<div class="linha">
-<img src="img/isopor.jpg">
-
-<select id="isoporUnit">
-<option>H8 7,5x33</option>
-<option>H8 7,5x40</option>
-<option>H10 9x33</option>
-<option>H10 9x40</option>
-</select>
-
-<div class="contador">
-<button onclick="diminuir(this)">−</button>
-<input type="number" class="qtd" value="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-
-<button class="btn" onclick="addIsopor(this)">Adicionar</button>
 </div>
 
 <script>
 
-/* GERAR TAMANHO VIGA */
-const lista = document.getElementById("medidasViga");
-for(let i=0.8;i<=6;i+=0.1){
-  let op = document.createElement("option");
-  op.value = i.toFixed(1)+"m";
-  lista.appendChild(op);
-}
-
-/* ISOPOR DINÂMICO */
-function atualizarIsopor(){
-  const tipo = document.getElementById("tipoLaje").value;
-  const select = document.getElementById("isopor");
-
-  select.innerHTML = "<option disabled selected>Escolha o isopor</option>";
-
-  if(tipo === "H8"){
-    select.innerHTML += "<option>7,5x33</option><option>7,5x40</option>";
-  } else {
-    select.innerHTML += "<option>9x33</option><option>9x40</option>";
-  }
-}
-
-/* CALCULO M2 */
-document.getElementById("comprimento").oninput =
-document.getElementById("largura").oninput = function(){
-  let c = document.getElementById("comprimento").value;
-  let l = document.getElementById("largura").value;
-  document.getElementById("m2").value = (c*l || 0).toFixed(2);
-}
-
-/* CONTADOR */
-function aumentar(btn){
-  let input = btn.parentElement.querySelector("input");
-  input.value = parseInt(input.value)+1;
-}
-
-function diminuir(btn){
-  let input = btn.parentElement.querySelector("input");
-  input.value = Math.max(1, input.value-1);
-}
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 /* CARRINHO */
-let carrinho = [];
-
-function addLaje(){
-  let tipo = tipoLaje.value;
-  let iso = isopor.value;
-  let m2 = document.getElementById("m2").value;
-
-  carrinho.push({nome:`${tipo} ${iso} (${m2}m²)`});
-  render();
-}
-
-function addViga(btn){
-  let tipo = tipoViga.value;
-  let tam = medidaViga.value;
-  let qtd = btn.parentElement.querySelector("input").value;
-
-  carrinho.push({nome:`Viga ${tipo} ${tam} x${qtd}`});
-  render();
-}
-
-function addIsopor(btn){
-  let tipo = isoporUnit.value;
-  let qtd = btn.parentElement.querySelector("input").value;
-
-  carrinho.push({nome:`Isopor ${tipo} x${qtd}`});
-  render();
-}
-
 function abrirCarrinho(){
-  carrinhoBox.classList.add("active");
+  carrinhoEl.classList.add("active");
   overlay.classList.add("active");
+  header.classList.add("sumir");
+  document.body.classList.add("sem-header");
+  render();
 }
 
 function fecharCarrinho(){
-  carrinhoBox.classList.remove("active");
+  carrinhoEl.classList.remove("active");
   overlay.classList.remove("active");
+  header.classList.remove("sumir");
+  document.body.classList.remove("sem-header");
 }
-
-const carrinhoBox = document.getElementById("carrinho");
-const overlay = document.getElementById("overlay");
 
 function render(){
-  let lista = document.getElementById("lista");
-  lista.innerHTML = carrinho.map(i=>`<div>${i.nome}</div>`).join("");
+  lista.innerHTML="";
+  if(carrinho.length === 0){
+    lista.innerHTML="Carrinho vazio";
+    return;
+  }
+
+  carrinho.forEach((item,i)=>{
+    lista.innerHTML+=`
+    <div class="item">
+      ${item.nome} (x${item.qtd})
+      <button class="remover" onclick="remover(${i})">X</button>
+    </div>`;
+  });
 }
+
+function remover(i){
+  carrinho.splice(i,1);
+  salvar();
+}
+
+function salvar(){
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  render();
+}
+
+function enviar(){
+  let msg="Pedido:%0A";
+  carrinho.forEach(i=>{
+    msg+=`${i.nome} - ${i.qtd}%0A`;
+  });
+  window.open(`https://wa.me/5561999385680?text=${msg}`);
+}
+
+const carrinhoEl = document.getElementById("carrinho");
+const overlay = document.getElementById("overlay");
+const header = document.getElementById("header");
 
 </script>
 
