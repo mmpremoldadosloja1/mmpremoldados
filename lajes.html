@@ -2,90 +2,97 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Lajes Pré-Moldadas | MM Pré-Moldados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lajes Pré-Moldadas | MM Pré-Moldados</title>
 
 <style>
 
 body{
-  font-family:'Montserrat', sans-serif;
   background:#f5f5f5;
+  font-family:'Montserrat', sans-serif;
   margin:0;
-  padding:20px;
+  padding-top:90px;
+}
+
+/* HEADER */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:#fff;
+  padding:15px;
+  z-index:999;
+  display:flex;
+  justify-content:space-between;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
 /* TITULO */
 h1{
   text-align:center;
   color:#e63946;
-  margin-bottom:20px;
 }
 
-/* SUBTITULO */
-h2{
-  margin-top:25px;
-  color:#333;
-}
-
-/* CONTAINER */
-.container{
-  max-width:650px;
-  margin:auto;
+/* BLOCO */
+.bloco{
   background:#fff;
+  margin:20px;
   padding:20px;
   border-radius:12px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
 }
 
-/* CAMPOS */
+/* INPUTS */
 select, input{
   width:100%;
   padding:10px;
-  margin:8px 0;
-  border-radius:8px;
+  margin-top:10px;
+  border-radius:6px;
   border:1px solid #ccc;
 }
 
-/* BOTÕES */
+/* LINHA */
+.linha{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+/* CONTADOR */
+.contador{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+}
+
+.contador button{
+  padding:5px 12px;
+  font-size:18px;
+  border:none;
+  background:#eee;
+  cursor:pointer;
+}
+
+/* BOTÃO */
 .btn{
+  margin-top:15px;
   width:100%;
   padding:12px;
+  background:#e63946;
+  color:#fff;
   border:none;
   border-radius:8px;
   font-weight:bold;
   cursor:pointer;
+}
+
+/* RESULTADO */
+.resultado{
   margin-top:10px;
-}
-
-.add{
-  background:#e63946;
-  color:#fff;
-}
-
-.finalizar{
-  background:#25D366;
-  color:#fff;
-}
-
-/* LISTA */
-.lista{
-  margin-top:20px;
-}
-
-.item{
-  display:flex;
-  justify-content:space-between;
-  padding:8px;
-  border-bottom:1px solid #ddd;
-}
-
-.remover{
-  background:red;
-  color:#fff;
-  border:none;
-  padding:3px 8px;
-  border-radius:5px;
-  cursor:pointer;
+  font-weight:bold;
+  text-align:center;
 }
 
 </style>
@@ -93,146 +100,173 @@ select, input{
 
 <body>
 
+<header>
+  <a href="index.html">Início</a>
+</header>
+
 <h1>LAJES PRÉ-MOLDADAS</h1>
 
-<div class="container">
+<!-- ================= LAJES ================= -->
+<div class="bloco">
 
-  <!-- LAJE -->
-  <h2>Lajes</h2>
+<h2>Lajes</h2>
 
-  <select id="tipoLaje">
-    <option>Laje Teto H8</option>
-    <option>Laje Piso H10</option>
-  </select>
+<select id="tipoLaje" onchange="atualizarIsopor()">
+  <option value="">Selecione a laje</option>
+  <option value="H8">Laje de Teto H8</option>
+  <option value="H10">Laje de Piso H10</option>
+</select>
 
-  <select id="medidaLaje">
-    <option>7,5cm x 33cm</option>
-    <option>7,5cm x 40cm</option>
-    <option>9cm x 33cm</option>
-    <option>9cm x 40cm</option>
-  </select>
+<select id="isopor"></select>
 
-  <input type="number" id="qtdLaje" value="1" min="1">
+<div class="linha">
+  <input type="number" id="comprimento" placeholder="Comprimento (m)" oninput="calcular()">
+  <input type="number" id="largura" placeholder="Largura (m)" oninput="calcular()">
+</div>
 
-  <button class="btn add" onclick="addLaje()">Adicionar Laje</button>
+<div class="resultado" id="m2">Total: 0 m²</div>
 
-  <!-- VIGA -->
-  <h2>Vigas</h2>
+<button class="btn" onclick="addLaje()">Adicionar ao carrinho</button>
 
-  <select id="tipoViga">
-    <option>H8</option>
-    <option>H10</option>
-  </select>
+</div>
 
-  <select id="tamViga">
-    <option>2 metros</option>
-    <option>3 metros</option>
-    <option>4 metros</option>
-  </select>
+<!-- ================= VIGAS ================= -->
+<div class="bloco">
 
-  <input type="number" id="qtdViga" value="1" min="1">
+<h2>Vigas por unidade</h2>
 
-  <button class="btn add" onclick="addViga()">Adicionar Viga</button>
+<select id="tipoViga">
+  <option>H8</option>
+  <option>H10</option>
+</select>
 
-  <!-- ISOPOR -->
-  <h2>Isopor</h2>
+<input list="listaVigas" id="tamanhoViga" placeholder="Digite ou selecione o tamanho">
 
-  <select id="tamIsopor">
-    <option>7,5 x 33cm</option>
-    <option>8 x 40cm</option>
-    <option>9 x 33cm</option>
-    <option>9 x 40cm</option>
-  </select>
+<datalist id="listaVigas"></datalist>
 
-  <input type="number" id="qtdIsopor" value="1" min="1">
+<div class="contador">
+  <button onclick="menos('qtdViga')">-</button>
+  <span id="qtdViga">1</span>
+  <button onclick="mais('qtdViga')">+</button>
+</div>
 
-  <button class="btn add" onclick="addIsopor()">Adicionar Isopor</button>
+<button class="btn" onclick="addViga()">Adicionar</button>
 
-  <!-- LISTA -->
-  <div class="lista" id="lista"></div>
+</div>
 
-  <button class="btn finalizar" onclick="enviar()">Finalizar no WhatsApp</button>
+<!-- ================= ISOPOR ================= -->
+<div class="bloco">
+
+<h2>Isopor por unidade</h2>
+
+<select id="tipoIsopor">
+  <option>H8 - 7,5x33cm</option>
+  <option>H8 - 7,5x40cm</option>
+  <option>H10 - 9x33cm</option>
+  <option>H10 - 9x40cm</option>
+</select>
+
+<div class="contador">
+  <button onclick="menos('qtdIso')">-</button>
+  <span id="qtdIso">1</span>
+  <button onclick="mais('qtdIso')">+</button>
+</div>
+
+<button class="btn" onclick="addIsopor()">Adicionar</button>
 
 </div>
 
 <script>
 
-let carrinho = [];
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-/* ADICIONAR LAJE */
+/* ================= ISOPOR DINÂMICO ================= */
+function atualizarIsopor(){
+  const tipo = document.getElementById("tipoLaje").value;
+  const select = document.getElementById("isopor");
+
+  select.innerHTML = "";
+
+  if(tipo === "H8"){
+    select.innerHTML += "<option>7,5x33cm</option>";
+    select.innerHTML += "<option>7,5x40cm</option>";
+  }
+
+  if(tipo === "H10"){
+    select.innerHTML += "<option>9x33cm</option>";
+    select.innerHTML += "<option>9x40cm</option>";
+  }
+}
+
+/* ================= CALCULO ================= */
+function calcular(){
+  const c = parseFloat(document.getElementById("comprimento").value) || 0;
+  const l = parseFloat(document.getElementById("largura").value) || 0;
+
+  const total = c * l;
+
+  document.getElementById("m2").innerText = "Total: " + total.toFixed(2) + " m²";
+}
+
+/* ================= CONTADOR ================= */
+function mais(id){
+  const el = document.getElementById(id);
+  el.innerText = parseInt(el.innerText)+1;
+}
+
+function menos(id){
+  const el = document.getElementById(id);
+  el.innerText = Math.max(1, parseInt(el.innerText)-1);
+}
+
+/* ================= VIGAS LISTA ================= */
+const lista = document.getElementById("listaVigas");
+for(let i=0.8; i<=6; i+=0.1){
+  lista.innerHTML += `<option value="${i.toFixed(1)}m">`;
+}
+
+/* ================= CARRINHO ================= */
+function salvar(){
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+/* ================= ADD LAJE ================= */
 function addLaje(){
   const tipo = document.getElementById("tipoLaje").value;
-  const medida = document.getElementById("medidaLaje").value;
-  const qtd = parseInt(document.getElementById("qtdLaje").value);
+  const iso = document.getElementById("isopor").value;
+  const m2 = document.getElementById("m2").innerText;
 
-  adicionarItem(`${tipo} - ${medida}`, qtd);
+  const nome = `Laje ${tipo} | Isopor ${iso} | ${m2}`;
+
+  carrinho.push({nome, qtd:1});
+  salvar();
+
+  alert("Adicionado!");
 }
 
-/* ADICIONAR VIGA */
+/* ================= ADD VIGA ================= */
 function addViga(){
   const tipo = document.getElementById("tipoViga").value;
-  const tamanho = document.getElementById("tamViga").value;
-  const qtd = parseInt(document.getElementById("qtdViga").value);
+  const tam = document.getElementById("tamanhoViga").value;
+  const qtd = document.getElementById("qtdViga").innerText;
 
-  adicionarItem(`Viga ${tipo} - ${tamanho}`, qtd);
+  const nome = `Viga ${tipo} - ${tam}`;
+
+  carrinho.push({nome, qtd});
+  salvar();
+
+  alert("Adicionado!");
 }
 
-/* ADICIONAR ISOPOR */
+/* ================= ADD ISOPOR ================= */
 function addIsopor(){
-  const tamanho = document.getElementById("tamIsopor").value;
-  const qtd = parseInt(document.getElementById("qtdIsopor").value);
+  const tipo = document.getElementById("tipoIsopor").value;
+  const qtd = document.getElementById("qtdIso").innerText;
 
-  adicionarItem(`Isopor - ${tamanho}`, qtd);
-}
+  carrinho.push({nome:tipo, qtd});
+  salvar();
 
-/* FUNÇÃO GLOBAL */
-function adicionarItem(nome, qtd){
-  const existente = carrinho.find(item => item.nome === nome);
-
-  if(existente){
-    existente.qtd += qtd;
-  } else {
-    carrinho.push({nome, qtd});
-  }
-
-  renderizar();
-}
-
-/* RENDER */
-function renderizar(){
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
-
-  carrinho.forEach((item, i)=>{
-    lista.innerHTML += `
-      <div class="item">
-        ${item.nome} (x${item.qtd})
-        <button class="remover" onclick="remover(${i})">X</button>
-      </div>
-    `;
-  });
-}
-
-/* REMOVER */
-function remover(i){
-  carrinho.splice(i,1);
-  renderizar();
-}
-
-/* WHATSAPP */
-function enviar(){
-  if(carrinho.length === 0){
-    alert("Adicione itens!");
-    return;
-  }
-
-  let msg = "Pedido de Lajes:%0A";
-
-  carrinho.forEach(item=>{
-    msg += `${item.nome} - ${item.qtd}%0A`;
-  });
-
-  window.open(`https://wa.me/5561999385680?text=${msg}`);
+  alert("Adicionado!");
 }
 
 </script>
