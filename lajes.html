@@ -5,23 +5,19 @@
 <title>Lajes Pré-Moldadas | MM Pré-Moldados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="stylesheet" href="css/style.css">
+
 <style>
 
 /* BASE */
 body{
-  background:#ddd;
+  background:#fff;
   color:#000;
-  font-family:'Montserrat', sans-serif;
   padding-top:90px;
-  margin:0;
+  font-family:'Montserrat', sans-serif;
 }
 
-/* 🔥 REMOVE ESPAÇO */
-body.sem-header{
-  padding-top:0 !important;
-}
-
-/* HEADER */
+/* HEADER PADRÃO */
 header{
   width:100%;
   display:flex;
@@ -31,16 +27,15 @@ header{
   position:fixed;
   top:0;
   z-index:999;
-  background:#ddd;
-  transition:0.3s;
+  background:#fff;
+  transition:.3s;
 }
 
-/* 🔥 SOME TOTAL */
-header.sumir{
-  display:none;
+header.hide{
+  opacity:0;
+  pointer-events:none;
 }
 
-/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -55,7 +50,6 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
-  transition:0.3s;
 }
 
 .nav-item svg{
@@ -65,12 +59,7 @@ nav{
   stroke:currentColor;
 }
 
-.nav-item:hover{
-  color:#e63946;
-  transform:scale(1.05);
-}
-
-/* ===== CARRINHO ===== */
+/* CARRINHO */
 .carrinho-lateral{
   position:fixed;
   top:0;
@@ -80,7 +69,7 @@ nav{
   background:#fff;
   box-shadow:-5px 0 20px rgba(0,0,0,0.2);
   padding:20px;
-  transition:0.3s;
+  transition:.3s;
   z-index:1001;
   display:flex;
   flex-direction:column;
@@ -90,37 +79,6 @@ nav{
   right:0;
 }
 
-.lista-carrinho{
-  flex:1;
-  overflow-y:auto;
-}
-
-.item{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
-.remover{
-  background:#e63946;
-  color:#fff;
-  border:none;
-  padding:3px 8px;
-  border-radius:4px;
-  cursor:pointer;
-}
-
-.btn-finalizar{
-  padding:15px;
-  background:#25D366;
-  color:#fff;
-  border:none;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* OVERLAY */
 .overlay{
   position:fixed;
   width:100%;
@@ -128,7 +86,7 @@ nav{
   background:rgba(0,0,0,0.4);
   opacity:0;
   pointer-events:none;
-  transition:0.3s;
+  transition:.3s;
   z-index:1000;
 }
 
@@ -141,39 +99,50 @@ nav{
 h1{
   text-align:center;
   text-transform:uppercase;
-  font-size:32px;
-  margin-bottom:30px;
+  font-size:36px;
+  margin-bottom:20px;
   color:#e63946;
 }
 
-/* GRID */
+/* GRID PADRÃO */
 .grid{
-  display:flex;
-  flex-direction:column;
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
   gap:20px;
-  padding:0 10px 50px;
+  padding:0 20px 40px;
+  max-width:1100px;
+  margin:0 auto;
 }
 
 /* CARD */
 .card{
-  background:transparent;
+  background:#fff;
+  border-radius:12px;
   padding:15px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
   display:flex;
   flex-direction:column;
-  align-items:center;
-  width:100%;
+  justify-content:space-between;
+}
+
+/* TITULO CARD */
+.card h3{
+  font-size:14px;
+  margin:10px 0;
+  min-height:40px;
 }
 
 /* SELECT */
 select{
-  padding:8px;
+  width:100%;
+  padding:7px;
+  margin:10px 0;
   border-radius:6px;
   border:1px solid #ccc;
-  margin-top:10px;
-  width:100%;
 }
 
-/* CONTADOR PADRÃO */
+/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
@@ -184,11 +153,10 @@ select{
 
 .contador button{
   padding:5px 10px;
-  font-size:16px;
-  cursor:pointer;
   border:none;
   border-radius:5px;
   background:#eee;
+  cursor:pointer;
 }
 
 .contador input{
@@ -202,12 +170,12 @@ select{
 /* BOTÃO */
 .btn{
   width:100%;
-  padding:10px 0;
+  padding:10px;
   background:#e63946;
   color:#fff;
-  font-weight:bold;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
+  font-weight:bold;
   cursor:pointer;
 }
 
@@ -246,13 +214,13 @@ select{
 <!-- CARRINHO -->
 <div class="carrinho-lateral" id="carrinho">
   <h3>Seu Carrinho</h3>
-  <div class="lista-carrinho" id="lista"></div>
-  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
+  <div id="lista"></div>
+  <button class="btn" onclick="enviarWhatsApp()">Finalizar</button>
 </div>
 
 <div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
 
-<h1>Lajes Pré-Moldadas</h1>
+<h1>LAJES PRÉ-MOLDADAS</h1>
 
 <div class="grid" id="gridProdutos"></div>
 
@@ -261,6 +229,7 @@ select{
 const grid = document.getElementById("gridProdutos");
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
+/* CONTADOR */
 function aumentar(btn){
   const input = btn.parentElement.querySelector('.qtd');
   input.value = parseInt(input.value) + 1;
@@ -271,6 +240,7 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
+/* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -280,35 +250,29 @@ function adicionarCarrinho(botao){
 
   const nomeFinal = variacao ? nome + " - " + variacao : nome;
 
-  const existente = carrinho.find(item => item.nome===nomeFinal);
+  const existente = carrinho.find(item => item.nome === nomeFinal);
 
   if(existente){
     existente.qtd += qtd;
   } else {
-    carrinho.push({nome: nomeFinal, qtd});
+    carrinho.push({ nome: nomeFinal, qtd });
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   alert("Produto adicionado!");
 }
 
-/* 🔥 CONTROLE DO CARRINHO */
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-
-  document.getElementById("header").classList.add("sumir");
-  document.body.classList.add("sem-header");
-
+  document.getElementById("header").classList.add("hide");
   renderizar();
 }
 
 function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-
-  document.getElementById("header").classList.remove("sumir");
-  document.body.classList.remove("sem-header");
+  document.getElementById("header").classList.remove("hide");
 }
 
 function renderizar(){
@@ -322,9 +286,9 @@ function renderizar(){
 
   carrinho.forEach((item, i)=>{
     lista.innerHTML += `
-      <div class="item">
+      <div>
         ${item.nome} (x${item.qtd})
-        <button class="remover" onclick="remover(${i})">X</button>
+        <button onclick="remover(${i})">X</button>
       </div>
     `;
   });
@@ -354,7 +318,7 @@ function criarProduto(nome, opcoes=null){
 
     ${opcoes ? `
       <select>
-        ${opcoes.map(op=>`<option>${op}</option>`).join('')}
+        ${opcoes.map(op => `<option>${op}</option>`).join('')}
       </select>
     ` : ''}
 
