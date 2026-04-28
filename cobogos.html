@@ -455,8 +455,18 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+let carrinho;
 
+try {
+  carrinho = JSON.parse(localStorage.getItem('carrinho'));
+
+  if (!Array.isArray(carrinho)) {
+    carrinho = [];
+  }
+
+} catch (e) {
+  carrinho = [];
+}
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -491,7 +501,7 @@ function renderizar(){
   lista.innerHTML = "";
 
   if(carrinho.length === 0){
-    lista.innerHTML = "Carrinho vazio";
+    
     return;
   }
 
