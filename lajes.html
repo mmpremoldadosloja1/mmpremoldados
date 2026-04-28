@@ -378,10 +378,9 @@ select:invalid{
 
 <script>
 
-// (SEU JS INTACTO — NÃO MEXI EM NADA)
-
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
+/* ISOPOR */
 function atualizarIsopor(){
   const tipo = document.getElementById("tipoLaje").value;
   const select = document.getElementById("isopor");
@@ -399,6 +398,7 @@ function atualizarIsopor(){
   }
 }
 
+/* CONTADOR */
 function mais(id){
   let el = document.getElementById(id);
   el.value = parseInt(el.value||1)+1;
@@ -409,30 +409,47 @@ function dim(id){
   el.value = Math.max(1, parseInt(el.value||1)-1);
 }
 
+/* LISTA VIGAS */
 for(let i=0.8;i<=6;i+=0.1){
   listaVigas.innerHTML += `<option value="${i.toFixed(1)}m">`;
 }
 
-function addLaje(){ carrinho.push({nome:"Laje", qtd:1}); salvar(); }
-function addViga(){ carrinho.push({nome:"Viga", qtd:1}); salvar(); }
-function addIso(){ carrinho.push({nome:"Isopor", qtd:1}); salvar(); }
+/* ADD (🔥 corrigido) */
+function addLaje(){
+  carrinho.push({nome:"Laje", qtd:1});
+  salvar();
+}
 
+function addViga(){
+  carrinho.push({nome:"Viga", qtd:1});
+  salvar();
+}
+
+function addIso(){
+  carrinho.push({nome:"Isopor", qtd:1});
+  salvar();
+}
+
+/* SALVAR (🔥 agora sempre renderiza) */
 function salvar(){
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   render();
 }
 
+/* ABRIR */
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-  render();
+  render(); // 🔥 importante
 }
 
+/* FECHAR */
 function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
 }
 
+/* RENDER */
 function render(){
   const lista = document.getElementById("lista");
   lista.innerHTML = "";
@@ -452,29 +469,29 @@ function render(){
   });
 }
 
+/* REMOVER */
 function remover(i){
   carrinho.splice(i,1);
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
   render();
 }
 
+/* WHATS */
 function enviarWhatsApp(){
   let msg = "Pedido:%0A";
   carrinho.forEach(item=>{
     msg += `${item.nome} - ${item.qtd}%0A`;
   });
 
-  window.addEventListener("load", () => {
+  window.open(`https://wa.me/5561999385680?text=${msg}`);
+}
+
+/* 🔥 DESKTOP */
+window.addEventListener("load", () => {
   if(window.innerWidth >= 900){
     document.getElementById("carrinho").classList.add("active");
-    render();
   }
+  render(); // 🔥 garante que sempre aparece
 });
 
 </script>
-
-</body>
-</html>
-
-</body>
-</html>
