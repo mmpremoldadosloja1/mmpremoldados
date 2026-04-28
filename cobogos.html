@@ -12,14 +12,11 @@
 body{
   background:#fff;
   color:#000;
-  padding-top:110px;
+  padding-top:90px;
   font-family: 'Montserrat', sans-serif;
 }
 
-body.sem-header{
-  padding-top:0 !important;
-}
-
+/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -30,11 +27,6 @@ header{
   top:0;
   z-index:999;
   background:#fff;
-  transition:0.3s;
-}
-
-header.sumir{
-  display:none;
 }
 
 /* NAV */
@@ -85,14 +77,12 @@ nav{
   width:320px;
   height:100%;
   background:#fff;
-  box-shadow:-10px 0 30px rgba(0,0,0,0.25);
+  box-shadow:-5px 0 20px rgba(0,0,0,0.2);
   padding:20px;
   transition:0.3s;
   z-index:1001;
   display:flex;
   flex-direction:column;
-  border-top-left-radius:15px;
-  border-bottom-left-radius:15px;
 }
 
 .carrinho-lateral.active{
@@ -129,7 +119,7 @@ nav{
   cursor:pointer;
 }
 
-/* OVERLAY */
+/* OVERLAY (SÓ MOBILE USA) */
 .overlay{
   position:fixed;
   width:100%;
@@ -146,8 +136,7 @@ nav{
   pointer-events:auto;
 }
 
-/* ===== SEU CSS ORIGINAL ===== */
-
+/* TITULOS */
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -228,6 +217,7 @@ h2{
   border:none;
   border-radius:8px;
   cursor:pointer;
+  transition:0.3s;
 }
 
 .btn:hover{
@@ -235,7 +225,7 @@ h2{
   transform:scale(1.05);
 }
 
-/* ===== DESKTOP ===== */
+/* 🔥 DESKTOP APENAS */
 @media(min-width:900px){
 
   .carrinho-lateral{
@@ -261,7 +251,7 @@ h2{
 
 <body>
 
-<header id="header">
+<header>
   <nav class="nav-left">
     <a href="index.html" class="nav-item">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
@@ -285,7 +275,7 @@ h2{
 </header>
 
 <!-- CARRINHO -->
-<div class="carrinho-lateral active" id="carrinho">
+<div class="carrinho-lateral" id="carrinho">
   <h3>Seu Carrinho</h3>
   <div class="lista-carrinho" id="lista"></div>
   <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
@@ -481,25 +471,18 @@ function adicionarCarrinho(botao){
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert('Produto adicionado');
 }
 
+/* CARRINHO */
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-
-  document.getElementById("header").classList.add("sumir");
-  document.body.classList.add("sem-header");
-
   renderizar();
 }
 
 function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-
-  document.getElementById("header").classList.remove("sumir");
-  document.body.classList.remove("sem-header");
 }
 
 function renderizar(){
@@ -535,6 +518,14 @@ function enviarWhatsApp(){
 
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
+
+/* 🔥 ABRIR AUTOMATICO SÓ NO DESKTOP */
+window.addEventListener("load", () => {
+  if(window.innerWidth >= 900){
+    document.getElementById("carrinho").classList.add("active");
+    renderizar();
+  }
+});
 
 </script>
 
