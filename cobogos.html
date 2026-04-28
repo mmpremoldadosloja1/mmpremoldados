@@ -12,11 +12,10 @@
 body{
   background:#fff;
   color:#000;
-  padding-top:90px;
+  padding-top:110px;
   font-family: 'Montserrat', sans-serif;
 }
 
-/* 🔥 NOVO */
 body.sem-header{
   padding-top:0 !important;
 }
@@ -34,7 +33,6 @@ header{
   transition:0.3s;
 }
 
-/* 🔥 NOVO */
 header.sumir{
   display:none;
 }
@@ -87,12 +85,14 @@ nav{
   width:320px;
   height:100%;
   background:#fff;
-  box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+  box-shadow:-10px 0 30px rgba(0,0,0,0.25);
   padding:20px;
   transition:0.3s;
   z-index:1001;
   display:flex;
   flex-direction:column;
+  border-top-left-radius:15px;
+  border-bottom-left-radius:15px;
 }
 
 .carrinho-lateral.active{
@@ -235,6 +235,27 @@ h2{
   transform:scale(1.05);
 }
 
+/* ===== DESKTOP ===== */
+@media(min-width:900px){
+
+  .carrinho-lateral{
+    right:0 !important;
+  }
+
+  .overlay{
+    display:none !important;
+  }
+
+  body{
+    padding-right:320px;
+  }
+
+  header{
+    width:calc(100% - 320px);
+  }
+
+}
+
 </style>
 </head>
 
@@ -264,7 +285,7 @@ h2{
 </header>
 
 <!-- CARRINHO -->
-<div class="carrinho-lateral" id="carrinho">
+<div class="carrinho-lateral active" id="carrinho">
   <h3>Seu Carrinho</h3>
   <div class="lista-carrinho" id="lista"></div>
   <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
