@@ -471,9 +471,10 @@ function adicionarCarrinho(botao){
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+  renderizar(); // 🔥 CORREÇÃO
 }
 
-/* CARRINHO */
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
@@ -519,7 +520,7 @@ function enviarWhatsApp(){
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
 
-/* 🔥 ABRIR AUTOMATICO SÓ NO DESKTOP */
+/* AUTO OPEN DESKTOP */
 window.addEventListener("load", () => {
   if(window.innerWidth >= 900){
     document.getElementById("carrinho").classList.add("active");
