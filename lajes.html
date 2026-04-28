@@ -12,7 +12,7 @@
 body{
   background:#fff;
   color:#000;
-  padding-top:110px; /* 🔥 ajuste do título */
+  padding-top:110px;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -84,13 +84,13 @@ nav{
   width:320px;
   height:100%;
   background:#fff;
-  box-shadow:-10px 0 30px rgba(0,0,0,0.25); /* 🔥 melhor sombra */
+  box-shadow:-10px 0 30px rgba(0,0,0,0.25);
   padding:20px;
   transition:0.3s;
   z-index:1001;
   display:flex;
   flex-direction:column;
-  border-top-left-radius:15px; /* 🔥 bordas */
+  border-top-left-radius:15px;
   border-bottom-left-radius:15px;
 }
 
@@ -164,7 +164,7 @@ nav{
   object-fit:contain;
 }
 
-/* ===== SEU CSS ORIGINAL ===== */
+/* ===== ORIGINAL ===== */
 
 .bloco{
   background:#fff;
@@ -244,7 +244,6 @@ select:invalid{
     min-width:140px;
   }
 
-  /* 🔥 CARRINHO FIXO */
   .carrinho-lateral{
     right:0 !important;
   }
@@ -291,8 +290,8 @@ select:invalid{
   </nav>
 </header>
 
-<!-- CARRINHO -->
-<div class="carrinho-lateral active" id="carrinho">
+<!-- CARRINHO (🔥 removido active daqui) -->
+<div class="carrinho-lateral" id="carrinho">
   <h3>Seu Carrinho</h3>
   <div class="lista-carrinho" id="lista"></div>
   <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
@@ -465,16 +464,17 @@ function enviarWhatsApp(){
     msg += `${item.nome} - ${item.qtd}%0A`;
   });
 
-  window.open(`https://wa.me/5561999385680?text=${msg}`);
-}
-
-window.addEventListener("load", () => {
+  window.addEventListener("load", () => {
   if(window.innerWidth >= 900){
-    abrirCarrinho();
+    document.getElementById("carrinho").classList.add("active");
+    render();
   }
 });
 
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
