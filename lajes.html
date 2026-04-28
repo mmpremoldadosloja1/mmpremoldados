@@ -214,10 +214,16 @@ select:invalid{
   border-radius:8px;
   cursor:pointer;
 }
-
+/* botão aparece só no mobile */
+.btn-carrinho{
+  display:flex;
+}
+  
 /* DESKTOP */
 @media(min-width:900px){
-
+.btn-carrinho{
+  display:none !important;
+}
   .bloco{
     display:flex;
     gap:20px;
@@ -277,7 +283,7 @@ select:invalid{
   </nav>
 
   <nav class="nav-right">
-    <a href="#" class="nav-item" onclick="abrirCarrinho(); return false;">
+    <a href="#" class="nav-item btn-carrinho" onclick="abrirCarrinho(); return false;">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
