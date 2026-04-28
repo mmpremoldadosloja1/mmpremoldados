@@ -157,7 +157,7 @@ h1{
   color:#e63946;
 }
 
-/* GRID (MANTIDO) */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(2, 1fr);
@@ -242,6 +242,27 @@ select{
   cursor:pointer;
 }
 
+/* 🔥 DESKTOP (IGUAL COBOGÓ) */
+@media(min-width:900px){
+
+  .carrinho-lateral{
+    right:0 !important;
+  }
+
+  .overlay{
+    display:none !important;
+  }
+
+  body{
+    padding-right:320px;
+  }
+
+  header{
+    width:calc(100% - 320px);
+  }
+
+}
+
 </style>
 </head>
 
@@ -282,6 +303,8 @@ select{
 <h1>Pingadeiras</h1>
 
 <div class="grid">
+
+  <!-- SEUS CARDS (INALTERADOS) -->
 
   <div class="card">
     <img src="img/pingadeira/casinha.jpg">
@@ -357,7 +380,6 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-/* CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -375,10 +397,9 @@ function adicionarCarrinho(botao){
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert("Produto adicionado");
 }
 
-/* PADRÃO COBOGÓS */
+/* PADRÃO COBOGÓ */
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
@@ -427,6 +448,14 @@ function enviarWhatsApp(){
 
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
+
+/* 🔥 DESKTOP ABRE AUTOMATICO */
+window.addEventListener("load", () => {
+  if(window.innerWidth >= 900){
+    document.getElementById("carrinho").classList.add("active");
+    renderizar();
+  }
+});
 
 </script>
 
