@@ -9,6 +9,7 @@
 
 <style>
 
+/* BASE */
 body{
   background:#fff;
   color:#000;
@@ -16,10 +17,12 @@ body{
   font-family:'Montserrat', sans-serif;
 }
 
+/* 🔥 PADRÃO COBOGÓS */
 body.sem-header{
   padding-top:0 !important;
 }
 
+/* HEADER */
 header{
   width:100%;
   display:flex;
@@ -30,15 +33,29 @@ header{
   top:0;
   z-index:999;
   background:#fff;
+  transition:0.3s;
 }
 
+/* SUMIR HEADER */
 header.sumir{
   display:none;
 }
 
+/* NAV */
 nav{
   display:flex;
   gap:25px;
+  align-items:center;
+}
+
+.nav-left, .nav-right{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.nav-right{
+  margin-right:20px;
 }
 
 .nav-item{
@@ -49,14 +66,22 @@ nav{
   color:#000;
   font-size:12px;
   font-weight:600;
+  transition:0.3s;
 }
 
 .nav-item svg{
   width:24px;
   height:24px;
+  margin-bottom:3px;
+  stroke:currentColor;
 }
 
-/* CARRINHO */
+.nav-item:hover{
+  color:#e63946;
+  transform:scale(1.05);
+}
+
+/* ===== CARRINHO PADRÃO ===== */
 .carrinho-lateral{
   position:fixed;
   top:0;
@@ -64,14 +89,14 @@ nav{
   width:320px;
   height:100%;
   background:#fff;
-  box-shadow:-10px 0 30px rgba(0,0,0,0.25);
+  box-shadow:-10px 0 30px rgba(0,0,0,0.25); /* 🔥 sombra melhor */
   padding:20px;
   transition:0.3s;
   z-index:1001;
   display:flex;
   flex-direction:column;
 
-  border-top-left-radius:15px;
+  border-top-left-radius:15px;   /* 🔥 acabamento */
   border-bottom-left-radius:15px;
 }
 
@@ -79,6 +104,37 @@ nav{
   right:0;
 }
 
+.lista-carrinho{
+  flex:1;
+  overflow-y:auto;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.remover{
+  background:#e63946;
+  color:#fff;
+  border:none;
+  padding:3px 8px;
+  border-radius:4px;
+  cursor:pointer;
+}
+
+.btn-finalizar{
+  padding:15px;
+  background:#25D366;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* OVERLAY */
 .overlay{
   position:fixed;
   width:100%;
@@ -86,6 +142,8 @@ nav{
   background:rgba(0,0,0,0.4);
   opacity:0;
   pointer-events:none;
+  transition:0.3s;
+  z-index:1000;
 }
 
 .overlay.active{
@@ -93,68 +151,109 @@ nav{
   pointer-events:auto;
 }
 
+/* TITULO */
 h1{
   text-align:center;
+  text-transform:uppercase;
   font-size:36px;
-  color:#e63946;
   margin-bottom:30px;
+  color:#e63946;
 }
 
+/* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:20px;
-  padding:20px;
+  grid-template-columns:repeat(2, 1fr);
+  gap:25px;
+  padding:0 20px 40px;
 }
 
+@media (min-width:768px){
+  .grid{
+    grid-template-columns:repeat(3, 1fr);
+  }
+}
+
+@media (min-width:1200px){
+  .grid{
+    max-width:1100px;
+    margin:0 auto;
+  }
+}
+
+/* CARD */
 .card{
   background:#fff;
   border-radius:12px;
-  padding:15px;
+  padding:20px;
   text-align:center;
-  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
+/* IMAGEM */
 .card img{
   width:100%;
-  height:120px;
+  height:140px;
   object-fit:contain;
+  margin-bottom:10px;
 }
 
+/* SELECT */
 select{
   width:100%;
-  margin:10px 0;
+  padding:7px;
+  margin-bottom:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
 }
 
+/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
+  align-items:center;
   gap:5px;
+  margin-bottom:10px;
 }
 
-.qtd{
+.contador button{
+  padding:5px 10px;
+  font-size:16px;
+  cursor:pointer;
+  border:none;
+  border-radius:5px;
+  background:#eee;
+}
+
+.contador input{
   width:50px;
   text-align:center;
+  border:1px solid #ccc;
+  border-radius:5px;
+  padding:5px;
 }
 
+/* BOTÃO */
 .btn{
   width:100%;
-  margin-top:10px;
-  padding:10px;
+  padding:10px 0;
   background:#e63946;
   color:#fff;
+  font-weight:bold;
   border:none;
   border-radius:8px;
+  cursor:pointer;
 }
 
-/* DESKTOP */
+/* 🔥 DESKTOP (IGUAL COBOGÓ) */
 @media(min-width:900px){
+
   .carrinho-lateral{
     right:0 !important;
   }
 
   .overlay{
-    display:none;
+    display:none !important;
   }
 
   body{
@@ -164,6 +263,7 @@ select{
   header{
     width:calc(100% - 320px);
   }
+
 }
 
 </style>
@@ -171,15 +271,34 @@ select{
 
 <body>
 
-<header>
-<a href="index.html">Início</a>
-<a href="#" onclick="abrirCarrinho()">Carrinho</a>
+<header id="header">
+  <nav class="nav-left">
+    <a href="index.html" class="nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+      Início
+    </a>
+  </nav>
+
+  <nav class="nav-right">
+    <a href="#" class="nav-item" onclick="abrirCarrinho(); return false;">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+      Carrinho
+    </a>
+  </nav>
 </header>
 
+<!-- CARRINHO -->
 <div class="carrinho-lateral" id="carrinho">
-<h3>Seu Carrinho</h3>
-<div id="lista"></div>
-<button onclick="enviarWhatsApp()">Finalizar</button>
+  <h3>Seu Carrinho</h3>
+  <div class="lista-carrinho" id="lista"></div>
+  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
 </div>
 
 <div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
@@ -188,92 +307,118 @@ select{
 
 <div class="grid">
 
-<!-- CASINHA -->
-<div class="card">
-<img src="img/pingadeira/casinha.jpg">
-<h3>Pingadeira Casinha</h3>
-<select>
-<option>1m x 20cm</option>
-<option>1m x 23cm</option>
-<option>1m x 25cm</option>
-<option>1m x 30cm</option>
-</select>
-<div class="contador">
-<button onclick="diminuir(this)">-</button>
-<input class="qtd" value="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
+  <!-- SEUS CARDS (INALTERADOS) -->
 
-<!-- RETA -->
-<div class="card">
-<img src="img/pingadeira/reta.jpg">
-<h3>Pingadeira Reta</h3>
-<select>
-<option>1m x 20cm</option>
-<option>1m x 23cm</option>
-<option>1m x 25cm</option>
-<option>1m x 30cm</option>
-<option>1m x 40cm</option>
-</select>
-<div class="contador">
-<button onclick="diminuir(this)">-</button>
-<input class="qtd" value="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
+  <div class="card">
+    <img src="img/pingadeira/casinha.jpg">
+    <h3>Pingadeira Casinha</h3>
 
-<!-- DEGRAU (🔥 AGORA INCLUÍDO) -->
-<div class="card">
-<img src="img/pingadeira/degrau.jpg">
-<h3>Pingadeira Degrau</h3>
-<select>
-<option>1m x 20cm</option>
-</select>
-<div class="contador">
-<button onclick="diminuir(this)">-</button>
-<input class="qtd" value="1">
-<button onclick="aumentar(this)">+</button>
-</div>
-<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-</div>
+    <select>
+      <option>1m x 20cm</option>
+      <option>1m x 23cm</option>
+      <option>1m x 25cm</option>
+      <option>1m x 30cm</option>
+    </select>
+
+    <div class="contador">
+      <button onclick="diminuir(this)">−</button>
+      <input type="number" class="qtd" value="1" min="1">
+      <button onclick="aumentar(this)">+</button>
+    </div>
+
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+  </div>
+
+  <div class="card">
+    <img src="img/pingadeira/reta.jpg">
+    <h3>Pingadeira Reta</h3>
+
+    <select>
+      <option>1m x 20cm</option>
+      <option>1m x 23cm</option>
+      <option>1m x 25cm</option>
+      <option>1m x 30cm</option>
+      <option>1m x 40cm</option>
+    </select>
+
+    <div class="contador">
+      <button onclick="diminuir(this)">−</button>
+      <input type="number" class="qtd" value="1" min="1">
+      <button onclick="aumentar(this)">+</button>
+    </div>
+
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+  </div>
+
+  <div class="card">
+    <img src="img/pingadeira/degrau.jpg">
+    <h3>Pingadeira Degrau</h3>
+
+    <select>
+      <option>1m x 20cm</option>
+    </select>
+
+    <div class="contador">
+      <button onclick="diminuir(this)">−</button>
+      <input type="number" class="qtd" value="1" min="1">
+      <button onclick="aumentar(this)">+</button>
+    </div>
+
+    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+  </div>
 
 </div>
 
 <script>
 
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+localStorage.setItem('carrinho', JSON.stringify(carrinho));
+renderizar(); // 🔥
+  
+}  
 
 function aumentar(btn){
-  const i = btn.parentElement.querySelector('.qtd');
-  i.value = parseInt(i.value)+1;
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = parseInt(input.value) + 1;
 }
 
 function diminuir(btn){
-  const i = btn.parentElement.querySelector('.qtd');
-  i.value = Math.max(1, parseInt(i.value)-1);
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-function adicionarCarrinho(btn){
-  const card = btn.closest('.card');
+function adicionarCarrinho(botao){
+  const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
   const qtd = parseInt(card.querySelector('.qtd').value);
   const medida = card.querySelector('select').value;
 
-  const nomeFinal = nome + " - " + medida;
+  const nomeCompleto = nome + " - " + medida;
 
-  const existe = carrinho.find(p => p.nome === nomeFinal);
+  const existente = carrinho.find(item => item.nome === nomeCompleto);
 
-  if(existe){
-    existe.qtd += qtd;
+  if(existente){
+    existente.qtd += qtd;
   } else {
-    carrinho.push({nome:nomeFinal, qtd});
+    carrinho.push({ nome: nomeCompleto, qtd });
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+/* PADRÃO COBOGÓ */
+function abrirCarrinho(){
+  document.getElementById("carrinho").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+  document.getElementById("header").classList.add("sumir");
+  document.body.classList.add("sem-header");
   renderizar();
+}
+
+function fecharCarrinho(){
+  document.getElementById("carrinho").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+  document.getElementById("header").classList.remove("sumir");
+  document.body.classList.remove("sem-header");
 }
 
 function renderizar(){
@@ -285,11 +430,11 @@ function renderizar(){
     return;
   }
 
-  carrinho.forEach((item,i)=>{
+  carrinho.forEach((item, i)=>{
     lista.innerHTML += `
-      <div>
+      <div class="item">
         ${item.nome} (x${item.qtd})
-        <button onclick="remover(${i})">X</button>
+        <button class="remover" onclick="remover(${i})">X</button>
       </div>
     `;
   });
@@ -297,33 +442,26 @@ function renderizar(){
 
 function remover(i){
   carrinho.splice(i,1);
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
   renderizar();
-}
-
-function abrirCarrinho(){
-  document.getElementById("carrinho").classList.add("active");
-  document.getElementById("overlay").classList.add("active");
-  renderizar();
-}
-
-function fecharCarrinho(){
-  document.getElementById("carrinho").classList.remove("active");
-  document.getElementById("overlay").classList.remove("active");
 }
 
 function enviarWhatsApp(){
   let msg = "Pedido:%0A";
-  carrinho.forEach(i=>{
-    msg += `${i.nome} - ${i.qtd}%0A`;
+  carrinho.forEach(item=>{
+    msg += `${item.nome} - ${item.qtd}%0A`;
   });
 
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
 
-window.onload = function(){
-  renderizar();
-}
+/* 🔥 DESKTOP ABRE AUTOMATICO */
+window.addEventListener("load", () => {
+  if(window.innerWidth >= 900){
+    document.getElementById("carrinho").classList.add("active");
+    renderizar();
+  }
+});
 
 </script>
 
