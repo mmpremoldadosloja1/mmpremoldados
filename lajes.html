@@ -16,7 +16,6 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-/* 🔥 NOVO */
 body.sem-header{
   padding-top:0 !important;
 }
@@ -34,12 +33,10 @@ header{
   transition:0.3s;
 }
 
-/* 🔥 NOVO */
 header.sumir{
   display:none;
 }
 
-/* NAV */
 nav{
   display:flex;
   gap:25px;
@@ -79,7 +76,7 @@ nav{
   transform:scale(1.05);
 }
 
-/* ===== CARRINHO (IGUAL AO COBOGO) ===== */
+/* ===== CARRINHO ===== */
 .carrinho-lateral{
   position:fixed;
   top:0;
@@ -146,6 +143,25 @@ nav{
   pointer-events:auto;
 }
 
+/* ===== IMAGENS ===== */
+.imagem{
+  width:100%;
+  height:150px;
+  background:#eee;
+  border-radius:10px;
+  margin-bottom:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.imagem img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
 /* ===== SEU CSS ORIGINAL ===== */
 
 .bloco{
@@ -154,14 +170,6 @@ nav{
   padding:20px;
   border-radius:12px;
   box-shadow:0 5px 15px rgba(0,0,0,0.08);
-}
-
-.imagem{
-  width:100%;
-  height:150px;
-  background:#eee;
-  border-radius:10px;
-  margin-bottom:15px;
 }
 
 select, input{
@@ -209,6 +217,7 @@ select:invalid{
 
 /* DESKTOP */
 @media(min-width:900px){
+
   .bloco{
     display:flex;
     gap:20px;
@@ -232,6 +241,24 @@ select:invalid{
     width:auto;
     min-width:140px;
   }
+
+  /* 🔥 CARRINHO FIXO */
+  .carrinho-lateral{
+    right:0 !important;
+  }
+
+  .overlay{
+    display:none !important;
+  }
+
+  body{
+    padding-right:320px;
+  }
+
+  header{
+    width:calc(100% - 320px);
+  }
+
 }
 
 </style>
@@ -263,7 +290,7 @@ select:invalid{
 </header>
 
 <!-- CARRINHO -->
-<div class="carrinho-lateral" id="carrinho">
+<div class="carrinho-lateral active" id="carrinho">
   <h3>Seu Carrinho</h3>
   <div class="lista-carrinho" id="lista"></div>
   <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
@@ -273,12 +300,13 @@ select:invalid{
 
 <h1 style="text-align:center;color:#e63946;">LAJES</h1>
 
-<!-- ===== LAJES (INALTERADO) ===== -->
+<!-- LAJE -->
 <div class="bloco">
-<div class="imagem"></div>
+<div class="imagem">
+<img src="img/lajes/laje1.jpg">
+</div>
 
 <div class="conteudo">
-
 <select id="tipoLaje" required onchange="atualizarIsopor()">
 <option value="" disabled selected>Selecione a laje</option>
 <option value="H8">Laje de Teto H8</option>
@@ -295,23 +323,22 @@ select:invalid{
 <div id="m2">0 m²</div>
 
 <button class="btn" onclick="addLaje()">Adicionar</button>
-
 </div>
 </div>
 
-<!-- ===== VIGAS (INALTERADO) ===== -->
+<!-- VIGA -->
 <div class="bloco">
-<div class="imagem"></div>
+<div class="imagem">
+<img src="img/lajes/viga.jpg">
+</div>
 
 <div class="conteudo">
-
 <select id="tipoViga">
 <option>H8 TETO</option>
 <option>H10 PISO</option>
 </select>
 
 <input list="listaVigas" id="tamViga" placeholder="Tamanho">
-
 <datalist id="listaVigas"></datalist>
 
 <div class="contador">
@@ -321,16 +348,16 @@ select:invalid{
 </div>
 
 <button class="btn" onclick="addViga()">Adicionar</button>
-
 </div>
 </div>
 
-<!-- ===== ISOPOR (INALTERADO) ===== -->
+<!-- ISOPOR -->
 <div class="bloco">
-<div class="imagem"></div>
+<div class="imagem">
+<img src="img/lajes/isopor.jpg">
+</div>
 
 <div class="conteudo">
-
 <select id="tipoIso">
 <option>H8 - 7,5x33</option>
 <option>H8 - 7,5x40</option>
@@ -345,7 +372,6 @@ select:invalid{
 </div>
 
 <button class="btn" onclick="addIso()">Adicionar</button>
-
 </div>
 </div>
 
@@ -392,13 +418,10 @@ function addLaje(){ carrinho.push({nome:"Laje", qtd:1}); salvar(); }
 function addViga(){ carrinho.push({nome:"Viga", qtd:1}); salvar(); }
 function addIso(){ carrinho.push({nome:"Isopor", qtd:1}); salvar(); }
 
-/* SALVAR */
 function salvar(){
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   render();
 }
-
-/* ===== CARRINHO IGUAL AO COBOGO ===== */
 
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
@@ -448,6 +471,13 @@ function enviarWhatsApp(){
 
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
+
+/* ABRIR NO DESKTOP */
+window.addEventListener("load", () => {
+  if(window.innerWidth >= 900){
+    abrirCarrinho();
+  }
+});
 
 </script>
 
