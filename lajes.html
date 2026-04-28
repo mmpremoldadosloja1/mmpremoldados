@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lajes Pré-Moldadas</title>
 
+<link rel="stylesheet" href="css/style.css">
+
 <style>
 
 body{
@@ -77,7 +79,7 @@ nav{
   transform:scale(1.05);
 }
 
-/* ===== CARRINHO ===== */
+/* ===== CARRINHO (IGUAL AO COBOGO) ===== */
 .carrinho-lateral{
   position:fixed;
   top:0;
@@ -264,7 +266,7 @@ select:invalid{
 <div class="carrinho-lateral" id="carrinho">
   <h3>Seu Carrinho</h3>
   <div class="lista-carrinho" id="lista"></div>
-  <button class="btn" onclick="enviar()">Finalizar</button>
+  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
 </div>
 
 <div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
@@ -390,11 +392,13 @@ function addLaje(){ carrinho.push({nome:"Laje", qtd:1}); salvar(); }
 function addViga(){ carrinho.push({nome:"Viga", qtd:1}); salvar(); }
 function addIso(){ carrinho.push({nome:"Isopor", qtd:1}); salvar(); }
 
-/* CARRINHO */
+/* SALVAR */
 function salvar(){
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   render();
 }
+
+/* ===== CARRINHO IGUAL AO COBOGO ===== */
 
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
@@ -413,17 +417,35 @@ function fecharCarrinho(){
 
 function render(){
   const lista = document.getElementById("lista");
-  lista.innerHTML="";
-  carrinho.forEach((i,index)=>{
-    lista.innerHTML += `${i.nome} (${i.qtd})<br>`;
+  lista.innerHTML = "";
+
+  if(carrinho.length === 0){
+    lista.innerHTML = "Carrinho vazio";
+    return;
+  }
+
+  carrinho.forEach((item, i)=>{
+    lista.innerHTML += `
+      <div class="item">
+        ${item.nome} (x${item.qtd})
+        <button class="remover" onclick="remover(${i})">X</button>
+      </div>
+    `;
   });
 }
 
-function enviar(){
-  let msg="Pedido:%0A";
-  carrinho.forEach(i=>{
-    msg+=`${i.nome} - ${i.qtd}%0A`;
+function remover(i){
+  carrinho.splice(i,1);
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  render();
+}
+
+function enviarWhatsApp(){
+  let msg = "Pedido:%0A";
+  carrinho.forEach(item=>{
+    msg += `${item.nome} - ${item.qtd}%0A`;
   });
+
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
 
