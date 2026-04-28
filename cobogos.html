@@ -458,12 +458,21 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+/* 🔥 SEMPRE ATUALIZA O CARRINHO */
+function getCarrinho(){
+  return JSON.parse(localStorage.getItem('carrinho')) || [];
+}
+
+function salvarCarrinho(carrinho){
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
 
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
   const qtd = parseInt(card.querySelector('.qtd').value);
+
+  let carrinho = getCarrinho(); // 🔥 pega atualizado
 
   const existente = carrinho.find(item => item.nome === nome);
 
@@ -473,9 +482,9 @@ function adicionarCarrinho(botao){
     carrinho.push({nome, qtd});
   }
 
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  salvarCarrinho(carrinho);
 
-  renderizar(); // 🔥 CORREÇÃO
+  renderizar(); // 🔥 atualiza na hora
 }
 
 function abrirCarrinho(){
@@ -493,6 +502,8 @@ function renderizar(){
   const lista = document.getElementById("lista");
   lista.innerHTML = "";
 
+  const carrinho = getCarrinho(); // 🔥 sempre atualizado
+
   if(carrinho.length === 0){
     lista.innerHTML = "Carrinho vazio";
     return;
@@ -509,13 +520,19 @@ function renderizar(){
 }
 
 function remover(i){
+  let carrinho = getCarrinho();
+
   carrinho.splice(i,1);
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+  salvarCarrinho(carrinho);
   renderizar();
 }
 
 function enviarWhatsApp(){
+  const carrinho = getCarrinho();
+
   let msg = "Pedido:%0A";
+
   carrinho.forEach(item=>{
     msg += `${item.nome} - ${item.qtd}%0A`;
   });
@@ -532,6 +549,3 @@ window.addEventListener("load", () => {
 });
 
 </script>
-
-</body>
-</html>
