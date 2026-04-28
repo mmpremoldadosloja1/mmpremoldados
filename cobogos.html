@@ -363,6 +363,10 @@ function diminuir(btn){
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function adicionarCarrinho(botao){
+
+  // 🔥 SEMPRE pega o carrinho atualizado
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
   const qtd = parseInt(card.querySelector('.qtd').value);
@@ -375,8 +379,11 @@ function adicionarCarrinho(botao){
     carrinho.push({nome, qtd});
   }
 
+  // 🔥 salva atualizado
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert('Produto adicionado');
+
+  // 🔥 FORÇA atualização imediata
+  renderizar();
 }
 
 </script>
