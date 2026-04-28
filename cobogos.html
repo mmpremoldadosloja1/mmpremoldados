@@ -224,10 +224,17 @@ h2{
   background:#c92f3b;
   transform:scale(1.05);
 }
-
+  
+/* botão aparece só no mobile */
+.btn-carrinho{
+  display:flex;
+}
+  
 /* 🔥 DESKTOP APENAS */
 @media(min-width:900px){
-
+.btn-carrinho{
+  display:none !important;
+}
   .carrinho-lateral{
     right:0 !important;
   }
@@ -263,7 +270,7 @@ h2{
   </nav>
 
   <nav class="nav-right">
-    <a href="#" class="nav-item" onclick="abrirCarrinho(); return false;">
+    <a href="#" class="nav-item btn-carrinho" onclick="abrirCarrinho(); return false;">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
