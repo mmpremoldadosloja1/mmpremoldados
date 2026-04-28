@@ -371,9 +371,25 @@ select{
 
 <script>
 
-localStorage.setItem('carrinho', JSON.stringify(carrinho));
-renderizar(); // 🔥
-}  
+function adicionarCarrinho(botao){
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const qtd = parseInt(card.querySelector('.qtd').value);
+  const medida = card.querySelector('select').value;
+
+  const nomeCompleto = nome + " - " + medida;
+
+  const existente = carrinho.find(item => item.nome === nomeCompleto);
+
+  if(existente){
+    existente.qtd += qtd;
+  } else {
+    carrinho.push({ nome: nomeCompleto, qtd });
+  }
+
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  renderizar(); // 🔥 ESSENCIAL
+}
 
 function aumentar(btn){
   const input = btn.parentElement.querySelector('.qtd');
