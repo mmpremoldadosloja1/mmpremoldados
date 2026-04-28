@@ -455,11 +455,12 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
+// 🔥 GARANTE ARRAY SEMPRE VÁLIDO
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
-  const nome = card.querySelector('h3').innerText;
+  const nome = card.querySelector('h3').innerText.trim();
   const qtd = parseInt(card.querySelector('.qtd').value);
 
   const existente = carrinho.find(item => item.nome === nome);
@@ -472,13 +473,15 @@ function adicionarCarrinho(botao){
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
 
-  renderizar(); // 🔥 CORREÇÃO
+  renderizar();
+
+  // 🔥 FEEDBACK VISUAL (IMPORTANTE)
+  abrirCarrinho();
 }
 
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-  renderizar();
 }
 
 function fecharCarrinho(){
@@ -491,17 +494,22 @@ function renderizar(){
   lista.innerHTML = "";
 
   if(carrinho.length === 0){
-    lista.innerHTML = "Carrinho vazio";
+    lista.innerHTML = "<p>Carrinho vazio</p>";
     return;
   }
 
   carrinho.forEach((item, i)=>{
-    lista.innerHTML += `
-      <div class="item">
-        ${item.nome} (x${item.qtd})
-        <button class="remover" onclick="remover(${i})">X</button>
-      </div>
+    const div = document.createElement("div");
+    div.classList.add("item");
+
+    div.innerHTML = `
+      <span>${item.nome} (x${item.qtd})</span>
+      <button class="remover">X</button>
     `;
+
+    div.querySelector(".remover").onclick = () => remover(i);
+
+    lista.appendChild(div);
   });
 }
 
@@ -512,7 +520,13 @@ function remover(i){
 }
 
 function enviarWhatsApp(){
+  if(carrinho.length === 0){
+    alert("Carrinho vazio!");
+    return;
+  }
+
   let msg = "Pedido:%0A";
+
   carrinho.forEach(item=>{
     msg += `${item.nome} - ${item.qtd}%0A`;
   });
@@ -520,11 +534,12 @@ function enviarWhatsApp(){
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
 
-/* AUTO OPEN DESKTOP */
+// 🔥 CARREGA AUTOMATICAMENTE
 window.addEventListener("load", () => {
+  renderizar();
+
   if(window.innerWidth >= 900){
     document.getElementById("carrinho").classList.add("active");
-    renderizar();
   }
 });
 
