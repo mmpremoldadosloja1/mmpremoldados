@@ -167,7 +167,10 @@ h1{
   gap:25px;
   padding:0 20px 40px;
 }
-
+/* botão aparece só no mobile */
+.btn-carrinho{
+  display:flex;
+}
 @media (min-width:768px){
   .grid{
     grid-template-columns:repeat(3, 1fr);
@@ -247,7 +250,9 @@ select{
 
 /* 🔥 DESKTOP (IGUAL COBOGÓ) */
 @media(min-width:900px){
-
+.btn-carrinho{
+  display:none !important;
+}
   .carrinho-lateral{
     right:0 !important;
   }
