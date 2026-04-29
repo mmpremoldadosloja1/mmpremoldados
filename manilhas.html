@@ -311,7 +311,21 @@ select{
 <h1>MANILHAS E TAMPAS</h1>
 
 <div class="grid" id="gridProdutos"></div>
+  
+titulo("Manilhas");
 
+[
+"Manilha 90cm x 50cm",
+"Manilha 1,10m x 50cm"
+].forEach(nome => criarProduto(nome));
+
+titulo("Tampas de Manilha");
+
+criarProduto("Tampa 90cm", ["Aberta", "Fechada"]);
+criarProduto("Tampa 1m", ["Aberta", "Fechada"]);
+criarProduto("Tampa 1,10cm", ["Aberta", "Fechada"]);
+criarProduto("Tampa 1,20cm", ["Aberta", "Fechada"]);
+  
 <script>
 
 const grid = document.getElementById("gridProdutos");
@@ -439,20 +453,6 @@ function criarProduto(nome, opcoes = null){
 
   </div>`;
 }
-
-titulo("Manilhas");
-
-[
-"Manilha 90cm x 50cm",
-"Manilha 1,10m x 50cm"
-].forEach(nome => criarProduto(nome));
-
-titulo("Tampas de Manilha");
-
-criarProduto("Tampa 90cm", ["Aberta", "Fechada"]);
-criarProduto("Tampa 1m", ["Aberta", "Fechada"]);
-criarProduto("Tampa 1,10cm", ["Aberta", "Fechada"]);
-criarProduto("Tampa 1,20cm", ["Aberta", "Fechada"]);
 
 </script>
 
