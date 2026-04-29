@@ -376,6 +376,16 @@ select{
 
 <script>
 
+function aumentar(btn){
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = parseInt(input.value) + 1;
+}
+
+function diminuir(btn){
+  const input = btn.parentElement.querySelector('.qtd');
+  input.value = Math.max(1, parseInt(input.value) - 1);
+}
+
 let carrinho;
 
 try {
@@ -388,52 +398,33 @@ try {
 } catch (e) {
   carrinho = [];
 }
-  
-}  
-
-function aumentar(btn){
-  const input = btn.parentElement.querySelector('.qtd');
-  input.value = parseInt(input.value) + 1;
-}
-
-function diminuir(btn){
-  const input = btn.parentElement.querySelector('.qtd');
-  input.value = Math.max(1, parseInt(input.value) - 1);
-}
-
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
   const qtd = parseInt(card.querySelector('.qtd').value);
-  const medida = card.querySelector('select').value;
 
-  const nomeCompleto = nome + " - " + medida;
-
-  const existente = carrinho.find(item => item.nome === nomeCompleto);
+  const existente = carrinho.find(item => item.nome === nome);
 
   if(existente){
     existente.qtd += qtd;
-  } else {
-    carrinho.push({ nome: nomeCompleto, qtd });
+  }else{
+    carrinho.push({nome, qtd});
   }
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+  renderizar(); // 🔥 CORREÇÃO
 }
 
-/* PADRÃO COBOGÓ */
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-  document.getElementById("header").classList.add("sumir");
-  document.body.classList.add("sem-header");
   renderizar();
 }
 
 function fecharCarrinho(){
   document.getElementById("carrinho").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-  document.getElementById("header").classList.remove("sumir");
-  document.body.classList.remove("sem-header");
 }
 
 function renderizar(){
@@ -441,7 +432,7 @@ function renderizar(){
   lista.innerHTML = "";
 
   if(carrinho.length === 0){
-    lista.innerHTML = "Carrinho vazio";
+    
     return;
   }
 
@@ -470,7 +461,7 @@ function enviarWhatsApp(){
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
 
-/* 🔥 DESKTOP ABRE AUTOMATICO */
+/* AUTO OPEN DESKTOP */
 window.addEventListener("load", () => {
   if(window.innerWidth >= 900){
     document.getElementById("carrinho").classList.add("active");
