@@ -376,8 +376,18 @@ select{
 
 <script>
 
-localStorage.setItem('carrinho', JSON.stringify(carrinho));
-renderizar(); // 🔥
+let carrinho;
+
+try {
+  carrinho = JSON.parse(localStorage.getItem('carrinho'));
+
+  if (!Array.isArray(carrinho)) {
+    carrinho = [];
+  }
+
+} catch (e) {
+  carrinho = [];
+}
   
 }  
 
