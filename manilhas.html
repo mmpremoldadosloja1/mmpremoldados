@@ -9,8 +9,6 @@
 
 <style>
 
-/* (TODO seu CSS foi mantido igual — não mexi no visual) */
-
 body{
   background:#fff;
   color:#000;
@@ -71,7 +69,7 @@ nav{
   transform:scale(1.05);
 }
 
-/* CARRINHO (igual cobogó) */
+/* ===== CARRINHO PADRÃO ===== */
 .carrinho-lateral{
   position:fixed;
   top:0;
@@ -79,13 +77,14 @@ nav{
   width:320px;
   height:100%;
   background:#fff;
-  box-shadow:-10px 0 30px rgba(0,0,0,0.25);
+  box-shadow:-10px 0 30px rgba(0,0,0,0.25); /* 🔥 sombra melhor */
   padding:20px;
   transition:0.3s;
   z-index:1001;
   display:flex;
   flex-direction:column;
-  border-top-left-radius:50px;
+
+  border-top-left-radius:50px;   /* 🔥 acabamento */
   border-bottom-left-radius:50px;
 }
 
@@ -123,7 +122,7 @@ nav{
   cursor:pointer;
 }
 
-/* OVERLAY */
+/* OVERLAY (SÓ MOBILE USA) */
 .overlay{
   position:fixed;
   width:100%;
@@ -157,7 +156,6 @@ h2{
   padding-left:20px;
 }
 
-/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
@@ -165,7 +163,6 @@ h2{
   padding:0 20px 40px 20px;
 }
 
-/* CARD */
 .card{
   background:#fff;
   border-radius:12px;
@@ -189,7 +186,6 @@ h2{
   min-height:40px;
 }
 
-/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
@@ -215,7 +211,6 @@ h2{
   padding:5px;
 }
 
-/* BOTÃO */
 .btn{
   width:100%;
   padding:10px 0;
@@ -225,14 +220,45 @@ h2{
   border:none;
   border-radius:8px;
   cursor:pointer;
+  transition:0.3s;
 }
 
 .btn:hover{
   background:#c92f3b;
+  transform:scale(1.05);
+}
+  
+/* botão aparece só no mobile */
+.btn-carrinho{
+  display:flex;
+}
+  
+/* 🔥 DESKTOP APENAS */
+@media(min-width:900px){
+.btn-carrinho{
+  display:none !important;
+}
+  .carrinho-lateral{
+    right:0 !important;
+  }
+
+  .overlay{
+    display:none !important;
+  }
+
+  body{
+    padding-right:320px;
+  }
+
+  header{
+    width:calc(100% - 320px);
+  }
+
 }
 
 </style>
 </head>
+
 
 <body>
 
