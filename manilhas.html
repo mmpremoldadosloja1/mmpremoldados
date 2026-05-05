@@ -11,6 +11,7 @@ body{
   background:#fff;
   color:#000;
   padding-top:90px;
+  padding-right:0;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -40,6 +41,11 @@ nav{
   align-items:center;
 }
 
+.nav-right{
+  margin-right:20px;
+}
+
+/* 🔥 EXATAMENTE IGUAL */
 .nav-item{
   display:flex;
   flex-direction:column;
@@ -63,12 +69,12 @@ nav{
   transform:scale(1.05);
 }
 
-/* ===== CARRINHO ===== */
+/* ===== CARRINHO IDENTICO ===== */
 .carrinho-lateral{
   position:fixed;
   top:0;
-  right:-350px;
-  width:320px;
+  right:-350px; /* 🔥 IGUAL */
+  width:320px;  /* 🔥 IGUAL */
   height:100%;
   background:#fff;
   box-shadow:-10px 0 30px rgba(0,0,0,0.25);
@@ -77,6 +83,7 @@ nav{
   z-index:1001;
   display:flex;
   flex-direction:column;
+
   border-top-left-radius:50px;
   border-bottom-left-radius:50px;
 }
@@ -115,6 +122,7 @@ nav{
   cursor:pointer;
 }
 
+/* OVERLAY */
 .overlay{
   position:fixed;
   width:100%;
@@ -129,6 +137,19 @@ nav{
 .overlay.active{
   opacity:1;
   pointer-events:auto;
+}
+
+/* TITULOS */
+h1{
+  text-align:center;
+  text-transform:uppercase;
+  font-size:36px;
+  margin-bottom:20px;
+  color:#e63946;
+}
+
+h2{
+  margin:30px 0 15px 20px;
 }
 
 /* GRID */
@@ -160,8 +181,8 @@ nav{
 .contador button{
   padding:5px 10px;
   border:none;
-  background:#eee;
   border-radius:5px;
+  background:#eee;
 }
 
 .contador input{
@@ -181,16 +202,32 @@ nav{
   font-weight:bold;
 }
 
+/* MOBILE */
 .btn-carrinho{
   display:flex;
 }
 
+/* DESKTOP IGUAL */
 @media(min-width:900px){
-  .btn-carrinho{display:none;}
-  .carrinho-lateral{right:0 !important;}
-  .overlay{display:none;}
-  body{padding-right:320px;}
-  header{width:calc(100% - 320px);}
+  .btn-carrinho{
+    display:none !important;
+  }
+
+  .carrinho-lateral{
+    right:0 !important;
+  }
+
+  .overlay{
+    display:none !important;
+  }
+
+  body{
+    padding-right:320px;
+  }
+
+  header{
+    width:calc(100% - 320px);
+  }
 }
 
 </style>
@@ -201,7 +238,8 @@ nav{
 <header>
   <nav class="nav-left">
     <a href="index.html" class="nav-item">
-      <svg viewBox="0 0 24 24" stroke-width="2">
+      <!-- 🔥 SVG IDENTICO -->
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <path d="M3 10L12 3l9 7"></path>
         <path d="M5 10v10h14V10"></path>
       </svg>
@@ -211,7 +249,8 @@ nav{
 
   <nav class="nav-right">
     <a href="#" class="nav-item btn-carrinho" onclick="abrirCarrinho(); return false;">
-      <svg viewBox="0 0 24 24" stroke-width="2">
+      <!-- 🔥 SVG IDENTICO -->
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
         <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
@@ -230,7 +269,7 @@ nav{
 
 <div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
 
-<h1 style="text-align:center;color:#e63946;">MANILHAS E TAMPAS</h1>
+<h1>MANILHAS E TAMPAS</h1>
 
 <div class="grid" id="gridProdutos"></div>
 
@@ -238,8 +277,8 @@ nav{
 
 const grid = document.getElementById("gridProdutos");
 
-function titulo(texto){
-  grid.innerHTML += `<div style="grid-column:1/-1"><h2>${texto}</h2></div>`;
+function titulo(t){
+  grid.innerHTML += `<div style="grid-column:1/-1"><h2>${t}</h2></div>`;
 }
 
 function aumentar(btn){
@@ -254,8 +293,8 @@ function diminuir(btn){
 
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-function adicionarCarrinho(botao){
-  const card = botao.closest('.card');
+function adicionarCarrinho(btn){
+  const card = btn.closest('.card');
   const nome = card.querySelector('h3').innerText;
   const select = card.querySelector('select');
   const variacao = select ? select.value : "";
@@ -278,15 +317,13 @@ function adicionarCarrinho(botao){
 function criarProduto(nome, opcoes=null){
   grid.innerHTML += `
   <div class="card">
-    <div style="height:110px;display:flex;align-items:center;justify-content:center;background:#f3f3f3;border-radius:8px;margin-bottom:10px;">
-      IMG
-    </div>
+    <div style="height:110px;background:#f3f3f3;border-radius:8px;margin-bottom:10px;"></div>
 
     <h3>${nome}</h3>
 
     ${opcoes ? `
       <select style="margin:10px 0;padding:6px;width:100%;">
-        ${opcoes.map(op=>`<option>${op}</option>`).join('')}
+        ${opcoes.map(o=>`<option>${o}</option>`).join('')}
       </select>` : ''}
 
     <div class="contador">
@@ -311,6 +348,10 @@ criarProduto("Tampa 1,10cm",["Aberta","Fechada"]);
 criarProduto("Tampa 1,20cm",["Aberta","Fechada"]);
 
 /* CARRINHO */
+const carrinhoEl = document.getElementById("carrinho");
+const overlay = document.getElementById("overlay");
+const lista = document.getElementById("lista");
+
 function abrirCarrinho(){
   carrinhoEl.classList.add("active");
   overlay.classList.add("active");
@@ -325,7 +366,7 @@ function fecharCarrinho(){
 function renderizar(){
   lista.innerHTML="";
   carrinho.forEach((item,i)=>{
-    lista.innerHTML+=`
+    lista.innerHTML += `
     <div class="item">
       ${item.nome} (x${item.qtd})
       <button class="remover" onclick="remover(${i})">X</button>
@@ -346,10 +387,6 @@ function enviarWhatsApp(){
   });
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
-
-const carrinhoEl=document.getElementById("carrinho");
-const overlay=document.getElementById("overlay");
-const lista=document.getElementById("lista");
 
 window.addEventListener("load",()=>{
   if(window.innerWidth>=900){
