@@ -390,18 +390,7 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-let carrinho;
-
-try {
-  carrinho = JSON.parse(localStorage.getItem('carrinho'));
-
-  if (!Array.isArray(carrinho)) {
-    carrinho = [];
-  }
-
-} catch (e) {
-  carrinho = [];
-}
+/* ADD AO CARRINHO */
 function adicionarCarrinho(botao){
   const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
@@ -415,65 +404,12 @@ function adicionarCarrinho(botao){
     carrinho.push({nome, qtd});
   }
 
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-
-  renderizar(); // 🔥 CORREÇÃO
+  salvarCarrinho(); // 🔥 agora usa o global
 }
-
-function abrirCarrinho(){
-  document.getElementById("carrinho").classList.add("active");
-  document.getElementById("overlay").classList.add("active");
-  renderizar();
-}
-
-function fecharCarrinho(){
-  document.getElementById("carrinho").classList.remove("active");
-  document.getElementById("overlay").classList.remove("active");
-}
-
-function renderizar(){
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
-
-  if(carrinho.length === 0){
-    
-    return;
-  }
-
-  carrinho.forEach((item, i)=>{
-    lista.innerHTML += `
-      <div class="item">
-        ${item.nome} (x${item.qtd})
-        <button class="remover" onclick="remover(${i})">X</button>
-      </div>
-    `;
-  });
-}
-
-function remover(i){
-  carrinho.splice(i,1);
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
-  renderizar();
-}
-
-function enviarWhatsApp(){
-  let msg = "Pedido:%0A";
-  carrinho.forEach(item=>{
-    msg += `${item.nome} - ${item.qtd}%0A`;
-  });
-
-  window.open(`https://wa.me/5561999385680?text=${msg}`);
-}
-
-/* AUTO OPEN DESKTOP */
-window.addEventListener("load", () => {
-  if(window.innerWidth >= 900){
-    document.getElementById("carrinho").classList.add("active");
-    renderizar();
-  }
-});
 
 </script>
+
+<script src="js/carrinho.js"></script>
 
 </body>
 </html>
