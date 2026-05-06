@@ -536,32 +536,31 @@ function render(){
     let texto = "";
 
     if(item.nome === "Laje"){
-      texto = `
-        <strong>Laje ${item.tipo}</strong><br>
-        Isopor: ${item.iso}<br>
-        ${item.c} x ${item.l} = ${item.m2} m²
-      `;
-    }
+  texto = `
+    <div class="titulo-item">Laje ${item.tipo}</div>
+    <div class="detalhe">Isopor: ${item.iso}</div>
+    <div class="detalhe">${item.c} x ${item.l} = <strong>${item.m2} m²</strong></div>
+  `;
+}
 
-    if(item.nome === "Viga"){
-      texto = `
-        <strong>Viga ${item.tipo}</strong><br>
-        Tamanho: ${item.tam}<br>
-        Qtd: ${item.qtd}
-      `;
-    }
+if(item.nome === "Viga"){
+  texto = `
+    <div class="titulo-item">Viga ${item.tipo}</div>
+    <div class="detalhe">Tamanho: ${item.tam}</div>
+    <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
+  `;
+}
 
-    if(item.nome === "Isopor"){
-      texto = `
-        <strong>Isopor</strong><br>
-        Tipo: ${item.tipo}<br>
-        Qtd: ${item.qtd}
-      `;
-    }
-
+if(item.nome === "Isopor"){
+  texto = `
+    <div class="titulo-item">Isopor</div>
+    <div class="detalhe">Tipo: ${item.tipo}</div>
+    <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
+  `;
+}
     lista.innerHTML += `
       <div class="item">
-        <div>${texto}</div>
+        <div class="info-item">${texto}</div>
         <button class="remover" onclick="remover(${i})">
   <svg viewBox="0 0 24 24" fill="none" stroke="#e63946" stroke-width="2" width="20" height="20">
     <path d="M3 6h18"></path>
