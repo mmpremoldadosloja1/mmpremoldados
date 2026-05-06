@@ -570,7 +570,20 @@ function render(){
   lista.innerHTML = "";
 
   if(carrinho.length === 0){
-    lista.innerHTML = "<p>Carrinho vazio</p>";
+    lista.innerHTML = `
+  <div class="carrinho-vazio">
+    
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" width="50" height="50">
+      <circle cx="9" cy="20" r="1"></circle>
+      <circle cx="18" cy="20" r="1"></circle>
+      <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+    </svg>
+
+    <p>Seu carrinho está vazio</p>
+    <span>Adicione produtos para continuar</span>
+
+  </div>
+`;
     return;
   }
 
