@@ -420,23 +420,80 @@ for(let i=0.8;i<=6;i+=0.1){
   listaVigas.innerHTML += `<option value="${i.toFixed(1)}m">`;
 }
 
-/* ADD (🔥 corrigido) */
+/* CALCULO M2 AUTOMÁTICO */
+document.getElementById("c").addEventListener("input", calcularM2);
+document.getElementById("l").addEventListener("input", calcularM2);
+
+function calcularM2(){
+  let c = parseFloat(document.getElementById("c").value) || 0;
+  let l = parseFloat(document.getElementById("l").value) || 0;
+  let total = (c * l).toFixed(2);
+
+  document.getElementById("m2").innerText = total + " m²";
+}
+
+/* ADD LAJE (🔥 AGORA COMPLETO) */
 function addLaje(){
-  carrinho.push({nome:"Laje", qtd:1});
+  let tipo = document.getElementById("tipoLaje").value;
+  let iso = document.getElementById("isopor").value;
+  let c = document.getElementById("c").value;
+  let l = document.getElementById("l").value;
+  let m2 = (parseFloat(c || 0) * parseFloat(l || 0)).toFixed(2);
+
+  if(!tipo || !iso || !c || !l){
+    alert("Preencha todos os campos da laje");
+    return;
+  }
+
+  carrinho.push({
+    nome: "Laje",
+    tipo,
+    iso,
+    c,
+    l,
+    m2,
+    qtd: 1
+  });
+
   salvar();
 }
 
+/* ADD VIGA */
 function addViga(){
-  carrinho.push({nome:"Viga", qtd:1});
+  let tipo = document.getElementById("tipoViga").value;
+  let tam = document.getElementById("tamViga").value;
+  let qtd = document.getElementById("qv").value;
+
+  if(!tam){
+    alert("Informe o tamanho da viga");
+    return;
+  }
+
+  carrinho.push({
+    nome: "Viga",
+    tipo,
+    tam,
+    qtd
+  });
+
   salvar();
 }
 
+/* ADD ISOPOR */
 function addIso(){
-  carrinho.push({nome:"Isopor", qtd:1});
+  let tipo = document.getElementById("tipoIso").value;
+  let qtd = document.getElementById("qi").value;
+
+  carrinho.push({
+    nome: "Isopor",
+    tipo,
+    qtd
+  });
+
   salvar();
 }
 
-/* SALVAR (🔥 agora sempre renderiza) */
+/* SALVAR */
 function salvar(){
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   render();
@@ -446,7 +503,7 @@ function salvar(){
 function abrirCarrinho(){
   document.getElementById("carrinho").classList.add("active");
   document.getElementById("overlay").classList.add("active");
-  render(); // 🔥 importante
+  render();
 }
 
 /* FECHAR */
@@ -455,20 +512,47 @@ function fecharCarrinho(){
   document.getElementById("overlay").classList.remove("active");
 }
 
-/* RENDER */
+/* RENDER (🔥 AGORA MOSTRA DETALHES) */
 function render(){
   const lista = document.getElementById("lista");
   lista.innerHTML = "";
 
   if(carrinho.length === 0){
-  
+    lista.innerHTML = "<p>Carrinho vazio</p>";
     return;
   }
 
   carrinho.forEach((item, i)=>{
+    
+    let texto = "";
+
+    if(item.nome === "Laje"){
+      texto = `
+        <strong>Laje ${item.tipo}</strong><br>
+        Isopor: ${item.iso}<br>
+        ${item.c} x ${item.l} = ${item.m2} m²
+      `;
+    }
+
+    if(item.nome === "Viga"){
+      texto = `
+        <strong>Viga ${item.tipo}</strong><br>
+        Tamanho: ${item.tam}<br>
+        Qtd: ${item.qtd}
+      `;
+    }
+
+    if(item.nome === "Isopor"){
+      texto = `
+        <strong>Isopor</strong><br>
+        Tipo: ${item.tipo}<br>
+        Qtd: ${item.qtd}
+      `;
+    }
+
     lista.innerHTML += `
       <div class="item">
-        ${item.nome} (x${item.qtd})
+        <div>${texto}</div>
         <button class="remover" onclick="remover(${i})">X</button>
       </div>
     `;
@@ -482,22 +566,33 @@ function remover(i){
   render();
 }
 
-/* WHATS */
+/* WHATS (🔥 AGORA VAI COMPLETO) */
 function enviarWhatsApp(){
   let msg = "Pedido:%0A";
+
   carrinho.forEach(item=>{
-    msg += `${item.nome} - ${item.qtd}%0A`;
+    if(item.nome === "Laje"){
+      msg += `Laje ${item.tipo} | ${item.iso} | ${item.c}x${item.l} (${item.m2}m²)%0A`;
+    }
+
+    if(item.nome === "Viga"){
+      msg += `Viga ${item.tipo} | ${item.tam} | Qtd:${item.qtd}%0A`;
+    }
+
+    if(item.nome === "Isopor"){
+      msg += `Isopor ${item.tipo} | Qtd:${item.qtd}%0A`;
+    }
   });
 
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
 
-/* 🔥 DESKTOP */
+/* DESKTOP */
 window.addEventListener("load", () => {
   if(window.innerWidth >= 900){
     document.getElementById("carrinho").classList.add("active");
   }
-  render(); // 🔥 garante que sempre aparece
+  render();
 });
 
 </script>
