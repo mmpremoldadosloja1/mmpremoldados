@@ -77,43 +77,6 @@ nav{
   transform:scale(1.05);
 }
 
-.lista-carrinho{
-  flex:1;
-  overflow-y:auto;
-}
-
-.item{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-  
-.btn-finalizar{
-  padding:15px;
-  background:#25D366;
-  color:#fff;
-  border:none;
-  border-radius:5px;
-  font-weight:bold;
-  cursor:pointer;
-}
-/* OVERLAY */
-.overlay{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.4);
-  opacity:0;
-  pointer-events:none;
-  transition:0.3s;
-  z-index:1000;
-}
-
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
-
 /* ===== IMAGENS ===== */
 .imagem{
   width:100%;
@@ -217,14 +180,6 @@ select:invalid{
   .conteudo input{
     width:auto;
     min-width:140px;
-  }
-
-  .carrinho-lateral{
-    right:0 !important;
-  }
-
-  .overlay{
-    display:none !important;
   }
 
   body{
