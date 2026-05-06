@@ -1,0 +1,96 @@
+/* ===== CARRINHO ===== */
+
+.carrinho-lateral{
+  box-shadow:-10px 0 30px rgba(0,0,0,0.25);
+  border-top-left-radius:50px;
+  border-bottom-left-radius:50px;
+}
+
+.lista-carrinho{
+  flex:1;
+  overflow-y:auto;
+  margin-top:10px;
+}
+
+/* ITEM */
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+}
+
+/* TEXTO */
+.info-item{
+  font-size:14px;
+  line-height:1.4;
+}
+
+/* TITULO */
+.titulo-item{
+  font-weight:700;
+  font-size:15px;
+  margin-bottom:4px;
+  border-left:4px solid #e63946;
+  padding-left:8px;
+}
+
+/* DETALHES */
+.detalhe{
+  color:#555;
+  font-size:13px;
+}
+
+.detalhe strong{
+  color:#000;
+}
+
+/* BOTÃO LIXEIRA */
+.remover{
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  padding:5px;
+  display:flex;
+  align-items:center;
+}
+
+.remover svg{
+  stroke:#e63946;
+  transition:0.2s;
+}
+
+.remover:hover svg{
+  stroke:#c1121f;
+  transform:scale(1.15);
+}
+
+/* CARRINHO VAZIO */
+.carrinho-vazio{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  margin-top:40px;
+  color:#777;
+}
+
+.carrinho-vazio svg{
+  stroke:#e63946;
+  margin-bottom:10px;
+  opacity:0.7;
+}
+
+.carrinho-vazio p{
+  font-weight:600;
+  font-size:16px;
+  color:#000;
+}
+
+.carrinho-vazio span{
+  font-size:13px;
+  color:#777;
+}
