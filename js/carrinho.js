@@ -54,29 +54,40 @@ function renderCarrinho(){
   carrinho.forEach((item, i)=>{
     let texto = "";
 
-    if(item.nome === "Laje"){
-      texto = `
-        <div class="titulo-item">Laje ${item.tipo}</div>
-        <div class="detalhe">Isopor: ${item.iso}</div>
-        <div class="detalhe">${item.c} x ${item.l} = <strong>${item.m2} m²</strong></div>
-      `;
-    }
+/* LAJE */
+if(item.nome === "Laje"){
+  texto = `
+    <div class="titulo-item">Laje ${item.tipo}</div>
+    <div class="detalhe">Isopor: ${item.iso}</div>
+    <div class="detalhe">${item.c} x ${item.l} = <strong>${item.m2} m²</strong></div>
+  `;
+}
 
-    if(item.nome === "Viga"){
-      texto = `
-        <div class="titulo-item">Viga ${item.tipo}</div>
-        <div class="detalhe">Tamanho: ${item.tam}</div>
-        <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
-      `;
-    }
+/* VIGA */
+else if(item.nome === "Viga"){
+  texto = `
+    <div class="titulo-item">Viga ${item.tipo}</div>
+    <div class="detalhe">Tamanho: ${item.tam}</div>
+    <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
+  `;
+}
 
-    if(item.nome === "Isopor"){
-      texto = `
-        <div class="titulo-item">Isopor</div>
-        <div class="detalhe">Tipo: ${item.tipo}</div>
-        <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
-      `;
-    }
+/* ISOPOR */
+else if(item.nome === "Isopor"){
+  texto = `
+    <div class="titulo-item">Isopor</div>
+    <div class="detalhe">Tipo: ${item.tipo}</div>
+    <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
+  `;
+}
+
+/* 🔥 PRODUTOS SIMPLES (COBOGÓS E OUTROS) */
+else{
+  texto = `
+    <div class="titulo-item">${item.nome}</div>
+    <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
+  `;
+}
 
     lista.innerHTML += `
       <div class="item">
