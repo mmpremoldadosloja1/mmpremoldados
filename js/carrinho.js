@@ -4,32 +4,32 @@
 
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-// SALVAR
+/* SALVAR */
 function salvarCarrinho(){
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
   renderCarrinho();
 }
 
-// ABRIR
+/* ABRIR */
 function abrirCarrinho(){
   document.getElementById("carrinho")?.classList.add("active");
   document.getElementById("overlay")?.classList.add("active");
   renderCarrinho();
 }
 
-// FECHAR
+/* FECHAR */
 function fecharCarrinho(){
   document.getElementById("carrinho")?.classList.remove("active");
   document.getElementById("overlay")?.classList.remove("active");
 }
 
-// REMOVER ITEM
-function removerItem(index){
-  carrinho.splice(index, 1);
+/* REMOVER */
+function removerItem(i){
+  carrinho.splice(i,1);
   salvarCarrinho();
 }
 
-// RENDER
+/* RENDER */
 function renderCarrinho(){
   const lista = document.getElementById("lista");
   if(!lista) return;
@@ -52,42 +52,43 @@ function renderCarrinho(){
   }
 
   carrinho.forEach((item, i)=>{
+
     let texto = "";
 
-/* LAJE */
-if(item.nome === "Laje"){
-  texto = `
-    <div class="titulo-item">Laje ${item.tipo}</div>
-    <div class="detalhe">Isopor: ${item.iso}</div>
-    <div class="detalhe">${item.c} x ${item.l} = <strong>${item.m2} m²</strong></div>
-  `;
-}
+    // LAJE
+    if(item.nome === "Laje"){
+      texto = `
+        <div class="titulo-item">Laje ${item.tipo}</div>
+        <div class="detalhe">Isopor: ${item.iso}</div>
+        <div class="detalhe">${item.c} x ${item.l} = <strong>${item.m2} m²</strong></div>
+      `;
+    }
 
-/* VIGA */
-else if(item.nome === "Viga"){
-  texto = `
-    <div class="titulo-item">Viga ${item.tipo}</div>
-    <div class="detalhe">Tamanho: ${item.tam}</div>
-    <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
-  `;
-}
+    // VIGA
+    else if(item.nome === "Viga"){
+      texto = `
+        <div class="titulo-item">Viga ${item.tipo}</div>
+        <div class="detalhe">Tamanho: ${item.tam}</div>
+        <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
+      `;
+    }
 
-/* ISOPOR */
-else if(item.nome === "Isopor"){
-  texto = `
-    <div class="titulo-item">Isopor</div>
-    <div class="detalhe">Tipo: ${item.tipo}</div>
-    <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
-  `;
-}
+    // ISOPOR
+    else if(item.nome === "Isopor"){
+      texto = `
+        <div class="titulo-item">Isopor</div>
+        <div class="detalhe">Tipo: ${item.tipo}</div>
+        <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
+      `;
+    }
 
-/* 🔥 PRODUTOS SIMPLES (COBOGÓS E OUTROS) */
-else{
-  texto = `
-    <div class="titulo-item">${item.nome}</div>
-    <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
-  `;
-}
+    // 🔥 QUALQUER OUTRO PRODUTO (COBOGÓ, ETC)
+    else{
+      texto = `
+        <div class="titulo-item">${item.nome}</div>
+        <div class="detalhe">Quantidade: <strong>${item.qtd}</strong></div>
+      `;
+    }
 
     lista.innerHTML += `
       <div class="item">
@@ -107,28 +108,35 @@ else{
   });
 }
 
-// WHATSAPP
+/* WHATSAPP */
 function enviarWhatsApp(){
   let msg = "Pedido:%0A";
 
   carrinho.forEach(item=>{
+
     if(item.nome === "Laje"){
       msg += `Laje ${item.tipo} | ${item.iso} | ${item.c}x${item.l} (${item.m2}m²)%0A`;
     }
 
-    if(item.nome === "Viga"){
+    else if(item.nome === "Viga"){
       msg += `Viga ${item.tipo} | ${item.tam} | Qtd:${item.qtd}%0A`;
     }
 
-    if(item.nome === "Isopor"){
+    else if(item.nome === "Isopor"){
       msg += `Isopor ${item.tipo} | Qtd:${item.qtd}%0A`;
     }
+
+    // 🔥 COBÓGOS E OUTROS
+    else{
+      msg += `${item.nome} | Qtd:${item.qtd}%0A`;
+    }
+
   });
 
   window.open(`https://wa.me/5561999385680?text=${msg}`);
 }
 
-// CARREGAR
+/* LOAD */
 window.addEventListener("load", ()=>{
   if(window.innerWidth >= 900){
     document.getElementById("carrinho")?.classList.add("active");
