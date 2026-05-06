@@ -1,9 +1,26 @@
 /* ===== CARRINHO ===== */
 
 .carrinho-lateral{
+  position:fixed;
+  top:0;
+  right:-350px;
+  width:320px;
+  height:100%;
+  background:#fff;
+  padding:20px;
+  transition:0.3s;
+  z-index:1001;
+  display:flex;
+  flex-direction:column;
+
+  /* VISUAL */
   box-shadow:-10px 0 30px rgba(0,0,0,0.25);
   border-top-left-radius:50px;
   border-bottom-left-radius:50px;
+}
+
+.carrinho-lateral.active{
+  right:0;
 }
 
 .lista-carrinho{
