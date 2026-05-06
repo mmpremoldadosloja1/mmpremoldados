@@ -1,4 +1,6 @@
-/* ===== CARRINHO ===== */
+/* =========================
+   CARRINHO - ESTRUTURA
+========================= */
 
 .carrinho-lateral{
   position:fixed;
@@ -22,6 +24,27 @@
 .carrinho-lateral.active{
   right:0;
 }
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+  z-index:1000;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* =========================
+   LISTA DE PRODUTOS
+========================= */
 
 .lista-carrinho{
   flex:1;
@@ -64,7 +87,10 @@
   color:#000;
 }
 
-/* BOTÃO LIXEIRA */
+/* =========================
+   BOTÃO REMOVER
+========================= */
+
 .remover{
   background:transparent;
   border:none;
@@ -84,7 +110,25 @@
   transform:scale(1.15);
 }
 
-/* CARRINHO VAZIO */
+/* =========================
+   BOTÃO FINALIZAR
+========================= */
+
+.btn-finalizar{
+  padding:15px;
+  background:#25D366;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+/* =========================
+   CARRINHO VAZIO
+========================= */
+
 .carrinho-vazio{
   display:flex;
   flex-direction:column;
@@ -110,4 +154,24 @@
 .carrinho-vazio span{
   font-size:13px;
   color:#777;
+}
+
+/* =========================
+   DESKTOP FIXO
+========================= */
+
+@media(min-width:900px){
+
+  .carrinho-lateral{
+    right:0 !important;
+  }
+
+  .overlay{
+    display:none !important;
+  }
+
+  body{
+    padding-right:320px;
+  }
+
 }
