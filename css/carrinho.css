@@ -7,21 +7,21 @@
   top:0;
   right:-350px;
   width:320px;
-  height:100%;
+  height:100vh;
   background:#fff;
   padding:20px;
   transition:0.3s ease;
   z-index:1001;
+
   display:flex;
   flex-direction:column;
-
-  /* 🔥 IMPORTANTE */
-  overflow:hidden;
 
   /* VISUAL */
   box-shadow:-10px 0 30px rgba(0,0,0,0.25);
   border-top-left-radius:50px;
   border-bottom-left-radius:50px;
+
+  overflow:hidden;
 
   /* MOBILE FIX */
   will-change:right;
@@ -32,13 +32,18 @@
   right:0;
 }
 
-/* OVERLAY */
+/* =========================
+   OVERLAY
+========================= */
+
 .overlay{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,0.4);
+
   opacity:0;
   pointer-events:none;
+
   transition:0.3s;
   z-index:1000;
 }
@@ -54,49 +59,68 @@
 
 .lista-carrinho{
   flex:1;
+
   overflow-y:auto;
   overflow-x:hidden;
 
-  margin-top:10px;
+  margin-top:15px;
+  margin-bottom:15px;
 
-  /* 🔥 IMPORTANTE */
-  min-height:0;
+  display:flex;
+  flex-direction:column;
 
-  /* MOBILE */
+  min-height:200px;
+
   -webkit-overflow-scrolling:touch;
 }
 
-/* ITEM */
+/* =========================
+   ITEM
+========================= */
+
 .item{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
+
   gap:10px;
+
   padding:12px 0;
+
   border-bottom:1px solid #eee;
 }
 
-/* TEXTO */
+/* =========================
+   TEXTO
+========================= */
+
 .info-item{
   flex:1;
 
   font-size:14px;
   line-height:1.4;
 
-  /* 🔥 IMPORTANTE */
   word-break:break-word;
 }
 
-/* TITULO */
+/* =========================
+   TITULO
+========================= */
+
 .titulo-item{
   font-weight:700;
   font-size:15px;
+
   margin-bottom:4px;
+
   border-left:4px solid #e63946;
   padding-left:8px;
 }
 
-/* DETALHES */
+/* =========================
+   DETALHES
+========================= */
+
 .detalhe{
   color:#555;
   font-size:13px;
@@ -113,15 +137,16 @@
 .remover{
   background:transparent;
   border:none;
+
   cursor:pointer;
+
   padding:5px;
+
   display:flex;
   align-items:center;
 
-  /* 🔥 IMPORTANTE */
   flex-shrink:0;
 
-  /* MOBILE */
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
 }
@@ -142,15 +167,19 @@
 
 .btn-finalizar{
   padding:15px;
+
   background:#25D366;
   color:#fff;
+
   border:none;
   border-radius:5px;
+
   font-weight:bold;
+
   cursor:pointer;
+
   margin-top:10px;
 
-  /* MOBILE */
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
 }
@@ -162,10 +191,14 @@
 .carrinho-vazio{
   display:flex;
   flex-direction:column;
+
   align-items:center;
   justify-content:center;
+
   text-align:center;
+
   margin-top:40px;
+
   color:#777;
 }
 
@@ -208,6 +241,7 @@
     right:-100%;
     width:85%;
     max-width:320px;
+    height:100vh;
     z-index:1001;
   }
 
