@@ -42,8 +42,6 @@ function abrirCarrinho(){
   document.getElementById("overlay")
   ?.classList.add("active");
 
-  document.body.classList.add("sem-scroll");
-
   renderCarrinho();
 }
 
@@ -58,8 +56,6 @@ function fecharCarrinho(){
 
   document.getElementById("overlay")
   ?.classList.remove("active");
-
-  document.body.classList.remove("sem-scroll");
 }
 
 /* =========================
@@ -130,7 +126,6 @@ function renderCarrinho(){
     if(item.nome === "Laje"){
 
       texto = `
-
         <div class="titulo-item">
           Laje ${item.tipo}
         </div>
@@ -144,7 +139,6 @@ function renderCarrinho(){
           =
           <strong>${item.m2} m²</strong>
         </div>
-
       `;
     }
 
@@ -152,7 +146,6 @@ function renderCarrinho(){
     else if(item.nome === "Viga"){
 
       texto = `
-
         <div class="titulo-item">
           Viga ${item.tipo}
         </div>
@@ -165,7 +158,6 @@ function renderCarrinho(){
           Quantidade:
           <strong>${item.qtd}</strong>
         </div>
-
       `;
     }
 
@@ -173,7 +165,6 @@ function renderCarrinho(){
     else if(item.nome === "Isopor"){
 
       texto = `
-
         <div class="titulo-item">
           Isopor
         </div>
@@ -186,15 +177,13 @@ function renderCarrinho(){
           Quantidade:
           <strong>${item.qtd}</strong>
         </div>
-
       `;
     }
 
-    /* QUALQUER OUTRO PRODUTO */
+    /* OUTROS */
     else{
 
       texto = `
-
         <div class="titulo-item">
           ${item.nome}
         </div>
@@ -203,7 +192,6 @@ function renderCarrinho(){
           Quantidade:
           <strong>${item.qtd}</strong>
         </div>
-
       `;
     }
 
@@ -212,9 +200,7 @@ function renderCarrinho(){
       <div class="item">
 
         <div class="info-item">
-
           ${texto}
-
         </div>
 
         <button
@@ -258,25 +244,21 @@ function enviarWhatsApp(){
 
   carrinho.forEach(item=>{
 
-    /* LAJE */
     if(item.nome === "Laje"){
 
       msg += `Laje ${item.tipo} | ${item.iso} | ${item.c}x${item.l} (${item.m2}m²)%0A`;
     }
 
-    /* VIGA */
     else if(item.nome === "Viga"){
 
       msg += `Viga ${item.tipo} | ${item.tam} | Qtd:${item.qtd}%0A`;
     }
 
-    /* ISOPOR */
     else if(item.nome === "Isopor"){
 
       msg += `Isopor ${item.tipo} | Qtd:${item.qtd}%0A`;
     }
 
-    /* OUTROS */
     else{
 
       msg += `${item.nome} | Qtd:${item.qtd}%0A`;
@@ -297,7 +279,6 @@ window.addEventListener("load", ()=>{
 
   renderCarrinho();
 
-  /* DESKTOP */
   if(window.innerWidth >= 900){
 
     document.getElementById("carrinho")
@@ -308,7 +289,7 @@ window.addEventListener("load", ()=>{
 });
 
 /* =========================
-   FECHAR AO CLICAR OVERLAY
+   OVERLAY
 ========================= */
 
 document.getElementById("overlay")
