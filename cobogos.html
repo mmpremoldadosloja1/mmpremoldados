@@ -380,31 +380,183 @@ h2{
 
 <script>
 
+/* =========================
+   CONTADOR
+========================= */
+
 function aumentar(btn){
-  const input = btn.parentElement.querySelector('.qtd');
-  input.value = parseInt(input.value) + 1;
+
+  const input =
+    btn.parentElement.querySelector('.qtd');
+
+  input.value =
+    parseInt(input.value) + 1;
 }
 
 function diminuir(btn){
-  const input = btn.parentElement.querySelector('.qtd');
-  input.value = Math.max(1, parseInt(input.value) - 1);
+
+  const input =
+    btn.parentElement.querySelector('.qtd');
+
+  input.value =
+    Math.max(
+      1,
+      parseInt(input.value) - 1
+    );
 }
 
-/* ADD AO CARRINHO */
-function adicionarCarrinho(botao){
-  const card = botao.closest('.card');
-  const nome = card.querySelector('h3').innerText;
-  const qtd = parseInt(card.querySelector('.qtd').value);
+/* =========================
+   MOBILE TOUCH FIX
+========================= */
 
-  const existente = carrinho.find(item => item.nome === nome);
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    /* =========================
+       BOTÕES ADICIONAR
+    ========================= */
+
+    const botoes =
+      document.querySelectorAll(".btn");
+
+    botoes.forEach(botao => {
+
+      function executarAdicionar(e){
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        adicionarCarrinho(botao);
+      }
+
+      /* CLICK */
+
+      botao.addEventListener(
+        "click",
+        executarAdicionar
+      );
+
+      /* TOUCH */
+
+      botao.addEventListener(
+        "touchstart",
+        executarAdicionar,
+        { passive:false }
+      );
+    });
+
+    /* =========================
+       BOTÃO CARRINHO MOBILE
+    ========================= */
+
+    const btnCarrinho =
+      document.querySelector(".btn-carrinho");
+
+    if(btnCarrinho){
+
+      btnCarrinho.addEventListener(
+        "touchstart",
+        function(e){
+
+          e.preventDefault();
+
+          abrirCarrinho();
+        },
+        { passive:false }
+      );
+    }
+  }
+);
+
+/* =========================
+   ADD AO CARRINHO
+========================= */
+
+function adicionarCarrinho(botao){
+
+  const card =
+    botao.closest('.card');
+
+  const nome =
+    card.querySelector('h3').innerText;
+
+  const qtd =
+    parseInt(
+      card.querySelector('.qtd').value
+    );
+
+  const imagem =
+    card.querySelector('img').src;
+
+  /* =========================
+     USA O GLOBAL
+  ========================= */
+
+  let carrinhoAtual =
+    JSON.parse(
+      localStorage.getItem("carrinhoMM")
+    ) || [];
+
+  const existente =
+    carrinhoAtual.find(
+      item => item.nome === nome
+    );
 
   if(existente){
-    existente.qtd += qtd;
+
+    existente.quantidade += qtd;
+
   }else{
-    carrinho.push({nome, qtd});
+
+    carrinhoAtual.push({
+      nome:nome,
+      quantidade:qtd,
+      imagem:imagem
+    });
   }
 
-  salvarCarrinho(); // 🔥 agora usa o global
+  /* =========================
+     SALVA
+  ========================= */
+
+  localStorage.setItem(
+    "carrinhoMM",
+    JSON.stringify(carrinhoAtual)
+  );
+
+  /* =========================
+     RENDERIZA IMEDIATAMENTE
+  ========================= */
+
+  if(typeof renderizarCarrinho === "function"){
+    renderizarCarrinho();
+  }
+
+  /* =========================
+     MOBILE
+  ========================= */
+
+  if(window.innerWidth <= 900){
+
+    if(typeof abrirCarrinho === "function"){
+      abrirCarrinho();
+    }
+
+    const carrinhoEl =
+      document.querySelector(".carrinho-lateral");
+
+    const overlay =
+      document.querySelector(".overlay");
+
+    if(carrinhoEl){
+      carrinhoEl.classList.add("ativo");
+    }
+
+    if(overlay){
+      overlay.classList.add("ativo");
+    }
+  }
 }
 
 </script>
