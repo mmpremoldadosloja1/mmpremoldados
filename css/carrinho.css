@@ -58,9 +58,6 @@
 
   /* 🔥 IMPORTANTE */
   min-height:0;
-
-  /* 🔥 MOBILE SCROLL */
-  -webkit-overflow-scrolling:touch;
 }
 
 /* ITEM */
@@ -117,9 +114,6 @@
 
   /* 🔥 IMPORTANTE */
   flex-shrink:0;
-
-  /* 🔥 MOBILE */
-  touch-action:manipulation;
 }
 
 .remover svg{
@@ -145,9 +139,6 @@
   font-weight:bold;
   cursor:pointer;
   margin-top:10px;
-
-  /* 🔥 MOBILE */
-  touch-action:manipulation;
 }
 
 /* =========================
@@ -188,22 +179,11 @@
 @media(max-width:899px){
 
   .carrinho-lateral{
-    width:85%;
-    max-width:320px;
-
-    right:-100%;
-
-    border-top-left-radius:35px;
-    border-bottom-left-radius:35px;
+    right:-350px;
   }
 
   .carrinho-lateral.active{
     right:0;
-  }
-
-  /* 🔥 GARANTE CLIQUE */
-  .overlay.active{
-    pointer-events:auto;
   }
 
 }
