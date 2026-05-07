@@ -223,127 +223,145 @@ h2{
 
 <script>
 
+// GRID
 const grid = document.getElementById("gridProdutos");
 
+// TITULO
 function titulo(t){
-  grid.innerHTML += `<div style="grid-column:1/-1"><h2>${t}</h2></div>`;
+  grid.innerHTML += `
+    <div style="grid-column:1/-1">
+      <h2>${t}</h2>
+    </div>
+  `;
 }
 
+// CONTADOR
 function aumentar(btn){
   const input = btn.parentElement.querySelector('.qtd');
-  input.value = parseInt(input.value)+1;
+  input.value = parseInt(input.value) + 1;
 }
 
 function diminuir(btn){
   const input = btn.parentElement.querySelector('.qtd');
-  input.value = Math.max(1, parseInt(input.value)-1);
+  input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
+// ADICIONAR CARRINHO
 function adicionarCarrinho(btn){
+
   const card = btn.closest('.card');
+
   const nome = card.querySelector('h3').innerText;
+
   const select = card.querySelector('select');
   const variacao = select ? select.value : "";
+
   const qtd = parseInt(card.querySelector('.qtd').value);
 
-  const nomeFinal = variacao ? nome+" - "+variacao : nome;
+  const nomeFinal = variacao
+    ? `${nome} - ${variacao}`
+    : nome;
 
-  const existente = carrinho.find(i=>i.nome===nomeFinal);
+  const existente = carrinho.find(item => item.nome === nomeFinal);
 
   if(existente){
     existente.qtd += qtd;
   }else{
-    carrinho.push({nome:nomeFinal,qtd});
+    carrinho.push({
+      nome: nomeFinal,
+      qtd
+    });
   }
 
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  renderizar();
+  salvarCarrinho();
 }
 
-function criarProduto(nome, opcoes=null){
+// CRIAR PRODUTO
+function criarProduto(nome, opcoes = null){
+
   grid.innerHTML += `
+  
   <div class="card">
-    <div style="height:110px;background:#f3f3f3;border-radius:8px;margin-bottom:10px;"></div>
+
+    <div style="
+      height:110px;
+      background:#f3f3f3;
+      border-radius:8px;
+      margin-bottom:10px;
+    "></div>
 
     <h3>${nome}</h3>
 
     ${opcoes ? `
-      <select style="margin:10px 0;padding:6px;width:100%;">
-        ${opcoes.map(o=>`<option>${o}</option>`).join('')}
-      </select>` : ''}
+      <select style="
+        margin:10px 0;
+        padding:6px;
+        width:100%;
+      ">
+        ${opcoes.map(o => `
+          <option>${o}</option>
+        `).join('')}
+      </select>
+    ` : ''}
 
     <div class="contador">
       <button onclick="diminuir(this)">−</button>
-      <input type="number" class="qtd" value="1" min="1">
+
+      <input
+        type="number"
+        class="qtd"
+        value="1"
+        min="1"
+      >
+
       <button onclick="aumentar(this)">+</button>
     </div>
 
-    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
-  </div>`;
+    <button class="btn" onclick="adicionarCarrinho(this)">
+      Adicionar
+    </button>
+
+  </div>
+  
+  `;
 }
 
-/* PRODUTOS */
+/* =========================
+   PRODUTOS
+========================= */
+
 titulo("Manilhas");
-["Manilha 90cm x 50cm","Manilha 1,10m x 50cm"]
-.forEach(n=>criarProduto(n));
+
+[
+  "Manilha 90cm x 50cm",
+  "Manilha 1,10m x 50cm"
+].forEach(n => criarProduto(n));
 
 titulo("Tampas de Manilha");
-criarProduto("Tampa 90cm",["Aberta","Fechada"]);
-criarProduto("Tampa 1m",["Aberta","Fechada"]);
-criarProduto("Tampa 1,10cm",["Aberta","Fechada"]);
-criarProduto("Tampa 1,20cm",["Aberta","Fechada"]);
 
-/* CARRINHO */
-const carrinhoEl = document.getElementById("carrinho");
-const overlay = document.getElementById("overlay");
-const lista = document.getElementById("lista");
+criarProduto("Tampa 90cm", [
+  "Aberta",
+  "Fechada"
+]);
 
-function abrirCarrinho(){
-  carrinhoEl.classList.add("active");
-  overlay.classList.add("active");
-  renderizar();
-}
+criarProduto("Tampa 1m", [
+  "Aberta",
+  "Fechada"
+]);
 
-function fecharCarrinho(){
-  carrinhoEl.classList.remove("active");
-  overlay.classList.remove("active");
-}
+criarProduto("Tampa 1,10cm", [
+  "Aberta",
+  "Fechada"
+]);
 
-function renderizar(){
-  lista.innerHTML="";
-  carrinho.forEach((item,i)=>{
-    lista.innerHTML += `
-    <div class="item">
-      ${item.nome} (x${item.qtd})
-      <button class="remover" onclick="remover(${i})">X</button>
-    </div>`;
-  });
-}
-
-function remover(i){
-  carrinho.splice(i,1);
-  localStorage.setItem('carrinho',JSON.stringify(carrinho));
-  renderizar();
-}
-
-function enviarWhatsApp(){
-  let msg="Pedido:%0A";
-  carrinho.forEach(i=>{
-    msg+=`${i.nome} - ${i.qtd}%0A`;
-  });
-  window.open(`https://wa.me/5561999385680?text=${msg}`);
-}
-
-window.addEventListener("load",()=>{
-  if(window.innerWidth>=900){
-    carrinhoEl.classList.add("active");
-    renderizar();
-  }
-});
+criarProduto("Tampa 1,20cm", [
+  "Aberta",
+  "Fechada"
+]);
 
 </script>
+
+<script src="js/carrinho.js"></script>
 
 </body>
 </html>
