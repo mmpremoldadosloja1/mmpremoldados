@@ -1,256 +1,315 @@
-/* =========================
-   CARRINHO - ESTRUTURA
-========================= */
+// =========================
+// CARRINHO GLOBAL
+// =========================
 
-.carrinho-lateral{
-  position:fixed;
-  top:0;
-  right:-100%;
-  width:320px;
-  max-width:85%;
-  height:100%;
-  background:#fff;
-  padding:20px;
-  transition:0.3s ease;
-  z-index:1001;
+let carrinho;
 
-  display:flex;
-  flex-direction:column;
+try{
 
-  /* VISUAL */
-  box-shadow:-10px 0 30px rgba(0,0,0,0.25);
-  border-top-left-radius:50px;
-  border-bottom-left-radius:50px;
-}
+  carrinho = JSON.parse(localStorage.getItem('carrinho'));
 
-.carrinho-lateral.active{
-  right:0;
-}
-
-/* =========================
-   OVERLAY
-========================= */
-
-.overlay{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-
-  background:rgba(0,0,0,0.4);
-
-  opacity:0;
-  pointer-events:none;
-
-  transition:0.3s ease;
-
-  z-index:1000;
-}
-
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
-
-/* BLOQUEAR SCROLL */
-body.sem-scroll{
-  overflow:hidden;
-}
-
-/* =========================
-   LISTA DE PRODUTOS
-========================= */
-
-.lista-carrinho{
-  flex:1;
-  overflow-y:auto;
-  margin-top:10px;
-  padding-right:5px;
-}
-
-/* SCROLL */
-.lista-carrinho::-webkit-scrollbar{
-  width:5px;
-}
-
-.lista-carrinho::-webkit-scrollbar-thumb{
-  background:#ddd;
-  border-radius:10px;
-}
-
-/* =========================
-   ITEM
-========================= */
-
-.item{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:10px;
-
-  padding:12px 0;
-
-  border-bottom:1px solid #eee;
-}
-
-/* =========================
-   TEXTO
-========================= */
-
-.info-item{
-  flex:1;
-  font-size:14px;
-  line-height:1.4;
-}
-
-/* TITULO */
-
-.titulo-item{
-  font-weight:700;
-  font-size:15px;
-  margin-bottom:4px;
-
-  border-left:4px solid #e63946;
-  padding-left:8px;
-
-  word-break:break-word;
-}
-
-/* DETALHES */
-
-.detalhe{
-  color:#555;
-  font-size:13px;
-}
-
-.detalhe strong{
-  color:#000;
-}
-
-/* =========================
-   BOTÃO REMOVER
-========================= */
-
-.remover{
-  background:transparent;
-  border:none;
-  cursor:pointer;
-
-  padding:5px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  flex-shrink:0;
-}
-
-.remover svg{
-  stroke:#e63946;
-  transition:0.2s;
-}
-
-.remover:hover svg{
-  stroke:#c1121f;
-  transform:scale(1.15);
-}
-
-/* =========================
-   BOTÃO FINALIZAR
-========================= */
-
-.btn-finalizar{
-  width:100%;
-
-  padding:15px;
-
-  background:#25D366;
-  color:#fff;
-
-  border:none;
-  border-radius:8px;
-
-  font-weight:bold;
-  font-size:15px;
-
-  cursor:pointer;
-
-  margin-top:15px;
-
-  transition:0.3s;
-}
-
-.btn-finalizar:hover{
-  transform:scale(1.02);
-}
-
-/* =========================
-   CARRINHO VAZIO
-========================= */
-
-.carrinho-vazio{
-  display:flex;
-  flex-direction:column;
-
-  align-items:center;
-  justify-content:center;
-
-  text-align:center;
-
-  margin-top:40px;
-
-  color:#777;
-}
-
-.carrinho-vazio svg{
-  stroke:#e63946;
-  margin-bottom:10px;
-  opacity:0.7;
-}
-
-.carrinho-vazio p{
-  font-weight:600;
-  font-size:16px;
-  color:#000;
-}
-
-.carrinho-vazio span{
-  font-size:13px;
-  color:#777;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:899px){
-
-  .carrinho-lateral{
-    width:85%;
-    max-width:320px;
+  if(!Array.isArray(carrinho)){
+    carrinho = [];
   }
 
+}catch{
+  carrinho = [];
 }
 
 /* =========================
-   DESKTOP FIXO
+   SALVAR
 ========================= */
 
-@media(min-width:900px){
+function salvarCarrinho(){
 
-  .carrinho-lateral{
-    right:0 !important;
-    width:320px;
-    max-width:320px;
-  }
+  localStorage.setItem(
+    'carrinho',
+    JSON.stringify(carrinho)
+  );
 
-  .overlay{
-    display:none !important;
-  }
-
-  body{
-    padding-right:320px;
-  }
-
+  renderCarrinho();
 }
+
+/* =========================
+   ABRIR
+========================= */
+
+function abrirCarrinho(){
+
+  document.getElementById("carrinho")
+  ?.classList.add("active");
+
+  document.getElementById("overlay")
+  ?.classList.add("active");
+
+  document.body.classList.add("sem-scroll");
+
+  renderCarrinho();
+}
+
+/* =========================
+   FECHAR
+========================= */
+
+function fecharCarrinho(){
+
+  document.getElementById("carrinho")
+  ?.classList.remove("active");
+
+  document.getElementById("overlay")
+  ?.classList.remove("active");
+
+  document.body.classList.remove("sem-scroll");
+}
+
+/* =========================
+   REMOVER
+========================= */
+
+function removerItem(i){
+
+  carrinho.splice(i,1);
+
+  salvarCarrinho();
+}
+
+/* =========================
+   RENDER
+========================= */
+
+function renderCarrinho(){
+
+  carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+  const lista = document.getElementById("lista");
+
+  if(!lista) return;
+
+  lista.innerHTML = "";
+
+  /* CARRINHO VAZIO */
+  if(carrinho.length === 0){
+
+    lista.innerHTML = `
+    
+      <div class="carrinho-vazio">
+
+        <svg viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="1.8"
+        width="50"
+        height="50">
+
+          <circle cx="9" cy="20" r="1"></circle>
+
+          <circle cx="18" cy="20" r="1"></circle>
+
+          <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+
+        </svg>
+
+        <p>Seu carrinho está vazio</p>
+
+        <span>
+          Adicione produtos para continuar
+        </span>
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+  /* ITENS */
+  carrinho.forEach((item, i)=>{
+
+    let texto = "";
+
+    /* LAJE */
+    if(item.nome === "Laje"){
+
+      texto = `
+
+        <div class="titulo-item">
+          Laje ${item.tipo}
+        </div>
+
+        <div class="detalhe">
+          Isopor: ${item.iso}
+        </div>
+
+        <div class="detalhe">
+          ${item.c} x ${item.l}
+          =
+          <strong>${item.m2} m²</strong>
+        </div>
+
+      `;
+    }
+
+    /* VIGA */
+    else if(item.nome === "Viga"){
+
+      texto = `
+
+        <div class="titulo-item">
+          Viga ${item.tipo}
+        </div>
+
+        <div class="detalhe">
+          Tamanho: ${item.tam}
+        </div>
+
+        <div class="detalhe">
+          Quantidade:
+          <strong>${item.qtd}</strong>
+        </div>
+
+      `;
+    }
+
+    /* ISOPOR */
+    else if(item.nome === "Isopor"){
+
+      texto = `
+
+        <div class="titulo-item">
+          Isopor
+        </div>
+
+        <div class="detalhe">
+          Tipo: ${item.tipo}
+        </div>
+
+        <div class="detalhe">
+          Quantidade:
+          <strong>${item.qtd}</strong>
+        </div>
+
+      `;
+    }
+
+    /* QUALQUER OUTRO PRODUTO */
+    else{
+
+      texto = `
+
+        <div class="titulo-item">
+          ${item.nome}
+        </div>
+
+        <div class="detalhe">
+          Quantidade:
+          <strong>${item.qtd}</strong>
+        </div>
+
+      `;
+    }
+
+    lista.innerHTML += `
+
+      <div class="item">
+
+        <div class="info-item">
+
+          ${texto}
+
+        </div>
+
+        <button
+        class="remover"
+        onclick="removerItem(${i})">
+
+          <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke-width="2"
+          width="20"
+          height="20">
+
+            <path d="M3 6h18"></path>
+
+            <path d="M8 6V4h8v2"></path>
+
+            <path d="M6 6l1 14h10l1-14"></path>
+
+            <path d="M10 11v6"></path>
+
+            <path d="M14 11v6"></path>
+
+          </svg>
+
+        </button>
+
+      </div>
+
+    `;
+  });
+}
+
+/* =========================
+   WHATSAPP
+========================= */
+
+function enviarWhatsApp(){
+
+  let msg = "Pedido:%0A%0A";
+
+  carrinho.forEach(item=>{
+
+    /* LAJE */
+    if(item.nome === "Laje"){
+
+      msg += `Laje ${item.tipo} | ${item.iso} | ${item.c}x${item.l} (${item.m2}m²)%0A`;
+    }
+
+    /* VIGA */
+    else if(item.nome === "Viga"){
+
+      msg += `Viga ${item.tipo} | ${item.tam} | Qtd:${item.qtd}%0A`;
+    }
+
+    /* ISOPOR */
+    else if(item.nome === "Isopor"){
+
+      msg += `Isopor ${item.tipo} | Qtd:${item.qtd}%0A`;
+    }
+
+    /* OUTROS */
+    else{
+
+      msg += `${item.nome} | Qtd:${item.qtd}%0A`;
+    }
+
+  });
+
+  window.open(
+    `https://wa.me/5561999385680?text=${msg}`
+  );
+}
+
+/* =========================
+   AUTO LOAD
+========================= */
+
+window.addEventListener("load", ()=>{
+
+  renderCarrinho();
+
+  /* DESKTOP */
+  if(window.innerWidth >= 900){
+
+    document.getElementById("carrinho")
+    ?.classList.add("active");
+
+  }
+
+});
+
+/* =========================
+   FECHAR AO CLICAR OVERLAY
+========================= */
+
+document.getElementById("overlay")
+?.addEventListener("click", fecharCarrinho);
