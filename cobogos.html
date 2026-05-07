@@ -406,70 +406,6 @@ function diminuir(btn){
 }
 
 /* =========================
-   MOBILE TOUCH FIX
-========================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    /* =========================
-       BOTÕES ADICIONAR
-    ========================= */
-
-    const botoes =
-      document.querySelectorAll(".btn");
-
-    botoes.forEach(botao => {
-
-      function executarAdicionar(e){
-
-        e.preventDefault();
-        e.stopPropagation();
-
-        adicionarCarrinho(botao);
-      }
-
-      /* CLICK */
-
-      botao.addEventListener(
-        "click",
-        executarAdicionar
-      );
-
-      /* TOUCH */
-
-      botao.addEventListener(
-        "touchstart",
-        executarAdicionar,
-        { passive:false }
-      );
-    });
-
-    /* =========================
-       BOTÃO CARRINHO MOBILE
-    ========================= */
-
-    const btnCarrinho =
-      document.querySelector(".btn-carrinho");
-
-    if(btnCarrinho){
-
-      btnCarrinho.addEventListener(
-        "touchstart",
-        function(e){
-
-          e.preventDefault();
-
-          abrirCarrinho();
-        },
-        { passive:false }
-      );
-    }
-  }
-);
-
-/* =========================
    ADD AO CARRINHO
 ========================= */
 
@@ -489,13 +425,9 @@ function adicionarCarrinho(botao){
   const imagem =
     card.querySelector('img').src;
 
-  /* =========================
-     USA O GLOBAL
-  ========================= */
-
   let carrinhoAtual =
     JSON.parse(
-      localStorage.getItem("carrinhoMM")
+      localStorage.getItem("carrinho")
     ) || [];
 
   const existente =
@@ -505,59 +437,77 @@ function adicionarCarrinho(botao){
 
   if(existente){
 
-    existente.quantidade += qtd;
+    existente.qtd += qtd;
 
   }else{
 
     carrinhoAtual.push({
       nome:nome,
-      quantidade:qtd,
+      qtd:qtd,
       imagem:imagem
     });
   }
 
-  /* =========================
-     SALVA
-  ========================= */
-
   localStorage.setItem(
-    "carrinhoMM",
+    "carrinho",
     JSON.stringify(carrinhoAtual)
   );
 
-  /* =========================
-     RENDERIZA IMEDIATAMENTE
-  ========================= */
+  /* ATUALIZA */
 
   if(typeof renderizarCarrinho === "function"){
     renderizarCarrinho();
   }
 
-  /* =========================
-     MOBILE
-  ========================= */
+  /* MOBILE */
 
-  if(window.innerWidth <= 900){
+  if(window.innerWidth <= 899){
 
-    if(typeof abrirCarrinho === "function"){
-      abrirCarrinho();
-    }
-
-    const carrinhoEl =
+    const carrinho =
       document.querySelector(".carrinho-lateral");
 
     const overlay =
       document.querySelector(".overlay");
 
-    if(carrinhoEl){
-      carrinhoEl.classList.add("ativo");
+    if(carrinho){
+      carrinho.classList.add("active");
     }
 
     if(overlay){
-      overlay.classList.add("ativo");
+      overlay.classList.add("active");
     }
   }
 }
+
+/* =========================
+   MOBILE FIX
+========================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    /* REMOVE TOUCH DUPLO */
+
+    const botoes =
+      document.querySelectorAll(".btn");
+
+    botoes.forEach(botao => {
+
+      botao.style.pointerEvents = "auto";
+
+      botao.addEventListener(
+        "touchstart",
+        function(e){
+
+          e.stopPropagation();
+        },
+        { passive:true }
+      );
+    });
+
+  }
+);
 
 </script>
 
