@@ -390,23 +390,6 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-/* ADD AO CARRINHO */
-function adicionarCarrinho(botao){
-  const card = botao.closest('.card');
-  const nome = card.querySelector('h3').innerText;
-  const qtd = parseInt(card.querySelector('.qtd').value);
-
-  const existente = carrinho.find(item => item.nome === nome);
-
-  if(existente){
-    existente.qtd += qtd;
-  }else{
-    carrinho.push({nome, qtd});
-  }
-
-  salvarCarrinho(); // 🔥 agora usa o global
-}
-
 </script>
 
 <script src="js/carrinho.js"></script>
