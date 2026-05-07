@@ -10,7 +10,7 @@
   height:100%;
   background:#fff;
   padding:20px;
-  transition:0.3s;
+  transition:0.3s ease;
   z-index:1001;
   display:flex;
   flex-direction:column;
@@ -22,6 +22,10 @@
   box-shadow:-10px 0 30px rgba(0,0,0,0.25);
   border-top-left-radius:50px;
   border-bottom-left-radius:50px;
+
+  /* MOBILE FIX */
+  will-change:right;
+  -webkit-overflow-scrolling:touch;
 }
 
 .carrinho-lateral.active{
@@ -31,8 +35,7 @@
 /* OVERLAY */
 .overlay{
   position:fixed;
-  width:100%;
-  height:100%;
+  inset:0;
   background:rgba(0,0,0,0.4);
   opacity:0;
   pointer-events:none;
@@ -58,6 +61,9 @@
 
   /* 🔥 IMPORTANTE */
   min-height:0;
+
+  /* MOBILE */
+  -webkit-overflow-scrolling:touch;
 }
 
 /* ITEM */
@@ -114,6 +120,10 @@
 
   /* 🔥 IMPORTANTE */
   flex-shrink:0;
+
+  /* MOBILE */
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .remover svg{
@@ -139,6 +149,10 @@
   font-weight:bold;
   cursor:pointer;
   margin-top:10px;
+
+  /* MOBILE */
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
 }
 
 /* =========================
@@ -173,17 +187,40 @@
 }
 
 /* =========================
+   TOUCH FIX GLOBAL
+========================= */
+
+.btn,
+.btn-carrinho,
+.contador button,
+.carrinho-lateral button{
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* =========================
    MOBILE
 ========================= */
 
 @media(max-width:899px){
 
   .carrinho-lateral{
-    right:-350px;
+    right:-100%;
+    width:85%;
+    max-width:320px;
+    z-index:1001;
   }
 
   .carrinho-lateral.active{
     right:0;
+  }
+
+  .overlay{
+    z-index:1000;
+  }
+
+  .btn-carrinho{
+    display:flex !important;
   }
 
 }
