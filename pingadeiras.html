@@ -6,6 +6,7 @@
 <title>Pingadeiras | MM Pré-Moldados</title>
 
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/carrinho.css">
 
 <style>
 
@@ -81,76 +82,6 @@ nav{
   transform:scale(1.05);
 }
 
-/* ===== CARRINHO PADRÃO ===== */
-.carrinho-lateral{
-  position:fixed;
-  top:0;
-  right:-350px;
-  width:320px;
-  height:100%;
-  background:#fff;
-  box-shadow:-10px 0 30px rgba(0,0,0,0.25); /* 🔥 sombra melhor */
-  padding:20px;
-  transition:0.3s;
-  z-index:1001;
-  display:flex;
-  flex-direction:column;
-
-  border-top-left-radius:15px;   /* 🔥 acabamento */
-  border-bottom-left-radius:15px;
-}
-
-.carrinho-lateral.active{
-  right:0;
-}
-
-.lista-carrinho{
-  flex:1;
-  overflow-y:auto;
-}
-
-.item{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
-.remover{
-  background:#e63946;
-  color:#fff;
-  border:none;
-  padding:3px 8px;
-  border-radius:4px;
-  cursor:pointer;
-}
-
-.btn-finalizar{
-  padding:15px;
-  background:#25D366;
-  color:#fff;
-  border:none;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* OVERLAY */
-.overlay{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.4);
-  opacity:0;
-  pointer-events:none;
-  transition:0.3s;
-  z-index:1000;
-}
-
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
-
 /* TITULO */
 h1{
   text-align:center;
@@ -167,10 +98,12 @@ h1{
   gap:25px;
   padding:0 20px 40px;
 }
+
 /* botão aparece só no mobile */
 .btn-carrinho{
   display:flex;
 }
+
 @media (min-width:768px){
   .grid{
     grid-template-columns:repeat(3, 1fr);
@@ -248,21 +181,11 @@ select{
   cursor:pointer;
 }
 
-/* 🔥 DESKTOP (IGUAL COBOGÓ) */
+/* 🔥 DESKTOP */
 @media(min-width:900px){
-.btn-carrinho{
-  display:none !important;
-}
-  .carrinho-lateral{
-    right:0 !important;
-  }
 
-  .overlay{
+  .btn-carrinho{
     display:none !important;
-  }
-
-  body{
-    padding-right:320px;
   }
 
   header{
@@ -389,87 +312,198 @@ function diminuir(btn){
 let carrinho;
 
 try {
+
   carrinho = JSON.parse(localStorage.getItem('carrinho'));
 
-  if (!Array.isArray(carrinho)) {
+  if(!Array.isArray(carrinho)){
     carrinho = [];
   }
 
-} catch (e) {
+}catch(e){
+
   carrinho = [];
+
 }
+
+/* ADICIONAR */
 function adicionarCarrinho(botao){
+
   const card = botao.closest('.card');
+
   const nome = card.querySelector('h3').innerText;
+
   const qtd = parseInt(card.querySelector('.qtd').value);
 
   const existente = carrinho.find(item => item.nome === nome);
 
   if(existente){
+
     existente.qtd += qtd;
+
   }else{
-    carrinho.push({nome, qtd});
+
+    carrinho.push({
+      nome,
+      qtd
+    });
+
   }
+
+  salvarCarrinho();
+
+}
+
+/* SALVAR */
+function salvarCarrinho(){
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho));
 
-  renderizar(); // 🔥 CORREÇÃO
-}
-
-function abrirCarrinho(){
-  document.getElementById("carrinho").classList.add("active");
-  document.getElementById("overlay").classList.add("active");
   renderizar();
+
 }
 
+/* ABRIR */
+function abrirCarrinho(){
+
+  document.getElementById("carrinho").classList.add("active");
+
+  document.getElementById("overlay").classList.add("active");
+
+  renderizar();
+
+}
+
+/* FECHAR */
 function fecharCarrinho(){
+
   document.getElementById("carrinho").classList.remove("active");
+
   document.getElementById("overlay").classList.remove("active");
+
 }
 
+/* RENDER */
 function renderizar(){
+
   const lista = document.getElementById("lista");
+
   lista.innerHTML = "";
 
+  /* CARRINHO VAZIO */
   if(carrinho.length === 0){
-    
+
+    lista.innerHTML = `
+
+      <div class="carrinho-vazio">
+
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" width="50" height="50">
+
+          <circle cx="9" cy="20" r="1"></circle>
+
+          <circle cx="18" cy="20" r="1"></circle>
+
+          <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+
+        </svg>
+
+        <p>Seu carrinho está vazio</p>
+
+        <span>Adicione produtos para continuar</span>
+
+      </div>
+
+    `;
+
     return;
+
   }
 
   carrinho.forEach((item, i)=>{
+
     lista.innerHTML += `
+
       <div class="item">
-        ${item.nome} (x${item.qtd})
-        <button class="remover" onclick="remover(${i})">X</button>
+
+        <div class="info-item">
+
+          <div class="titulo-item">${item.nome}</div>
+
+          <div class="detalhe">
+
+            Quantidade: <strong>${item.qtd}</strong>
+
+          </div>
+
+        </div>
+
+        <button class="remover" onclick="remover(${i})">
+
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="20" height="20">
+
+            <path d="M3 6h18"></path>
+
+            <path d="M8 6V4h8v2"></path>
+
+            <path d="M6 6l1 14h10l1-14"></path>
+
+            <path d="M10 11v6"></path>
+
+            <path d="M14 11v6"></path>
+
+          </svg>
+
+        </button>
+
       </div>
+
     `;
+
   });
+
 }
 
+/* REMOVER */
 function remover(i){
+
   carrinho.splice(i,1);
+
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
   renderizar();
+
 }
 
+/* WHATSAPP */
 function enviarWhatsApp(){
+
   let msg = "Pedido:%0A";
+
   carrinho.forEach(item=>{
-    msg += `${item.nome} - ${item.qtd}%0A`;
+
+    msg += `${item.nome} - Qtd: ${item.qtd}%0A`;
+
   });
 
   window.open(`https://wa.me/5561999385680?text=${msg}`);
+
 }
 
-/* AUTO OPEN DESKTOP */
+/* DESKTOP */
 window.addEventListener("load", () => {
+
   if(window.innerWidth >= 900){
+
     document.getElementById("carrinho").classList.add("active");
-    renderizar();
+
   }
+
+  renderizar();
+
 });
 
 </script>
+
+<script src="js/carrinho.js"></script>
 
 </body>
 </html>
