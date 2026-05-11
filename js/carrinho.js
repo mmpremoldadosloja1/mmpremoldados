@@ -172,21 +172,30 @@ function renderCarrinho(){
 
   carrinho.forEach((item, i)=>{
 
-    // separa cada linha
+    // separa linhas
     const linhas =
       String(item.nome).split("\n");
 
-    // primeira linha = título
     const titulo =
-      linhas[0];
+      linhas[0] || "";
 
-    // resto = detalhes
-    const detalhes =
-      linhas.slice(1);
+    const subtitulo =
+      linhas[1] || "";
+
+    const detalhe1 =
+      linhas[2] || "";
+
+    const detalhe2 =
+      linhas[3] || "";
+
+    const destaque =
+      linhas[4] || "";
 
     lista.innerHTML += `
 
       <div class="item">
+
+        <div class="linha-vermelha"></div>
 
         <div class="info-item">
 
@@ -195,14 +204,42 @@ function renderCarrinho(){
           </div>
 
           ${
-            detalhes.map(det => `
-              <div class="detalhe-produto">
-                ${det}
-              </div>
-            `).join("")
+            subtitulo
+            ?
+            `<div class="subtitulo-item">
+              ${subtitulo}
+            </div>`
+            : ""
           }
 
-          <div class="detalhe qtd-item">
+          ${
+            detalhe1
+            ?
+            `<div class="detalhe-produto">
+              ${detalhe1}
+            </div>`
+            : ""
+          }
+
+          ${
+            detalhe2
+            ?
+            `<div class="detalhe-produto">
+              ${detalhe2}
+            </div>`
+            : ""
+          }
+
+          ${
+            destaque
+            ?
+            `<div class="destaque-item">
+              ${destaque}
+            </div>`
+            : ""
+          }
+
+          <div class="qtd-item">
 
             Quantidade:
             <strong>${item.qtd}</strong>
@@ -216,7 +253,7 @@ function renderCarrinho(){
           onclick="removerItem(${i})"
         >
 
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="20" height="20">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="18" height="18">
 
             <path d="M3 6h18"></path>
 
