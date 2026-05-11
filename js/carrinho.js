@@ -87,6 +87,9 @@ function adicionarCarrinho(botao){
   const select =
     card.querySelector('select');
 
+  const imagem =
+    card.querySelector('img');
+
   const nome =
     titulo
     ? titulo.innerText.trim()
@@ -99,15 +102,12 @@ function adicionarCarrinho(botao){
 
   let nomeFinal = nome;
 
-  // se tiver variação
   if(select){
 
-    nomeFinal += `
-${select.value}`;
+    nomeFinal += `\n${select.value}`;
 
   }
 
-  // procura existente
   const existente =
     carrinho.find(
       item => item.nome === nomeFinal
@@ -120,8 +120,15 @@ ${select.value}`;
   }else{
 
     carrinho.push({
+
       nome: nomeFinal,
-      qtd: qtd
+
+      qtd: qtd,
+
+      imagem: imagem
+        ? imagem.src
+        : ""
+
     });
 
   }
@@ -172,30 +179,23 @@ function renderCarrinho(){
 
   carrinho.forEach((item, i)=>{
 
-    // separa linhas
     const linhas =
       String(item.nome).split("\n");
 
     const titulo =
-      linhas[0] || "";
+      linhas[0];
 
-    const subtitulo =
-      linhas[1] || "";
-
-    const detalhe1 =
-      linhas[2] || "";
-
-    const detalhe2 =
-      linhas[3] || "";
-
-    const destaque =
-      linhas[4] || "";
+    const detalhes =
+      linhas.slice(1);
 
     lista.innerHTML += `
 
       <div class="item">
 
-        <div class="linha-vermelha"></div>
+        <img
+          class="img-item"
+          src="${item.imagem || ''}"
+        >
 
         <div class="info-item">
 
@@ -204,39 +204,13 @@ function renderCarrinho(){
           </div>
 
           ${
-            subtitulo
-            ?
-            `<div class="subtitulo-item">
-              ${subtitulo}
-            </div>`
-            : ""
-          }
+            detalhes.map(det => `
 
-          ${
-            detalhe1
-            ?
-            `<div class="detalhe-produto">
-              ${detalhe1}
-            </div>`
-            : ""
-          }
+              <div class="detalhe-produto">
+                ${det}
+              </div>
 
-          ${
-            detalhe2
-            ?
-            `<div class="detalhe-produto">
-              ${detalhe2}
-            </div>`
-            : ""
-          }
-
-          ${
-            destaque
-            ?
-            `<div class="destaque-item">
-              ${destaque}
-            </div>`
-            : ""
+            `).join("")
           }
 
           <div class="qtd-item">
@@ -253,7 +227,7 @@ function renderCarrinho(){
           onclick="removerItem(${i})"
         >
 
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="18" height="18">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="20" height="20">
 
             <path d="M3 6h18"></path>
 
@@ -325,7 +299,6 @@ function diminuir(btn){
 ========================= */
 window.addEventListener("load", ()=>{
 
-  // desktop fixo
   if(window.innerWidth >= 900){
 
     document
