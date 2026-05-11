@@ -8,7 +8,12 @@ let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
    SALVAR
 ========================= */
 function salvarCarrinho(){
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+  localStorage.setItem(
+    'carrinho',
+    JSON.stringify(carrinho)
+  );
+
   renderCarrinho();
 }
 
@@ -96,7 +101,10 @@ function adicionarCarrinho(botao){
 
   // se tiver variação
   if(select){
-    nomeFinal += "\n" + select.value;
+
+    nomeFinal += `
+${select.value}`;
+
   }
 
   // procura existente
@@ -120,7 +128,6 @@ function adicionarCarrinho(botao){
 
   salvarCarrinho();
 
-  // MOBILE
   abrirCarrinho();
 }
 
@@ -165,6 +172,18 @@ function renderCarrinho(){
 
   carrinho.forEach((item, i)=>{
 
+    // separa cada linha
+    const linhas =
+      String(item.nome).split("\n");
+
+    // primeira linha = título
+    const titulo =
+      linhas[0];
+
+    // resto = detalhes
+    const detalhes =
+      linhas.slice(1);
+
     lista.innerHTML += `
 
       <div class="item">
@@ -172,12 +191,18 @@ function renderCarrinho(){
         <div class="info-item">
 
           <div class="titulo-item">
-
-            ${String(item.nome).replace(/\n/g, "<br>")}
-
+            ${titulo}
           </div>
 
-          <div class="detalhe">
+          ${
+            detalhes.map(det => `
+              <div class="detalhe-produto">
+                ${det}
+              </div>
+            `).join("")
+          }
+
+          <div class="detalhe qtd-item">
 
             Quantidade:
             <strong>${item.qtd}</strong>
@@ -220,12 +245,12 @@ function renderCarrinho(){
 ========================= */
 function enviarWhatsApp(){
 
-  let msg = "Pedido:%0A";
+  let msg = "Pedido:%0A%0A";
 
   carrinho.forEach(item=>{
 
-    msg +=
-      `${item.nome} | Qtd:${item.qtd}%0A`;
+    msg += `${item.nome}%0A`;
+    msg += `Quantidade: ${item.qtd}%0A%0A`;
 
   });
 
