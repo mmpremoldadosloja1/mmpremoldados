@@ -3,52 +3,41 @@
 ========================= */
 
 .carrinho-lateral{
-
   position:fixed;
-
   top:0;
-  right:-120%;
-
-  width:85%;
-  max-width:320px;
-
-  height:100dvh;
+  right:-350px;
+  width:320px;
+  height:100vh;
 
   background:#fff;
 
   padding:20px;
+  transition:0.3s ease;
 
-  z-index:9999;
+  transition:right 0.3s ease;
+
+  z-index:1001;
 
   display:flex;
   flex-direction:column;
 
-  overflow-y:auto;
-  overflow-x:hidden;
-
-  transition:right 0.3s ease;
+  /* VISUAL */
+  overflow:hidden;
 
   box-shadow:-10px 0 30px rgba(0,0,0,0.25);
 
-  border-top-left-radius:40px;
-  border-bottom-left-radius:40px;
+  border-top-left-radius:50px;
+  border-bottom-left-radius:50px;
 
-  /* 🔥 IMPORTANTE */
-  pointer-events:none;
+  overflow:hidden;
 
-  /* 🔥 REMOVE BUG CHROME */
-  will-change:auto;
-
+  /* MOBILE FIX */
+  will-change:right;
   -webkit-overflow-scrolling:touch;
 }
 
-/* ABERTO */
-
 .carrinho-lateral.active{
-
   right:0;
-
-  pointer-events:auto;
 }
 
 /* =========================
@@ -56,9 +45,7 @@
 ========================= */
 
 .overlay{
-
   position:fixed;
-
   inset:0;
 
   background:rgba(0,0,0,0.4);
@@ -69,34 +56,36 @@
 
   transition:0.3s;
 
-  z-index:9998;
+  z-index:1000;
 }
 
 .overlay.active{
-
   opacity:1;
-
   pointer-events:auto;
 }
 
 /* =========================
+   LISTA DE PRODUTOS
    LISTA
 ========================= */
 
 .lista-carrinho{
-
   flex:1;
 
   overflow-y:auto;
+  overflow-x:hidden;
 
   margin-top:15px;
+  margin-bottom:15px;
+
+  min-height:200px;
 
   display:flex;
   flex-direction:column;
 
-  gap:10px;
+  min-height:200px;
 
-  min-height:0;
+  -webkit-overflow-scrolling:touch;
 }
 
 /* =========================
@@ -104,11 +93,8 @@
 ========================= */
 
 .item{
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:flex-start;
 
   gap:10px;
@@ -124,10 +110,19 @@
 
 .info-item{
   flex:1;
+
+  font-size:14px;
+
+  line-height:1.4;
+
+  word-break:break-word;
 }
 
-.titulo-item{
+/* =========================
+   TITULO
+========================= */
 
+.titulo-item{
   font-weight:700;
 
   font-size:15px;
@@ -139,40 +134,58 @@
   padding-left:8px;
 }
 
+/* =========================
+   DETALHES
+========================= */
+
 .detalhe{
-
   color:#555;
-
   font-size:13px;
 }
 
+.detalhe strong{
+  color:#000;
+}
+
 /* =========================
-   REMOVER
+   BOTÃO REMOVER
 ========================= */
 
 .remover{
-
-  background:none;
+  background:transparent;
 
   border:none;
 
   cursor:pointer;
 
-  color:#e63946;
+  padding:5px;
 
-  font-size:18px;
+  display:flex;
+
+  align-items:center;
 
   flex-shrink:0;
+
+  touch-action:manipulation;
+
+  -webkit-tap-highlight-color:transparent;
+}
+
+.remover svg{
+  stroke:#e63946;
+  transition:0.2s;
+}
+
+.remover:hover svg{
+  stroke:#c1121f;
+  transform:scale(1.15);
 }
 
 /* =========================
-   FINALIZAR
+   BOTÃO FINALIZAR
 ========================= */
 
 .btn-finalizar{
-
-  margin-top:15px;
-
   padding:15px;
 
   background:#25D366;
@@ -181,50 +194,124 @@
 
   border:none;
 
-  border-radius:8px;
+  border-radius:5px;
 
   font-weight:bold;
 
   cursor:pointer;
-}
 
-/* =========================
-   MOBILE FIX
-========================= */
-
-.btn,
-.contador button,
-.btn-carrinho{
+  margin-top:10px;
+  margin-top:auto;
 
   touch-action:manipulation;
 
   -webkit-tap-highlight-color:transparent;
-
-  pointer-events:auto;
-}
-
-/* 🔥 MUITO IMPORTANTE */
-
-body{
-
-  overflow-x:hidden;
 }
 
 /* =========================
-   DESKTOP
+   CARRINHO VAZIO
+========================= */
+
+.carrinho-vazio{
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  margin-top:40px;
+
+  color:#777;
+}
+
+.carrinho-vazio svg{
+  stroke:#e63946;
+
+  margin-bottom:10px;
+
+  opacity:0.7;
+}
+
+.carrinho-vazio p{
+  font-weight:600;
+
+  font-size:16px;
+
+  color:#000;
+}
+
+.carrinho-vazio span{
+  font-size:13px;
+
+  color:#777;
+}
+
+/* =========================
+   TOUCH FIX GLOBAL
+========================= */
+
+.btn,
+.btn-carrinho,
+.contador button,
+.carrinho-lateral button{
+  touch-action:manipulation;
+
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:899px){
+
+  .carrinho-lateral{
+    right:-100%;
+
+    width:85%;
+    max-width:320px;
+
+    height:100vh;
+    z-index:1001;
+  }
+
+  .carrinho-lateral.active{
+    right:0;
+  }
+
+  /* 🔥 MUITO IMPORTANTE */
+  .carrinho-lateral:not(.active){
+    pointer-events:none;
+  }
+
+  .carrinho-lateral.active{
+    pointer-events:auto;
+  }
+
+  .overlay{
+    z-index:1000;
+  }
+
+  .btn-carrinho{
+    display:flex !important;
+  }
+
+}
+
+/* =========================
+   DESKTOP FIXO
 ========================= */
 
 @media(min-width:900px){
 
   .carrinho-lateral{
-
-    right:0;
-
-    pointer-events:auto;
+    right:0 !important;
   }
 
   .overlay{
-    display:none;
+    display:none !important;
   }
 
   body{
