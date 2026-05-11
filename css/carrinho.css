@@ -3,35 +3,52 @@
 ========================= */
 
 .carrinho-lateral{
+
   position:fixed;
+
   top:0;
-  right:-350px;
-  width:320px;
-  height:100vh;
+  right:-120%;
+
+  width:85%;
+  max-width:320px;
+
+  height:100dvh;
 
   background:#fff;
 
   padding:20px;
 
-  transition:right 0.3s ease;
-
-  z-index:1001;
+  z-index:9999;
 
   display:flex;
   flex-direction:column;
 
-  overflow:hidden;
+  overflow-y:auto;
+  overflow-x:hidden;
+
+  transition:right 0.3s ease;
 
   box-shadow:-10px 0 30px rgba(0,0,0,0.25);
 
-  border-top-left-radius:50px;
-  border-bottom-left-radius:50px;
+  border-top-left-radius:40px;
+  border-bottom-left-radius:40px;
 
-  will-change:right;
+  /* 🔥 IMPORTANTE */
+  pointer-events:none;
+
+  /* 🔥 REMOVE BUG CHROME */
+  will-change:auto;
+
+  -webkit-overflow-scrolling:touch;
 }
 
+/* ABERTO */
+
 .carrinho-lateral.active{
+
   right:0;
+
+  pointer-events:auto;
 }
 
 /* =========================
@@ -39,7 +56,9 @@
 ========================= */
 
 .overlay{
+
   position:fixed;
+
   inset:0;
 
   background:rgba(0,0,0,0.4);
@@ -50,11 +69,13 @@
 
   transition:0.3s;
 
-  z-index:1000;
+  z-index:9998;
 }
 
 .overlay.active{
+
   opacity:1;
+
   pointer-events:auto;
 }
 
@@ -63,20 +84,19 @@
 ========================= */
 
 .lista-carrinho{
+
   flex:1;
 
   overflow-y:auto;
-  overflow-x:hidden;
 
   margin-top:15px;
-  margin-bottom:15px;
-
-  min-height:200px;
 
   display:flex;
   flex-direction:column;
 
-  -webkit-overflow-scrolling:touch;
+  gap:10px;
+
+  min-height:0;
 }
 
 /* =========================
@@ -84,8 +104,11 @@
 ========================= */
 
 .item{
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:flex-start;
 
   gap:10px;
@@ -101,19 +124,10 @@
 
 .info-item{
   flex:1;
-
-  font-size:14px;
-
-  line-height:1.4;
-
-  word-break:break-word;
 }
 
-/* =========================
-   TITULO
-========================= */
-
 .titulo-item{
+
   font-weight:700;
 
   font-size:15px;
@@ -125,58 +139,40 @@
   padding-left:8px;
 }
 
-/* =========================
-   DETALHES
-========================= */
-
 .detalhe{
+
   color:#555;
+
   font-size:13px;
 }
 
-.detalhe strong{
-  color:#000;
-}
-
 /* =========================
-   BOTÃO REMOVER
+   REMOVER
 ========================= */
 
 .remover{
-  background:transparent;
+
+  background:none;
 
   border:none;
 
   cursor:pointer;
 
-  padding:5px;
+  color:#e63946;
 
-  display:flex;
-
-  align-items:center;
+  font-size:18px;
 
   flex-shrink:0;
-
-  touch-action:manipulation;
-
-  -webkit-tap-highlight-color:transparent;
-}
-
-.remover svg{
-  stroke:#e63946;
-  transition:0.2s;
-}
-
-.remover:hover svg{
-  stroke:#c1121f;
-  transform:scale(1.15);
 }
 
 /* =========================
-   BOTÃO FINALIZAR
+   FINALIZAR
 ========================= */
 
 .btn-finalizar{
+
+  margin-top:15px;
+
   padding:15px;
 
   background:#25D366;
@@ -185,122 +181,50 @@
 
   border:none;
 
-  border-radius:5px;
+  border-radius:8px;
 
   font-weight:bold;
 
   cursor:pointer;
-
-  margin-top:auto;
-
-  touch-action:manipulation;
-
-  -webkit-tap-highlight-color:transparent;
 }
 
 /* =========================
-   CARRINHO VAZIO
-========================= */
-
-.carrinho-vazio{
-  display:flex;
-  flex-direction:column;
-
-  align-items:center;
-  justify-content:center;
-
-  text-align:center;
-
-  margin-top:40px;
-
-  color:#777;
-}
-
-.carrinho-vazio svg{
-  stroke:#e63946;
-
-  margin-bottom:10px;
-
-  opacity:0.7;
-}
-
-.carrinho-vazio p{
-  font-weight:600;
-
-  font-size:16px;
-
-  color:#000;
-}
-
-.carrinho-vazio span{
-  font-size:13px;
-
-  color:#777;
-}
-
-/* =========================
-   TOUCH FIX GLOBAL
+   MOBILE FIX
 ========================= */
 
 .btn,
-.btn-carrinho,
 .contador button,
-.carrinho-lateral button{
+.btn-carrinho{
+
   touch-action:manipulation;
 
   -webkit-tap-highlight-color:transparent;
+
+  pointer-events:auto;
+}
+
+/* 🔥 MUITO IMPORTANTE */
+
+body{
+
+  overflow-x:hidden;
 }
 
 /* =========================
-   MOBILE
-========================= */
-
-@media(max-width:899px){
-
-  .carrinho-lateral{
-    right:-100%;
-
-    width:85%;
-    max-width:320px;
-
-    height:100vh;
-  }
-
-  .carrinho-lateral.active{
-    right:0;
-  }
-
-  /* 🔥 MUITO IMPORTANTE */
-  .carrinho-lateral:not(.active){
-    pointer-events:none;
-  }
-
-  .carrinho-lateral.active{
-    pointer-events:auto;
-  }
-
-  .overlay{
-    z-index:1000;
-  }
-
-  .btn-carrinho{
-    display:flex !important;
-  }
-
-}
-
-/* =========================
-   DESKTOP FIXO
+   DESKTOP
 ========================= */
 
 @media(min-width:900px){
 
   .carrinho-lateral{
-    right:0 !important;
+
+    right:0;
+
+    pointer-events:auto;
   }
 
   .overlay{
-    display:none !important;
+    display:none;
   }
 
   body{
