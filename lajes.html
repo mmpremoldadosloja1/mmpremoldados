@@ -308,109 +308,208 @@ select:invalid{
 
 /* ISOPOR */
 function atualizarIsopor(){
-  const tipo = document.getElementById("tipoLaje").value;
-  const select = document.getElementById("isopor");
 
-  select.innerHTML = `<option disabled selected>Selecione o isopor</option>`;
+  const tipo =
+    document.getElementById("tipoLaje").value;
+
+  const select =
+    document.getElementById("isopor");
+
+  select.innerHTML =
+    `<option disabled selected>Selecione o isopor</option>`;
 
   if(tipo === "H8"){
-    select.innerHTML += `<option>7,5x33</option>`;
-    select.innerHTML += `<option>7,5x40</option>`;
+
+    select.innerHTML +=
+      `<option>7,5x33</option>`;
+
+    select.innerHTML +=
+      `<option>7,5x40</option>`;
   }
 
   if(tipo === "H10"){
-    select.innerHTML += `<option>9x33</option>`;
-    select.innerHTML += `<option>9x40</option>`;
+
+    select.innerHTML +=
+      `<option>9x33</option>`;
+
+    select.innerHTML +=
+      `<option>9x40</option>`;
   }
+
 }
 
 /* CONTADOR */
 function mais(id){
-  let el = document.getElementById(id);
-  el.value = parseInt(el.value||1)+1;
+
+  let el =
+    document.getElementById(id);
+
+  el.value =
+    parseInt(el.value || 1) + 1;
+
 }
 
 function dim(id){
-  let el = document.getElementById(id);
-  el.value = Math.max(1, parseInt(el.value||1)-1);
+
+  let el =
+    document.getElementById(id);
+
+  el.value =
+    Math.max(
+      1,
+      parseInt(el.value || 1) - 1
+    );
+
 }
 
 /* LISTA VIGAS */
-for(let i=0.8;i<=6;i+=0.1){
-  listaVigas.innerHTML += `<option value="${i.toFixed(1)}m">`;
+for(let i = 0.8; i <= 6; i += 0.1){
+
+  listaVigas.innerHTML +=
+    `<option value="${i.toFixed(1)}m">`;
+
 }
 
 /* CALCULO M2 */
-document.getElementById("c").addEventListener("input", calcularM2);
-document.getElementById("l").addEventListener("input", calcularM2);
+document
+  .getElementById("c")
+  .addEventListener("input", calcularM2);
+
+document
+  .getElementById("l")
+  .addEventListener("input", calcularM2);
 
 function calcularM2(){
-  let c = parseFloat(document.getElementById("c").value) || 0;
-  let l = parseFloat(document.getElementById("l").value) || 0;
-  let total = (c * l).toFixed(2);
 
-  document.getElementById("m2").innerText = total + " m²";
+  let c =
+    parseFloat(
+      document.getElementById("c").value
+    ) || 0;
+
+  let l =
+    parseFloat(
+      document.getElementById("l").value
+    ) || 0;
+
+  let total =
+    (c * l).toFixed(2);
+
+  document.getElementById("m2").innerText =
+    total + " m²";
+
 }
 
-/* ADD LAJE */
+/* =========================
+   ADD LAJE
+========================= */
+
 function addLaje(){
-  let tipo = document.getElementById("tipoLaje").value;
-  let iso = document.getElementById("isopor").value;
-  let c = document.getElementById("c").value;
-  let l = document.getElementById("l").value;
-  let m2 = (parseFloat(c || 0) * parseFloat(l || 0)).toFixed(2);
+
+  let tipo =
+    document.getElementById("tipoLaje").value;
+
+  let iso =
+    document.getElementById("isopor").value;
+
+  let c =
+    document.getElementById("c").value;
+
+  let l =
+    document.getElementById("l").value;
+
+  let m2 =
+    (
+      parseFloat(c || 0) *
+      parseFloat(l || 0)
+    ).toFixed(2);
 
   if(!tipo || !iso || !c || !l){
+
     alert("Preencha todos os campos da laje");
     return;
+
   }
 
   carrinho.push({
-    nome: "Laje",
+
+    nome:
+      `Laje | ${tipo} | ${iso} | ${c}x${l} | ${m2} m²`,
+
     tipo,
     iso,
     c,
     l,
     m2,
-    qtd: 1
+
+    qtd:1
+
   });
 
   salvarCarrinho();
+
 }
 
-/* ADD VIGA */
+/* =========================
+   ADD VIGA
+========================= */
+
 function addViga(){
-  let tipo = document.getElementById("tipoViga").value;
-  let tam = document.getElementById("tamViga").value;
-  let qtd = document.getElementById("qv").value;
+
+  let tipo =
+    document.getElementById("tipoViga").value;
+
+  let tam =
+    document.getElementById("tamViga").value;
+
+  let qtd =
+    document.getElementById("qv").value;
 
   if(!tam){
+
     alert("Informe o tamanho da viga");
     return;
+
   }
 
   carrinho.push({
-    nome: "Viga",
+
+    nome:
+      `Viga | ${tipo} | ${tam}`,
+
     tipo,
     tam,
     qtd
+
   });
 
   salvarCarrinho();
+
 }
 
-/* ADD ISOPOR */
+/* =========================
+   ADD ISOPOR
+========================= */
+
 function addIso(){
-  let tipo = document.getElementById("tipoIso").value;
-  let qtd = document.getElementById("qi").value;
+
+  let tipo =
+    document.getElementById("tipoIso").value;
+
+  let qtd =
+    document.getElementById("qi").value;
 
   carrinho.push({
-    nome: "Isopor",
+
+    nome:
+      `Isopor | ${tipo}`,
+
     tipo,
     qtd
+
   });
 
   salvarCarrinho();
+
 }
 
 </script>
