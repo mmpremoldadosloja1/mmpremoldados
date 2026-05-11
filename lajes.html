@@ -14,7 +14,7 @@ body{
   background:#fff;
   color:#000;
   padding-top:110px;
-  font-family: 'Montserrat', sans-serif;
+  font-family:'Montserrat', sans-serif;
 }
 
 body.sem-header{
@@ -44,7 +44,8 @@ nav{
   align-items:center;
 }
 
-.nav-left, .nav-right{
+.nav-left,
+.nav-right{
   display:flex;
   gap:20px;
   align-items:center;
@@ -77,13 +78,32 @@ nav{
   transform:scale(1.05);
 }
 
+/* ===== TITULO ===== */
+
+h1{
+  text-align:center;
+  color:#e63946;
+  margin-bottom:30px;
+}
+
+/* ===== BLOCOS ===== */
+
+.bloco{
+  background:#fff;
+  margin:20px;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
 /* ===== IMAGENS ===== */
+
 .imagem{
   width:100%;
-  height:150px;
-  background:#eee;
-  border-radius:10px;
-  margin-bottom:15px;
+  height:180px;
+  background:#f5f5f5;
+  border-radius:16px;
+  margin-bottom:20px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -96,90 +116,134 @@ nav{
   object-fit:contain;
 }
 
-/* ===== ORIGINAL ===== */
+/* ===== CONTEUDO ===== */
 
-.bloco{
-  background:#fff;
-  margin:20px;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+.conteudo{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
-select, input{
+/* ===== INPUTS ===== */
+
+select,
+input{
   width:100%;
-  padding:10px;
-  margin-top:10px;
-  border-radius:6px;
-  border:1px solid #ccc;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-size:14px;
+  outline:none;
+  transition:0.3s;
+}
+
+select:focus,
+input:focus{
+  border-color:#e63946;
+  box-shadow:0 0 0 4px rgba(230,57,70,0.10);
 }
 
 select:invalid{
   color:#999;
 }
 
+/* ===== M2 ===== */
+
+#m2{
+  background:#fafafa;
+  border:1px solid #eee;
+  padding:12px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:700;
+  color:#e63946;
+  font-size:18px;
+}
+
+/* ===== CONTADOR ===== */
+
 .contador{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:5px;
-  margin-top:10px;
+  gap:10px;
+  margin-top:5px;
 }
 
 .contador button{
-  padding:5px 10px;
+  width:38px;
+  height:38px;
   border:none;
-  background:#eee;
+  border-radius:50%;
+  background:#f0f0f0;
+  font-size:18px;
+  font-weight:bold;
   cursor:pointer;
+  transition:0.3s;
+}
+
+.contador button:hover{
+  background:#e63946;
+  color:#fff;
 }
 
 .contador input{
-  width:30px;
+  width:70px;
   text-align:center;
+  font-weight:bold;
 }
 
+/* ===== BOTÃO ===== */
+
 .btn{
-  margin-top:15px;
-  width:70%;
-  padding:12px;
+  margin-top:10px;
+  width:100%;
+  padding:14px;
   background:#e63946;
   color:#fff;
   border:none;
-  border-radius:8px;
+  border-radius:12px;
   cursor:pointer;
+  font-weight:700;
+  font-size:15px;
+  transition:0.3s;
 }
+
+.btn:hover{
+  background:#c92f3b;
+  transform:translateY(-2px);
+}
+
 /* botão aparece só no mobile */
 .btn-carrinho{
   display:flex;
 }
 
-/* DESKTOP */
+/* ===== DESKTOP ===== */
+
 @media(min-width:900px){
-.btn-carrinho{
-  display:none !important;
-}
+
+  .btn-carrinho{
+    display:none !important;
+  }
+
   .bloco{
     display:flex;
-    gap:20px;
+    gap:30px;
     align-items:center;
+    max-width:1100px;
+    margin:25px auto;
   }
 
   .imagem{
-    width:200px;
-    height:140px;
+    width:260px;
+    min-width:260px;
+    height:220px;
+    margin-bottom:0;
   }
 
   .conteudo{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    width:100%;
-  }
-
-  .conteudo select,
-  .conteudo input{
-    width:auto;
-    min-width:140px;
+    flex:1;
   }
 
   body{
@@ -190,118 +254,184 @@ select:invalid{
     width:calc(100% - 320px);
   }
 
+}
+
 </style>
 </head>
 
 <body>
 
 <header id="header">
+
   <nav class="nav-left">
+
     <a href="index.html" class="nav-item">
+
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <path d="M3 10L12 3l9 7"></path>
         <path d="M5 10v10h14V10"></path>
       </svg>
+
       Início
+
     </a>
+
   </nav>
 
   <nav class="nav-right">
+
     <a href="#" class="nav-item btn-carrinho" onclick="abrirCarrinho(); return false;">
+
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
         <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
       </svg>
+
       Carrinho
+
     </a>
+
   </nav>
+
 </header>
 
-<!-- CARRINHO (🔥 removido active daqui) -->
+<!-- CARRINHO -->
 <div class="carrinho-lateral" id="carrinho">
+
   <h3>Seu Carrinho</h3>
+
   <div class="lista-carrinho" id="lista"></div>
-  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
+
+  <button class="btn-finalizar" onclick="enviarWhatsApp()">
+    Finalizar
+  </button>
+
 </div>
 
 <div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
 
-<h1 style="text-align:center;color:#e63946;">LAJES</h1>
+<h1>LAJES</h1>
 
 <!-- LAJE -->
 <div class="bloco">
-<div class="imagem">
-<img src="img/lajes/laje.jpg">
-</div>
 
-<div class="conteudo">
-<select id="tipoLaje" required onchange="atualizarIsopor()">
-<option value="" disabled selected>Selecione a laje</option>
-<option value="H8">Laje de Teto H8</option>
-<option value="H10">Laje de Piso H10</option>
-</select>
+  <div class="imagem">
+    <img src="img/lajes/laje.jpg">
+  </div>
 
-<select id="isopor" required>
-<option value="" disabled selected>Selecione o isopor</option>
-</select>
+  <div class="conteudo">
 
-<input type="number" id="c" placeholder="Comprimento">
-<input type="number" id="l" placeholder="Largura">
+    <select id="tipoLaje" required onchange="atualizarIsopor()">
 
-<div id="m2">0 m²</div>
+      <option value="" disabled selected>
+        Selecione a laje
+      </option>
 
-<button class="btn" onclick="addLaje()">Adicionar</button>
-</div>
+      <option value="H8">
+        Laje de Teto H8
+      </option>
+
+      <option value="H10">
+        Laje de Piso H10
+      </option>
+
+    </select>
+
+    <select id="isopor" required>
+
+      <option value="" disabled selected>
+        Selecione o isopor
+      </option>
+
+    </select>
+
+    <input type="number" id="c" placeholder="Comprimento">
+
+    <input type="number" id="l" placeholder="Largura">
+
+    <div id="m2">0 m²</div>
+
+    <button class="btn" onclick="addLaje()">
+      Adicionar
+    </button>
+
+  </div>
+
 </div>
 
 <!-- VIGA -->
 <div class="bloco">
-<div class="imagem">
-<img src="img/lajes/viga.jpg">
-</div>
 
-<div class="conteudo">
-<select id="tipoViga">
-<option>H8 TETO</option>
-<option>H10 PISO</option>
-</select>
+  <div class="imagem">
+    <img src="img/lajes/viga.jpg">
+  </div>
 
-<input list="listaVigas" id="tamViga" placeholder="Tamanho">
-<datalist id="listaVigas"></datalist>
+  <div class="conteudo">
 
-<div class="contador">
-<button onclick="dim('qv')">-</button>
-<input id="qv" value="1">
-<button onclick="mais('qv')">+</button>
-</div>
+    <select id="tipoViga">
 
-<button class="btn" onclick="addViga()">Adicionar</button>
-</div>
+      <option>H8 TETO</option>
+      <option>H10 PISO</option>
+
+    </select>
+
+    <input list="listaVigas" id="tamViga" placeholder="Tamanho">
+
+    <datalist id="listaVigas"></datalist>
+
+    <div class="contador">
+
+      <button onclick="dim('qv')">-</button>
+
+      <input id="qv" value="1">
+
+      <button onclick="mais('qv')">+</button>
+
+    </div>
+
+    <button class="btn" onclick="addViga()">
+      Adicionar
+    </button>
+
+  </div>
+
 </div>
 
 <!-- ISOPOR -->
 <div class="bloco">
-<div class="imagem">
-<img src="img/lajes/isopor.jpg">
-</div>
 
-<div class="conteudo">
-<select id="tipoIso">
-<option>H8 - 7,5x33</option>
-<option>H8 - 7,5x40</option>
-<option>H10 - 9x33</option>
-<option>H10 - 9x40</option>
-</select>
+  <div class="imagem">
+    <img src="img/lajes/isopor.jpg">
+  </div>
 
-<div class="contador">
-<button onclick="dim('qi')">-</button>
-<input id="qi" value="1">
-<button onclick="mais('qi')">+</button>
-</div>
+  <div class="conteudo">
 
-<button class="btn" onclick="addIso()">Adicionar</button>
-</div>
+    <select id="tipoIso">
+
+      <option>H8 - 7,5x33</option>
+      <option>H8 - 7,5x40</option>
+      <option>H10 - 9x33</option>
+      <option>H10 - 9x40</option>
+
+    </select>
+
+    <div class="contador">
+
+      <button onclick="dim('qi')">-</button>
+
+      <input id="qi" value="1">
+
+      <button onclick="mais('qi')">+</button>
+
+    </div>
+
+    <button class="btn" onclick="addIso()">
+      Adicionar
+    </button>
+
+  </div>
+
 </div>
 
 <script>
@@ -339,6 +469,7 @@ function atualizarIsopor(){
 }
 
 /* CONTADOR */
+
 function mais(id){
 
   let el =
@@ -363,6 +494,7 @@ function dim(id){
 }
 
 /* LISTA VIGAS */
+
 for(let i = 0.8; i <= 6; i += 0.1){
 
   listaVigas.innerHTML +=
@@ -371,6 +503,7 @@ for(let i = 0.8; i <= 6; i += 0.1){
 }
 
 /* CALCULO M2 */
+
 document
   .getElementById("c")
   .addEventListener("input", calcularM2);
@@ -399,9 +532,7 @@ function calcularM2(){
 
 }
 
-/* =========================
-   ADD LAJE
-========================= */
+/* ADD LAJE */
 
 function addLaje(){
 
@@ -435,15 +566,9 @@ function addLaje(){
     nome:
 `Laje
 ${tipo}
-${iso}
-${c}x${l}
+Isopor ${iso}
+${c}m x ${l}m
 ${m2} m²`,
-
-    tipo,
-    iso,
-    c,
-    l,
-    m2,
 
     qtd:1
 
@@ -451,11 +576,11 @@ ${m2} m²`,
 
   salvarCarrinho();
 
+  abrirCarrinho();
+
 }
 
-/* =========================
-   ADD VIGA
-========================= */
+/* ADD VIGA */
 
 function addViga(){
 
@@ -482,19 +607,17 @@ function addViga(){
 ${tipo}
 ${tam}`,
 
-    tipo,
-    tam,
-    qtd
+    qtd:qtd
 
   });
 
   salvarCarrinho();
 
+  abrirCarrinho();
+
 }
 
-/* =========================
-   ADD ISOPOR
-========================= */
+/* ADD ISOPOR */
 
 function addIso(){
 
@@ -510,18 +633,19 @@ function addIso(){
 `Isopor
 ${tipo}`,
 
-    tipo,
-    qtd
+    qtd:qtd
 
   });
 
   salvarCarrinho();
 
+  abrirCarrinho();
+
 }
 
 </script>
 
-<script src="js/carrinho.js"></script>  
-  
+<script src="js/carrinho.js"></script>
+
 </body>
 </html>
