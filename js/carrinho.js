@@ -16,8 +16,12 @@ function salvarCarrinho(){
    ABRIR
 ========================= */
 function abrirCarrinho(){
-  const carrinhoEl = document.getElementById("carrinho");
-  const overlayEl = document.getElementById("overlay");
+
+  const carrinhoEl =
+    document.getElementById("carrinho");
+
+  const overlayEl =
+    document.getElementById("overlay");
 
   if(carrinhoEl){
     carrinhoEl.classList.add("active");
@@ -34,8 +38,12 @@ function abrirCarrinho(){
    FECHAR
 ========================= */
 function fecharCarrinho(){
-  const carrinhoEl = document.getElementById("carrinho");
-  const overlayEl = document.getElementById("overlay");
+
+  const carrinhoEl =
+    document.getElementById("carrinho");
+
+  const overlayEl =
+    document.getElementById("overlay");
 
   if(carrinhoEl){
     carrinhoEl.classList.remove("active");
@@ -50,7 +58,9 @@ function fecharCarrinho(){
    REMOVER
 ========================= */
 function removerItem(i){
+
   carrinho.splice(i,1);
+
   salvarCarrinho();
 }
 
@@ -63,35 +73,54 @@ function adicionarCarrinho(botao){
 
   if(!card) return;
 
-  const titulo = card.querySelector('h3');
-  const qtdInput = card.querySelector('.qtd');
-  const select = card.querySelector('select');
+  const titulo =
+    card.querySelector('h3');
 
-  const nome = titulo ? titulo.innerText.trim() : "Produto";
-  const qtd = qtdInput ? parseInt(qtdInput.value) : 1;
+  const qtdInput =
+    card.querySelector('.qtd');
+
+  const select =
+    card.querySelector('select');
+
+  const nome =
+    titulo
+    ? titulo.innerText.trim()
+    : "Produto";
+
+  const qtd =
+    qtdInput
+    ? parseInt(qtdInput.value)
+    : 1;
 
   let nomeFinal = nome;
 
   // se tiver variação
   if(select){
-    nomeFinal += " - " + select.value;
+    nomeFinal += "\n" + select.value;
   }
 
   // procura existente
-  const existente = carrinho.find(item => item.nome === nomeFinal);
+  const existente =
+    carrinho.find(
+      item => item.nome === nomeFinal
+    );
 
   if(existente){
+
     existente.qtd += qtd;
+
   }else{
+
     carrinho.push({
       nome: nomeFinal,
       qtd: qtd
     });
+
   }
 
   salvarCarrinho();
 
-  // 🔥 ESSA LINHA RESOLVE O MOBILE
+  // MOBILE
   abrirCarrinho();
 }
 
@@ -100,7 +129,8 @@ function adicionarCarrinho(botao){
 ========================= */
 function renderCarrinho(){
 
-  const lista = document.getElementById("lista");
+  const lista =
+    document.getElementById("lista");
 
   if(!lista) return;
 
@@ -109,18 +139,25 @@ function renderCarrinho(){
   if(carrinho.length === 0){
 
     lista.innerHTML = `
+
       <div class="carrinho-vazio">
 
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" width="50" height="50">
+
           <circle cx="9" cy="20" r="1"></circle>
+
           <circle cx="18" cy="20" r="1"></circle>
+
           <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+
         </svg>
 
         <p>Seu carrinho está vazio</p>
+
         <span>Adicione produtos para continuar</span>
 
       </div>
+
     `;
 
     return;
@@ -135,24 +172,37 @@ function renderCarrinho(){
         <div class="info-item">
 
           <div class="titulo-item">
-            ${item.nome}
+
+            ${String(item.nome).replace(/\n/g, "<br>")}
+
           </div>
 
           <div class="detalhe">
+
             Quantidade:
             <strong>${item.qtd}</strong>
+
           </div>
 
         </div>
 
-        <button class="remover" onclick="removerItem(${i})">
+        <button
+          class="remover"
+          onclick="removerItem(${i})"
+        >
 
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="20" height="20">
+
             <path d="M3 6h18"></path>
+
             <path d="M8 6V4h8v2"></path>
+
             <path d="M6 6l1 14h10l1-14"></path>
+
             <path d="M10 11v6"></path>
+
             <path d="M14 11v6"></path>
+
           </svg>
 
         </button>
@@ -173,11 +223,15 @@ function enviarWhatsApp(){
   let msg = "Pedido:%0A";
 
   carrinho.forEach(item=>{
-    msg += `${item.nome} | Qtd:${item.qtd}%0A`;
+
+    msg +=
+      `${item.nome} | Qtd:${item.qtd}%0A`;
+
   });
 
-  window.open(`https://wa.me/5561999385680?text=${msg}`);
-
+  window.open(
+    `https://wa.me/5561999385680?text=${msg}`
+  );
 }
 
 /* =========================
@@ -185,18 +239,23 @@ function enviarWhatsApp(){
 ========================= */
 function aumentar(btn){
 
-  const input = btn.parentElement.querySelector('.qtd');
+  const input =
+    btn.parentElement.querySelector('.qtd');
 
-  input.value = parseInt(input.value) + 1;
-
+  input.value =
+    parseInt(input.value) + 1;
 }
 
 function diminuir(btn){
 
-  const input = btn.parentElement.querySelector('.qtd');
+  const input =
+    btn.parentElement.querySelector('.qtd');
 
-  input.value = Math.max(1, parseInt(input.value) - 1);
-
+  input.value =
+    Math.max(
+      1,
+      parseInt(input.value) - 1
+    );
 }
 
 /* =========================
@@ -207,7 +266,9 @@ window.addEventListener("load", ()=>{
   // desktop fixo
   if(window.innerWidth >= 900){
 
-    document.getElementById("carrinho")?.classList.add("active");
+    document
+      .getElementById("carrinho")
+      ?.classList.add("active");
 
   }
 
