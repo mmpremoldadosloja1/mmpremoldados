@@ -6,13 +6,13 @@
   position:fixed;
   top:0;
   right:-350px;
-  width:340px;
+  width:320px;
   height:100vh;
 
   background:#fff;
-  background:#ffffff;
 
-  padding:25px 20px;
+  padding:20px;
+  transition:0.3s ease;
 
   transition:right 0.3s ease;
 
@@ -21,40 +21,23 @@
   display:flex;
   flex-direction:column;
 
+  /* VISUAL */
   overflow:hidden;
 
-  box-shadow:-10px 0 30px rgba(0,0,0,0.12);
-  box-shadow:-10px 0 35px rgba(0,0,0,0.10);
+  box-shadow:-10px 0 30px rgba(0,0,0,0.25);
 
-  border-top-left-radius:35px;
-  border-bottom-left-radius:35px;
+  border-top-left-radius:50px;
+  border-bottom-left-radius:50px;
 
+  overflow:hidden;
+
+  /* MOBILE FIX */
   will-change:right;
-
   -webkit-overflow-scrolling:touch;
 }
 
 .carrinho-lateral.active{
   right:0;
-}
-
-/* =========================
-   TÍTULO
-========================= */
-
-.carrinho-lateral h3{
-  text-align:center;
-
-  font-size:28px;
-  font-size:34px;
-  font-weight:800;
-
-  margin-bottom:10px;
-  margin-bottom:18px;
-
-  color:#111;
-
-  letter-spacing:-1px;
 }
 
 /* =========================
@@ -82,6 +65,7 @@
 }
 
 /* =========================
+   LISTA DE PRODUTOS
    LISTA
 ========================= */
 
@@ -91,213 +75,102 @@
   overflow-y:auto;
   overflow-x:hidden;
 
-  margin-top:10px;
+  margin-top:15px;
   margin-bottom:15px;
+
+  min-height:200px;
 
   display:flex;
   flex-direction:column;
 
-  gap:18px;
-
-  padding-right:4px;
+  min-height:200px;
 
   -webkit-overflow-scrolling:touch;
 }
 
 /* =========================
-   ITEM PREMIUM
+   ITEM
 ========================= */
 
 .item{
-  position:relative;
-
   display:flex;
+  justify-content:space-between;
   align-items:flex-start;
 
-  gap:14px;
+  gap:10px;
 
-  background:#fff;
+  padding:12px 0;
 
-  border-radius:18px;
-  border-radius:22px;
-
-  padding:16px 14px;
-
-  border:1px solid #f1f1f1;
-
-  box-shadow:0 4px 12px rgba(0,0,0,0.04);
-  box-shadow:
-    0 4px 12px rgba(0,0,0,0.04),
-    0 1px 2px rgba(0,0,0,0.03);
-}
-
-/* BARRA VERMELHA */
-
-.item::before{
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  top:14px;
-
-  width:4px;
-  height:70%;
-  height:72%;
-
-  border-radius:10px;
-
-  background:#e63946;
+  border-bottom:1px solid #eee;
 }
 
 /* =========================
-   IMAGEM
-========================= */
-
-.img-item{
-  width:70px;
-  height:70px;
-
-  border-radius:12px;
-
-  background:#f7f7f7;
-
-  object-fit:contain;
-
-  padding:6px;
-
-  flex-shrink:0;
-}
-
-/* =========================
-   INFORMAÇÕES
+   TEXTO
 ========================= */
 
 .info-item{
   flex:1;
 
-  display:flex;
-  flex-direction:column;
+  font-size:14px;
 
-  gap:5px;
+  line-height:1.4;
 
-  min-width:0;
+  word-break:break-word;
 }
 
-/* NOME */
 /* =========================
-   NOME PRODUTO
+   TITULO
 ========================= */
 
-.nome-produto{
-  font-size:20px;
 .titulo-item{
-  font-size:22px;
-  font-weight:800;
+  font-weight:700;
 
-  color:#111;
+  font-size:15px;
 
-  margin-bottom:2px;
-  line-height:1.1;
+  margin-bottom:4px;
 
-  margin-bottom:10px;
+  border-left:4px solid #e63946;
 
-  letter-spacing:-0.5px;
+  padding-left:8px;
+
+  white-space:pre-line;
 }
 
-/* META */
 /* =========================
    DETALHES
 ========================= */
 
-.meta-item{
-  font-size:14px;
-.detalhe-produto{
-  font-size:15px;
-
+.detalhe{
   color:#555;
-
-  line-height:1.4;
-  line-height:1.5;
-
-  margin-bottom:2px;
-
-  font-weight:500;
+  font-size:13px;
 }
 
-.meta-item strong{
-.detalhe-produto:last-of-type{
-  color:#111;
-  font-weight:700;
-}
-
-/* DESTAQUE */
-/* =========================
-   QUANTIDADE
-========================= */
-
-.meta-item.destaque{
+.detalhe strong{
   color:#000;
-  font-weight:700;
-}
-.qtd-item{
-  margin-top:10px;
-
-/* QUANTIDADE */
-  font-size:15px;
-
-.qtd-box{
-  margin-top:8px;
-  color:#444;
-
-  font-size:14px;
-  font-weight:500;
-}
-
-.qtd-item strong{
-  color:#111;
-
-  font-weight:600;
-  font-size:17px;
 }
 
 /* =========================
-   REMOVER
+   BOTÃO REMOVER
 ========================= */
 
 .remover{
-  width:38px;
-  height:38px;
-  width:42px;
-  height:42px;
+  background:transparent;
 
   border:none;
 
-  border-radius:12px;
-  border-radius:14px;
-
-  background:#fff;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
   cursor:pointer;
 
+  padding:5px;
+
+  display:flex;
+
+  align-items:center;
+
   flex-shrink:0;
-
-  transition:0.2s;
-
-  box-shadow:0 2px 8px rgba(0,0,0,0.06);
-  box-shadow:0 3px 10px rgba(0,0,0,0.06);
 
   touch-action:manipulation;
 
   -webkit-tap-highlight-color:transparent;
-}
-
-.remover:hover{
-  transform:scale(1.08);
 }
 
 .remover svg{
@@ -305,15 +178,17 @@
   transition:0.2s;
 }
 
+.remover:hover svg{
+  stroke:#c1121f;
+  transform:scale(1.15);
+}
+
 /* =========================
-   FINALIZAR
+   BOTÃO FINALIZAR
 ========================= */
 
 .btn-finalizar{
-  width:100%;
-
-  padding:16px;
-  padding:17px;
+  padding:15px;
 
   background:#25D366;
 
@@ -321,31 +196,18 @@
 
   border:none;
 
-  border-radius:14px;
-  border-radius:16px;
+  border-radius:5px;
 
-  font-size:18px;
-  font-weight:700;
-  font-size:20px;
-  font-weight:800;
+  font-weight:bold;
 
   cursor:pointer;
 
+  margin-top:10px;
   margin-top:auto;
-  margin-top:18px;
-
-  transition:0.2s;
-
-  box-shadow:0 6px 16px rgba(37,211,102,0.3);
-  box-shadow:0 8px 18px rgba(37,211,102,0.28);
 
   touch-action:manipulation;
 
   -webkit-tap-highlight-color:transparent;
-}
-
-.btn-finalizar:hover{
-  transform:translateY(-2px);
 }
 
 /* =========================
@@ -361,8 +223,7 @@
 
   text-align:center;
 
-  margin-top:50px;
-  margin-top:70px;
+  margin-top:40px;
 
   color:#777;
 }
@@ -370,27 +231,27 @@
 .carrinho-vazio svg{
   stroke:#e63946;
 
-  margin-bottom:12px;
+  margin-bottom:10px;
 
-  opacity:0.8;
+  opacity:0.7;
 }
 
 .carrinho-vazio p{
-  font-weight:700;
+  font-weight:600;
 
-  font-size:18px;
+  font-size:16px;
 
-  color:#111;
+  color:#000;
 }
 
 .carrinho-vazio span{
-  font-size:14px;
+  font-size:13px;
 
   color:#777;
 }
 
 /* =========================
-   TOUCH FIX
+   TOUCH FIX GLOBAL
 ========================= */
 
 .btn,
@@ -403,19 +264,6 @@
 }
 
 /* =========================
-   SCROLLBONITO
-========================= */
-
-.lista-carrinho::-webkit-scrollbar{
-  width:6px;
-}
-
-.lista-carrinho::-webkit-scrollbar-thumb{
-  background:#ddd;
-  border-radius:10px;
-}
-
-/* =========================
    MOBILE
 ========================= */
 
@@ -424,23 +272,28 @@
   .carrinho-lateral{
     right:-100%;
 
-    width:88%;
-    max-width:340px;
+    width:85%;
+    max-width:320px;
 
-    border-top-left-radius:28px;
-    border-bottom-left-radius:28px;
+    height:100vh;
+    z-index:1001;
   }
 
   .carrinho-lateral.active{
     right:0;
   }
 
+  /* 🔥 MUITO IMPORTANTE */
   .carrinho-lateral:not(.active){
     pointer-events:none;
   }
 
   .carrinho-lateral.active{
     pointer-events:auto;
+  }
+
+  .overlay{
+    z-index:1000;
   }
 
   .btn-carrinho{
@@ -450,7 +303,7 @@
 }
 
 /* =========================
-   DESKTOP
+   DESKTOP FIXO
 ========================= */
 
 @media(min-width:900px){
@@ -464,7 +317,7 @@
   }
 
   body{
-    padding-right:340px;
+    padding-right:320px;
   }
 
 }
