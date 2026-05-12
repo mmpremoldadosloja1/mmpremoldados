@@ -6,6 +6,7 @@
 <title>Cobogós | MM Pré-Moldados</title>
 
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/carrinho.css">
 
 <style>
@@ -14,6 +15,7 @@ body{
   background:#fff;
   color:#000;
   padding-top:90px;
+  font-family: 'Montserrat', sans-serif;
   font-family:'Montserrat', sans-serif;
   overflow-x:hidden;
 }
@@ -29,6 +31,7 @@ header{
 
   position:fixed;
   top:0;
+  z-index:999;
 
   z-index:10;
 
@@ -42,6 +45,7 @@ nav{
   align-items:center;
 }
 
+.nav-left, .nav-right{
 .nav-left,
 .nav-right{
   display:flex;
@@ -115,6 +119,7 @@ h2{
 /* GRID */
 .grid{
   display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
 
   grid-template-columns:
   repeat(auto-fill, minmax(150px,1fr));
@@ -223,6 +228,7 @@ h2{
 /* BOTÃO */
 .btn{
   width:100%;
+  padding:10px 0;
 
   padding:12px 0;
 
@@ -246,6 +252,8 @@ h2{
   -webkit-tap-highlight-color:transparent;
 
   position:relative;
+
+  z-index:1;
   z-index:10;
 }
 
@@ -253,6 +261,7 @@ h2{
   background:#c92f3b;
   transform:scale(1.05);
 }
+  
 
 /* botão mobile */
 .btn-carrinho{
@@ -265,6 +274,7 @@ h2{
 
   -webkit-tap-highlight-color:transparent;
 }
+  
 
 /* MOBILE */
 @media(max-width:899px){
@@ -282,6 +292,7 @@ h2{
   }
 
   .btn{
+    min-height:48px;
     min-height:45px;
   }
 
@@ -311,24 +322,37 @@ h2{
 
 <header>
   <nav class="nav-left">
+
     <a href="index.html" class="nav-item">
+
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <path d="M3 10L12 3l9 7"></path>
         <path d="M5 10v10h14V10"></path>
       </svg>
+
       Início
+
     </a>
+
   </nav>
 
   <nav class="nav-right">
+
+    <a href="#"
+       class="nav-item btn-carrinho"
+       onclick="abrirCarrinho(); return false;">
+
     <a href="#" class="nav-item btn-carrinho" onclick="abrirCarrinho(); return false;">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
         <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
       </svg>
+
       Carrinho
+
     </a>
+
   </nav>
 </header>
 
