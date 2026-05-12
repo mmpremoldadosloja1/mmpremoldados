@@ -15,7 +15,6 @@ body{
   background:#fff;
   color:#000;
   padding-top:90px;
-  font-family: 'Montserrat', sans-serif;
   font-family:'Montserrat', sans-serif;
   overflow-x:hidden;
 }
@@ -29,9 +28,7 @@ header{
 
   padding:15px 25px;
 
-  position:fixed;
-  top:0;
-  z-index:999;
+  position:relative;
 
   z-index:10;
 
@@ -45,7 +42,6 @@ nav{
   align-items:center;
 }
 
-.nav-left, .nav-right{
 .nav-left,
 .nav-right{
   display:flex;
@@ -119,7 +115,6 @@ h2{
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
 
   grid-template-columns:
   repeat(auto-fill, minmax(150px,1fr));
@@ -228,7 +223,6 @@ h2{
 /* BOTÃO */
 .btn{
   width:100%;
-  padding:10px 0;
 
   padding:12px 0;
 
@@ -252,16 +246,15 @@ h2{
   -webkit-tap-highlight-color:transparent;
 
   position:relative;
+  z-index:10;
 
   z-index:1;
-  z-index:10;
 }
 
 .btn:hover{
   background:#c92f3b;
   transform:scale(1.05);
 }
-  
 
 /* botão mobile */
 .btn-carrinho{
@@ -274,7 +267,6 @@ h2{
 
   -webkit-tap-highlight-color:transparent;
 }
-  
 
 /* MOBILE */
 @media(max-width:899px){
@@ -292,8 +284,8 @@ h2{
   }
 
   .btn{
-    min-height:48px;
     min-height:45px;
+    min-height:48px;
   }
 
 }
@@ -337,12 +329,12 @@ h2{
   </nav>
 
   <nav class="nav-right">
+    <a href="#" class="nav-item btn-carrinho" onclick="abrirCarrinho(); return false;">
 
     <a href="#"
        class="nav-item btn-carrinho"
        onclick="abrirCarrinho(); return false;">
 
-    <a href="#" class="nav-item btn-carrinho" onclick="abrirCarrinho(); return false;">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
@@ -525,138 +517,6 @@ h2{
 
 </div>
 
-<script>
-
-/* =========================
-   CONTADOR
-========================= */
-
-function aumentar(btn){
-
-  const input =
-    btn.parentElement.querySelector('.qtd');
-
-  input.value =
-    parseInt(input.value) + 1;
-}
-
-function diminuir(btn){
-
-  const input =
-    btn.parentElement.querySelector('.qtd');
-
-  input.value =
-    Math.max(
-      1,
-      parseInt(input.value) - 1
-    );
-}
-
-/* =========================
-   ADD AO CARRINHO
-========================= */
-
-function adicionarCarrinho(botao){
-
-  const card =
-    botao.closest('.card');
-
-  const nome =
-    card.querySelector('h3').innerText;
-
-  const qtd =
-    parseInt(
-      card.querySelector('.qtd').value
-    );
-
-  const imagem =
-    card.querySelector('img').src;
-
-  let carrinhoAtual =
-    JSON.parse(
-      localStorage.getItem("carrinho")
-    ) || [];
-
-  const existente =
-    carrinhoAtual.find(
-      item => item.nome === nome
-    );
-
-  if(existente){
-
-    existente.qtd += qtd;
-
-  }else{
-
-    carrinhoAtual.push({
-      nome:nome,
-      qtd:qtd,
-      imagem:imagem
-    });
-  }
-
-  localStorage.setItem(
-    "carrinho",
-    JSON.stringify(carrinhoAtual)
-  );
-
-  /* ATUALIZA */
-
-  if(typeof renderizarCarrinho === "function"){
-    renderizarCarrinho();
-  }
-
-  /* MOBILE */
-
-  if(window.innerWidth <= 899){
-
-    const carrinho =
-      document.querySelector(".carrinho-lateral");
-
-    const overlay =
-      document.querySelector(".overlay");
-
-    if(carrinho){
-      carrinho.classList.add("active");
-    }
-
-    if(overlay){
-      overlay.classList.add("active");
-    }
-  }
-}
-
-/* =========================
-   MOBILE FIX
-========================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function(){
-
-    /* REMOVE TOUCH DUPLO */
-
-    const botoes =
-      document.querySelectorAll(".btn");
-
-    botoes.forEach(botao => {
-
-      botao.style.pointerEvents = "auto";
-
-      botao.addEventListener(
-        "touchstart",
-        function(e){
-
-          e.stopPropagation();
-        },
-        { passive:true }
-      );
-    });
-
-  }
-);
-
-</script>
 
 <script src="js/carrinho.js"></script>
 
