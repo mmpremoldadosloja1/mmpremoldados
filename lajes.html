@@ -436,102 +436,6 @@ select:invalid{
 
 <script>
 
-/* ISOPOR */
-function atualizarIsopor(){
-
-  const tipo =
-    document.getElementById("tipoLaje").value;
-
-  const select =
-    document.getElementById("isopor");
-
-  select.innerHTML =
-    `<option disabled selected>Selecione o isopor</option>`;
-
-  if(tipo === "H8"){
-
-    select.innerHTML +=
-      `<option>7,5x33</option>`;
-
-    select.innerHTML +=
-      `<option>7,5x40</option>`;
-  }
-
-  if(tipo === "H10"){
-
-    select.innerHTML +=
-      `<option>9x33</option>`;
-
-    select.innerHTML +=
-      `<option>9x40</option>`;
-  }
-
-}
-
-/* CONTADOR */
-
-function mais(id){
-
-  let el =
-    document.getElementById(id);
-
-  el.value =
-    parseInt(el.value || 1) + 1;
-
-}
-
-function dim(id){
-
-  let el =
-    document.getElementById(id);
-
-  el.value =
-    Math.max(
-      1,
-      parseInt(el.value || 1) - 1
-    );
-
-}
-
-/* LISTA VIGAS */
-
-for(let i = 0.8; i <= 6; i += 0.1){
-
-  listaVigas.innerHTML +=
-    `<option value="${i.toFixed(1)}m">`;
-
-}
-
-/* CALCULO M2 */
-
-document
-  .getElementById("c")
-  .addEventListener("input", calcularM2);
-
-document
-  .getElementById("l")
-  .addEventListener("input", calcularM2);
-
-function calcularM2(){
-
-  let c =
-    parseFloat(
-      document.getElementById("c").value
-    ) || 0;
-
-  let l =
-    parseFloat(
-      document.getElementById("l").value
-    ) || 0;
-
-  let total =
-    (c * l).toFixed(2);
-
-  document.getElementById("m2").innerText =
-    total + " m²";
-
-}
-
 /* ADD LAJE */
 
 function addLaje(){
@@ -570,7 +474,9 @@ Isopor ${iso}
 ${c}m x ${l}m
 ${m2} m²`,
 
-    qtd:1
+    qtd:1,
+
+    imagem:"img/lajes/laje.jpg"
 
   });
 
@@ -607,7 +513,9 @@ function addViga(){
 ${tipo}
 ${tam}`,
 
-    qtd:qtd
+    qtd:qtd,
+
+    imagem:"img/lajes/viga.jpg"
 
   });
 
@@ -633,7 +541,9 @@ function addIso(){
 `Isopor
 ${tipo}`,
 
-    qtd:qtd
+    qtd:qtd,
+
+    imagem:"img/lajes/isopor.jpg"
 
   });
 
