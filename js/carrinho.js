@@ -70,6 +70,24 @@ function removerItem(i){
 }
 
 /* =========================
+   PEGAR IMAGEM DO CARD
+========================= */
+function pegarImagem(card){
+
+  // procura qualquer imagem do produto
+  const imagem =
+    card.querySelector('img');
+
+  if(imagem && imagem.src){
+
+    return imagem.src;
+
+  }
+
+  return "";
+}
+
+/* =========================
    ADICIONAR PRODUTO
 ========================= */
 function adicionarCarrinho(botao){
@@ -96,7 +114,7 @@ function adicionarCarrinho(botao){
 
   // IMAGEM
   const imagem =
-    card.querySelector('img');
+    pegarImagem(card);
 
   const nome =
     titulo
@@ -167,8 +185,6 @@ function adicionarCarrinho(botao){
       qtd: qtd,
 
       imagem: imagem
-        ? imagem.src
-        : ""
 
     });
 
