@@ -141,6 +141,35 @@
 }
 
 /* =========================
+   IMAGEM PRODUTO
+========================= */
+
+.img-item{
+  width:70px;
+  height:70px;
+
+  min-width:70px;
+  min-height:70px;
+
+  max-width:70px;
+  max-height:70px;
+
+  border-radius:12px;
+
+  background:#f7f7f7;
+
+  object-fit:contain;
+
+  padding:6px;
+
+  flex-shrink:0;
+
+  display:block;
+
+  overflow:hidden;
+}
+
+/* =========================
    INFORMAÇÕES
 ========================= */
 
@@ -184,6 +213,8 @@
   margin-bottom:2px;
 
   font-weight:500;
+
+  word-break:break-word;
 }
 
 .detalhe-produto:last-of-type{
