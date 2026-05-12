@@ -14,7 +14,6 @@ body{
   background:#fff;
   color:#000;
   padding-top:110px;
-  font-family: 'Montserrat', sans-serif;
   font-family:'Montserrat', sans-serif;
 }
 
@@ -45,7 +44,6 @@ nav{
   align-items:center;
 }
 
-.nav-left, .nav-right{
 .nav-left,
 .nav-right{
   display:flex;
@@ -102,10 +100,6 @@ h1{
 
 .imagem{
   width:100%;
-  height:150px;
-  background:#eee;
-  border-radius:10px;
-  margin-bottom:15px;
   height:180px;
   background:#f5f5f5;
   border-radius:16px;
@@ -122,31 +116,19 @@ h1{
   object-fit:contain;
 }
 
-/* ===== ORIGINAL ===== */
 /* ===== CONTEUDO ===== */
 
-.bloco{
-  background:#fff;
-  margin:20px;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.08);
 .conteudo{
   display:flex;
   flex-direction:column;
   gap:12px;
 }
 
-select, input{
 /* ===== INPUTS ===== */
 
 select,
 input{
   width:100%;
-  padding:10px;
-  margin-top:10px;
-  border-radius:6px;
-  border:1px solid #ccc;
   padding:14px;
   border-radius:10px;
   border:1px solid #ddd;
@@ -184,18 +166,14 @@ select:invalid{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:5px;
-  margin-top:10px;
   gap:10px;
   margin-top:5px;
 }
 
 .contador button{
-  padding:5px 10px;
   width:38px;
   height:38px;
   border:none;
-  background:#eee;
   border-radius:50%;
   background:#f0f0f0;
   font-size:18px;
@@ -210,7 +188,6 @@ select:invalid{
 }
 
 .contador input{
-  width:30px;
   width:70px;
   text-align:center;
   font-weight:bold;
@@ -219,16 +196,12 @@ select:invalid{
 /* ===== BOTÃO ===== */
 
 .btn{
-  margin-top:15px;
-  width:70%;
-  padding:12px;
   margin-top:10px;
   width:100%;
   padding:14px;
   background:#e63946;
   color:#fff;
   border:none;
-  border-radius:8px;
   border-radius:12px;
   cursor:pointer;
   font-weight:700;
@@ -246,13 +219,9 @@ select:invalid{
   display:flex;
 }
 
-/* DESKTOP */
 /* ===== DESKTOP ===== */
 
 @media(min-width:900px){
-.btn-carrinho{
-  display:none !important;
-}
 
   .btn-carrinho{
     display:none !important;
@@ -260,7 +229,6 @@ select:invalid{
 
   .bloco{
     display:flex;
-    gap:20px;
     gap:30px;
     align-items:center;
     max-width:1100px;
@@ -268,8 +236,6 @@ select:invalid{
   }
 
   .imagem{
-    width:200px;
-    height:140px;
     width:260px;
     min-width:260px;
     height:220px;
@@ -277,16 +243,6 @@ select:invalid{
   }
 
   .conteudo{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    width:100%;
-  }
-
-  .conteudo select,
-  .conteudo input{
-    width:auto;
-    min-width:140px;
     flex:1;
   }
 
@@ -340,14 +296,12 @@ select:invalid{
 
 </header>
 
-<!-- CARRINHO (🔥 removido active daqui) -->
 <!-- CARRINHO -->
 <div class="carrinho-lateral" id="carrinho">
 
   <h3>Seu Carrinho</h3>
 
   <div class="lista-carrinho" id="lista"></div>
-  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
 
   <button class="btn-finalizar" onclick="enviarWhatsApp()">
     Finalizar
@@ -357,35 +311,19 @@ select:invalid{
 
 <div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
 
-<h1 style="text-align:center;color:#e63946;">LAJES</h1>
 <h1>LAJES</h1>
 
 <!-- LAJE -->
 <div class="bloco">
-<div class="imagem">
-<img src="img/lajes/laje.jpg">
-</div>
 
-<div class="conteudo">
-<select id="tipoLaje" required onchange="atualizarIsopor()">
-<option value="" disabled selected>Selecione a laje</option>
-<option value="H8">Laje de Teto H8</option>
-<option value="H10">Laje de Piso H10</option>
-</select>
   <div class="imagem">
     <img src="img/lajes/laje.jpg">
   </div>
 
-<select id="isopor" required>
-<option value="" disabled selected>Selecione o isopor</option>
-</select>
   <div class="conteudo">
 
-<input type="number" id="c" placeholder="Comprimento">
-<input type="number" id="l" placeholder="Largura">
     <select id="tipoLaje" required onchange="atualizarIsopor()">
 
-<div id="m2">0 m²</div>
       <option value="" disabled selected>
         Selecione a laje
       </option>
@@ -420,34 +358,17 @@ select:invalid{
 
   </div>
 
-<button class="btn" onclick="addLaje()">Adicionar</button>
-</div>
 </div>
 
 <!-- VIGA -->
 <div class="bloco">
-<div class="imagem">
-<img src="img/lajes/viga.jpg">
-</div>
 
-<div class="conteudo">
-<select id="tipoViga">
-<option>H8 TETO</option>
-<option>H10 PISO</option>
-</select>
   <div class="imagem">
     <img src="img/lajes/viga.jpg">
   </div>
 
-<input list="listaVigas" id="tamViga" placeholder="Tamanho">
-<datalist id="listaVigas"></datalist>
   <div class="conteudo">
 
-<div class="contador">
-<button onclick="dim('qv')">-</button>
-<input id="qv" value="1">
-<button onclick="mais('qv')">+</button>
-</div>
     <select id="tipoViga">
 
       <option>H8 TETO</option>
@@ -475,29 +396,11 @@ select:invalid{
 
   </div>
 
-<button class="btn" onclick="addViga()">Adicionar</button>
-</div>
 </div>
 
 <!-- ISOPOR -->
 <div class="bloco">
-<div class="imagem">
-<img src="img/lajes/isopor.jpg">
-</div>
 
-<div class="conteudo">
-<select id="tipoIso">
-<option>H8 - 7,5x33</option>
-<option>H8 - 7,5x40</option>
-<option>H10 - 9x33</option>
-<option>H10 - 9x40</option>
-</select>
-
-<div class="contador">
-<button onclick="dim('qi')">-</button>
-<input id="qi" value="1">
-<button onclick="mais('qi')">+</button>
-</div>
   <div class="imagem">
     <img src="img/lajes/isopor.jpg">
   </div>
@@ -529,8 +432,6 @@ select:invalid{
 
   </div>
 
-<button class="btn" onclick="addIso()">Adicionar</button>
-</div>
 </div>
 
 <script>
@@ -631,9 +532,6 @@ function calcularM2(){
 
 }
 
-/* =========================
-   ADD LAJE
-========================= */
 /* ADD LAJE */
 
 function addLaje(){
@@ -668,17 +566,9 @@ function addLaje(){
     nome:
 `Laje
 ${tipo}
-${iso}
-${c}x${l}
 Isopor ${iso}
 ${c}m x ${l}m
 ${m2} m²`,
-
-    tipo,
-    iso,
-    c,
-    l,
-    m2,
 
     qtd:1
 
@@ -690,9 +580,6 @@ ${m2} m²`,
 
 }
 
-/* =========================
-   ADD VIGA
-========================= */
 /* ADD VIGA */
 
 function addViga(){
@@ -720,9 +607,6 @@ function addViga(){
 ${tipo}
 ${tam}`,
 
-    tipo,
-    tam,
-    qtd
     qtd:qtd
 
   });
@@ -733,9 +617,6 @@ ${tam}`,
 
 }
 
-/* =========================
-   ADD ISOPOR
-========================= */
 /* ADD ISOPOR */
 
 function addIso(){
@@ -752,8 +633,6 @@ function addIso(){
 `Isopor
 ${tipo}`,
 
-    tipo,
-    qtd
     qtd:qtd
 
   });
@@ -766,8 +645,6 @@ ${tipo}`,
 
 </script>
 
-<script src="js/carrinho.js"></script>  
-  
 <script src="js/carrinho.js"></script>
 
 </body>
