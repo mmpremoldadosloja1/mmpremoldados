@@ -282,20 +282,34 @@ function renderCarrinho(){
 ========================= */
 function enviarWhatsApp(){
 
-  let msg = "Pedido:%0A%0A";
+  let msg =
+`🛒 *NOVO PEDIDO* 
 
-  carrinho.forEach(item=>{
+`;
 
-    msg += `${item.nome}%0A`;
-    msg += `Quantidade: ${item.qtd}%0A%0A`;
+  carrinho.forEach((item, index)=>{
+
+    const linhas =
+      String(item.nome).split("\n");
+
+    msg += `*${index + 1}. ${linhas[0]}*\n`;
+
+    linhas.slice(1).forEach(linha=>{
+
+      msg += `${linha}\n`;
+
+    });
+
+    msg += `Quantidade: ${item.qtd}\n`;
+
+    msg += `\n----------------------\n\n`;
 
   });
 
   window.open(
-    `https://wa.me/5561999385680?text=${msg}`
+    `https://wa.me/5561999385680?text=${encodeURIComponent(msg)}`
   );
 }
-
 /* =========================
    CONTADOR
 ========================= */
