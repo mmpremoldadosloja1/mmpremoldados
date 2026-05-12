@@ -1,312 +1,470 @@
-// =========================
-// CARRINHO GLOBAL
-// =========================
-
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
 /* =========================
-   SALVAR
+   CARRINHO - ESTRUTURA
 ========================= */
-function salvarCarrinho(){
 
-  localStorage.setItem(
-    'carrinho',
-    JSON.stringify(carrinho)
-  );
+.carrinho-lateral{
+  position:fixed;
+  top:0;
+  right:-350px;
+  width:340px;
+  height:100vh;
 
-  renderCarrinho();
+  background:#fff;
+  background:#ffffff;
+
+  padding:25px 20px;
+
+  transition:right 0.3s ease;
+
+  z-index:1001;
+
+  display:flex;
+  flex-direction:column;
+
+  overflow:hidden;
+
+  box-shadow:-10px 0 30px rgba(0,0,0,0.12);
+  box-shadow:-10px 0 35px rgba(0,0,0,0.10);
+
+  border-top-left-radius:35px;
+  border-bottom-left-radius:35px;
+
+  will-change:right;
+
+  -webkit-overflow-scrolling:touch;
+}
+
+.carrinho-lateral.active{
+  right:0;
 }
 
 /* =========================
-   ABRIR
+   TÍTULO
 ========================= */
-function abrirCarrinho(){
 
-  const carrinhoEl =
-    document.getElementById("carrinho");
+.carrinho-lateral h3{
+  text-align:center;
 
-  const overlayEl =
-    document.getElementById("overlay");
+  font-size:28px;
+  font-size:34px;
+  font-weight:800;
 
-  if(carrinhoEl){
-    carrinhoEl.classList.add("active");
-  }
+  margin-bottom:10px;
+  margin-bottom:18px;
 
-  if(overlayEl && window.innerWidth < 900){
-    overlayEl.classList.add("active");
-  }
+  color:#111;
 
-  renderCarrinho();
+  letter-spacing:-1px;
 }
 
 /* =========================
-   FECHAR
+   OVERLAY
 ========================= */
-function fecharCarrinho(){
 
-  const carrinhoEl =
-    document.getElementById("carrinho");
+.overlay{
+  position:fixed;
+  inset:0;
 
-  const overlayEl =
-    document.getElementById("overlay");
+  background:rgba(0,0,0,0.4);
 
-  if(carrinhoEl){
-    carrinhoEl.classList.remove("active");
-  }
+  opacity:0;
 
-  if(overlayEl){
-    overlayEl.classList.remove("active");
-  }
+  pointer-events:none;
+
+  transition:0.3s;
+
+  z-index:1000;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* =========================
+   LISTA
+========================= */
+
+.lista-carrinho{
+  flex:1;
+
+  overflow-y:auto;
+  overflow-x:hidden;
+
+  margin-top:10px;
+  margin-bottom:15px;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:18px;
+
+  padding-right:4px;
+
+  -webkit-overflow-scrolling:touch;
+}
+
+/* =========================
+   ITEM PREMIUM
+========================= */
+
+.item{
+  position:relative;
+
+  display:flex;
+  align-items:flex-start;
+
+  gap:14px;
+
+  background:#fff;
+
+  border-radius:18px;
+  border-radius:22px;
+
+  padding:16px 14px;
+
+  border:1px solid #f1f1f1;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.04);
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.04),
+    0 1px 2px rgba(0,0,0,0.03);
+}
+
+/* BARRA VERMELHA */
+
+.item::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:14px;
+
+  width:4px;
+  height:70%;
+  height:72%;
+
+  border-radius:10px;
+
+  background:#e63946;
+}
+
+/* =========================
+   IMAGEM
+========================= */
+
+.img-item{
+  width:70px;
+  height:70px;
+
+  border-radius:12px;
+
+  background:#f7f7f7;
+
+  object-fit:contain;
+
+  padding:6px;
+
+  flex-shrink:0;
+}
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.info-item{
+  flex:1;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:5px;
+
+  min-width:0;
+}
+
+/* NOME */
+/* =========================
+   NOME PRODUTO
+========================= */
+
+.nome-produto{
+  font-size:20px;
+.titulo-item{
+  font-size:22px;
+  font-weight:800;
+
+  color:#111;
+
+  margin-bottom:2px;
+  line-height:1.1;
+
+  margin-bottom:10px;
+
+  letter-spacing:-0.5px;
+}
+
+/* META */
+/* =========================
+   DETALHES
+========================= */
+
+.meta-item{
+  font-size:14px;
+.detalhe-produto{
+  font-size:15px;
+
+  color:#555;
+
+  line-height:1.4;
+  line-height:1.5;
+
+  margin-bottom:2px;
+
+  font-weight:500;
+}
+
+.meta-item strong{
+.detalhe-produto:last-of-type{
+  color:#111;
+  font-weight:700;
+}
+
+/* DESTAQUE */
+/* =========================
+   QUANTIDADE
+========================= */
+
+.meta-item.destaque{
+  color:#000;
+  font-weight:700;
+}
+.qtd-item{
+  margin-top:10px;
+
+/* QUANTIDADE */
+  font-size:15px;
+
+.qtd-box{
+  margin-top:8px;
+  color:#444;
+
+  font-size:14px;
+  font-weight:500;
+}
+
+.qtd-item strong{
+  color:#111;
+
+  font-weight:600;
+  font-size:17px;
 }
 
 /* =========================
    REMOVER
 ========================= */
-function removerItem(i){
 
-  carrinho.splice(i,1);
+.remover{
+  width:38px;
+  height:38px;
+  width:42px;
+  height:42px;
 
-  salvarCarrinho();
+  border:none;
+
+  border-radius:12px;
+  border-radius:14px;
+
+  background:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  flex-shrink:0;
+
+  transition:0.2s;
+
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+  box-shadow:0 3px 10px rgba(0,0,0,0.06);
+
+  touch-action:manipulation;
+
+  -webkit-tap-highlight-color:transparent;
+}
+
+.remover:hover{
+  transform:scale(1.08);
+}
+
+.remover svg{
+  stroke:#e63946;
+  transition:0.2s;
 }
 
 /* =========================
-   ADICIONAR PRODUTO
+   FINALIZAR
 ========================= */
-function adicionarCarrinho(botao){
 
-  const card = botao.closest('.card');
+.btn-finalizar{
+  width:100%;
 
-  if(!card) return;
+  padding:16px;
+  padding:17px;
 
-  const titulo =
-    card.querySelector('h3');
+  background:#25D366;
 
-  const qtdInput =
-    card.querySelector('.qtd');
+  color:#fff;
 
-  const select =
-    card.querySelector('select');
+  border:none;
 
-  const imagem =
-    card.querySelector('img');
+  border-radius:14px;
+  border-radius:16px;
 
-  const nome =
-    titulo
-    ? titulo.innerText.trim()
-    : "Produto";
+  font-size:18px;
+  font-weight:700;
+  font-size:20px;
+  font-weight:800;
 
-  const qtd =
-    qtdInput
-    ? parseInt(qtdInput.value)
-    : 1;
+  cursor:pointer;
 
-  let nomeFinal = nome;
+  margin-top:auto;
+  margin-top:18px;
 
-  if(select){
+  transition:0.2s;
 
-    nomeFinal += `\n${select.value}`;
+  box-shadow:0 6px 16px rgba(37,211,102,0.3);
+  box-shadow:0 8px 18px rgba(37,211,102,0.28);
 
+  touch-action:manipulation;
+
+  -webkit-tap-highlight-color:transparent;
+}
+
+.btn-finalizar:hover{
+  transform:translateY(-2px);
+}
+
+/* =========================
+   CARRINHO VAZIO
+========================= */
+
+.carrinho-vazio{
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  margin-top:50px;
+  margin-top:70px;
+
+  color:#777;
+}
+
+.carrinho-vazio svg{
+  stroke:#e63946;
+
+  margin-bottom:12px;
+
+  opacity:0.8;
+}
+
+.carrinho-vazio p{
+  font-weight:700;
+
+  font-size:18px;
+
+  color:#111;
+}
+
+.carrinho-vazio span{
+  font-size:14px;
+
+  color:#777;
+}
+
+/* =========================
+   TOUCH FIX
+========================= */
+
+.btn,
+.btn-carrinho,
+.contador button,
+.carrinho-lateral button{
+  touch-action:manipulation;
+
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* =========================
+   SCROLLBONITO
+========================= */
+
+.lista-carrinho::-webkit-scrollbar{
+  width:6px;
+}
+
+.lista-carrinho::-webkit-scrollbar-thumb{
+  background:#ddd;
+  border-radius:10px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:899px){
+
+  .carrinho-lateral{
+    right:-100%;
+
+    width:88%;
+    max-width:340px;
+
+    border-top-left-radius:28px;
+    border-bottom-left-radius:28px;
   }
 
-  const existente =
-    carrinho.find(
-      item => item.nome === nomeFinal
-    );
-
-  if(existente){
-
-    existente.qtd += qtd;
-
-  }else{
-
-    carrinho.push({
-
-      nome: nomeFinal,
-
-      qtd: qtd,
-
-      imagem: imagem
-        ? imagem.src
-        : ""
-
-    });
-
+  .carrinho-lateral.active{
+    right:0;
   }
 
-  salvarCarrinho();
-
-  abrirCarrinho();
-}
-
-/* =========================
-   RENDER
-========================= */
-function renderCarrinho(){
-
-  const lista =
-    document.getElementById("lista");
-
-  if(!lista) return;
-
-  lista.innerHTML = "";
-
-  if(carrinho.length === 0){
-
-    lista.innerHTML = `
-
-      <div class="carrinho-vazio">
-
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" width="50" height="50">
-
-          <circle cx="9" cy="20" r="1"></circle>
-
-          <circle cx="18" cy="20" r="1"></circle>
-
-          <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-
-        </svg>
-
-        <p>Seu carrinho está vazio</p>
-
-        <span>Adicione produtos para continuar</span>
-
-      </div>
-
-    `;
-
-    return;
+  .carrinho-lateral:not(.active){
+    pointer-events:none;
   }
 
-  carrinho.forEach((item, i)=>{
-
-    const linhas =
-      String(item.nome).split("\n");
-
-    const titulo =
-      linhas[0];
-
-    const detalhes =
-      linhas.slice(1);
-
-    lista.innerHTML += `
-
-      <div class="item">
-
-        <img
-          class="img-item"
-          src="${item.imagem || ''}"
-        >
-
-        <div class="info-item">
-
-          <div class="titulo-item">
-            ${titulo}
-          </div>
-
-          ${
-            detalhes.map(det => `
-
-              <div class="detalhe-produto">
-                ${det}
-              </div>
-
-            `).join("")
-          }
-
-          <div class="qtd-item">
-
-            Quantidade:
-            <strong>${item.qtd}</strong>
-
-          </div>
-
-        </div>
-
-        <button
-          class="remover"
-          onclick="removerItem(${i})"
-        >
-
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="20" height="20">
-
-            <path d="M3 6h18"></path>
-
-            <path d="M8 6V4h8v2"></path>
-
-            <path d="M6 6l1 14h10l1-14"></path>
-
-            <path d="M10 11v6"></path>
-
-            <path d="M14 11v6"></path>
-
-          </svg>
-
-        </button>
-
-      </div>
-
-    `;
-
-  });
-
-}
-
-/* =========================
-   WHATSAPP
-========================= */
-function enviarWhatsApp(){
-
-  let msg = "Pedido:%0A%0A";
-
-  carrinho.forEach(item=>{
-
-    msg += `${item.nome}%0A`;
-    msg += `Quantidade: ${item.qtd}%0A%0A`;
-
-  });
-
-  window.open(
-    `https://wa.me/5561999385680?text=${msg}`
-  );
-}
-
-/* =========================
-   CONTADOR
-========================= */
-function aumentar(btn){
-
-  const input =
-    btn.parentElement.querySelector('.qtd');
-
-  input.value =
-    parseInt(input.value) + 1;
-}
-
-function diminuir(btn){
-
-  const input =
-    btn.parentElement.querySelector('.qtd');
-
-  input.value =
-    Math.max(
-      1,
-      parseInt(input.value) - 1
-    );
-}
-
-/* =========================
-   LOAD
-========================= */
-window.addEventListener("load", ()=>{
-
-  if(window.innerWidth >= 900){
-
-    document
-      .getElementById("carrinho")
-      ?.classList.add("active");
-
+  .carrinho-lateral.active{
+    pointer-events:auto;
   }
 
-  renderCarrinho();
+  .btn-carrinho{
+    display:flex !important;
+  }
 
-});
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media(min-width:900px){
+
+  .carrinho-lateral{
+    right:0 !important;
+  }
+
+  .overlay{
+    display:none !important;
+  }
+
+  body{
+    padding-right:340px;
+  }
+
+}
