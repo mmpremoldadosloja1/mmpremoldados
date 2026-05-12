@@ -1,329 +1,536 @@
-// =========================
-// CARRINHO GLOBAL
-// =========================
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cobogós | MM Pré-Moldados</title>
 
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/carrinho.css">
 
-/* =========================
-   SALVAR
-========================= */
-function salvarCarrinho(){
+<style>
 
-  localStorage.setItem(
-    'carrinho',
-    JSON.stringify(carrinho)
-  );
-
-  renderCarrinho();
+body{
+  background:#fff;
+  color:#000;
+  padding-top:90px;
+  font-family: 'Montserrat', sans-serif;
+  font-family:'Montserrat', sans-serif;
+  overflow-x:hidden;
 }
 
-/* =========================
-   ABRIR
-========================= */
-function abrirCarrinho(){
+/* HEADER */
+header{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 
-  const carrinhoEl =
-    document.getElementById("carrinho");
+  padding:15px 25px;
 
-  const overlayEl =
-    document.getElementById("overlay");
+  position:fixed;
+  top:0;
+  z-index:999;
 
-  if(carrinhoEl){
-    carrinhoEl.classList.add("active");
-  }
+  z-index:10;
 
-  if(overlayEl && window.innerWidth < 900){
-    overlayEl.classList.add("active");
-  }
-
-  renderCarrinho();
+  background:#fff;
 }
 
-/* =========================
-   FECHAR
-========================= */
-function fecharCarrinho(){
-
-  const carrinhoEl =
-    document.getElementById("carrinho");
-
-  const overlayEl =
-    document.getElementById("overlay");
-
-  if(carrinhoEl){
-    carrinhoEl.classList.remove("active");
-  }
-
-  if(overlayEl){
-    overlayEl.classList.remove("active");
-  }
+/* NAV */
+nav{
+  display:flex;
+  gap:25px;
+  align-items:center;
 }
 
-/* =========================
-   REMOVER
-========================= */
-function removerItem(i){
-
-  carrinho.splice(i,1);
-
-  salvarCarrinho();
+.nav-left, .nav-right{
+.nav-left,
+.nav-right{
+  display:flex;
+  gap:20px;
+  align-items:center;
 }
 
-/* =========================
-   ADICIONAR PRODUTO
-========================= */
-function adicionarCarrinho(botao){
-
-  const card = botao.closest('.card');
-
-  if(!card) return;
-
-  const titulo =
-    card.querySelector('h3');
-
-  const qtdInput =
-    card.querySelector('.qtd');
-
-  const select =
-    card.querySelector('select');
-
-  const imagem =
-    card.querySelector('img');
-
-  const nome =
-    titulo
-    ? titulo.innerText.trim()
-    : "Produto";
-
-  const qtd =
-    qtdInput
-    ? parseInt(qtdInput.value)
-    : 1;
-
-  let nomeFinal = nome;
-
-  // se tiver variação
-  if(select){
-
-    nomeFinal += `
-${select.value}`;
-    nomeFinal += `\n${select.value}`;
-
-  }
-
-  // procura existente
-  const existente =
-    carrinho.find(
-      item => item.nome === nomeFinal
-    );
-
-  if(existente){
-
-    existente.qtd += qtd;
-
-  }else{
-
-    carrinho.push({
-
-      nome: nomeFinal,
-      qtd: qtd
-
-      qtd: qtd,
-
-      imagem: imagem
-        ? imagem.src
-        : ""
-
-    });
-
-  }
-
-  salvarCarrinho();
-
-  abrirCarrinho();
+.nav-right{
+  margin-right:20px;
 }
 
-/* =========================
-   RENDER
-========================= */
-function renderCarrinho(){
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 
-  const lista =
-    document.getElementById("lista");
+  text-decoration:none;
 
-  if(!lista) return;
+  color:#000;
 
-  lista.innerHTML = "";
+  font-size:12px;
+  font-weight:600;
 
-  if(carrinho.length === 0){
+  transition:0.3s;
 
-    lista.innerHTML = `
+  position:relative;
+  z-index:20;
+}
 
-      <div class="carrinho-vazio">
+.nav-item svg{
+  width:24px;
+  height:24px;
+  margin-bottom:3px;
+  stroke:currentColor;
+}
 
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" width="50" height="50">
+.nav-item:hover{
+  color:#e63946;
+  transform:scale(1.05);
+}
 
-          <circle cx="9" cy="20" r="1"></circle>
+/* TITULOS */
+h1{
+  text-align:center;
+  text-transform:uppercase;
 
-          <circle cx="18" cy="20" r="1"></circle>
+  font-size:36px;
 
-          <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+  margin-bottom:20px;
 
-        </svg>
+  color:#e63946;
 
-        <p>Seu carrinho está vazio</p>
+  position:relative;
+  z-index:1;
+}
 
-        <span>Adicione produtos para continuar</span>
+h2{
+  text-align:left;
 
-      </div>
+  margin-top:30px;
+  margin-bottom:15px;
 
-    `;
+  font-size:22px;
 
-    return;
+  padding-left:20px;
+
+  position:relative;
+  z-index:1;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+
+  grid-template-columns:
+  repeat(auto-fill, minmax(150px,1fr));
+
+  gap:20px;
+
+  padding:0 20px 40px 20px;
+
+  position:relative;
+  z-index:1;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+
+  border-radius:12px;
+
+  padding:15px;
+
+  text-align:center;
+
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  position:relative;
+  z-index:2;
+}
+
+.card img{
+  width:100%;
+  height:110px;
+  object-fit:contain;
+
+  position:relative;
+  z-index:1;
+}
+
+.card h3{
+  margin:10px 0;
+
+  font-size:14px;
+
+  min-height:40px;
+
+  position:relative;
+  z-index:1;
+}
+
+/* CONTADOR */
+.contador{
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  gap:5px;
+
+  margin-bottom:8px;
+
+  position:relative;
+  z-index:5;
+}
+
+.contador button{
+  padding:5px 10px;
+
+  font-size:16px;
+
+  cursor:pointer;
+
+  border:none;
+  border-radius:5px;
+
+  background:#eee;
+
+  pointer-events:auto !important;
+
+  touch-action:manipulation;
+
+  -webkit-tap-highlight-color:transparent;
+
+  position:relative;
+  z-index:5;
+}
+
+.contador input{
+  width:50px;
+
+  text-align:center;
+
+  border:1px solid #ccc;
+  border-radius:5px;
+
+  padding:5px;
+
+  pointer-events:auto !important;
+
+  position:relative;
+  z-index:5;
+}
+
+/* BOTÃO */
+.btn{
+  width:100%;
+  padding:10px 0;
+
+  padding:12px 0;
+
+  background:#e63946;
+
+  color:#fff;
+
+  font-weight:bold;
+
+  border:none;
+  border-radius:8px;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+  pointer-events:auto !important;
+
+  touch-action:manipulation;
+
+  -webkit-tap-highlight-color:transparent;
+
+  position:relative;
+
+  z-index:1;
+  z-index:10;
+}
+
+.btn:hover{
+  background:#c92f3b;
+  transform:scale(1.05);
+}
+  
+
+/* botão mobile */
+.btn-carrinho{
+  display:flex;
+
+  position:relative;
+  z-index:20;
+
+  touch-action:manipulation;
+
+  -webkit-tap-highlight-color:transparent;
+}
+  
+
+/* MOBILE */
+@media(max-width:899px){
+
+  body{
+    overflow-x:hidden;
   }
 
-  carrinho.forEach((item, i)=>{
+  .grid{
+    z-index:2;
+  }
 
-    // separa linhas
-    const linhas =
-      String(item.nome).split("\n");
+  .card{
+    z-index:2;
+  }
 
-    const titulo =
-      linhas[0] || "";
-
-    const subtitulo =
-      linhas[1] || "";
-
-    const detalhe1 =
-      linhas[2] || "";
-
-    const detalhe2 =
-      linhas[3] || "";
-      linhas[0];
-
-    const destaque =
-      linhas[4] || "";
-    const detalhes =
-      linhas.slice(1);
-
-    lista.innerHTML += `
-
-      <div class="item">
-
-        <div class="linha-vermelha"></div>
-        <img
-          class="img-item"
-          src="${item.imagem || ''}"
-        >
-
-        <div class="info-item">
-
-          <div class="titulo-item">
-            ${titulo}
-          </div>
-
-          ${
-            subtitulo
-            ?
-            `<div class="subtitulo-item">
-              ${subtitulo}
-            </div>`
-            : ""
-          }
-
-          ${
-            detalhe1
-            ?
-            `<div class="detalhe-produto">
-              ${detalhe1}
-            </div>`
-            : ""
-          }
-            detalhes.map(det => `
-
-          ${
-            detalhe2
-            ?
-            `<div class="detalhe-produto">
-              ${detalhe2}
-            </div>`
-            : ""
-          }
-              <div class="detalhe-produto">
-                ${det}
-              </div>
-
-          ${
-            destaque
-            ?
-            `<div class="destaque-item">
-              ${destaque}
-            </div>`
-            : ""
-            `).join("")
-          }
-
-          <div class="qtd-item">
-
-            Quantidade:
-            <strong>${item.qtd}</strong>
-
-          </div>
-
-        </div>
-
-        <button
-          class="remover"
-          onclick="removerItem(${i})"
-        >
-
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="18" height="18">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="20" height="20">
-
-            <path d="M3 6h18"></path>
-
-            <path d="M8 6V4h8v2"></path>
-
-            <path d="M6 6l1 14h10l1-14"></path>
-
-            <path d="M10 11v6"></path>
-
-            <path d="M14 11v6"></path>
-
-          </svg>
-
-        </button>
-
-      </div>
-
-    `;
-
-  });
+  .btn{
+    min-height:48px;
+    min-height:45px;
+  }
 
 }
 
-/* =========================
-   WHATSAPP
-========================= */
-function enviarWhatsApp(){
+/* DESKTOP */
+@media(min-width:900px){
 
-  let msg = "Pedido:%0A%0A";
+  .btn-carrinho{
+    display:none !important;
+  }
 
-  carrinho.forEach(item=>{
+  body{
+    padding-right:320px;
+  }
 
-    msg += `${item.nome}%0A`;
-    msg += `Quantidade: ${item.qtd}%0A%0A`;
+  header{
+    width:calc(100% - 320px);
+  }
 
-  });
-
-  window.open(
-    `https://wa.me/5561999385680?text=${msg}`
-  );
 }
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <nav class="nav-left">
+
+    <a href="index.html" class="nav-item">
+
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+
+      Início
+
+    </a>
+
+  </nav>
+
+  <nav class="nav-right">
+
+    <a href="#"
+       class="nav-item btn-carrinho"
+       onclick="abrirCarrinho(); return false;">
+
+    <a href="#" class="nav-item btn-carrinho" onclick="abrirCarrinho(); return false;">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+
+      Carrinho
+
+    </a>
+
+  </nav>
+</header>
+
+<!-- CARRINHO -->
+<div class="carrinho-lateral" id="carrinho">
+  <h3>Seu Carrinho</h3>
+  <div class="lista-carrinho" id="lista"></div>
+  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
+</div>
+
+<div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
+
+<h1>COBOGÓS</h1>
+
+<h2>Cobogós 40x40</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-16-furos-40.jpg">
+<h3>16 Furos 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-4-pontas-40.jpg">
+<h3>4 Pontas 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-anti-chuva-40.jpg">
+<h3>Anti-Chuva 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-arabe-40.jpg">
+<h3>Árabe 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-flor-40.jpg">
+<h3>Flor 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-taco-chines-40.jpg">
+<h3>Taco Chinês 40x40</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+</div>
+
+<h2>Cobogós 30x30</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-estrela-30.jpg">
+<h3>Estrela 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-estrela-dos-ventos-30.jpg">
+<h3>Estrela dos Ventos 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-fenestra-30.jpg">
+<h3>Fenestra 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-petala-30.jpg">
+<h3>Pétala 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-quadrado-cruz-30.jpg">
+<h3>Quadrado Cruz 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-xis-30.jpg">
+<h3>Xis 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+</div>
+
+<h2>Cobogós 24x24</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-4-furos-24.jpg">
+<h3>4 Furos 24x24</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+</div>
+
+<script>
 
 /* =========================
    CONTADOR
 ========================= */
+
 function aumentar(btn){
 
   const input =
@@ -346,19 +553,112 @@ function diminuir(btn){
 }
 
 /* =========================
-   LOAD
+   ADD AO CARRINHO
 ========================= */
-window.addEventListener("load", ()=>{
 
-  // desktop fixo
-  if(window.innerWidth >= 900){
+function adicionarCarrinho(botao){
 
-    document
-      .getElementById("carrinho")
-      ?.classList.add("active");
+  const card =
+    botao.closest('.card');
 
+  const nome =
+    card.querySelector('h3').innerText;
+
+  const qtd =
+    parseInt(
+      card.querySelector('.qtd').value
+    );
+
+  const imagem =
+    card.querySelector('img').src;
+
+  let carrinhoAtual =
+    JSON.parse(
+      localStorage.getItem("carrinho")
+    ) || [];
+
+  const existente =
+    carrinhoAtual.find(
+      item => item.nome === nome
+    );
+
+  if(existente){
+
+    existente.qtd += qtd;
+
+  }else{
+
+    carrinhoAtual.push({
+      nome:nome,
+      qtd:qtd,
+      imagem:imagem
+    });
   }
 
-  renderCarrinho();
+  localStorage.setItem(
+    "carrinho",
+    JSON.stringify(carrinhoAtual)
+  );
 
-});
+  /* ATUALIZA */
+
+  if(typeof renderizarCarrinho === "function"){
+    renderizarCarrinho();
+  }
+
+  /* MOBILE */
+
+  if(window.innerWidth <= 899){
+
+    const carrinho =
+      document.querySelector(".carrinho-lateral");
+
+    const overlay =
+      document.querySelector(".overlay");
+
+    if(carrinho){
+      carrinho.classList.add("active");
+    }
+
+    if(overlay){
+      overlay.classList.add("active");
+    }
+  }
+}
+
+/* =========================
+   MOBILE FIX
+========================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    /* REMOVE TOUCH DUPLO */
+
+    const botoes =
+      document.querySelectorAll(".btn");
+
+    botoes.forEach(botao => {
+
+      botao.style.pointerEvents = "auto";
+
+      botao.addEventListener(
+        "touchstart",
+        function(e){
+
+          e.stopPropagation();
+        },
+        { passive:true }
+      );
+    });
+
+  }
+);
+
+</script>
+
+<script src="js/carrinho.js"></script>
+
+</body>
+</html>
