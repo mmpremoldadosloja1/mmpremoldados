@@ -70,12 +70,13 @@ function removerItem(i){
 }
 
 /* =========================
-   PEGAR IMAGEM
+   PEGAR IMAGEM DO CARD
 ========================= */
 function pegarImagem(card){
 
+  // procura qualquer imagem do produto
   const imagem =
-    card.querySelector("img");
+    card.querySelector('img');
 
   if(imagem && imagem.src){
 
@@ -87,7 +88,7 @@ function pegarImagem(card){
 }
 
 /* =========================
-   ADICIONAR PRODUTO PADRÃO
+   ADICIONAR PRODUTO
 ========================= */
 function adicionarCarrinho(botao){
 
@@ -95,16 +96,25 @@ function adicionarCarrinho(botao){
 
   if(!card) return;
 
+  // TÍTULO
   const titulo =
     card.querySelector('h3');
 
+  // QUANTIDADE
   const qtdInput =
     card.querySelector('.qtd');
 
-  const select =
-    card.querySelector('select');
+  // SELECTS
+  const selects =
+    card.querySelectorAll('select');
 
+  // INPUTS
+  const inputs =
+    card.querySelectorAll('input');
+
+  // IMAGEM
   const imagem =
+    card.querySelector('img');
     pegarImagem(card);
 
   const nome =
@@ -117,14 +127,47 @@ function adicionarCarrinho(botao){
     ? parseInt(qtdInput.value)
     : 1;
 
+  let detalhes = [];
+
+  // PEGAR TODOS OS SELECTS
+  selects.forEach(select=>{
+
+    if(
+      select.value &&
+      select.value !== "Selecione" &&
+      select.value !== "Tamanho"
+    ){
+
+      detalhes.push(select.value);
+
+    }
+
+  });
+
+  // PEGAR INPUTS
+  inputs.forEach(input=>{
+
+    if(
+      input.value &&
+      !input.classList.contains("qtd")
+    ){
+
+      detalhes.push(input.value);
+
+    }
+
+  });
+
+  // NOME FINAL
   let nomeFinal = nome;
 
-  if(select){
+  if(detalhes.length > 0){
 
-    nomeFinal += `\n${select.value}`;
+    nomeFinal += "\n" + detalhes.join("\n");
 
   }
 
+  // VERIFICA EXISTENTE
   const existente =
     carrinho.find(
       item => item.nome === nomeFinal
@@ -143,6 +186,8 @@ function adicionarCarrinho(botao){
       qtd: qtd,
 
       imagem: imagem
+        ? imagem.src
+        : ""
 
     });
 
