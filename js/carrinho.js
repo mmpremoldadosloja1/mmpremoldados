@@ -102,14 +102,16 @@ function adicionarCarrinho(botao){
 
   let nomeFinal = nome;
 
-  // VARIAÇÃO
+  // se tiver variação
   if(select){
 
+    nomeFinal += `
+${select.value}`;
     nomeFinal += `\n${select.value}`;
 
   }
 
-  // VERIFICA EXISTENTE
+  // procura existente
   const existente =
     carrinho.find(
       item => item.nome === nomeFinal
@@ -124,11 +126,11 @@ function adicionarCarrinho(botao){
     carrinho.push({
 
       nome: nomeFinal,
+      qtd: qtd
 
       qtd: qtd,
 
-      imagem:
-        imagem
+      imagem: imagem
         ? imagem.src
         : ""
 
@@ -153,7 +155,6 @@ function renderCarrinho(){
 
   lista.innerHTML = "";
 
-  // CARRINHO VAZIO
   if(carrinho.length === 0){
 
     lista.innerHTML = `
@@ -183,15 +184,25 @@ function renderCarrinho(){
 
   carrinho.forEach((item, i)=>{
 
-    // QUEBRA LINHAS
+    // separa linhas
     const linhas =
       String(item.nome).split("\n");
 
-    // TITULO
     const titulo =
+      linhas[0] || "";
+
+    const subtitulo =
+      linhas[1] || "";
+
+    const detalhe1 =
+      linhas[2] || "";
+
+    const detalhe2 =
+      linhas[3] || "";
       linhas[0];
 
-    // DETALHES
+    const destaque =
+      linhas[4] || "";
     const detalhes =
       linhas.slice(1);
 
@@ -199,10 +210,10 @@ function renderCarrinho(){
 
       <div class="item">
 
+        <div class="linha-vermelha"></div>
         <img
           class="img-item"
           src="${item.imagem || ''}"
-          alt="${titulo}"
         >
 
         <div class="info-item">
@@ -211,13 +222,46 @@ function renderCarrinho(){
             ${titulo}
           </div>
 
-          ${detalhes.map(det => `
+          ${
+            subtitulo
+            ?
+            `<div class="subtitulo-item">
+              ${subtitulo}
+            </div>`
+            : ""
+          }
 
-            <div class="detalhe-produto">
-              ${det}
-            </div>
+          ${
+            detalhe1
+            ?
+            `<div class="detalhe-produto">
+              ${detalhe1}
+            </div>`
+            : ""
+          }
+            detalhes.map(det => `
 
-          `).join("")}
+          ${
+            detalhe2
+            ?
+            `<div class="detalhe-produto">
+              ${detalhe2}
+            </div>`
+            : ""
+          }
+              <div class="detalhe-produto">
+                ${det}
+              </div>
+
+          ${
+            destaque
+            ?
+            `<div class="destaque-item">
+              ${destaque}
+            </div>`
+            : ""
+            `).join("")
+          }
 
           <div class="qtd-item">
 
@@ -233,6 +277,7 @@ function renderCarrinho(){
           onclick="removerItem(${i})"
         >
 
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="18" height="18">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="20" height="20">
 
             <path d="M3 6h18"></path>
@@ -266,15 +311,7 @@ function enviarWhatsApp(){
 
   carrinho.forEach(item=>{
 
-    const linhas =
-      String(item.nome).split("\n");
-
-    linhas.forEach(linha=>{
-
-      msg += `${linha}%0A`;
-
-    });
-
+    msg += `${item.nome}%0A`;
     msg += `Quantidade: ${item.qtd}%0A%0A`;
 
   });
@@ -313,6 +350,7 @@ function diminuir(btn){
 ========================= */
 window.addEventListener("load", ()=>{
 
+  // desktop fixo
   if(window.innerWidth >= 900){
 
     document
