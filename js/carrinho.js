@@ -114,7 +114,6 @@ function adicionarCarrinho(botao){
 
   // IMAGEM
   const imagem =
-    card.querySelector('img');
     pegarImagem(card);
 
   const nome =
@@ -186,8 +185,6 @@ function adicionarCarrinho(botao){
       qtd: qtd,
 
       imagem: imagem
-        ? imagem.src
-        : ""
 
     });
 
