@@ -141,40 +141,6 @@
 }
 
 /* =========================
-   IMAGEM PRODUTO
-========================= */
-
-.img-item{
-  width:55px !important;
-  height:55px !important;
-
-  min-width:55px !important;
-  min-height:55px !important;
-
-  max-width:55px !important;
-  max-height:55px !important;
-
-  object-fit:contain;
-
-  border-radius:10px;
-
-  background:#f7f7f7;
-
-  padding:4px;
-
-  flex-shrink:0;
-
-  display:block;
-
-  overflow:hidden;
-}
-
-.item img{
-  width:55px !important;
-  height:55px !important;
-}
-
-/* =========================
    INFORMAÇÕES
 ========================= */
 
@@ -218,8 +184,6 @@
   margin-bottom:2px;
 
   font-weight:500;
-
-  word-break:break-word;
 }
 
 .detalhe-produto:last-of-type{
@@ -251,17 +215,12 @@
 ========================= */
 
 .remover{
-  position:absolute;
-
-  top:10px;
-  right:10px;
-
-  width:32px;
-  height:32px;
+  width:42px;
+  height:42px;
 
   border:none;
 
-  border-radius:10px;
+  border-radius:14px;
 
   background:#fff;
 
@@ -271,13 +230,11 @@
 
   cursor:pointer;
 
-  z-index:10;
-
-  box-shadow:0 2px 8px rgba(0,0,0,0.12);
-
   flex-shrink:0;
 
   transition:0.2s;
+
+  box-shadow:0 3px 10px rgba(0,0,0,0.06);
 
   touch-action:manipulation;
 
@@ -289,11 +246,7 @@
 }
 
 .remover svg{
-  width:18px;
-  height:18px;
-
   stroke:#e63946;
-
   transition:0.2s;
 }
 
