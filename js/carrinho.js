@@ -102,12 +102,14 @@ function adicionarCarrinho(botao){
 
   let nomeFinal = nome;
 
+  // VARIAÇÃO
   if(select){
 
     nomeFinal += `\n${select.value}`;
 
   }
 
+  // VERIFICA EXISTENTE
   const existente =
     carrinho.find(
       item => item.nome === nomeFinal
@@ -125,7 +127,8 @@ function adicionarCarrinho(botao){
 
       qtd: qtd,
 
-      imagem: imagem
+      imagem:
+        imagem
         ? imagem.src
         : ""
 
@@ -150,6 +153,7 @@ function renderCarrinho(){
 
   lista.innerHTML = "";
 
+  // CARRINHO VAZIO
   if(carrinho.length === 0){
 
     lista.innerHTML = `
@@ -179,12 +183,15 @@ function renderCarrinho(){
 
   carrinho.forEach((item, i)=>{
 
+    // QUEBRA LINHAS
     const linhas =
       String(item.nome).split("\n");
 
+    // TITULO
     const titulo =
       linhas[0];
 
+    // DETALHES
     const detalhes =
       linhas.slice(1);
 
@@ -195,6 +202,7 @@ function renderCarrinho(){
         <img
           class="img-item"
           src="${item.imagem || ''}"
+          alt="${titulo}"
         >
 
         <div class="info-item">
@@ -203,15 +211,13 @@ function renderCarrinho(){
             ${titulo}
           </div>
 
-          ${
-            detalhes.map(det => `
+          ${detalhes.map(det => `
 
-              <div class="detalhe-produto">
-                ${det}
-              </div>
+            <div class="detalhe-produto">
+              ${det}
+            </div>
 
-            `).join("")
-          }
+          `).join("")}
 
           <div class="qtd-item">
 
@@ -260,7 +266,15 @@ function enviarWhatsApp(){
 
   carrinho.forEach(item=>{
 
-    msg += `${item.nome}%0A`;
+    const linhas =
+      String(item.nome).split("\n");
+
+    linhas.forEach(linha=>{
+
+      msg += `${linha}%0A`;
+
+    });
+
     msg += `Quantidade: ${item.qtd}%0A%0A`;
 
   });
