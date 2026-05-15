@@ -2,10 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOCOS | MM Pré-Moldados</title>
 <title>COBOGÓS | MM Pré-Moldados</title>
 
 <link rel="stylesheet" href="css/style.css">
@@ -179,6 +177,7 @@ h2{
 </style>
 </head>
 
+  
 <body>
 
 <header>
@@ -198,24 +197,23 @@ h2{
   </nav>
 
   <nav class="nav-right">
+    <a href="#" class="nav-item btn-carrinho" onclick="abrirCarrinho(); return false;">
 
-  <a href="#"
-     class="nav-item btn-carrinho"
-     onclick="abrirCarrinho(); return false;">
-   class="nav-item btn-carrinho"
-   onclick="abrirCarrinho(); return false;">
+    <a href="#"
+       class="nav-item btn-carrinho"
+       onclick="abrirCarrinho(); return false;">
 
-    <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-      <circle cx="9" cy="20" r="1"></circle>
-      <circle cx="18" cy="20" r="1"></circle>
-      <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-    </svg>
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
 
-    Carrinho
+      Carrinho
 
-  </a>
+    </a>
 
-</nav>
+  </nav>
 </header>
 
 <!-- CARRINHO -->
@@ -386,7 +384,7 @@ h2{
 </div>
 
 </div>
-
+  
 <script>
 
 // CONTADOR
@@ -400,14 +398,25 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
+// ADICIONAR PRODUTO (PADRÃO NOVO)
+function adicionarCarrinho(botao){
+  const card = botao.closest('.card');
+  const nome = card.querySelector('h3').innerText;
+  const qtd = parseInt(card.querySelector('.qtd').value);
+
+  const existente = carrinho.find(item => item.nome === nome);
+
+  if(existente){
+    existente.qtd += qtd;
+  }else{
+    carrinho.push({nome, qtd});
+  }
 
   salvarCarrinho(); // 🔥 usa o carrinho.js
 }
 
 </script>
 
-<script src="js/carrinho.js"></script>
-
 </body>
-<body ontouchstart="">
 </html>
+<script src="js/carrinho.js"></script>
