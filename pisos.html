@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,10 +15,11 @@ body{
   background:#fff;
   color:#000;
   padding-top:90px;
-  font-family: 'Montserrat', sans-serif;
+  font-family:'Montserrat', sans-serif;
 }
 
 /* HEADER */
+
 header{
   width:100%;
   display:flex;
@@ -31,13 +33,15 @@ header{
 }
 
 /* NAV */
+
 nav{
   display:flex;
   gap:25px;
   align-items:center;
 }
 
-.nav-left, .nav-right{
+.nav-left,
+.nav-right{
   display:flex;
   gap:20px;
   align-items:center;
@@ -71,6 +75,7 @@ nav{
 }
 
 /* TITULOS */
+
 h1{
   text-align:center;
   text-transform:uppercase;
@@ -87,12 +92,16 @@ h2{
   padding-left:20px;
 }
 
+/* GRID */
+
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
   gap:20px;
   padding:0 20px 40px 20px;
 }
+
+/* CARD */
 
 .card{
   background:#fff;
@@ -116,6 +125,18 @@ h2{
   font-size:14px;
   min-height:40px;
 }
+
+/* SELECT */
+
+.card select{
+  width:100%;
+  padding:8px;
+  margin-bottom:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+
+/* CONTADOR */
 
 .contador{
   display:flex;
@@ -142,6 +163,8 @@ h2{
   padding:5px;
 }
 
+/* BOTÃO */
+
 .btn{
   width:100%;
   padding:10px 0;
@@ -159,12 +182,12 @@ h2{
   transform:scale(1.05);
 }
 
-/* botão mobile */
+/* MOBILE */
+
 .btn-carrinho{
   display:flex;
 }
 
-/* DESKTOP */
 @media(min-width:900px){
 
   .btn-carrinho{
@@ -178,34 +201,55 @@ h2{
 
 <body>
 
-<header id="header">
-<nav>
-<a href="index.html" class="nav-item">
-<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-<path d="M3 10L12 3l9 7"></path>
-<path d="M5 10v10h14V10"></path>
-</svg>
-Início
-</a>
-</nav>
+<header>
 
-<nav class="nav-right">
-<a href="#" class="nav-item" onclick="abrirCarrinho(); return false;">
-<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-<circle cx="9" cy="20" r="1"></circle>
-<circle cx="18" cy="20" r="1"></circle>
-<path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-</svg>
-Carrinho
-</a>
-</nav>
+  <nav class="nav-left">
+
+    <a href="index.html" class="nav-item">
+
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M3 10L12 3l9 7"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+
+      Início
+
+    </a>
+
+  </nav>
+
+  <nav class="nav-right">
+
+    <a href="#"
+       class="nav-item btn-carrinho"
+       onclick="abrirCarrinho(); return false;">
+
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="9" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+        <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+      </svg>
+
+      Carrinho
+
+    </a>
+
+  </nav>
+
 </header>
 
 <!-- CARRINHO -->
+
 <div class="carrinho-lateral" id="carrinho">
+
   <h3>Seu Carrinho</h3>
+
   <div class="lista-carrinho" id="lista"></div>
-  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
+
+  <button class="btn-finalizar" onclick="enviarWhatsApp()">
+    Finalizar
+  </button>
+
 </div>
 
 <div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
@@ -216,151 +260,177 @@ Carrinho
 
 <script>
 
-const grid = document.getElementById("gridProdutos");
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+/* TITULOS */
 
 function titulo(texto){
+
   grid.innerHTML += `
+
     <div style="grid-column:1/-1">
+
       <h2>${texto}</h2>
+
     </div>
+
   `;
 }
 
+/* CONTADOR */
+
 function aumentar(btn){
-  const input = btn.parentElement.querySelector('.qtd');
-  input.value = parseInt(input.value) + 1;
+
+  const input =
+    btn.parentElement.querySelector('.qtd');
+
+  input.value =
+    parseInt(input.value) + 1;
 }
 
 function diminuir(btn){
-  const input = btn.parentElement.querySelector('.qtd');
-  input.value = Math.max(1, parseInt(input.value) - 1);
+
+  const input =
+    btn.parentElement.querySelector('.qtd');
+
+  input.value =
+    Math.max(
+      1,
+      parseInt(input.value) - 1
+    );
 }
 
-function adicionarCarrinho(botao){
-  const card = botao.closest('.card');
-  const nome = card.querySelector('h3').innerText;
-  const select = card.querySelector('select');
-  const variacao = select ? select.value : "";
-  const qtd = parseInt(card.querySelector('.qtd').value);
+/* GRID */
 
-  const nomeFinal = variacao ? nome + " - " + variacao : nome;
-
-  const existente = carrinho.find(item => item.nome === nomeFinal);
-
-  if(existente){
-    existente.qtd += qtd;
-  } else {
-    carrinho.push({ nome: nomeFinal, qtd });
-  }
-
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert("Produto adicionado!");
-}
-
-/* 🔥 CONTROLE DO CARRINHO */
-function abrirCarrinho(){
-  document.getElementById("carrinho").classList.add("active");
-  document.getElementById("overlay").classList.add("active");
-
-  document.getElementById("header").classList.add("sumir");
-  document.body.classList.add("sem-header");
-
-  renderizar();
-}
-
-function fecharCarrinho(){
-  document.getElementById("carrinho").classList.remove("active");
-  document.getElementById("overlay").classList.remove("active");
-
-  document.getElementById("header").classList.remove("sumir");
-  document.body.classList.remove("sem-header");
-}
-
-function renderizar(){
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
-
-  if(carrinho.length === 0){
-    lista.innerHTML = "Carrinho vazio";
-    return;
-  }
-
-  carrinho.forEach((item, i)=>{
-    lista.innerHTML += `
-      <div class="item">
-        ${item.nome} (x${item.qtd})
-        <button class="remover" onclick="remover(${i})">X</button>
-      </div>
-    `;
-  });
-}
-
-function remover(i){
-  carrinho.splice(i,1);
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
-  renderizar();
-}
-
-function enviarWhatsApp(){
-  let msg = "Pedido:%0A";
-  carrinho.forEach(item=>{
-    msg += `${item.nome} - ${item.qtd}%0A`;
-  });
-
-  window.open(`https://wa.me/5561999385680?text=${msg}`);
-}
+const grid =
+  document.getElementById("gridProdutos");
 
 /* PRODUTOS */
+
 titulo("Pisos");
 
-criarProduto("Piso Quadrado Liso","img/pisos/piso-quadrado.jpg",["40x40cm","50x50cm","60x60cm"]);
-criarProduto("Piso Copacabana 50x50cm","img/pisos/copacabana.jpg");
-criarProduto("Piso Trabalhado em Flor 45x45cm","img/pisos/flor.jpg");
-criarProduto("Piso em X 45x45cm","img/pisos/piso.jpg");
+criarProduto(
+  "Piso Quadrado Liso",
+  "img/pisos/piso-quadrado.jpg",
+  ["40x40cm","50x50cm","60x60cm"]
+);
+
+criarProduto(
+  "Piso Copacabana 50x50cm",
+  "img/pisos/copacabana.jpg"
+);
+
+criarProduto(
+  "Piso Trabalhado em Flor 45x45cm",
+  "img/pisos/flor.jpg"
+);
+
+criarProduto(
+  "Piso em X 45x45cm",
+  "img/pisos/piso.jpg"
+);
 
 titulo("Pisadeiras");
 
-criarProduto("Pezão de Jardim 50cm","img/pisos/pezao.jpg");
-criarProduto("Círculo Estelar 50cm","img/pisos/circulo-estelar.jpg");
-criarProduto("Pisadeira Xis 50cm","img/pisos/pisadeira-x.jpg");
+criarProduto(
+  "Pezão de Jardim 50cm",
+  "img/pisos/pezao.jpg"
+);
+
+criarProduto(
+  "Círculo Estelar 50cm",
+  "img/pisos/circulo-estelar.jpg"
+);
+
+criarProduto(
+  "Pisadeira Xis 50cm",
+  "img/pisos/pisadeira-x.jpg"
+);
 
 titulo("Conjuntos");
 
-criarProduto("Conjunto Trevo Oriente 60x60cm","img/pisos/trevo-oriente.jpg");
-criarProduto("Conjunto Passarela Estrelado 70x70cm","img/pisos/passarela.jpg");
-criarProduto("Conjunto Circulo Quadrado 140x140cm","img/pisos/conjunto-circulo-quadrado.jpg");
+criarProduto(
+  "Conjunto Trevo Oriente 60x60cm",
+  "img/pisos/trevo-oriente.jpg"
+);
 
-function criarProduto(nome, img, opcoes=null){
+criarProduto(
+  "Conjunto Passarela Estrelado 70x70cm",
+  "img/pisos/passarela.jpg"
+);
+
+criarProduto(
+  "Conjunto Circulo Quadrado 140x140cm",
+  "img/pisos/conjunto-circulo-quadrado.jpg"
+);
+
+/* CRIAR PRODUTO */
+
+function criarProduto(
+  nome,
+  img,
+  opcoes = null
+){
+
   grid.innerHTML += `
+
   <div class="card">
 
-    <div class="imagem-container">
-      <img src="${img}">
-    </div>
+    <img src="${img}">
 
     <h3>${nome}</h3>
 
-    ${opcoes ? `
+    ${
+      opcoes
+      ?
+      `
       <select>
-        ${opcoes.map(o=>`<option>${o}</option>`).join('')}
+
+        ${opcoes.map(
+          o => `<option>${o}</option>`
+        ).join('')}
+
       </select>
-    ` : ''}
+      `
+      :
+      ''
+    }
 
     <div class="contador">
-      <button onclick="diminuir(this)">−</button>
-      <input type="number" class="qtd" value="1" min="1">
-      <button onclick="aumentar(this)">+</button>
+
+      <button onclick="diminuir(this)">
+        −
+      </button>
+
+      <input
+        type="number"
+        class="qtd"
+        value="1"
+        min="1"
+      >
+
+      <button onclick="aumentar(this)">
+        +
+      </button>
+
     </div>
 
-    <button class="btn" onclick="adicionarCarrinho(this)">
+    <button
+      class="btn"
+      onclick="adicionarCarrinho(this)"
+    >
+
       Adicionar
+
     </button>
 
-  </div>`;
+  </div>
+
+  `;
 }
 
 </script>
 
+<script src="js/carrinho.js"></script>
+
 </body>
 </html>
+```
