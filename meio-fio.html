@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,6 +7,7 @@
 <title>Meio-Fio | MM Pré-Moldados</title>
 
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/carrinho.css">
 
 <style>
 
@@ -15,11 +17,6 @@ body{
   color:#000;
   padding-top:90px;
   font-family:'Montserrat', sans-serif;
-}
-
-/* 🔥 PADRÃO COBOGÓS */
-body.sem-header{
-  padding-top:0 !important;
 }
 
 /* HEADER */
@@ -33,17 +30,19 @@ header{
   top:0;
   z-index:999;
   background:#fff;
-  transition:0.3s;
 }
 
-/* 🔥 SUMIR HEADER */
-header.sumir{
-  display:none;
-}
-
+/* NAV */
 nav{
   display:flex;
   gap:25px;
+  align-items:center;
+}
+
+.nav-left,
+.nav-right{
+  display:flex;
+  gap:20px;
   align-items:center;
 }
 
@@ -74,73 +73,6 @@ nav{
   transform:scale(1.05);
 }
 
-/* ===== CARRINHO PADRÃO ===== */
-.carrinho-lateral{
-  position:fixed;
-  top:0;
-  right:-350px;
-  width:320px;
-  height:100%;
-  background:#fff;
-  box-shadow:-5px 0 20px rgba(0,0,0,0.2);
-  padding:20px;
-  transition:0.3s;
-  z-index:1001;
-  display:flex;
-  flex-direction:column;
-}
-
-.carrinho-lateral.active{
-  right:0;
-}
-
-.lista-carrinho{
-  flex:1;
-  overflow-y:auto;
-}
-
-.item{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
-.remover{
-  background:#e63946;
-  color:#fff;
-  border:none;
-  padding:3px 8px;
-  border-radius:4px;
-  cursor:pointer;
-}
-
-.btn-finalizar{
-  padding:15px;
-  background:#25D366;
-  color:#fff;
-  border:none;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* OVERLAY */
-.overlay{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.4);
-  opacity:0;
-  pointer-events:none;
-  transition:0.3s;
-  z-index:1000;
-}
-
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
-
 /* TITULO */
 h1{
   text-align:center;
@@ -150,7 +82,7 @@ h1{
   color:#e63946;
 }
 
-/* GRID (MANTIDO) */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(2, 1fr);
@@ -159,19 +91,23 @@ h1{
 }
 
 @media (min-width:768px){
+
   .grid{
     grid-template-columns:repeat(3, 1fr);
   }
+
 }
 
 @media (min-width:1200px){
+
   .grid{
     max-width:1100px;
     margin:0 auto;
   }
+
 }
 
-/* CARD (NÃO ALTERADO) */
+/* CARD */
 .card{
   background:#fff;
   border-radius:12px;
@@ -179,6 +115,9 @@ h1{
   text-align:center;
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
   transition:0.3s;
+
+  position:relative;
+  z-index:2;
 }
 
 .card:hover{
@@ -193,7 +132,7 @@ h1{
   margin-bottom:10px;
 }
 
-/* TITULO */
+/* TITULO CARD */
 .card h3{
   margin:10px 0;
   font-size:14px;
@@ -216,6 +155,8 @@ h1{
   border:none;
   border-radius:5px;
   background:#eee;
+
+  touch-action:manipulation;
 }
 
 .contador input{
@@ -236,6 +177,31 @@ h1{
   border:none;
   border-radius:8px;
   cursor:pointer;
+  transition:0.3s;
+
+  position:relative;
+  z-index:9999;
+
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.btn:hover{
+  background:#c92f3b;
+  transform:scale(1.05);
+}
+
+/* MOBILE */
+.btn-carrinho{
+  display:flex;
+}
+
+@media(min-width:900px){
+
+  .btn-carrinho{
+    display:none !important;
+  }
+
 }
 
 </style>
@@ -243,166 +209,273 @@ h1{
 
 <body>
 
-<header id="header">
+<header>
+
   <nav class="nav-left">
+
     <a href="index.html" class="nav-item">
+
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+
         <path d="M3 10L12 3l9 7"></path>
         <path d="M5 10v10h14V10"></path>
+
       </svg>
+
       Início
+
     </a>
+
   </nav>
 
   <nav class="nav-right">
-    <a href="#" class="nav-item" onclick="abrirCarrinho(); return false;">
+
+    <a href="#"
+       class="nav-item btn-carrinho"
+       onclick="abrirCarrinho(); return false;">
+
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
         <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
+
       </svg>
+
       Carrinho
+
     </a>
+
   </nav>
+
 </header>
 
 <!-- CARRINHO -->
+
 <div class="carrinho-lateral" id="carrinho">
+
   <h3>Seu Carrinho</h3>
+
   <div class="lista-carrinho" id="lista"></div>
-  <button class="btn-finalizar" onclick="enviarWhatsApp()">Finalizar</button>
+
+  <button
+    class="btn-finalizar"
+    onclick="enviarWhatsApp()"
+  >
+
+    Finalizar
+
+  </button>
+
 </div>
 
-<div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
+<div
+  class="overlay"
+  id="overlay"
+  onclick="fecharCarrinho()"
+></div>
 
 <h1>MEIO-FIO DE JARDIM</h1>
 
 <div class="grid">
 
+  <!-- PRODUTO -->
+
   <div class="card">
+
     <img src="img/meiofio/arredondado.jpg">
+
     <h3>Meio-Fio Arredondado 80x25x8cm</h3>
 
     <div class="contador">
+
       <button onclick="diminuir(this)">−</button>
-      <input type="number" class="qtd" value="1" min="1">
+
+      <input
+        type="number"
+        class="qtd"
+        value="1"
+        min="1"
+      >
+
       <button onclick="aumentar(this)">+</button>
+
     </div>
 
-    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+    <button
+      class="btn"
+      onclick="adicionarCarrinho(this)"
+    >
+
+      Adicionar
+
+    </button>
+
   </div>
 
+  <!-- PRODUTO -->
+
   <div class="card">
+
     <img src="img/meiofio/cordao.jpg">
+
     <h3>Meio-Fio Cordão 80x25x4cm</h3>
 
     <div class="contador">
+
       <button onclick="diminuir(this)">−</button>
-      <input type="number" class="qtd" value="1" min="1">
+
+      <input
+        type="number"
+        class="qtd"
+        value="1"
+        min="1"
+      >
+
       <button onclick="aumentar(this)">+</button>
+
     </div>
 
-    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+    <button
+      class="btn"
+      onclick="adicionarCarrinho(this)"
+    >
+
+      Adicionar
+
+    </button>
+
   </div>
 
+  <!-- PRODUTO -->
+
   <div class="card">
+
     <img src="img/meiofio/ondulado.jpg">
+
     <h3>Guia de Jardim Ondulado 80x20x4cm</h3>
 
     <div class="contador">
+
       <button onclick="diminuir(this)">−</button>
-      <input type="number" class="qtd" value="1" min="1">
+
+      <input
+        type="number"
+        class="qtd"
+        value="1"
+        min="1"
+      >
+
       <button onclick="aumentar(this)">+</button>
+
     </div>
 
-    <button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+    <button
+      class="btn"
+      onclick="adicionarCarrinho(this)"
+    >
+
+      Adicionar
+
+    </button>
+
   </div>
 
 </div>
 
 <script>
 
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+/* =========================
+   CONTADOR
+========================= */
 
 function aumentar(btn){
-  const input = btn.parentElement.querySelector('.qtd');
-  input.value = parseInt(input.value) + 1;
+
+  const input =
+    btn.parentElement.querySelector('.qtd');
+
+  input.value =
+    parseInt(input.value) + 1;
 }
 
 function diminuir(btn){
-  const input = btn.parentElement.querySelector('.qtd');
-  input.value = Math.max(1, parseInt(input.value) - 1);
+
+  const input =
+    btn.parentElement.querySelector('.qtd');
+
+  input.value =
+    Math.max(
+      1,
+      parseInt(input.value) - 1
+    );
 }
 
-/* CARRINHO */
-function adicionarCarrinho(botao){
-  const card = botao.closest('.card');
-  const nome = card.querySelector('h3').innerText;
-  const qtd = parseInt(card.querySelector('.qtd').value);
+/* =========================
+   FIX CHROME MOBILE
+========================= */
 
-  const existente = carrinho.find(item => item.nome === nome);
+document.addEventListener(
+  "DOMContentLoaded",
+  ()=>{
 
-  if(existente){
-    existente.qtd += qtd;
-  } else {
-    carrinho.push({ nome, qtd });
+    const botoes =
+      document.querySelectorAll(".btn");
+
+    botoes.forEach(botao=>{
+
+      function clicar(e){
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        adicionarCarrinho(botao);
+      }
+
+      /* CLICK */
+
+      botao.addEventListener(
+        "click",
+        clicar
+      );
+
+      /* TOUCH */
+
+      botao.addEventListener(
+        "touchstart",
+        clicar,
+        { passive:false }
+      );
+
+    });
+
+    /* BOTÃO CARRINHO */
+
+    const btnCarrinho =
+      document.querySelector(".btn-carrinho");
+
+    if(btnCarrinho){
+
+      btnCarrinho.addEventListener(
+        "touchstart",
+        function(e){
+
+          e.preventDefault();
+
+          abrirCarrinho();
+
+        },
+        { passive:false }
+      );
+
+    }
+
   }
-
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-  alert('Produto adicionado');
-}
-
-/* PADRÃO COBOGÓS */
-function abrirCarrinho(){
-  document.getElementById("carrinho").classList.add("active");
-  document.getElementById("overlay").classList.add("active");
-  document.getElementById("header").classList.add("sumir");
-  document.body.classList.add("sem-header");
-  renderizar();
-}
-
-function fecharCarrinho(){
-  document.getElementById("carrinho").classList.remove("active");
-  document.getElementById("overlay").classList.remove("active");
-  document.getElementById("header").classList.remove("sumir");
-  document.body.classList.remove("sem-header");
-}
-
-function renderizar(){
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
-
-  if(carrinho.length === 0){
-    lista.innerHTML = "Carrinho vazio";
-    return;
-  }
-
-  carrinho.forEach((item, i)=>{
-    lista.innerHTML += `
-      <div class="item">
-        ${item.nome} (x${item.qtd})
-        <button class="remover" onclick="remover(${i})">X</button>
-      </div>
-    `;
-  });
-}
-
-function remover(i){
-  carrinho.splice(i,1);
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
-  renderizar();
-}
-
-function enviarWhatsApp(){
-  let msg = "Pedido:%0A";
-  carrinho.forEach(item=>{
-    msg += `${item.nome} - ${item.qtd}%0A`;
-  });
-
-  window.open(`https://wa.me/5561999385680?text=${msg}`);
-}
+);
 
 </script>
 
+<script src="js/carrinho.js"></script>
+
 </body>
 </html>
+```
