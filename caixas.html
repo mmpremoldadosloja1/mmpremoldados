@@ -200,7 +200,7 @@ select{
   
 <body>
 
-<header>
+<header id="header">
   <nav class="nav-left">
 
     <a href="index.html" class="nav-item">
@@ -462,17 +462,13 @@ function enviarWhatsApp(){
 }
 
 /* PRODUTOS */
-function criarProduto(nome){
+function criarProduto(nome, imagem){
 
   grid.innerHTML += `
 
     <div class="card">
 
-      <div class="imagem-placeholder">
-
-        Imagem
-
-      </div>
+      <img src="${imagem}" alt="${nome}">
 
       <h3>${nome}</h3>
 
@@ -506,9 +502,15 @@ function criarProduto(nome){
 
 }
 
-criarProduto("Caixa de Passagem 40x40x40");
+criarProduto(
+  "Caixa de Passagem 40x40x40",
+  "img/caixa-passagem-40x40x40.png"
+);
 
-criarProduto("Caixa de Energia 30x30x20");
+criarProduto(
+  "Caixa de Energia 30x30x20",
+  "img/caixa-energia-30x30x20.png"
+);
 
 /* DESKTOP */
 window.addEventListener("load", () => {
