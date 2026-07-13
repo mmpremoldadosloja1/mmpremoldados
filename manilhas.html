@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MANILHAS E TAMPAS | MM Pré-Moldados</title>
+<title>MANILHAS & TAMPAS | MM Pré-Moldados</title>
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/carrinho.css">
@@ -37,8 +37,7 @@ nav{
   align-items:center;
 }
 
-.nav-left,
-.nav-right{
+.nav-left, .nav-right{
   display:flex;
   gap:20px;
   align-items:center;
@@ -88,15 +87,13 @@ h2{
   padding-left:20px;
 }
 
-/* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+  grid-template-columns:repeat(auto-fill, minmax(300px,3fr));
   gap:20px;
   padding:0 20px 40px 20px;
 }
 
-/* CARD */
 .card{
   background:#fff;
   border-radius:12px;
@@ -110,7 +107,7 @@ h2{
 
 .card img{
   width:100%;
-  height:110px;
+  height:250px;
   object-fit:contain;
 }
 
@@ -120,7 +117,6 @@ h2{
   min-height:40px;
 }
 
-/* CONTADOR */
 .contador{
   display:flex;
   justify-content:center;
@@ -146,7 +142,6 @@ h2{
   padding:5px;
 }
 
-/* BOTÃO */
 .btn{
   width:100%;
   padding:10px 0;
@@ -164,7 +159,7 @@ h2{
   transform:scale(1.05);
 }
 
-/* BOTÃO MOBILE */
+/* botão mobile */
 .btn-carrinho{
   display:flex;
 }
@@ -181,30 +176,42 @@ h2{
 </style>
 </head>
 
+  
 <body>
 
 <header>
   <nav class="nav-left">
+
     <a href="index.html" class="nav-item">
-      <!-- 🔥 SVG IDENTICO -->
+
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <path d="M3 10L12 3l9 7"></path>
         <path d="M5 10v10h14V10"></path>
       </svg>
+
       Início
+
     </a>
+
   </nav>
 
   <nav class="nav-right">
     <a href="#" class="nav-item btn-carrinho" onclick="abrirCarrinho(); return false;">
-      <!-- 🔥 SVG IDENTICO -->
+
+    <a href="#"
+       class="nav-item btn-carrinho"
+       onclick="abrirCarrinho(); return false;">
+
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <circle cx="9" cy="20" r="1"></circle>
         <circle cx="18" cy="20" r="1"></circle>
         <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
       </svg>
+
       Carrinho
+
     </a>
+
   </nav>
 </header>
 
@@ -219,21 +226,81 @@ h2{
 
 <h1>MANILHAS E TAMPAS</h1>
 
-<div class="grid" id="gridProdutos"></div>
+<h2>MANLHAS</h2>
+<div class="grid">
 
+<div class="card">
+<img src="img/manilhas/manilha-90.jpg">
+<h3>Manilha de 90cmx50cm</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/manilhas/manilha-110.jpg">
+<h3>Manilha de 110cmx50cm</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+</div>
+
+<h2>TAMPAS</h2>
+<div class="grid">
+
+<div class="card">
+<img src="img/cobogo/cobogo-estrela-30.jpg">
+<h3>Estrela 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-estrela-dos-ventos-30.jpg">
+<h3>Estrela dos Ventos 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-fenestra-30.jpg">
+<h3>Fenestra 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="img/cobogo/cobogo-petala-30.jpg">
+<h3>Pétala 30x30</h3>
+<div class="contador">
+<button onclick="diminuir(this)">−</button>
+<input type="number" class="qtd" value="1" min="1">
+<button onclick="aumentar(this)">+</button>
+</div>
+<button class="btn" onclick="adicionarCarrinho(this)">Adicionar</button>
+</div>
+</div>
+  
 <script>
-
-// GRID
-const grid = document.getElementById("gridProdutos");
-
-// TITULO
-function titulo(t){
-  grid.innerHTML += `
-    <div style="grid-column:1/-1">
-      <h2>${t}</h2>
-    </div>
-  `;
-}
 
 // CONTADOR
 function aumentar(btn){
@@ -246,122 +313,25 @@ function diminuir(btn){
   input.value = Math.max(1, parseInt(input.value) - 1);
 }
 
-// ADICIONAR CARRINHO
-function adicionarCarrinho(btn){
-
-  const card = btn.closest('.card');
-
+// ADICIONAR PRODUTO (PADRÃO NOVO)
+function adicionarCarrinho(botao){
+  const card = botao.closest('.card');
   const nome = card.querySelector('h3').innerText;
-
-  const select = card.querySelector('select');
-  const variacao = select ? select.value : "";
-
   const qtd = parseInt(card.querySelector('.qtd').value);
 
-  const nomeFinal = variacao
-    ? `${nome} - ${variacao}`
-    : nome;
-
-  const existente = carrinho.find(item => item.nome === nomeFinal);
+  const existente = carrinho.find(item => item.nome === nome);
 
   if(existente){
     existente.qtd += qtd;
   }else{
-    carrinho.push({
-      nome: nomeFinal,
-      qtd
-    });
+    carrinho.push({nome, qtd});
   }
 
-  salvarCarrinho();
+  salvarCarrinho(); // 🔥 usa o carrinho.js
 }
-
-// CRIAR PRODUTO
-function criarProduto(nome, opcoes = null){
-
-  grid.innerHTML += `
-  
-  <div class="card">
-
-    <div style="
-      height:110px;
-      background:#f3f3f3;
-      border-radius:8px;
-      margin-bottom:10px;
-    "></div>
-
-    <h3>${nome}</h3>
-
-    ${opcoes ? `
-      <select style="
-        margin:10px 0;
-        padding:6px;
-        width:100%;
-      ">
-        ${opcoes.map(o => `
-          <option>${o}</option>
-        `).join('')}
-      </select>
-    ` : ''}
-
-    <div class="contador">
-      <button onclick="diminuir(this)">−</button>
-
-      <input
-        type="number"
-        class="qtd"
-        value="1"
-        min="1"
-      >
-
-      <button onclick="aumentar(this)">+</button>
-    </div>
-
-    <button class="btn" onclick="adicionarCarrinho(this)">
-      Adicionar
-    </button>
-
-  </div>
-  
-  `;
-}
-
-/* =========================
-   PRODUTOS
-========================= */
-
-titulo("Manilhas");
-
-[
-  "Manilha 90cm x 50cm",
-  "Manilha 1,10m x 50cm"
-].forEach(n => criarProduto(n));
-
-titulo("Tampas de Manilha");
-
-criarProduto("Tampa 90cm", [
-  "Aberta",
-  "Fechada"
-]);
-
-criarProduto("Tampa 1m", [
-  "Aberta",
-  "Fechada"
-]);
-
-criarProduto("Tampa 1,10cm", [
-  "Aberta",
-  "Fechada"
-]);
-
-criarProduto("Tampa 1,20cm", [
-  "Aberta",
-  "Fechada"
-]);
 
 </script>
 
-<script src="js/carrinho.js"></script>
-
 </body>
 </html>
+<script src="js/carrinho.js"></script>
