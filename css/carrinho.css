@@ -25,12 +25,14 @@ body{
   width:340px;
   max-width:100%;
 
+  height:100%;
   height:100vh;
 
   background:#ffffff;
 
   padding:25px 20px;
 
+  z-index:1001;
   z-index:99999;
 
   display:flex;
@@ -39,6 +41,7 @@ body{
   overflow-y:auto;
   overflow-x:hidden;
 
+  transition:0.3s ease;
   transition:right 0.3s ease;
 
   box-shadow:-10px 0 35px rgba(0,0,0,0.10);
@@ -435,7 +438,49 @@ header{
   .overlay{
     display:none;
   }
+/* =========================
+   FIX CHROME MOBILE
+========================= */
 
+.btn,
+.btn-finalizar,
+.btn-carrinho,
+.contador button,
+.remover{
+  position:relative;
+  z-index:9999;
+
+  pointer-events:auto !important;
+
+  touch-action:manipulation;
+
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* impede bloqueio invisível */
+.overlay{
+  pointer-events:none;
+}
+
+.overlay.active{
+  pointer-events:auto;
+}
+
+/* garante clique nos cards */
+.card{
+  position:relative;
+  z-index:2;
+}
+
+/* carrinho acima de tudo */
+.carrinho-lateral{
+  z-index:99999;
+}
+
+/* header não bloquear clique */
+header{
+  isolation:isolate;
+}
   body{
     padding-right:340px;
   }
