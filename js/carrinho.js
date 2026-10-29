@@ -1,391 +1,342 @@
 // =========================
-// CARRINHO GLOBAL
+// CARRINHO GLOBAL MM
 // =========================
 
-let carrinho =
-  JSON.parse(localStorage.getItem('carrinho')) || [];
+let carrinho = [];
 
-/* =========================
-   SALVAR
-========================= */
-function salvarCarrinho(){
+try {
+  const salvo = JSON.parse(localStorage.getItem("carrinho"));
+  carrinho = Array.isArray(salvo) ? salvo : [];
+} catch (e) {
+  carrinho = [];
+}
 
-  localStorage.setItem(
-    'carrinho',
-    JSON.stringify(carrinho)
-  );
+carrinho = carrinho.map(item => ({
+  nome: item.nome || "Produto",
+  qtd: Math.max(1, parseInt(item.qtd) || 1),
+  imagem: item.imagem || ""
+}));
+
+// =========================
+// SALVAR CARRINHO
+// =========================
+
+function salvarCarrinho() {
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  renderCarrinho();
+}
+
+// =========================
+// ABRIR CARRINHO
+// =========================
+
+function abrirCarrinho() {
+  const painel = document.getElementById("carrinho");
+  const overlay = document.getElementById("overlay");
+
+  if (painel) painel.classList.add("active");
+
+  if (overlay && window.innerWidth < 900) {
+    overlay.classList.add("active");
+  }
 
   renderCarrinho();
 }
 
-/* =========================
-   ABRIR
-========================= */
-function abrirCarrinho(){
+// =========================
+// FECHAR CARRINHO
+// =========================
 
-  const carrinhoEl =
-    document.getElementById("carrinho");
-
-  const overlayEl =
-    document.getElementById("overlay");
-
-  if(carrinhoEl){
-    carrinhoEl.classList.add("active");
-  }
-
-  if(
-    overlayEl &&
-    window.innerWidth < 900
-  ){
-    overlayEl.classList.add("active");
-  }
-
-  renderCarrinho();
+function fecharCarrinho() {
+  document.getElementById("carrinho")?.classList.remove("active");
+  document.getElementById("overlay")?.classList.remove("active");
 }
 
-/* =========================
-   FECHAR
-========================= */
-function fecharCarrinho(){
+// =========================
+// PEGAR IMAGEM DO PRODUTO
+// =========================
 
-  const carrinhoEl =
-    document.getElementById("carrinho");
-
-  const overlayEl =
-    document.getElementById("overlay");
-
-  if(carrinhoEl){
-    carrinhoEl.classList.remove("active");
-  }
-
-  if(overlayEl){
-    overlayEl.classList.remove("active");
-  }
+function pegarImagem(card) {
+  const img = card?.querySelector("img");
+  return img ? img.src : "";
 }
 
-/* =========================
-   REMOVER
-========================= */
-function removerItem(i){
+// =========================
+// ADICIONAR PRODUTO
+// =========================
 
-  carrinho.splice(i,1);
+function adicionarCarrinho(botao) {
+  const card = botao.closest(".card");
+  if (!card) return;
 
-  salvarCarrinho();
-}
+  const titulo = card.querySelector("h3");
+  const qtdInput = card.querySelector(".qtd");
+  const select = card.querySelector("select");
 
-/* =========================
-   PEGAR IMAGEM
-========================= */
-function pegarImagem(card){
+  const nome = titulo ? titulo.innerText.trim() : "Produto";
+  const qtd = Math.max(1, parseInt(qtdInput?.value) || 1);
+  const imagem = pegarImagem(card);
 
-  if(!card) return "";
+  // Guarda a variação escolhida, quando existir.
+  const nomeFinal = select && select.value
+    ? nome + "\n" + select.value
+    : nome;
 
-  const img =
-    card.querySelector("img");
+  const existente = carrinho.find(item => item.nome === nomeFinal);
 
-  if(img && img.src){
-
-    return img.src;
-
-  }
-
-  return "";
-}
-
-/* =========================
-   ADICIONAR PRODUTO
-========================= */
-function adicionarCarrinho(botao){
-
-  const card =
-    botao.closest('.card');
-
-  if(!card) return;
-
-  const titulo =
-    card.querySelector('h3');
-
-  const qtdInput =
-    card.querySelector('.qtd');
-
-  const select =
-    card.querySelector('select');
-
-  const imagem =
-    pegarImagem(card);
-
-  const nome =
-    titulo
-    ? titulo.innerText.trim()
-    : "Produto";
-
-  const qtd =
-    qtdInput
-    ? parseInt(qtdInput.value)
-    : 1;
-
-  let nomeFinal = nome;
-
-  // VARIAÇÃO
-  if(
-    select &&
-    select.value
-  ){
-
-    nomeFinal +=
-      "\n" + select.value;
-
-  }
-
-  // EXISTENTE
-  const existente =
-    carrinho.find(
-      item => item.nome === nomeFinal
-    );
-
-  if(existente){
-
+  if (existente) {
     existente.qtd += qtd;
-
-  }else{
-
+    if (!existente.imagem) existente.imagem = imagem;
+  } else {
     carrinho.push({
-
       nome: nomeFinal,
-
       qtd: qtd,
-
       imagem: imagem
-
     });
-
   }
 
   salvarCarrinho();
-
   abrirCarrinho();
 }
 
-/* =========================
-   RENDER
-========================= */
-function renderCarrinho(){
+// =========================
+// RENDERIZAR CARRINHO
+// =========================
 
-  const lista =
-    document.getElementById("lista");
-
-  if(!lista) return;
+function renderCarrinho() {
+  const lista = document.getElementById("lista");
+  if (!lista) return;
 
   lista.innerHTML = "";
 
-  if(carrinho.length === 0){
-
+  if (carrinho.length === 0) {
     lista.innerHTML = `
-
       <div class="carrinho-vazio">
-
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke-width="1.8"
-          width="50"
-          height="50"
-        >
-
-          <circle cx="9" cy="20" r="1"></circle>
-
-          <circle cx="18" cy="20" r="1"></circle>
-
-          <path d="M1 1h4l2.5 12h11.5l2-8H6"></path>
-
-        </svg>
-
-        <p>
-          Seu carrinho está vazio
-        </p>
-
-        <span>
-          Adicione produtos para continuar
-        </span>
-
+        <p>Seu carrinho está vazio</p>
+        <span>Adicione produtos para continuar</span>
       </div>
-
     `;
-
     return;
   }
 
-  carrinho.forEach((item, i)=>{
+  carrinho.forEach((item, i) => {
+    const linhas = String(item.nome).split("\n");
+    const titulo = linhas[0] || "Produto";
+    const detalhes = linhas.slice(1);
 
-    const linhas =
-      String(item.nome).split("\n");
+    const elemento = document.createElement("div");
+    elemento.className = "item";
 
-    const titulo =
-      linhas[0] || "";
+    if (item.imagem) {
+      const imagem = document.createElement("img");
+      imagem.className = "img-item";
+      imagem.src = item.imagem;
+      imagem.alt = titulo;
+      elemento.appendChild(imagem);
+    }
 
-    const detalhes =
-      linhas.slice(1);
+    const info = document.createElement("div");
+    info.className = "info-item";
 
-    lista.innerHTML += `
+    const nomeElemento = document.createElement("div");
+    nomeElemento.className = "titulo-item";
+    nomeElemento.textContent = titulo;
+    info.appendChild(nomeElemento);
 
-      <div class="item">
+    detalhes.forEach(detalhe => {
+      const detalheElemento = document.createElement("div");
+      detalheElemento.className = "detalhe-produto";
+      detalheElemento.textContent = detalhe;
+      info.appendChild(detalheElemento);
+    });
 
-        ${
-          item.imagem
-          ?
-          `
-          <img
-            class="img-item"
-            src="${item.imagem}"
-            alt="${titulo}"
-          >
-          `
-          :
-          ""
-        }
+    const quantidade = document.createElement("div");
+    quantidade.className = "qtd-item";
+    quantidade.textContent = "Quantidade: " + item.qtd;
+    info.appendChild(quantidade);
 
-        <div class="info-item">
+    const removerBotao = document.createElement("button");
+    removerBotao.className = "remover";
+    removerBotao.type = "button";
+    removerBotao.textContent = "🗑️";
+    removerBotao.setAttribute("aria-label", "Remover " + titulo);
+    removerBotao.addEventListener("click", () => removerItem(i));
 
-          <div class="titulo-item">
-            ${titulo}
-          </div>
-
-          ${
-            detalhes.map(det => `
-
-              <div class="detalhe-produto">
-                ${det}
-              </div>
-
-            `).join("")
-          }
-
-          <div class="qtd-item">
-
-            Quantidade:
-            <strong>${item.qtd}</strong>
-
-          </div>
-
-        </div>
-
-        <button
-          class="remover"
-          onclick="removerItem(${i})"
-        >
-
-          🗑️
-
-        </button>
-
-      </div>
-
-    `;
-
+    elemento.appendChild(info);
+    elemento.appendChild(removerBotao);
+    lista.appendChild(elemento);
   });
-
 }
 
-/* =========================
-   WHATSAPP
-========================= */
-function enviarWhatsApp(){
+// =========================
+// REMOVER ITEM
+// =========================
 
-  let msg =
-`🛒 *NOVO PEDIDO*
-
-`;
-
-  carrinho.forEach((item, index)=>{
-
-    const linhas =
-      String(item.nome).split("\n");
-
-    msg +=
-`*${index + 1}. ${linhas[0]}*
-`;
-
-    linhas
-      .slice(1)
-      .forEach(linha=>{
-
-        msg += `${linha}\n`;
-
-      });
-
-    msg +=
-`Quantidade: ${item.qtd}
-
-----------------------
-
-`;
-
-  });
-
-  window.open(
-    `https://wa.me/5561999385680?text=${encodeURIComponent(msg)}`
-  );
+function removerItem(i) {
+  carrinho.splice(i, 1);
+  salvarCarrinho();
 }
 
-/* =========================
-   CONTADOR
-========================= */
-function aumentar(btn){
-
-  const input =
-    btn.parentElement.querySelector('.qtd');
-
-  input.value =
-    parseInt(input.value) + 1;
+// Compatibilidade com páginas que usam remover(i).
+function remover(i) {
+  removerItem(i);
 }
 
-function diminuir(btn){
+// =========================
+// CONTADOR DE QUANTIDADE
+// =========================
 
-  const input =
-    btn.parentElement.querySelector('.qtd');
-
-  input.value =
-    Math.max(
-      1,
-      parseInt(input.value) - 1
-    );
+function aumentar(botao) {
+  const input = botao.parentElement.querySelector(".qtd");
+  if (input) {
+    input.value = (Math.max(1, parseInt(input.value) || 1)) + 1;
+  }
 }
 
-/* =========================
-   LOAD
-========================= */
-window.addEventListener("load", ()=>{
+function diminuir(botao) {
+  const input = botao.parentElement.querySelector(".qtd");
+  if (input) {
+    input.value = Math.max(1, (parseInt(input.value) || 1) - 1);
+  }
+}
 
-  // LIMPA CARRINHO ANTIGO
-  // QUEBRADO DO CHROME
+// =========================
+// MODALIDADE DE ENTREGA
+// =========================
 
-  carrinho = carrinho.map(item=>({
-
-    nome:
-      item.nome || "Produto",
-
-    qtd:
-      parseInt(item.qtd) || 1,
-
-    imagem:
-      item.imagem || ""
-
-  }));
-
-  localStorage.setItem(
-    'carrinho',
-    JSON.stringify(carrinho)
+function alternarCamposEntrega() {
+  const modalidade = document.querySelector(
+    'input[name="modalidadeEntrega"]:checked'
   );
 
-  // DESKTOP FIXO
-  if(window.innerWidth >= 900){
+  const campos = document.getElementById("camposEndereco");
+  if (!campos) return;
 
-    document
-      .getElementById("carrinho")
-      ?.classList.add("active");
+  const entrega = modalidade?.value !== "retirada";
+  campos.hidden = !entrega;
 
+  campos.querySelectorAll("input").forEach(input => {
+    input.required = entrega && [
+      "cepEntrega",
+      "ruaEntrega",
+      "numeroEntrega",
+      "bairroEntrega",
+      "cidadeEntrega",
+      "ufEntrega"
+    ].includes(input.id);
+  });
+}
+
+// =========================
+// MONTAR E ENVIAR PEDIDO
+// =========================
+
+function enviarWhatsApp() {
+  if (carrinho.length === 0) {
+    alert("Seu carrinho está vazio. Adicione produtos antes de finalizar.");
+    return;
   }
 
-  renderCarrinho();
+  const pegarValor = id =>
+    document.getElementById(id)?.value.trim() || "";
 
+  const nome = pegarValor("nomeRecebedor");
+  const telefone = pegarValor("telefoneRecebedor");
+
+  const modalidade = document.querySelector(
+    'input[name="modalidadeEntrega"]:checked'
+  )?.value || "entrega";
+
+  if (!nome || !telefone) {
+    alert("Preencha seu nome completo e WhatsApp para continuar.");
+    document.getElementById(!nome ? "nomeRecebedor" : "telefoneRecebedor")
+      ?.focus();
+    return;
+  }
+
+  const enderecoIds = [
+    "cepEntrega",
+    "ruaEntrega",
+    "numeroEntrega",
+    "bairroEntrega",
+    "cidadeEntrega",
+    "ufEntrega"
+  ];
+
+  if (modalidade === "entrega") {
+    for (const id of enderecoIds) {
+      if (!pegarValor(id)) {
+        alert("Preencha todos os campos obrigatórios do endereço.");
+        document.getElementById(id)?.focus();
+        return;
+      }
+    }
+  }
+
+  let mensagem = "🛒 NOVO PEDIDO - MM PRÉ-MOLDADOS\n\n";
+
+  mensagem += "DADOS DO CLIENTE\n";
+  mensagem += "Nome: " + nome + "\n";
+  mensagem += "WhatsApp: " + telefone + "\n\n";
+
+  if (modalidade === "retirada") {
+    mensagem += "Recebimento: RETIRADA NA FÁBRICA\n\n";
+  } else {
+    mensagem += "Recebimento: ENTREGA\n";
+    mensagem += "CEP: " + pegarValor("cepEntrega") + "\n";
+    mensagem += "Endereço: " + pegarValor("ruaEntrega") + ", ";
+    mensagem += pegarValor("numeroEntrega") + "\n";
+
+    const complemento = pegarValor("complementoEntrega");
+    if (complemento) {
+      mensagem += "Complemento: " + complemento + "\n";
+    }
+
+    mensagem += "Bairro: " + pegarValor("bairroEntrega") + "\n";
+    mensagem += "Cidade: " + pegarValor("cidadeEntrega");
+    mensagem += " - " + pegarValor("ufEntrega").toUpperCase() + "\n";
+
+    const referencia = pegarValor("referenciaEntrega");
+    if (referencia) {
+      mensagem += "Ponto de referência: " + referencia + "\n";
+    }
+
+    mensagem += "\nFrete: calcular e confirmar separadamente.\n\n";
+  }
+
+  mensagem += "PRODUTOS DO PEDIDO\n\n";
+
+  carrinho.forEach((item, index) => {
+    const linhas = String(item.nome).split("\n");
+
+    mensagem += (index + 1) + ". " + linhas[0] + "\n";
+
+    linhas.slice(1).forEach(linha => {
+      mensagem += "   Opção: " + linha + "\n";
+    });
+
+    mensagem += "   Quantidade: " + item.qtd + "\n\n";
+  });
+
+  mensagem += "Por favor, confirme os valores e a disponibilidade.";
+
+  const url = "https://wa.me/5561999385680?text=" +
+    encodeURIComponent(mensagem);
+
+  window.open(url, "_blank");
+}
+
+// =========================
+// INICIALIZAÇÃO
+// =========================
+
+window.addEventListener("load", () => {
+  const painel = document.getElementById("carrinho");
+
+  if (window.innerWidth >= 900 && painel) {
+    painel.classList.add("active");
+  }
+
+  alternarCamposEntrega();
+  renderCarrinho();
 });
