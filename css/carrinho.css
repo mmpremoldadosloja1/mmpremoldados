@@ -1,443 +1,122 @@
 /* =========================
-   RESET
+   FORMULÁRIO DE ENTREGA
 ========================= */
 
-*{
-  box-sizing:border-box;
+.dados-entrega-container {
+  margin-top: 20px;
+  padding: 16px 12px;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  background: #fff;
 }
 
-html,
-body{
-  overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
+.dados-entrega-container[hidden] {
+  display: none !important;
 }
 
-/* =========================
-   CARRINHO
-========================= */
-
-.carrinho-lateral{
-  position:fixed;
-
-  top:0;
-  right:-340px;
-
-  width:340px;
-  max-width:100%;
-
-  height:100vh;
-
-  background:#ffffff;
-
-  padding:25px 20px;
-
-  z-index:99999;
-
-  display:flex;
-  flex-direction:column;
-
-  overflow-y:auto;
-  overflow-x:hidden;
-
-  transition:right 0.3s ease;
-
-  box-shadow:-10px 0 35px rgba(0,0,0,0.10);
-
-  border-top-left-radius:35px;
-  border-bottom-left-radius:35px;
-
-  -webkit-overflow-scrolling:touch;
-
-  transform:translateZ(0);
-  -webkit-transform:translateZ(0);
-
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-
-  pointer-events:auto;
+.dados-entrega-container h4 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  color: #111;
 }
 
-.carrinho-lateral.active{
-  right:0;
+.campo-entrega {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 13px;
+  min-width: 0;
 }
 
-/* =========================
-   TÍTULO
-========================= */
-
-.carrinho-lateral h3{
-  text-align:center;
-
-  font-size:34px;
-  font-weight:800;
-
-  margin-bottom:18px;
-
-  color:#111;
-
-  letter-spacing:-1px;
+.campo-entrega label,
+.tipo-entrega legend {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
 }
 
-/* =========================
-   OVERLAY
-========================= */
-
-.overlay{
-  position:fixed;
-
-  top:0;
-  left:0;
-
-  width:100%;
-  height:100%;
-
-  background:rgba(0,0,0,0.4);
-
-  opacity:0;
-
-  visibility:hidden;
-
-  transition:0.3s;
-
-  z-index:1000;
-
-  pointer-events:none;
+.campo-entrega input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
-.overlay.active{
-  opacity:1;
-  visibility:visible;
-
-  pointer-events:auto;
+.campo-entrega input:focus {
+  outline: 2px solid #e63946;
+  border-color: #e63946;
 }
 
-/* =========================
-   LISTA
-========================= */
-
-.lista-carrinho{
-  flex:1;
-
-  display:flex;
-  flex-direction:column;
-
-  gap:18px;
-
-  padding-right:4px;
+.campos-entrega-linha {
+  display: flex;
+  gap: 10px;
 }
 
-/* =========================
-   ITEM
-========================= */
-
-.item{
-  position:relative;
-
-  display:flex;
-  align-items:flex-start;
-
-  gap:12px;
-
-  background:#fff;
-
-  border-radius:22px;
-
-  padding:16px 14px;
-
-  border:1px solid #f1f1f1;
-
-  box-shadow:
-    0 4px 12px rgba(0,0,0,0.04),
-    0 1px 2px rgba(0,0,0,0.03);
-
-  z-index:2;
+.campo-numero {
+  flex: 1;
 }
 
-.item::before{
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  top:14px;
-
-  width:4px;
-  height:72%;
-
-  border-radius:10px;
-
-  background:#e63946;
+.campo-complemento {
+  flex: 2;
 }
 
-/* =========================
-   IMAGEM
-========================= */
-
-.img-item{
-  width:70px;
-  height:70px;
-
-  min-width:70px;
-
-  object-fit:contain;
-
-  border-radius:14px;
-
-  background:#f7f7f7;
-
-  padding:5px;
-
-  border:1px solid #eee;
-
-  flex-shrink:0;
+.campo-cidade {
+  flex: 3;
 }
 
-/* =========================
-   INFO
-========================= */
-
-.info-item{
-  flex:1;
-
-  display:flex;
-  flex-direction:column;
-
-  min-width:0;
+.campo-uf {
+  flex: 1;
 }
 
-.titulo-item{
-  font-size:19px;
-  font-weight:800;
-
-  color:#111;
-
-  line-height:1.2;
-
-  margin-bottom:8px;
-
-  word-break:break-word;
+.tipo-entrega {
+  margin: 5px 0 18px;
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 10px;
 }
 
-.detalhe-produto{
-  font-size:14px;
-
-  color:#555;
-
-  line-height:1.5;
-
-  margin-bottom:2px;
-
-  word-break:break-word;
+.tipo-entrega legend {
+  padding: 0 5px;
 }
 
-.qtd-item{
-  margin-top:8px;
-
-  font-size:14px;
-
-  color:#444;
-
-  font-weight:600;
+.opcao-entrega {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 10px 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
 }
 
-/* =========================
-   REMOVER
-========================= */
-
-.remover{
-  width:34px;
-  height:34px;
-
-  min-width:34px;
-
-  border:none;
-
-  border-radius:10px;
-
-  background:#fff;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  cursor:pointer;
-
-  transition:0.2s;
-
-  box-shadow:0 3px 10px rgba(0,0,0,0.06);
-
-  position:relative;
-  z-index:9999;
-
-  pointer-events:auto !important;
-
-  touch-action:manipulation;
-
-  -webkit-tap-highlight-color:transparent;
+.opcao-entrega input {
+  margin-top: 2px;
+  accent-color: #e63946;
 }
 
-.remover:hover{
-  transform:scale(1.05);
+.aviso-frete {
+  margin: 8px 0 0;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fff5f5;
+  color: #8b2029;
+  font-size: 12px;
+  line-height: 1.5;
 }
 
-.remover svg{
-  width:16px;
-  height:16px;
-
-  stroke:#e63946;
-}
-
-/* =========================
-   BOTÃO FINALIZAR
-========================= */
-
-.btn-finalizar{
-  width:100%;
-
-  padding:17px;
-
-  background:#25D366;
-
-  color:#fff;
-
-  border:none;
-
-  border-radius:16px;
-
-  font-size:20px;
-  font-weight:800;
-
-  cursor:pointer;
-
-  margin-top:18px;
-
-  transition:0.2s;
-
-  box-shadow:0 8px 18px rgba(37,211,102,0.28);
-
-  position:relative;
-  z-index:9999;
-
-  pointer-events:auto !important;
-
-  touch-action:manipulation;
-
-  -webkit-tap-highlight-color:transparent;
-}
-
-.btn-finalizar:hover{
-  transform:translateY(-2px);
-}
-
-/* =========================
-   VAZIO
-========================= */
-
-.carrinho-vazio{
-  display:flex;
-  flex-direction:column;
-
-  align-items:center;
-  justify-content:center;
-
-  text-align:center;
-
-  margin-top:70px;
-
-  color:#777;
-}
-
-.carrinho-vazio svg{
-  stroke:#e63946;
-
-  margin-bottom:12px;
-
-  opacity:0.8;
-}
-
-.carrinho-vazio p{
-  font-weight:700;
-
-  font-size:18px;
-
-  color:#111;
-}
-
-.carrinho-vazio span{
-  font-size:14px;
-}
-
-/* =========================
-   SCROLL
-========================= */
-
-.lista-carrinho::-webkit-scrollbar{
-  width:6px;
-}
-
-.lista-carrinho::-webkit-scrollbar-thumb{
-  background:#ddd;
-  border-radius:10px;
-}
-
-/* =========================
-   FIX CHROME MOBILE
-========================= */
-
-.card,
-.btn,
-.btn-carrinho,
-.contador button{
-  position:relative;
-  z-index:9999;
-
-  pointer-events:auto !important;
-
-  touch-action:manipulation;
-
-  -webkit-tap-highlight-color:transparent;
-}
-
-header{
-  isolation:isolate;
-  z-index:999;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:899px){
-
-  .carrinho-lateral{
-    width:88%;
-    max-width:340px;
-
-    right:-100%;
+@media (max-width: 360px) {
+  .campos-entrega-linha {
+    gap: 7px;
   }
 
-  .carrinho-lateral.active{
-    right:0;
+  .campo-entrega input {
+    padding: 9px;
+    font-size: 13px;
   }
-
-}
-
-/* =========================
-   DESKTOP
-========================= */
-
-@media(min-width:900px){
-
-  .carrinho-lateral{
-    right:0;
-  }
-
-  .overlay{
-    display:none;
-  }
-
-  body{
-    padding-right:340px;
-  }
-
 }
